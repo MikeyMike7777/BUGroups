@@ -1,3 +1,6 @@
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Profile {
     private String name;
     private String email;
@@ -8,11 +11,13 @@ public class Profile {
     /*
      * name: formatPhoneNumber
      * parameters: input phone number (numbers only)
-     * return: formatted phone number
-     * description: changes phone number from 10 numbers to (XXX) XXX-XXXX
+     * return: formatted phone number if valid number; null if not valid number
+     * description: verifies and changes phone number from numbers to output format
      */
     public String formatPhoneNumber(String input) {
-        return input.replaceFirst("(\\d{3})(\\d{3})(\\d+)", "($1) $2-$3");
+        if(verfiyPhoneNumber(input)) {
+            return input.replaceFirst("(\\d{1,3})(\\d{3})(\\d{3})(\\d{4})", "+$1 ($2) $3-$4");
+        } else {return null;}
     }
     /*
      * name: verifyPhoneNumber
@@ -21,11 +26,9 @@ public class Profile {
      * description: makes sure a phone number is valid
      */
     public boolean verfiyPhoneNumber(String input){
-        boolean valid = true;
-        if(input.length() < 10 || input.length() > 13){
-            valid = false;
-        }
-        return valid;
+        Pattern pattern = Pattern.compile("(\\d{1,3})(\\d{3})(\\d{3})(\\d{4})");
+        Matcher matcher = pattern.matcher(input);
+        return matcher.matches();
     }
 
     public String getName() {
