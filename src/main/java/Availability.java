@@ -13,7 +13,8 @@ public class Availability {
      *
      * parameters:  String day (sunday - saturday), Integer
      *                  hour (0 - 23), Integer minutes (0, 15, 30, 45)
-     * return:      String representation of time (D(H)H:MM)
+     * return:      String representation of time (D(H)H:MM), or null if
+     *                  invalid values
      * description: Takes values for a day of the week, hour, and 15-min
      *                  increment, and converts them to time format for later
      *                  storage in availability.
@@ -85,7 +86,7 @@ public class Availability {
      */
     public void addTime (String day, int hour, int minute) {
         String time = toTime(day, hour, minute);
-        addTime(time);
+        if (time != null) addTime(time);
     }
 
     /*
@@ -107,13 +108,14 @@ public class Availability {
      * parameters:  String day (sunday - saturday), Integer
      *                  hour (0 - 23), Integer minutes (0, 15, 30, 45)
      * return:      boolean representation of whether availability contains
-     *                  the given time
+     *                  the given time, or false if invalid input
      * description: Takes values for a day of the week, hour, and 15-min
      *                  increment, and checks if that time is in availability.
      */
     public boolean hasTime (String day, int hour, int minute) {
         String time = toTime(day, hour, minute);
-        return hasTime(time);
+        if (time != null) return hasTime(time);
+        else return false;
     }
 
     /*
@@ -139,6 +141,6 @@ public class Availability {
      */
     public void removeTime (String day, int hour, int minutes) {
         String time = toTime(day, hour, minutes);
-        removeTime(time);
+        if (time != null) removeTime(time);
     }
 }
