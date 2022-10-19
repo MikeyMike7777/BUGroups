@@ -1,25 +1,28 @@
 import javax.swing.*;
+import java.awt.*;
 
 class BUGroups {
 
     private static void createAndShowGUI() {
         JFrame frame = new JFrame("BU Groups");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setPreferredSize(new Dimension(600, 400));
 
-        Window bugWindow = new Window();
-        bugWindow.setOpaque(true);
-        frame.setContentPane(bugWindow);
+        JPanel panel = new JPanel();
+        panel.setSize(new Dimension(600, 400));
+        panel.add(new Login());
+        panel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        frame.add(panel);
 
         frame.pack();
         frame.setVisible(true);
     }
 
     public static void main(String[] args) {
-        javax.swing.SwingUtilities.invokeLater(new Runnable() {
+        SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 createAndShowGUI();
             }
         });
     }
-
 }
