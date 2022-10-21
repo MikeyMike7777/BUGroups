@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 
 class BUGroups {
-
+    // testing git setup
     private static void createAndShowGUI() {
         JFrame frame = new JFrame("BU Groups");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
