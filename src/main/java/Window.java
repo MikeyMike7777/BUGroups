@@ -7,5 +7,6 @@ public class Window extends JPanel {
         super();
         setPreferredSize(new Dimension(600, 400));
         // add default tab and logo stuff here
+        // testing-- carsyn
     }
 }
