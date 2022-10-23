@@ -10,8 +10,7 @@ class BUGroups {
 
         JPanel panel = new JPanel();
         panel.setSize(new Dimension(600, 400));
-        //panel.add(new Login());
-        panel.add(new HomePage());
+        panel.add(new Login());
         panel.setAlignmentX(Component.LEFT_ALIGNMENT);
         frame.add(panel);
 
