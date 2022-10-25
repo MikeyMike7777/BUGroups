@@ -23,6 +23,15 @@ class BUGroups {
         JPanel testPanel = new JPanel(); //Create an instance of your JPanel extended class
         testPanel.setName("Test Panel"); //Set it's name to be seen on tab
         tabMap.put(0, testPanel);        //Put it in the map at the next available index
+        JPanel testPanel1 = new JPanel(); //Create an instance of your JPanel extended class
+        testPanel1.setName("Test Panel1"); //Set it's name to be seen on tab
+        tabMap.put(1, testPanel1);        //Put it in the map at the next available index
+        JPanel testPanel2 = new JPanel(); //Create an instance of your JPanel extended class
+        testPanel2.setName("Test Panel2"); //Set it's name to be seen on tab
+        tabMap.put(2, testPanel2);        //Put it in the map at the next available index
+        JPanel testPanel3 = new JPanel(); //Create an instance of your JPanel extended class
+        testPanel3.setName("Test Panel3"); //Set it's name to be seen on tab
+        tabMap.put(3, testPanel3);        //Put it in the map at the next available index
 
         frame.add(new Window(tabMap));
 

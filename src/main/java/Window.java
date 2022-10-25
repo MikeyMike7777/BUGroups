@@ -31,6 +31,7 @@ public class Window extends JPanel {
 
         this.tabMap = tabMap;
         initWindow();
+        setBackground(Color.GRAY);
         // add default tab and logo stuff here
         // testing-- carsyn
     }
@@ -42,7 +43,7 @@ public class Window extends JPanel {
     public void initWindow(){
         setSize(new Dimension(600, 100));
         layout = new SpringLayout();
-        setLayout(layout);
+
 
         try{
             initLogo();
@@ -51,6 +52,7 @@ public class Window extends JPanel {
         }
         initNavigationBar();
         buildLayout();
+        setLayout(layout);
 
     }
 
@@ -102,6 +104,7 @@ public class Window extends JPanel {
 
     public void initNavigationBar(){
         tabbedPane = new JTabbedPane();
+        tabbedPane.setPreferredSize(new Dimension(this.getWidth(), this.getHeight()));
 
         ImageIcon icon = new ImageIcon("src/main/resources/userIcon.png");
 
@@ -111,12 +114,11 @@ public class Window extends JPanel {
                     "Does nothing");
 
             //Sets key for auto navigation to a specified tab, uses the index of 0-?
-            tabbedPane.setMnemonicAt(entry.getKey(), entry.getKey());
+            tabbedPane.setMnemonicAt(entry.getKey(), KeyEvent.VK_1 + entry.getKey());
         }
 
         //Init our navigation bar Listeners
         initNavigationBarListeners();
-
         //Add the component to the JPanel
         add(tabbedPane);
     }
@@ -126,8 +128,6 @@ public class Window extends JPanel {
     }
 
     void flipLogo() throws IOException {
-        remove(picLabel);
-
         if(currLogoPath.equals("src/main/resources/BUGroups.png")){
             currLogoPath = "src/main/resources/BUGroups2.png";
         } else {
@@ -135,26 +135,16 @@ public class Window extends JPanel {
         }
 
         BufferedImage myPicture = ImageIO.read(new File(currLogoPath));
-        picLabel = new JLabel(new ImageIcon(myPicture.getScaledInstance(100, 25, Image.SCALE_FAST)));
+        picLabel.setIcon(new ImageIcon(myPicture.getScaledInstance(100, 25, Image.SCALE_FAST)));
 
-        layout = new SpringLayout();
-        buildLayout();
-        setLayout(layout);
-
-        //Init our logo listeners
-        initLogoListeners();
-
-        //Add the component to the JPanel
-        add(picLabel);
         revalidate();
         repaint();
     }
 
     void buildLayout(){
-        layout.putConstraint(SpringLayout.WEST, picLabel, 5, SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.EAST, picLabel, 0, SpringLayout.EAST, this);
         layout.putConstraint(SpringLayout.NORTH, picLabel, 5, SpringLayout.NORTH, this);
-        layout.putConstraint(SpringLayout.WEST, tabbedPane,5, SpringLayout.EAST, picLabel);
-        layout.putConstraint(SpringLayout.NORTH, tabbedPane, 5, SpringLayout.NORTH, this);
+        layout.putConstraint(SpringLayout.WEST, tabbedPane, 0, SpringLayout.WEST, this);
     }
 
 }
