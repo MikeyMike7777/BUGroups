@@ -1,10 +1,12 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class TutorsPage extends JPanel{
+import static java.awt.Component.CENTER_ALIGNMENT;
+
+public class Classmates extends JPanel {
     JLabel mainHeader;
 
-    TutorsPage() {
+    Classmates() {
         super();
         createAndDisplay();
     }
@@ -18,15 +20,14 @@ public class TutorsPage extends JPanel{
 
     void addComponents() {
         // header label
-        mainHeader = new JLabel("TUTORS");
+        mainHeader = new JLabel("CLASSMATES");
         add(mainHeader);
 
         // scroll bar
         ScrollPane scrolls = new ScrollPane(ScrollPane.SCROLLBARS_AS_NEEDED);
         scrolls.setSize(500, 100);
 
-        JPanel dropdown = new TutorsTab();
+        JPanel dropdown = new ClassmatesTab();
         add(dropdown);
     }
-
 }
