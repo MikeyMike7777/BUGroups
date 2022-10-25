@@ -24,14 +24,17 @@ class BUGroups {
         testPanel.setName("HomePage"); //Set it's name to be seen on tab
         tabMap.put(0, testPanel);        //Put it in the map at the next available index
         JPanel testPanel1 = new JPanel(); //Create an instance of your JPanel extended class
-        testPanel1.setName("Test Panel1"); //Set it's name to be seen on tab
+        testPanel1.setName("Message Board"); //Set it's name to be seen on tab
         tabMap.put(1, testPanel1);        //Put it in the map at the next available index
         JPanel testPanel2 = new JPanel(); //Create an instance of your JPanel extended class
-        testPanel2.setName("Test Panel2"); //Set it's name to be seen on tab
+        testPanel2.setName("Classmates"); //Set it's name to be seen on tab
         tabMap.put(2, testPanel2);        //Put it in the map at the next available index
-        JPanel testPanel3 = new JPanel(); //Create an instance of your JPanel extended class
-        testPanel3.setName("Test Panel3"); //Set it's name to be seen on tab
+        JPanel testPanel3 = new TutorsPage(); //Create an instance of your JPanel extended class
+        testPanel3.setName("Tutors"); //Set it's name to be seen on tab
         tabMap.put(3, testPanel3);        //Put it in the map at the next available index
+        JPanel testPanel4 = new JPanel(); //Create an instance of your JPanel extended class
+        testPanel4.setName("Profile"); //Set it's name to be seen on tab
+        tabMap.put(4, testPanel4);        //Put it in the map at the next available index
 
         frame.add(new Window(frame.getPreferredSize(), tabMap));
 

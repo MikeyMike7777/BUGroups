@@ -7,7 +7,7 @@ import java.util.HashMap;
 Window class), really just copied and pasted Bryce's work but theoretically
 it should do similar things */
 public class TutorsTab extends JPanel{
-    static final String[] names = {"Select Message Board", "Biology and " +
+    static final String[] names = {"Select Subject", "Biology and " +
             "Health Sciences", "Business", "Chemistry and Biochemistry", "Education " +
             "and Social Work", "Engineering and Computer Science", "English and " +
             "Journalism", "Fine Arts", "Foreign Languages", "History and Political " +
@@ -15,11 +15,16 @@ public class TutorsTab extends JPanel{
             "Sociology"};
 
     HashMap<String, Integer> boardKeys = new HashMap<>();
+    HashMap<String, JPanel> subjects = new HashMap<>();
+    JPanel currSubject = new JPanel();
 
     TutorsTab() {
         super();
-        for (int i = 1; i < 13; ++i)
+        for (int i = 1; i < 13; ++i) {
             boardKeys.put(names[i], i);
+            subjects.put(names[i], new JPanel());
+            subjects.get(names[i]).add(new JLabel(names[i]));
+        }
         createAndDisplay();
     }
 
@@ -42,7 +47,7 @@ public class TutorsTab extends JPanel{
         JMenuBar bar = new JMenuBar();
         bar.setPreferredSize(new Dimension(300, 30));
         JMenu select = new JMenu();
-        select.setText("Select Message Board");
+        select.setText("Select Subject");
         select.setAlignmentX(CENTER_ALIGNMENT);
         select.setPreferredSize(new Dimension(300, 30));
         JMenuItem[] boards = createBoardOptions();
@@ -68,10 +73,11 @@ public class TutorsTab extends JPanel{
             String s = ((JMenuItem)e.getSource()).getText();
             ((JMenu)((JPopupMenu)((JMenuItem)e.getSource()).getParent()).
                     getInvoker()).setText(s);
-            MessageBoard board = new MessageBoard();
-            board.iD = boardKeys.get(s);
-            board.name = s;
-            add(board);
+            currSubject = subjects.get(s);
+
+            // adds panels-- theoretically i want it to replace them
+            // (hide old one, show new one) but idk how to do that
+            add(currSubject);
         }
     }
 }
