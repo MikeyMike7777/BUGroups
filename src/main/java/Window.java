@@ -42,6 +42,7 @@ public class Window extends JPanel {
     public void initWindow(){
         setSize(new Dimension(600, 100));
         layout = new SpringLayout();
+        setLayout(layout);
 
         try{
             initLogo();
@@ -49,18 +50,13 @@ public class Window extends JPanel {
             e.printStackTrace();
         }
         initNavigationBar();
+        buildLayout();
 
     }
 
     public void initLogo() throws IOException {
         BufferedImage myPicture = ImageIO.read(new File(currLogoPath));
         picLabel = new JLabel(new ImageIcon(myPicture.getScaledInstance(100, 25, Image.SCALE_FAST)));
-
-
-        //Manage our Spring Layout for this component
-        layout.putConstraint(SpringLayout.WEST, picLabel, 5, SpringLayout.WEST, this);
-        layout.putConstraint(SpringLayout.NORTH, picLabel, 5, SpringLayout.NORTH, this);
-
 
         //Init our logo listeners
         initLogoListeners();
@@ -107,7 +103,7 @@ public class Window extends JPanel {
     public void initNavigationBar(){
         tabbedPane = new JTabbedPane();
 
-        ImageIcon icon = new ImageIcon("src/main/resources/icons8-user-30.png");
+        ImageIcon icon = new ImageIcon("src/main/resources/userIcon.png");
 
         //Build our navigation bar
         for (Map.Entry<Integer, JPanel> entry : tabMap.entrySet()) {
@@ -117,9 +113,6 @@ public class Window extends JPanel {
             //Sets key for auto navigation to a specified tab, uses the index of 0-?
             tabbedPane.setMnemonicAt(entry.getKey(), entry.getKey());
         }
-
-        //Manage our Spring Layout for this component
-        layout.putConstraint(SpringLayout.WEST, tabbedPane,5, SpringLayout.WEST, picLabel);
 
         //Init our navigation bar Listeners
         initNavigationBarListeners();
@@ -144,11 +137,9 @@ public class Window extends JPanel {
         BufferedImage myPicture = ImageIO.read(new File(currLogoPath));
         picLabel = new JLabel(new ImageIcon(myPicture.getScaledInstance(100, 25, Image.SCALE_FAST)));
 
-
-        //Manage our Spring Layout for this component
-        layout.putConstraint(SpringLayout.WEST, picLabel, 5, SpringLayout.WEST, tabbedPane);
-        layout.putConstraint(SpringLayout.NORTH, picLabel, 5, SpringLayout.NORTH, tabbedPane);
-
+        layout = new SpringLayout();
+        buildLayout();
+        setLayout(layout);
 
         //Init our logo listeners
         initLogoListeners();
@@ -157,6 +148,13 @@ public class Window extends JPanel {
         add(picLabel);
         revalidate();
         repaint();
+    }
+
+    void buildLayout(){
+        layout.putConstraint(SpringLayout.WEST, picLabel, 5, SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.NORTH, picLabel, 5, SpringLayout.NORTH, this);
+        layout.putConstraint(SpringLayout.WEST, tabbedPane,5, SpringLayout.EAST, picLabel);
+        layout.putConstraint(SpringLayout.NORTH, tabbedPane, 5, SpringLayout.NORTH, this);
     }
 
 }
