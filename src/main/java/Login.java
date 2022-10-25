@@ -1,7 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.security.DigestException;
 
 public class Login extends JPanel {
     Login() {
@@ -10,7 +9,6 @@ public class Login extends JPanel {
     }
 
     private void createAndDisplay() {
-        setName("Login");
         setSize(new Dimension(600, 400));
         setAlignmentX(LEFT_ALIGNMENT);
         addComponents();
@@ -59,8 +57,10 @@ public class Login extends JPanel {
         login.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                getParent().setVisible(false);
-                getParent().remove(0);
+                JPanel temp = (JPanel)getParent();
+                setVisible(false);
+                temp.remove(0);
+                temp.add(new Window());
             }
         });
         login.setAlignmentX(CENTER_ALIGNMENT);
