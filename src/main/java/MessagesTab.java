@@ -14,16 +14,15 @@ public class MessagesTab extends JPanel {
 
     HashMap<String, Integer> boardKeys = new HashMap<>();
 
-    MessagesTab() {
+    MessagesTab(Dimension d) {
         super();
+        setPreferredSize(d);
         for (int i = 1; i < 13; ++i)
             boardKeys.put(names[i], i);
         createAndDisplay();
     }
 
     void createAndDisplay() {
-        setSize(new Dimension(600, 400));
-        setAlignmentX(LEFT_ALIGNMENT);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         addComponents();
         setVisible(true);

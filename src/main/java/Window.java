@@ -7,6 +7,7 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 // Default panel of BUGroups, contains tabs and logo, extended by most other windows
@@ -17,34 +18,69 @@ public class Window extends JPanel {
     private JLabel picLabel;
     private JTabbedPane tabbedPane;
     private String currLogoPath = "src/main/resources/BUGroups.png";
+    private Dimension tabSize;
+
+    Window(Dimension preferredSize) {
+        super();
+        preferredSize.setSize(preferredSize.getWidth(),
+                preferredSize.getHeight() - 30);
+        setPreferredSize(preferredSize);
+        tabSize = new Dimension((int) (preferredSize.getWidth() - 50),
+                (int) (preferredSize.getHeight() - 80));
+        this.tabMap = initTabs();
+        initWindow();
+        setBackground(Color.LIGHT_GRAY);
+    }
 
     /*
-        Our default constructor will be accepting a map of Integers to JPanels
+        Our testing constructor will be accepting a map of Integers to JPanels
         where the Integer serves as the panelIndex (position) and the JPanel
         as the Panel for that indexed tab
 
         JPanel setName() function must be called for the tabs to show their
         proper names
      */
-    Window(Dimension preferredSize, Map<Integer, JPanel> tabMap) {
+    Window(Dimension preferredSize, Map<Integer, JPanel> tabs) {
         super();
-
-        this.tabMap = tabMap;
-        initWindow(preferredSize);
+        preferredSize.setSize(preferredSize.getWidth(),
+                preferredSize.getHeight() - 20);
+        setPreferredSize(preferredSize);
+        this.tabMap = tabs;
+        initWindow();
         setBackground(Color.LIGHT_GRAY);
-        // add default tab and logo stuff here
-        // testing-- carsyn
+    }
+
+    /*
+     * This whole function can be rewritten/tweaked for what the default
+     * tabs should actually be, I just copied and pasted Gabe's testing
+     * code since it was mostly functional.
+     */
+    private Map<Integer, JPanel> initTabs() {
+        Map<Integer, JPanel> tabMap = new HashMap<>();
+        JPanel testPanel = new HomePage(getPreferredSize()); //Create an instance of your JPanel extended class
+        testPanel.setName("HomePage"); //Set its name to be seen on tab
+        tabMap.put(0, testPanel);        //Put it in the map at the next available index
+        JPanel testPanel1 = new MessagesTab(tabSize);
+        testPanel1.setName("Message Boards"); //Set its name to be seen on tab
+        tabMap.put(1, testPanel1);        //Put it in the map at the next available index
+        JPanel testPanel2 = new JPanel(); //Create an instance of your JPanel extended class
+        testPanel2.setName("Classmates"); //Set its name to be seen on tab
+        tabMap.put(2, testPanel2);        //Put it in the map at the next available index
+        JPanel testPanel3 = new TutorsPage(); //Create an instance of your JPanel extended class
+        testPanel3.setName("Tutors"); //Set its name to be seen on tab
+        tabMap.put(3, testPanel3);        //Put it in the map at the next available index
+        JPanel testPanel4 = new JPanel(); //Create an instance of your JPanel extended class
+        testPanel4.setName("Profile"); //Set its name to be seen on tab
+        tabMap.put(4, testPanel4);        //Put it in the map at the next available index
+        return tabMap;
     }
 
     /*
         Seperate the intialization of the window from anything that might need to occur in
         the construction of the Window
      */
-    public void initWindow(Dimension preferredSize){
-        setPreferredSize(preferredSize);
+    public void initWindow(){
         layout = new SpringLayout();
-
-
         try{
             initLogo();
         } catch (IOException e) {
@@ -53,7 +89,6 @@ public class Window extends JPanel {
         initNavigationBar();
         buildLayout();
         setLayout(layout);
-
     }
 
     public void initLogo() throws IOException {
@@ -72,7 +107,7 @@ public class Window extends JPanel {
         picLabel.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                System.out.println("FLIP");
+                //System.out.println("FLIP");
                 try{
                     flipLogo();
                 } catch (IOException ex) {
@@ -81,24 +116,16 @@ public class Window extends JPanel {
             }
 
             @Override
-            public void mousePressed(MouseEvent e) {
-
-            }
+            public void mousePressed(MouseEvent e) {}
 
             @Override
-            public void mouseReleased(MouseEvent e) {
-
-            }
+            public void mouseReleased(MouseEvent e) {}
 
             @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
+            public void mouseEntered(MouseEvent e) {}
 
             @Override
-            public void mouseExited(MouseEvent e) {
-
-            }
+            public void mouseExited(MouseEvent e) {}
         });
     }
 

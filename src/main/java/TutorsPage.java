@@ -7,6 +7,10 @@ Window class), really just copied and pasted Bryce's work but theoretically
 it should do similar things */
 
 public class TutorsPage extends JPanel{
+    JLabel mainHeader;
+    Integer iD;
+    String name;
+
     TutorsPage() {
         super();
         createAndDisplay();
@@ -20,21 +24,16 @@ public class TutorsPage extends JPanel{
     }
 
     void addComponents() {
+        // header label
+        mainHeader = new JLabel("TUTORS");
+        add(mainHeader);
+
+        // scroll bar
         ScrollPane scrolls = new ScrollPane(ScrollPane.SCROLLBARS_AS_NEEDED);
         scrolls.setSize(500, 100);
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        panel.add(addTutors());
-        scrolls.add(panel);
-        add(scrolls);
+
+        JPanel dropdown = new TutorsTab();
+        add(dropdown);
     }
 
-    Component addTutors() {
-        JPanel message = new JPanel();
-        message.setBackground(Color.white);
-        message.setMinimumSize(new Dimension(500, 100));
-        message.setLayout(new BoxLayout(message, BoxLayout.Y_AXIS));
-        message.add(new JLabel("Carsyn Smeda"));
-        return message;
-    }
 }
