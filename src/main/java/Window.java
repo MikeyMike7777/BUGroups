@@ -16,6 +16,7 @@ public class Window extends JPanel {
     private Map<Integer, JPanel> tabMap;
     private JLabel picLabel;
     private JTabbedPane tabbedPane;
+    private String currLogoPath = "src/main/resources/BUGroups.png";
 
     /*
         Our default constructor will be accepting a map of Integers to JPanels
@@ -52,7 +53,7 @@ public class Window extends JPanel {
     }
 
     public void initLogo() throws IOException {
-        BufferedImage myPicture = ImageIO.read(new File("src/main/resources/BUGroups.png"));
+        BufferedImage myPicture = ImageIO.read(new File(currLogoPath));
         picLabel = new JLabel(new ImageIcon(myPicture.getScaledInstance(100, 25, Image.SCALE_FAST)));
 
 
@@ -74,6 +75,11 @@ public class Window extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 System.out.println("FLIP");
+                try{
+                    flipLogo();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
             }
 
             @Override
@@ -100,6 +106,7 @@ public class Window extends JPanel {
 
     public void initNavigationBar(){
         tabbedPane = new JTabbedPane();
+
         ImageIcon icon = new ImageIcon("src/main/resources/icons8-user-30.png");
 
         //Build our navigation bar
@@ -123,6 +130,33 @@ public class Window extends JPanel {
 
     void initNavigationBarListeners(){
 
+    }
+
+    void flipLogo() throws IOException {
+        remove(picLabel);
+
+        if(currLogoPath.equals("src/main/resources/BUGroups.png")){
+            currLogoPath = "src/main/resources/BUGroups2.png";
+        } else {
+            currLogoPath = "src/main/resources/BUGroups.png";
+        }
+
+        BufferedImage myPicture = ImageIO.read(new File(currLogoPath));
+        picLabel = new JLabel(new ImageIcon(myPicture.getScaledInstance(100, 25, Image.SCALE_FAST)));
+
+
+        //Manage our Spring Layout for this component
+        layout.putConstraint(SpringLayout.WEST, picLabel, 5, SpringLayout.WEST, tabbedPane);
+        layout.putConstraint(SpringLayout.NORTH, picLabel, 5, SpringLayout.NORTH, tabbedPane);
+
+
+        //Init our logo listeners
+        initLogoListeners();
+
+        //Add the component to the JPanel
+        add(picLabel);
+        revalidate();
+        repaint();
     }
 
 }
