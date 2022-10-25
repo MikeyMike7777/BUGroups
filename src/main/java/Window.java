@@ -2,63 +2,127 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Map;
 
 // Default panel of BUGroups, contains tabs and logo, extended by most other windows
 public class Window extends JPanel {
-    Window() {
+    //SpringLayout is used here because it allows us to overlay items on eachother
+    private SpringLayout layout;
+    private Map<Integer, JPanel> tabMap;
+    private JLabel picLabel;
+    private JTabbedPane tabbedPane;
+
+    /*
+        Our default constructor will be accepting a map of Integers to JPanels
+        where the Integer serves as the panelIndex (position) and the JPanel
+        as the Panel for that indexed tab
+
+        JPanel setName() function must be called for the tabs to show their
+        proper names
+     */
+    Window(Map<Integer, JPanel> tabMap) {
         super();
+
+        this.tabMap = tabMap;
         initWindow();
         // add default tab and logo stuff here
         // testing-- carsyn
     }
 
+    /*
+        Seperate the intialization of the window from anything that might need to occur in
+        the construction of the Window
+     */
     public void initWindow(){
-        setSize(new Dimension(600, 400));
-        setLayout(new GridLayout(1, 1));
-//        try{
-//            initLogo();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        setSize(new Dimension(600, 100));
+        layout = new SpringLayout();
+
+        try{
+            initLogo();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         initNavigationBar();
 
     }
 
     public void initLogo() throws IOException {
         BufferedImage myPicture = ImageIO.read(new File("src/main/resources/BUGroups.png"));
-        JLabel picLabel = new JLabel(new ImageIcon(myPicture.getScaledInstance(200, 100, Image.SCALE_FAST)));
-        setSize(200, 100);
+        picLabel = new JLabel(new ImageIcon(myPicture.getScaledInstance(100, 25, Image.SCALE_FAST)));
+
+
+        //Manage our Spring Layout for this component
+        layout.putConstraint(SpringLayout.WEST, picLabel, 5, SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.NORTH, picLabel, 5, SpringLayout.NORTH, this);
+
+
+        //Init our logo listeners
+        initLogoListeners();
+
+        //Add the component to the JPanel
         add(picLabel);
 
     }
 
+    void initLogoListeners(){
+        picLabel.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                System.out.println("FLIP");
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
+    }
+
     public void initNavigationBar(){
-        JTabbedPane tabbedPane = new JTabbedPane();
-        JPanel panel1 = new JPanel();
-        JPanel panel2 = new JPanel();
-        JPanel panel3 = new JPanel();
-        JPanel panel4 = new JPanel();
+        tabbedPane = new JTabbedPane();
         ImageIcon icon = new ImageIcon("src/main/resources/icons8-user-30.png");
 
-        tabbedPane.addTab("Message Board", icon, new JLabel("TEST1"),
-                "Does nothing");
-        tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
+        //Build our navigation bar
+        for (Map.Entry<Integer, JPanel> entry : tabMap.entrySet()) {
+            tabbedPane.addTab(entry.getValue().getName(), icon, entry.getValue(),
+                    "Does nothing");
 
-        tabbedPane.addTab("Classmates", icon, new JLabel("TEST2"),
-                "Does twice as much nothing");
-        tabbedPane.setMnemonicAt(1, KeyEvent.VK_2);
+            //Sets key for auto navigation to a specified tab, uses the index of 0-?
+            tabbedPane.setMnemonicAt(entry.getKey(), entry.getKey());
+        }
 
-        tabbedPane.addTab("Tutors", icon, new JLabel("TEST3"),
-                "Still does nothing");
-        tabbedPane.setMnemonicAt(2, KeyEvent.VK_3);
+        //Manage our Spring Layout for this component
+        layout.putConstraint(SpringLayout.WEST, tabbedPane,5, SpringLayout.WEST, picLabel);
 
-        tabbedPane.addTab("Profile", icon, new JLabel("TEST4"),
-                "Does nothing at all");
-        tabbedPane.setMnemonicAt(3, KeyEvent.VK_4);
+        //Init our navigation bar Listeners
+        initNavigationBarListeners();
 
+        //Add the component to the JPanel
         add(tabbedPane);
     }
+
+    void initNavigationBarListeners(){
+
+    }
+
 }

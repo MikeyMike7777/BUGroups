@@ -60,7 +60,7 @@ public class Login extends JPanel {
                 JPanel temp = (JPanel)getParent();
                 setVisible(false);
                 temp.remove(0);
-                temp.add(new Window());
+                //temp.add(new Window());
             }
         });
         login.setAlignmentX(CENTER_ALIGNMENT);
