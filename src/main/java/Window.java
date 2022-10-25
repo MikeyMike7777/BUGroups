@@ -26,12 +26,12 @@ public class Window extends JPanel {
         JPanel setName() function must be called for the tabs to show their
         proper names
      */
-    Window(Map<Integer, JPanel> tabMap) {
+    Window(Dimension preferredSize, Map<Integer, JPanel> tabMap) {
         super();
 
         this.tabMap = tabMap;
-        initWindow();
-        setBackground(Color.GRAY);
+        initWindow(preferredSize);
+        setBackground(Color.LIGHT_GRAY);
         // add default tab and logo stuff here
         // testing-- carsyn
     }
@@ -40,8 +40,8 @@ public class Window extends JPanel {
         Seperate the intialization of the window from anything that might need to occur in
         the construction of the Window
      */
-    public void initWindow(){
-        setSize(new Dimension(600, 100));
+    public void initWindow(Dimension preferredSize){
+        setPreferredSize(preferredSize);
         layout = new SpringLayout();
 
 
@@ -104,7 +104,7 @@ public class Window extends JPanel {
 
     public void initNavigationBar(){
         tabbedPane = new JTabbedPane();
-        tabbedPane.setPreferredSize(new Dimension(this.getWidth(), this.getHeight()));
+        tabbedPane.setPreferredSize(getPreferredSize());
 
         ImageIcon icon = new ImageIcon("src/main/resources/userIcon.png");
 

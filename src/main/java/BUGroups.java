@@ -20,8 +20,8 @@ class BUGroups {
             To see your JPanel added to the navigationBar follow the template below
          */
         Map<Integer, JPanel> tabMap = new HashMap<>();
-        JPanel testPanel = new JPanel(); //Create an instance of your JPanel extended class
-        testPanel.setName("Test Panel"); //Set it's name to be seen on tab
+        JPanel testPanel = new HomePage(frame.getPreferredSize()); //Create an instance of your JPanel extended class
+        testPanel.setName("HomePage"); //Set it's name to be seen on tab
         tabMap.put(0, testPanel);        //Put it in the map at the next available index
         JPanel testPanel1 = new JPanel(); //Create an instance of your JPanel extended class
         testPanel1.setName("Test Panel1"); //Set it's name to be seen on tab
@@ -33,7 +33,7 @@ class BUGroups {
         testPanel3.setName("Test Panel3"); //Set it's name to be seen on tab
         tabMap.put(3, testPanel3);        //Put it in the map at the next available index
 
-        frame.add(new Window(tabMap));
+        frame.add(new Window(frame.getPreferredSize(), tabMap));
 
 
         frame.pack();

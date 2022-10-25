@@ -10,20 +10,29 @@ public class HomePage extends JPanel {
     JPanel viewTutorsPreview;
     JPanel viewProfilesPreview;
 
-    HomePage(){
+    HomePage(Dimension preferredSize){
         //Call JPanels default constructor
         super();
 
         //Initialize all components and their default values
-        initPage();
+        initPage(preferredSize);
     }
 
-    private void initPage(){
+    private void initPage(Dimension preferredSize){
         //mainHeader Initialization
+        setPreferredSize(preferredSize);
         mainHeader = new JLabel("HOME");
-        mainHeader.setSize(new Dimension(100, 100));
+        //mainHeader.setSize(new Dimension(100, 100));
         add(mainHeader);
 
+        //Initialize the preview containers
+        initPreviewContainers();
+
+
+
+    }
+
+    private void initPreviewContainers(){
         //messageBoardsPreview Initialization
         messageBoardsPreview = new JPanel();
         messageBoardsPreview.add(new JLabel("View Message Boards"));
@@ -48,7 +57,7 @@ public class HomePage extends JPanel {
         previewContainer.add(viewClassmatesPreview);
         previewContainer.add(viewTutorsPreview);
         previewContainer.add(viewProfilesPreview);
+        previewContainer.setLayout(new GridLayout(4, 1));
         add(previewContainer);
-
     }
 }
