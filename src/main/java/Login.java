@@ -3,13 +3,14 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class Login extends JPanel {
-    Login() {
+    Login(Dimension d) {
         super();
+        setPreferredSize(d);
         createAndDisplay();
     }
 
     private void createAndDisplay() {
-        setSize(new Dimension(600, 400));
+        setPreferredSize(new Dimension(600, 400));
         setAlignmentX(LEFT_ALIGNMENT);
         addComponents();
         setVisible(true);
@@ -60,7 +61,7 @@ public class Login extends JPanel {
                 JPanel temp = (JPanel)getParent();
                 setVisible(false);
                 temp.remove(0);
-                //temp.add(new Window());
+                temp.add(new Window(getPreferredSize()));
             }
         });
         login.setAlignmentX(CENTER_ALIGNMENT);
