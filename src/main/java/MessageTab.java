@@ -3,18 +3,28 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.HashMap;
 
-public class MessagesTab extends JPanel {
+public class MessageTab extends JPanel {
 
-    static final String[] names = {"Select Message Board", "Biology and " +
-    "Health Sciences", "Business", "Chemistry and Biochemistry", "Education " +
-    "and Social Work", "Engineering and Computer Science", "English and " +
-    "Journalism", "Fine Arts", "Foreign Languages", "History and Political " +
-    "Science", "Math and Physics", "Philosophy and BIC", "Psychology and " +
-    "Sociology"};
+    static final String[] names = {
+            "Select a Message Board",
+            "Biology and Health Sciences",
+            "Business",
+            "Chemistry and Biochemistry",
+            "Education and Social Work",
+            "Engineering and Computer Science",
+            "English and Journalism",
+            "Fine Arts",
+            "Foreign Languages",
+            "Geology and Environmental Science",
+            "History and Political Science",
+            "Math and Physics",
+            "Philosophy and BIC",
+            "Psychology and Sociology"
+    };
 
     HashMap<String, Integer> boardKeys = new HashMap<>();
 
-    MessagesTab(Dimension d) {
+    MessageTab(Dimension d) {
         super();
         setSize(d);
         for (int i = 1; i < names.length; ++i)
@@ -38,11 +48,11 @@ public class MessagesTab extends JPanel {
 
     Component addBoardMenu() {
         JMenuBar bar = new JMenuBar();
-        bar.setPreferredSize(new Dimension(300, 30));
+        bar.setPreferredSize(new Dimension(200, 30));
         JMenu select = new JMenu();
-        select.setText("Select Message Board");
+        select.setText("Select a Message Board");
         select.setAlignmentX(CENTER_ALIGNMENT);
-        select.setPreferredSize(new Dimension(300, 30));
+        select.setPreferredSize(new Dimension(200, 30));
         JMenuItem[] boards = createBoardOptions();
         for (int i = 0; i < names.length; ++i)
             select.add(boards[i]);
@@ -51,8 +61,8 @@ public class MessagesTab extends JPanel {
     }
 
     JMenuItem[] createBoardOptions() {
-        JMenuItem[] items = new JMenuItem[13];
-        for (int i = 0; i < 13; ++i) {
+        JMenuItem[] items = new JMenuItem[names.length];
+        for (int i = 0; i < names.length; ++i) {
             items[i] = new JMenuItem(names[i]);
             if (i > 0)
                 items[i].addActionListener(new MenuActionListener());
