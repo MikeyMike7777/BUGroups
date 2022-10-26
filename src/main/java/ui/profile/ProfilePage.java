@@ -1,3 +1,7 @@
+package ui.profile;
+
+import ui.profile.ProfileClassList;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -9,7 +13,7 @@ public class ProfilePage extends JPanel {
 
     JPanel availibilty = new JPanel();
 
-    JPanel classList = new ClassList();
+    JPanel classList = new ProfileClassList();
 
 
     ProfilePage(Dimension d) {

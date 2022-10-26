@@ -1,3 +1,5 @@
+package ui.messages;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -6,7 +8,7 @@ import java.util.HashMap;
 public class MessageTab extends JPanel {
 
     static final String[] names = {
-            "Select a Message Board",
+            "Select a ui.messages.Message Board",
             "Biology and Health Sciences",
             "Business",
             "Chemistry and Biochemistry",
@@ -50,7 +52,7 @@ public class MessageTab extends JPanel {
         JMenuBar bar = new JMenuBar();
         bar.setPreferredSize(new Dimension(200, 30));
         JMenu select = new JMenu();
-        select.setText("Select a Message Board");
+        select.setText("Select a ui.messages.Message Board");
         select.setAlignmentX(CENTER_ALIGNMENT);
         select.setPreferredSize(new Dimension(200, 30));
         JMenuItem[] boards = createBoardOptions();

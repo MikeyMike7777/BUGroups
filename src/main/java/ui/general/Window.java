@@ -1,3 +1,11 @@
+package ui.general;
+
+import ui.classmates.ClassmatesPage;
+import ui.general.HomePage;
+import ui.messages.MessagePage;
+import ui.profile.ProfilePage;
+import ui.tutors.TutorsPage;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -58,10 +66,10 @@ public class Window extends JPanel {
     private Map<Integer, JPanel> initTabs() {
         Map<Integer, JPanel> tabMap = new HashMap<>();
         JPanel testPanel = new HomePage(getPreferredSize()); //Create an instance of your JPanel extended class
-        testPanel.setName("HomePage"); //Set its name to be seen on tab
+        testPanel.setName("ui.general.HomePage"); //Set its name to be seen on tab
         tabMap.put(0, testPanel);        //Put it in the map at the next available index
         JPanel testPanel1 = new MessagePage(tabSize);
-        testPanel1.setName("Message Boards"); //Set its name to be seen on tab
+        testPanel1.setName("ui.messages.Message Boards"); //Set its name to be seen on tab
         tabMap.put(1, testPanel1);        //Put it in the map at the next available index
         JPanel testPanel2 = new ClassmatesPage(); //Create an instance of your JPanel extended class
         testPanel2.setName("Classmates"); //Set its name to be seen on tab
@@ -77,7 +85,7 @@ public class Window extends JPanel {
 
     /*
         Seperate the intialization of the window from anything that might need to occur in
-        the construction of the Window
+        the construction of the ui.general.Window
      */
     public void initWindow(){
         layout = new SpringLayout();

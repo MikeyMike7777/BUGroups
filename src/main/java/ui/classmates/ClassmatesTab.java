@@ -1,3 +1,5 @@
+package ui.classmates;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -5,7 +7,7 @@ import java.util.HashMap;
 
 public class ClassmatesTab extends JPanel{
 
-    ClassList list = new ClassList(); // need to connect this to what called it
+    ProfileClassList list = new ProfileClassList(); // need to connect this to what called it
     String [] classNames = new String[list.getNames().length + 1];
     HashMap<String, Integer> boardKeys = new HashMap<>();
     HashMap<String, JPanel> classes = new HashMap<>();
