@@ -19,8 +19,8 @@ public class ClassList extends JPanel {
 
     ClassList(){
         super();
-        GridLayout grid = new GridLayout(3, 1);
-        setLayout(grid);
+        //GridLayout grid = new GridLayout(3, 1);
+        //setLayout(grid);
         createAndDisplay();
     }
 
@@ -33,21 +33,18 @@ public class ClassList extends JPanel {
     void addComponents() {
         // header label
         header = new JLabel("Current Classes:");
+
         add(header);
 
-        DefaultListModel<String> model = new DefaultListModel<>();
-        model.addAll(List.of(classes));
-        classList = new JList<>(model);
-        model.addElement("Test");
+        buildClassList();
         add(classList);
-
 
         buildAddRemoveButtons();
         add(buttons);
 
     }
 
-    public void buildAddRemoveButtons(){
+    void buildAddRemoveButtons(){
         JButton add = new JButton("Add Class");
         JButton remove = new JButton("Remove Class");
 
@@ -56,6 +53,14 @@ public class ClassList extends JPanel {
 
         buttons.setSize(new Dimension(10, 20));
         buttons.setVisible(true);
+    }
+
+    void buildClassList(){
+        DefaultListModel<String> model = new DefaultListModel<>();
+        model.addAll(List.of(classes));
+
+        classList = new JList<>(model);
+        add(new JScrollPane(classList));
     }
 
     String[] getNames(){

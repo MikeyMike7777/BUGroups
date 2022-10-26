@@ -64,7 +64,7 @@ public class ProfilePage extends JPanel {
         JButton edit = new JButton("Edit Profile Info");
         JButton tutor = new JButton("Tutor A Class");
         JButton messages = new JButton("Sent Messages");
-        profileButtons.setSize(new Dimension(225, 145));
+
 
         profileButtons.setLayout(new GridLayout(4, 1));
         profileButtons.add(logout);
