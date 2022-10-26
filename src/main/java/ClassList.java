@@ -42,5 +42,8 @@ public class ClassList extends JPanel {
         scrolls.setSize(500, 100);
     }
 
+    String[] getNames(){
+        return classes;
+    }
 
 }

@@ -27,6 +27,10 @@ public class Classmates extends JPanel {
         ScrollPane scrolls = new ScrollPane(ScrollPane.SCROLLBARS_AS_NEEDED);
         scrolls.setSize(500, 100);
 
+        /* in the final iteration we'll add the default "no classes" label but
+        for iteration 2 we'll just have hardcoded values */
+
+        // add(new JLabel ("No current classes"));
         JPanel dropdown = new ClassmatesTab();
         add(dropdown);
     }
