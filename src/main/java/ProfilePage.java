@@ -20,13 +20,13 @@ public class ProfilePage extends JPanel {
 
     void createAndDisplay() {
         setAlignmentX(CENTER_ALIGNMENT);
-        setLayout();
+        //setLayout();
+        setLayout(new GridLayout(2, 2));
         addComponents();
         setVisible(true);
     }
 
     void addComponents() {
-
 
         buildUserInfoBox();
         add(userInfo);
@@ -84,11 +84,11 @@ public class ProfilePage extends JPanel {
 
         infoText.setEditable(false);
         infoText.setText("""
-                M: 
-                T: 
-                W: 
-                TH:
-                F:""");
+                M:  12:00-5:00
+                T:  3:00-4:50
+                W:  2:15-3:30
+                TH: 4:45-6:15
+                F:  5:00-7:30""");
         infoText.setVisible(true);
 
         availibilty.add(infoText);

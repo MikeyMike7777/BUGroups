@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 public class ClassList extends JPanel {
 
@@ -24,7 +25,7 @@ public class ClassList extends JPanel {
     }
 
     void createAndDisplay() {
-        setMaximumSize(new Dimension(100,100));
+        setMinimumSize(new Dimension(100,100));
         addComponents();
         setVisible(true);
     }
@@ -34,9 +35,12 @@ public class ClassList extends JPanel {
         header = new JLabel("Current Classes:");
         add(header);
 
-
-        classList = new JList<>(classes);
+        DefaultListModel<String> model = new DefaultListModel<>();
+        model.addAll(List.of(classes));
+        classList = new JList<>(model);
+        model.addElement("Test");
         add(classList);
+
 
         buildAddRemoveButtons();
         add(buttons);
@@ -46,7 +50,6 @@ public class ClassList extends JPanel {
     public void buildAddRemoveButtons(){
         JButton add = new JButton("Add Class");
         JButton remove = new JButton("Remove Class");
-
 
         buttons.add(add);
         buttons.add(remove);
