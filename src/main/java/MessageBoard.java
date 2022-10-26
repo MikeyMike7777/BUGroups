@@ -36,9 +36,10 @@ public class MessageBoard extends JPanel {
         component.setLayout(new BoxLayout(component, BoxLayout.Y_AXIS));
         component.setMinimumSize(new Dimension(600, 300));
         component.setMaximumSize(new Dimension(600, 8000));
-        for (int i = 0; i < 5; ++i) {
-            message = new Message();
-            component.add(message);
+        for (int i = 0; i < 4; ++i) {
+            message = new Message(false);
+            if (!message.isReply)
+                component.add(message);
         }
         Message.counter = 0;
         return component;
