@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 public class ClassmatesTab extends JPanel{
     static final String[] classNames = {
-            "Select A Class",
+            "Select a Class",
             "CSI 3336 - Systems Programming",
             "CSI 3471 - Software Engineering I",
             "WGS 2300 - Women and Gender Studies",
@@ -72,7 +72,8 @@ public class ClassmatesTab extends JPanel{
             ((JMenu)((JPopupMenu)((JMenuItem)e.getSource()).getParent()).
                     getInvoker()).setText(s);
             currClass = classes.get(s);
-
+            if (getComponentCount() > 1)
+                remove(getComponentCount() - 1);
             // adds panels-- theoretically i want it to replace them
             // (hide old one, show new one) but idk how to do that
             add(currClass);

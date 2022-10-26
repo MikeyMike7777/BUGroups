@@ -1,18 +1,16 @@
 import javax.swing.*;
 import java.awt.*;
 
-import static java.awt.Component.CENTER_ALIGNMENT;
-
-public class Classmates extends JPanel {
+public class MessagePage extends JPanel {
     JLabel mainHeader;
 
-    Classmates() {
+    MessagePage(Dimension d) {
         super();
+        setMinimumSize(d);
         createAndDisplay();
     }
 
     void createAndDisplay() {
-        setMinimumSize(new Dimension(600, 350));
         setAlignmentX(CENTER_ALIGNMENT);
         addComponents();
         setVisible(true);
@@ -20,14 +18,14 @@ public class Classmates extends JPanel {
 
     void addComponents() {
         // header label
-        mainHeader = new JLabel("CLASSMATES");
+        mainHeader = new JLabel("Message Board:");
         add(mainHeader);
 
         // scroll bar
         ScrollPane scrolls = new ScrollPane(ScrollPane.SCROLLBARS_AS_NEEDED);
         scrolls.setSize(500, 100);
 
-        JPanel dropdown = new ClassmatesTab();
+        JPanel dropdown = new MessageTab(getMinimumSize());
         add(dropdown);
     }
 }

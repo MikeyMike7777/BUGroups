@@ -1,10 +1,10 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class TutorsPage extends JPanel{
+public class ClassmatesPage extends JPanel {
     JLabel mainHeader;
 
-    TutorsPage() {
+    ClassmatesPage() {
         super();
         createAndDisplay();
     }
@@ -25,8 +25,7 @@ public class TutorsPage extends JPanel{
         ScrollPane scrolls = new ScrollPane(ScrollPane.SCROLLBARS_AS_NEEDED);
         scrolls.setSize(500, 100);
 
-        JPanel dropdown = new TutorsTab();
+        JPanel dropdown = new ClassmatesTab();
         add(dropdown);
     }
-
 }

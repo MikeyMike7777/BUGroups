@@ -16,13 +16,14 @@ public class MessagesTab extends JPanel {
 
     MessagesTab(Dimension d) {
         super();
-        setPreferredSize(d);
-        for (int i = 1; i < 13; ++i)
+        setSize(d);
+        for (int i = 1; i < names.length; ++i)
             boardKeys.put(names[i], i);
         createAndDisplay();
     }
 
     void createAndDisplay() {
+        setAlignmentX(LEFT_ALIGNMENT);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         addComponents();
         setVisible(true);
@@ -43,7 +44,7 @@ public class MessagesTab extends JPanel {
         select.setAlignmentX(CENTER_ALIGNMENT);
         select.setPreferredSize(new Dimension(300, 30));
         JMenuItem[] boards = createBoardOptions();
-        for (int i = 0; i < 13; ++i)
+        for (int i = 0; i < names.length; ++i)
             select.add(boards[i]);
         bar.add(select);
         return bar;
@@ -65,6 +66,8 @@ public class MessagesTab extends JPanel {
             String s = ((JMenuItem)e.getSource()).getText();
             ((JMenu)((JPopupMenu)((JMenuItem)e.getSource()).getParent()).
                     getInvoker()).setText(s);
+            if (getComponentCount() > 1)
+                remove(getComponentCount() - 1);
             MessageBoard board = new MessageBoard();
             board.iD = boardKeys.get(s);
             board.name = s;

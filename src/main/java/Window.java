@@ -60,10 +60,10 @@ public class Window extends JPanel {
         JPanel testPanel = new HomePage(getPreferredSize()); //Create an instance of your JPanel extended class
         testPanel.setName("HomePage"); //Set its name to be seen on tab
         tabMap.put(0, testPanel);        //Put it in the map at the next available index
-        JPanel testPanel1 = new MessagesTab(tabSize);
+        JPanel testPanel1 = new MessagePage(tabSize);
         testPanel1.setName("Message Boards"); //Set its name to be seen on tab
         tabMap.put(1, testPanel1);        //Put it in the map at the next available index
-        JPanel testPanel2 = new Classmates(); //Create an instance of your JPanel extended class
+        JPanel testPanel2 = new ClassmatesPage(); //Create an instance of your JPanel extended class
         testPanel2.setName("Classmates"); //Set its name to be seen on tab
         tabMap.put(2, testPanel2);        //Put it in the map at the next available index
         JPanel testPanel3 = new TutorsPage(); //Create an instance of your JPanel extended class
