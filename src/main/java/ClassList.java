@@ -55,5 +55,8 @@ public class ClassList extends JPanel {
         buttons.setVisible(true);
     }
 
+    String[] getNames(){
+        return classes;
+    }
 
 }

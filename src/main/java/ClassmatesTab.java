@@ -4,28 +4,28 @@ import java.awt.event.*;
 import java.util.HashMap;
 
 public class ClassmatesTab extends JPanel{
-    static final String[] classNames = {
-            "Select A Class",
-            "CSI 3336 - Systems Programming",
-            "CSI 3471 - Software Engineering I",
-            "WGS 2300 - Women and Gender Studies",
-            "GEO 1306 - The Dynamic Earth"
-    };
 
+    ClassList list = new ClassList(); // need to connect this to what called it
+    String [] classNames = new String[list.getNames().length + 1];
     HashMap<String, Integer> boardKeys = new HashMap<>();
     HashMap<String, JPanel> classes = new HashMap<>();
     JPanel currClass = new JPanel();
 
     ClassmatesTab() {
         super();
+        loadClasses();
+        createAndDisplay();
+    }
+
+    void loadClasses(){
+        classNames[0] = "Select A Class";
         for (int i = 1; i < classNames.length; ++i) {
+            classNames[i] = list.getNames()[i - 1];
             boardKeys.put(classNames[i], i);
             classes.put(classNames[i], new JPanel());
             classes.get(classNames[i]).add(new JLabel(classNames[i]));
         }
-        createAndDisplay();
     }
-
     void createAndDisplay() {
         setSize(new Dimension(600, 400));
         setAlignmentX(LEFT_ALIGNMENT);
@@ -49,8 +49,9 @@ public class ClassmatesTab extends JPanel{
         select.setAlignmentX(CENTER_ALIGNMENT);
         select.setPreferredSize(new Dimension(300, 30));
         JMenuItem[] boards = createBoardOptions();
-        for (int i = 0; i < classNames.length; ++i)
+        for (int i = 0; i < classNames.length; ++i) {
             select.add(boards[i]);
+        }
         bar.add(select);
         return bar;
     }
@@ -79,13 +80,10 @@ public class ClassmatesTab extends JPanel{
         }
     }
 
-    /* button in profile that allows user to edit classes there. before classes
-    are populated, indicate an empty class page
-    for UI demo purposes, have a button that populates hardcoded classes
+    /*
+    when user clicks "update classes" in profile, it should construct a new
+    Classmates Tab. ClassList (in profile) should start with nothing in it
      */
-    void populateClasses(String[] classes){
-
-    }
 }
 
 
