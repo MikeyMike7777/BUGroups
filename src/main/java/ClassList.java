@@ -14,16 +14,17 @@ public class ClassList extends JPanel {
 
     JList<String> classList;
 
+    JPanel buttons = new JPanel();
+
     ClassList(){
         super();
-        GridLayout grid = new GridLayout(2, 1);
-        grid.setVgap(0);
+        GridLayout grid = new GridLayout(3, 1);
         setLayout(grid);
         createAndDisplay();
-
     }
 
     void createAndDisplay() {
+        setMaximumSize(new Dimension(100,100));
         addComponents();
         setVisible(true);
     }
@@ -37,9 +38,21 @@ public class ClassList extends JPanel {
         classList = new JList<>(classes);
         add(classList);
 
-        // scroll bar
-        ScrollPane scrolls = new ScrollPane(ScrollPane.SCROLLBARS_AS_NEEDED);
-        scrolls.setSize(500, 100);
+        buildAddRemoveButtons();
+        add(buttons);
+
+    }
+
+    public void buildAddRemoveButtons(){
+        JButton add = new JButton("Add Class");
+        JButton remove = new JButton("Remove Class");
+
+
+        buttons.add(add);
+        buttons.add(remove);
+
+        buttons.setSize(new Dimension(10, 20));
+        buttons.setVisible(true);
     }
 
 
