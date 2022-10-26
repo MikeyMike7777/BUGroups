@@ -7,7 +7,10 @@ public class ProfilePage extends JPanel {
 
     JPanel profileButtons = new JPanel();
 
-    SpringLayout layout;
+    JPanel availibilty = new JPanel();
+
+    JPanel classList = new ClassList();
+
 
     ProfilePage(Dimension d) {
         super();
@@ -17,16 +20,21 @@ public class ProfilePage extends JPanel {
 
     void createAndDisplay() {
         setAlignmentX(CENTER_ALIGNMENT);
-        //setLayout(layout);
+        setLayout();
         addComponents();
         setVisible(true);
     }
 
     void addComponents() {
+
+
         buildUserInfoBox();
         add(userInfo);
 
-        add(new ClassList());
+        buildAvalibilityInfo();
+        add(availibilty);
+
+        add(classList);
 
         buildProfileButtons();
         add(profileButtons);
@@ -47,6 +55,7 @@ public class ProfilePage extends JPanel {
         textArea.setVisible(true);
 
         userInfo.add(textArea);
+        userInfo.setSize(new Dimension(225, 145));
         userInfo.setVisible(true);
     }
 
@@ -55,6 +64,7 @@ public class ProfilePage extends JPanel {
         JButton edit = new JButton("Edit Profile Info");
         JButton tutor = new JButton("Tutor A Class");
         JButton messages = new JButton("Sent Messages");
+        profileButtons.setSize(new Dimension(225, 145));
 
         profileButtons.setLayout(new GridLayout(4, 1));
         profileButtons.add(logout);
@@ -65,9 +75,43 @@ public class ProfilePage extends JPanel {
         profileButtons.setVisible(true);
     }
 
-    public void setUpLayout(){
-        //layout.putConstraint(textArea, SwingConstants.NORTH_EAST, 4, );
+    void buildAvalibilityInfo(){
+        JTextArea infoText = new JTextArea();
+        JLabel infoLabel = new JLabel("Availability: ");
 
+        availibilty.setLayout(new GridLayout(2, 1));
+        availibilty.add(infoLabel);
+
+        infoText.setEditable(false);
+        infoText.setText("""
+                M: 
+                T: 
+                W: 
+                TH:
+                F:""");
+        infoText.setVisible(true);
+
+        availibilty.add(infoText);
+        availibilty.setVisible(true);
+    }
+
+    void setLayout(){
+        SpringLayout springLayout = new SpringLayout();
+
+        //Put the springLayout constraints
+        springLayout.putConstraint(SpringLayout.WEST, userInfo, 20, SpringLayout.WEST, this);
+        springLayout.putConstraint(SpringLayout.NORTH, userInfo, 20, SpringLayout.NORTH, this);
+
+        springLayout.putConstraint(SpringLayout.EAST, availibilty, -50, SpringLayout.EAST, this);
+        springLayout.putConstraint(SpringLayout.NORTH, availibilty, 10, SpringLayout.NORTH, this);
+
+        springLayout.putConstraint(SpringLayout.WEST, classList, 20, SpringLayout.WEST, this);
+        springLayout.putConstraint(SpringLayout.SOUTH, classList, -10, SpringLayout.SOUTH, this);
+
+        springLayout.putConstraint(SpringLayout.EAST, profileButtons, -40, SpringLayout.EAST, this);
+        springLayout.putConstraint(SpringLayout.SOUTH, profileButtons, -40, SpringLayout.SOUTH, this);
+
+        setLayout(springLayout);
     }
 
 }
