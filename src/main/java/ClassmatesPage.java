@@ -1,5 +1,3 @@
-package ui.classmates;
-
 import javax.swing.*;
 import java.awt.*;
 

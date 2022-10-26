@@ -1,5 +1,3 @@
-package ui.profile;
-
 import javax.swing.*;
 import java.awt.*;
 

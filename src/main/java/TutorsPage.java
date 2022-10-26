@@ -1,18 +1,16 @@
-package ui.messages;
-
 import javax.swing.*;
 import java.awt.*;
 
-public class MessagePage extends JPanel {
+public class TutorsPage extends JPanel{
     JLabel mainHeader;
 
-    MessagePage(Dimension d) {
+    TutorsPage() {
         super();
-        setMinimumSize(d);
         createAndDisplay();
     }
 
     void createAndDisplay() {
+        setMinimumSize(new Dimension(600, 350));
         setAlignmentX(CENTER_ALIGNMENT);
         addComponents();
         setVisible(true);
@@ -20,14 +18,15 @@ public class MessagePage extends JPanel {
 
     void addComponents() {
         // header label
-        mainHeader = new JLabel("ui.messages.Message Board:");
+        mainHeader = new JLabel("Class:");
         add(mainHeader);
 
         // scroll bar
         ScrollPane scrolls = new ScrollPane(ScrollPane.SCROLLBARS_AS_NEEDED);
         scrolls.setSize(500, 100);
 
-        JPanel dropdown = new MessageTab(getMinimumSize());
+        JPanel dropdown = new TutorsTab();
         add(dropdown);
     }
+
 }

@@ -1,7 +1,3 @@
-package ui.messages;
-
-import ui.messages.Message;
-
 import javax.swing.*;
 import java.awt.*;
 

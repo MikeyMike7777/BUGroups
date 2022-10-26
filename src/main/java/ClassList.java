@@ -1,10 +1,8 @@
-package ui.profile;
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
-public class ProfileClassList extends JPanel {
+public class ClassList extends JPanel {
 
     String[] classes = {
             "CSI 3336 - Systems Programming",
@@ -19,7 +17,7 @@ public class ProfileClassList extends JPanel {
 
     JPanel buttons = new JPanel();
 
-    ProfileClassList(){
+    ClassList(){
         super();
         //GridLayout grid = new GridLayout(3, 1);
         //setLayout(grid);

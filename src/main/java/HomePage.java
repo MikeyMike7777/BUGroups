@@ -1,5 +1,3 @@
-package ui.general;
-
 import javax.swing.*;
 import javax.swing.text.JTextComponent;
 import java.awt.*;
@@ -37,7 +35,7 @@ public class HomePage extends JPanel {
     private void initPreviewContainers(){
         //messageBoardsPreview Initialization
         messageBoardsPreview = new JPanel();
-        messageBoardsPreview.add(new JLabel("View ui.messages.Message Boards"));
+        messageBoardsPreview.add(new JLabel("View Message Boards"));
 
         //viewClassmatesPreview Initialization
         viewClassmatesPreview = new JPanel();
