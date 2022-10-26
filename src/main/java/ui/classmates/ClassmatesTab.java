@@ -26,7 +26,9 @@ public class ClassmatesTab extends JPanel{
         for (int i = 1; i < classNames.length; ++i) {
             classNames[i] = list.getNames()[i - 1];
             boardKeys.put(classNames[i], i);
+            // add to map
             classes.put(classNames[i], new JPanel());
+            // add label for class in each jpanel
             classes.get(classNames[i]).add(new JLabel(classNames[i]));
         }
     }
@@ -43,6 +45,7 @@ public class ClassmatesTab extends JPanel{
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.add(addBoardMenu());
         add(panel);
+        demoSoftwareClass();
     }
 
     Component addBoardMenu() {
@@ -79,15 +82,18 @@ public class ClassmatesTab extends JPanel{
             currClass = classes.get(s);
             if (getComponentCount() > 1)
                 remove(getComponentCount() - 1);
-            // adds panels-- theoretically i want it to replace them
-            // (hide old one, show new one) but idk how to do that
             add(currClass);
         }
     }
 
+    void demoSoftwareClass(){
+        // get the software engineering jpanel and add hardcoded demo data
+        classes.get("CSI 3471 - Software Engineering I").add(new JLabel("Carson Buntin"));
+    }
+
     /*
     when user clicks "update classes" in profile, it should construct a new
-    Classmates Tab. ClassList (in profile) should start with nothing in it
+    Classmates Tab object. ClassList (in profile) should start with nothing in it
      */
 }
 
