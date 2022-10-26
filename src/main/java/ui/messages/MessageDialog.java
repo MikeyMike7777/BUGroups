@@ -20,7 +20,7 @@ public class MessageDialog extends JDialog {
 
     void createAndDisplay() {
         setPreferredSize(new Dimension(600, 450));
-        setTitle("View ui.messages.Message");
+        setTitle("View Message");
         panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.setPreferredSize(new Dimension(600, 450));

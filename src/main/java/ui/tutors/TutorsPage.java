@@ -6,7 +6,7 @@ import java.awt.*;
 public class TutorsPage extends JPanel{
     JLabel mainHeader;
 
-    TutorsPage() {
+    public TutorsPage() {
         super();
         createAndDisplay();
     }

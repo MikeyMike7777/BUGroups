@@ -6,7 +6,7 @@ import java.awt.*;
 public class MessagePage extends JPanel {
     JLabel mainHeader;
 
-    MessagePage(Dimension d) {
+    public MessagePage(Dimension d) {
         super();
         setMinimumSize(d);
         createAndDisplay();
@@ -20,7 +20,7 @@ public class MessagePage extends JPanel {
 
     void addComponents() {
         // header label
-        mainHeader = new JLabel("ui.messages.Message Board:");
+        mainHeader = new JLabel("Message Board:");
         add(mainHeader);
 
         // scroll bar

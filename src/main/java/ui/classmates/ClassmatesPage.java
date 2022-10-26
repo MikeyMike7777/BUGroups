@@ -6,7 +6,7 @@ import java.awt.*;
 public class ClassmatesPage extends JPanel {
     JLabel mainHeader;
 
-    ClassmatesPage() {
+    public ClassmatesPage() {
         super();
         createAndDisplay();
     }

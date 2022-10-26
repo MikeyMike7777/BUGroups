@@ -1,7 +1,5 @@
 package ui.profile;
 
-import ui.profile.ProfileClassList;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -16,7 +14,7 @@ public class ProfilePage extends JPanel {
     JPanel classList = new ProfileClassList();
 
 
-    ProfilePage(Dimension d) {
+    public ProfilePage(Dimension d) {
         super();
         setPreferredSize(d);
         createAndDisplay();
@@ -64,9 +62,9 @@ public class ProfilePage extends JPanel {
     }
 
     void buildProfileButtons(){
-        JButton logout = new JButton("LogOut");
+        JButton logout = new JButton("Logout");
         JButton edit = new JButton("Edit Profile Info");
-        JButton tutor = new JButton("Tutor A Class");
+        JButton tutor = new JButton("Tutor a Class");
         JButton messages = new JButton("Sent Messages");
 
 

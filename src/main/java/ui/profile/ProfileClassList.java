@@ -19,7 +19,7 @@ public class ProfileClassList extends JPanel {
 
     JPanel buttons = new JPanel();
 
-    ProfileClassList(){
+    public ProfileClassList(){
         super();
         //GridLayout grid = new GridLayout(3, 1);
         //setLayout(grid);
@@ -65,7 +65,7 @@ public class ProfileClassList extends JPanel {
         add(new JScrollPane(classList));
     }
 
-    String[] getNames(){
+    public String[] getNames(){
         return classes;
     }
 

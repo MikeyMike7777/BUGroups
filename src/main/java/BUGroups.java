@@ -1,4 +1,4 @@
-import ui.general.Login;
+import ui.general.*;
 
 import javax.swing.*;
 import java.awt.*;

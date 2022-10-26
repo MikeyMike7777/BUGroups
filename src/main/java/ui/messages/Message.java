@@ -22,7 +22,7 @@ public class Message extends JPanel {
                     "out one or two days a week?",
             "Howdy, does anyone have an opinion on which professor to take " +
                     "for software 1? I've heard Cerny is difficult but that" +
-                    " you learn more than with the other options.",
+                    " you learn more with him than with the other options.",
             "Is anyone taking SPA 1310 with someone other than Spinks? None " +
                     "of my classmates are on here and I desperately need a " +
                     "study group lol",

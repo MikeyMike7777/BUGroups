@@ -1,5 +1,7 @@
 package ui.classmates;
 
+import ui.profile.ProfileClassList;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
