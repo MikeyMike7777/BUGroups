@@ -1,3 +1,7 @@
+package ui.general;
+
+import ui.general.Window;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -30,7 +34,7 @@ public class Login extends JPanel {
     }
 
     private Component addLabel() {
-        JLabel windowLabel = new JLabel("Login");
+        JLabel windowLabel = new JLabel("ui.general.Login");
         windowLabel.setAlignmentX(CENTER_ALIGNMENT);
         return windowLabel;
     }
@@ -54,7 +58,7 @@ public class Login extends JPanel {
     }
 
     private Component addLogin() {
-        JButton login = new JButton("Login");
+        JButton login = new JButton("ui.general.Login");
         login.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

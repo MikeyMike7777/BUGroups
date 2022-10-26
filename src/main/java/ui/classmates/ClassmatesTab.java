@@ -1,10 +1,12 @@
+package ui.classmates;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.HashMap;
 
-public class TutorsTab extends JPanel{
-    static final String[] names = {
+public class ClassmatesTab extends JPanel{
+    static final String[] classNames = {
             "Select a Class",
             "CSI 3336 - Systems Programming",
             "CSI 3471 - Software Engineering I",
@@ -13,15 +15,15 @@ public class TutorsTab extends JPanel{
     };
 
     HashMap<String, Integer> boardKeys = new HashMap<>();
-    HashMap<String, JPanel> subjects = new HashMap<>();
-    JPanel currSubject = new JPanel();
+    HashMap<String, JPanel> classes = new HashMap<>();
+    JPanel currClass = new JPanel();
 
-    TutorsTab() {
+    ClassmatesTab() {
         super();
-        for (int i = 1; i < names.length; ++i) {
-            boardKeys.put(names[i], i);
-            subjects.put(names[i], new JPanel());
-            subjects.get(names[i]).add(new JLabel(names[i]));
+        for (int i = 1; i < classNames.length; ++i) {
+            boardKeys.put(classNames[i], i);
+            classes.put(classNames[i], new JPanel());
+            classes.get(classNames[i]).add(new JLabel(classNames[i]));
         }
         createAndDisplay();
     }
@@ -45,22 +47,22 @@ public class TutorsTab extends JPanel{
         JMenuBar bar = new JMenuBar();
         bar.setPreferredSize(new Dimension(300, 30));
         JMenu select = new JMenu();
-        select.setText("Select a Class");
+        select.setText("Select Class");
         select.setAlignmentX(CENTER_ALIGNMENT);
         select.setPreferredSize(new Dimension(300, 30));
         JMenuItem[] boards = createBoardOptions();
-        for (int i = 0; i < names.length; ++i)
+        for (int i = 0; i < classNames.length; ++i)
             select.add(boards[i]);
         bar.add(select);
         return bar;
     }
 
     JMenuItem[] createBoardOptions() {
-        JMenuItem[] items = new JMenuItem[names.length];
-        for (int i = 0; i < names.length; ++i) {
-            items[i] = new JMenuItem(names[i]);
+        JMenuItem[] items = new JMenuItem[classNames.length];
+        for (int i = 0; i < classNames.length; ++i) {
+            items[i] = new JMenuItem(classNames[i]);
             if (i > 0)
-                items[i].addActionListener(new TutorsTab.MenuActionListener());
+                items[i].addActionListener(new ClassmatesTab.MenuActionListener());
         }
         return items;
     }
@@ -71,13 +73,21 @@ public class TutorsTab extends JPanel{
             String s = ((JMenuItem)e.getSource()).getText();
             ((JMenu)((JPopupMenu)((JMenuItem)e.getSource()).getParent()).
                     getInvoker()).setText(s);
-            currSubject = subjects.get(s);
+            currClass = classes.get(s);
             if (getComponentCount() > 1)
                 remove(getComponentCount() - 1);
             // adds panels-- theoretically i want it to replace them
             // (hide old one, show new one) but idk how to do that
-            add(currSubject);
+            add(currClass);
         }
+    }
+
+    /* button in profile that allows user to edit classes there. before classes
+    are populated, indicate an empty class page
+    for UI demo purposes, have a button that populates hardcoded classes
+     */
+    void populateClasses(String[] classes){
+
     }
 }
 
