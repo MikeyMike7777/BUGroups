@@ -1,7 +1,7 @@
+import ui.general.Login;
+
 import javax.swing.*;
 import java.awt.*;
-import java.util.HashMap;
-import java.util.Map;
 
 class BUGroups {
     private static void createAndShowGUI() {
@@ -19,16 +19,16 @@ class BUGroups {
          * BEGIN TESTING CODE
          */
 //        Map<Integer, JPanel> tabMap = new HashMap<>();
-//        JPanel testPanel = new HomePage(panel.getPreferredSize()); //Create an instance of your JPanel extended class
-//        testPanel.setName("HomePage"); //Set its name to be seen on tab
+//        JPanel testPanel = new ui.general.HomePage(panel.getPreferredSize()); //Create an instance of your JPanel extended class
+//        testPanel.setName("ui.general.HomePage"); //Set its name to be seen on tab
 //        tabMap.put(0, testPanel);        //Put it in the map at the next available index
 //        JPanel testPanel1 = new JPanel(); //Create an instance of your JPanel extended class
-//        testPanel1.setName("Message Board"); //Set its name to be seen on tab
+//        testPanel1.setName("ui.messages.Message Board"); //Set its name to be seen on tab
 //        tabMap.put(1, testPanel1);        //Put it in the map at the next available index
 //        JPanel testPanel2 = new JPanel(); //Create an instance of your JPanel extended class
 //        testPanel2.setName("Classmates"); //Set its name to be seen on tab
 //        tabMap.put(2, testPanel2);        //Put it in the map at the next available index
-//        JPanel testPanel3 = new TutorsPage(); //Create an instance of your JPanel extended class
+//        JPanel testPanel3 = new ui.tutors.TutorsPage(); //Create an instance of your JPanel extended class
 //        testPanel3.setName("Tutors"); //Set its name to be seen on tab
 //        tabMap.put(3, testPanel3);        //Put it in the map at the next available index
 //        JPanel testPanel4 = new JPanel(); //Create an instance of your JPanel extended class
