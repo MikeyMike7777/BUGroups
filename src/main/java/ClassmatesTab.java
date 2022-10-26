@@ -73,7 +73,8 @@ public class ClassmatesTab extends JPanel{
             ((JMenu)((JPopupMenu)((JMenuItem)e.getSource()).getParent()).
                     getInvoker()).setText(s);
             currClass = classes.get(s);
-
+            if (getComponentCount() > 1)
+                remove(getComponentCount() - 1);
             // adds panels-- theoretically i want it to replace them
             // (hide old one, show new one) but idk how to do that
             add(currClass);

@@ -12,6 +12,7 @@ public class MessageBoard extends JPanel {
 
     void createAndDisplay() {
         setMinimumSize(new Dimension(600, 350));
+        setMaximumSize(new Dimension(600, 800));
         setAlignmentX(CENTER_ALIGNMENT);
         addComponents();
         setVisible(true);
@@ -19,23 +20,28 @@ public class MessageBoard extends JPanel {
 
     void addComponents() {
         ScrollPane scrolls = new ScrollPane(ScrollPane.SCROLLBARS_AS_NEEDED);
-        scrolls.setSize(500, 100);
+        scrolls.setSize(520, 250);
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.setMinimumSize(new Dimension(600, 300));
+        panel.setMaximumSize(new Dimension(600, 8000));
         panel.add(addMessages());
         scrolls.add(panel);
         add(scrolls);
     }
 
     Component addMessages() {
-        JPanel message = new JPanel();
-        message.setBackground(Color.white);
-        message.setMinimumSize(new Dimension(500, 100));
-        message.setLayout(new BoxLayout(message, BoxLayout.Y_AXIS));
-        message.add(new JLabel("Carsyn Smeda"));
-        message.add(new JLabel("Hi everyone! I'm looking for a tutor in " +
-                "Databases but don't see any listed.\nHas anyone taken it who " +
-                "could help me out one or two days a week?"));
-        return message;
+        Message message;
+        JPanel component = new JPanel();
+        component.setLayout(new BoxLayout(component, BoxLayout.Y_AXIS));
+        component.setMinimumSize(new Dimension(600, 300));
+        component.setMaximumSize(new Dimension(600, 8000));
+        for (int i = 0; i < 4; ++i) {
+            message = new Message(false);
+            if (!message.isReply)
+                component.add(message);
+        }
+        Message.counter = 0;
+        return component;
     }
 }

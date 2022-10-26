@@ -4,12 +4,13 @@ import java.awt.event.*;
 import java.util.HashMap;
 
 public class TutorsTab extends JPanel{
-    static final String[] names = {"Select Subject", "Biology and " +
-            "Health Sciences", "Business", "Chemistry and Biochemistry", "Education " +
-            "and Social Work", "Engineering and Computer Science", "English and " +
-            "Journalism", "Fine Arts", "Foreign Languages", "History and Political " +
-            "Science", "Math and Physics", "Philosophy and BIC", "Psychology and " +
-            "Sociology"};
+    static final String[] names = {
+            "Select a Class",
+            "CSI 3336 - Systems Programming",
+            "CSI 3471 - Software Engineering I",
+            "WGS 2300 - Women and Gender Studies",
+            "GEO 1306 - The Dynamic Earth"
+    };
 
     HashMap<String, Integer> boardKeys = new HashMap<>();
     HashMap<String, JPanel> subjects = new HashMap<>();
@@ -44,7 +45,7 @@ public class TutorsTab extends JPanel{
         JMenuBar bar = new JMenuBar();
         bar.setPreferredSize(new Dimension(300, 30));
         JMenu select = new JMenu();
-        select.setText("Select Subject");
+        select.setText("Select a Class");
         select.setAlignmentX(CENTER_ALIGNMENT);
         select.setPreferredSize(new Dimension(300, 30));
         JMenuItem[] boards = createBoardOptions();
@@ -71,7 +72,8 @@ public class TutorsTab extends JPanel{
             ((JMenu)((JPopupMenu)((JMenuItem)e.getSource()).getParent()).
                     getInvoker()).setText(s);
             currSubject = subjects.get(s);
-
+            if (getComponentCount() > 1)
+                remove(getComponentCount() - 1);
             // adds panels-- theoretically i want it to replace them
             // (hide old one, show new one) but idk how to do that
             add(currSubject);

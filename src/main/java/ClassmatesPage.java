@@ -1,12 +1,10 @@
 import javax.swing.*;
 import java.awt.*;
 
-import static java.awt.Component.CENTER_ALIGNMENT;
-
-public class Classmates extends JPanel {
+public class ClassmatesPage extends JPanel {
     JLabel mainHeader;
 
-    Classmates() {
+    ClassmatesPage() {
         super();
         createAndDisplay();
     }
@@ -20,7 +18,7 @@ public class Classmates extends JPanel {
 
     void addComponents() {
         // header label
-        mainHeader = new JLabel("CLASSMATES");
+        mainHeader = new JLabel("Class:");
         add(mainHeader);
 
         // scroll bar
