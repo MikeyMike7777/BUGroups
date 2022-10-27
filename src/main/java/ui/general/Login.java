@@ -7,12 +7,11 @@ import java.awt.event.*;
 public class Login extends JPanel {
     public Login(Dimension d) {
         super();
-        setPreferredSize(d);
-        createAndDisplay();
+        createAndDisplay(d);
     }
 
-    private void createAndDisplay() {
-        setPreferredSize(new Dimension(600, 400));
+    private void createAndDisplay(Dimension d) {
+        setPreferredSize(d);
         setAlignmentX(LEFT_ALIGNMENT);
         addComponents();
         setVisible(true);
