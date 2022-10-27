@@ -9,11 +9,11 @@ import java.util.HashMap;
 
 public class ClassmatesTab extends JPanel{
 
-    ProfileClassList list = new ProfileClassList(); // need to connect this to what called it
+    ProfileClassList list = new ProfileClassList();
     String [] classNames = new String[list.getNames().length + 1];
     HashMap<String, Integer> boardKeys = new HashMap<>();
-    HashMap<String, JPanel> classes = new HashMap<>();
-    JPanel currClass = new JPanel();
+    //HashMap<String, JPanel> classes = new HashMap<>();
+    //JPanel currClass = new JPanel();
 
     ClassmatesTab() {
         super();
@@ -26,10 +26,13 @@ public class ClassmatesTab extends JPanel{
         for (int i = 1; i < classNames.length; ++i) {
             classNames[i] = list.getNames()[i - 1];
             boardKeys.put(classNames[i], i);
-            // add to map
-            classes.put(classNames[i], new JPanel());
+            //JPanel oneClass = new JPanel();
+            // set box layout for each panel
+            //oneClass.setLayout(new BoxLayout(oneClass, BoxLayout.Y_AXIS));
             // add label for class in each jpanel
-            classes.get(classNames[i]).add(new JLabel(classNames[i]));
+            //oneClass.add(new JLabel(classNames[i]));
+            // add to map
+            //classes.put(classNames[i], oneClass);
         }
     }
     void createAndDisplay() {
@@ -45,7 +48,7 @@ public class ClassmatesTab extends JPanel{
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.add(addBoardMenu());
         add(panel);
-        demoSoftwareClass();
+        //demoSoftwareClass();
     }
 
     Component addBoardMenu() {
@@ -79,17 +82,23 @@ public class ClassmatesTab extends JPanel{
             String s = ((JMenuItem)e.getSource()).getText();
             ((JMenu)((JPopupMenu)((JMenuItem)e.getSource()).getParent()).
                     getInvoker()).setText(s);
-            currClass = classes.get(s);
+            //currClass = classes.get(s);
             if (getComponentCount() > 1)
                 remove(getComponentCount() - 1);
-            add(currClass);
+            ClassmatesList currClassmates = new ClassmatesList();
+            currClassmates.iD = boardKeys.get(s);
+            currClassmates.name = s;
+            add(currClassmates);
         }
     }
 
-    void demoSoftwareClass(){
+    /*void demoSoftwareClass(){
         // get the software engineering jpanel and add hardcoded demo data
         classes.get("CSI 3471 - Software Engineering I").add(new JLabel("Carson Buntin"));
-    }
+        classes.get("CSI 3471 - Software Engineering I").add(new JLabel("Mikey Mathews"));
+        classes.get("CSI 3471 - Software Engineering I").add(new JLabel("Gabe Goulis"));
+        classes.get("CSI 3471 - Software Engineering I").add(new JLabel("Bryce Robinson"));
+    }*/
 
     /*
     when user clicks "update classes" in profile, it should construct a new
