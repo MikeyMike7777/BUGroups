@@ -74,8 +74,10 @@ public class Login extends JPanel {
         forgotPassword.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                getParent().setVisible(false);
-                getParent().remove(0);
+                JPanel temp = (JPanel)getParent();
+                setVisible(false);
+                temp.remove(0);
+                temp.add(new ForgotPassword(getPreferredSize()));
             }
         });
         forgotPassword.setAlignmentX(CENTER_ALIGNMENT);
@@ -87,8 +89,10 @@ public class Login extends JPanel {
         createAccount.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                getParent().setVisible(false);
-                getParent().remove(0);
+                JPanel temp = (JPanel)getParent();
+                setVisible(false);
+                temp.remove(0);
+                temp.add(new CreateAccount(getPreferredSize()));
             }
         });
         createAccount.setAlignmentX(CENTER_ALIGNMENT);
