@@ -21,6 +21,7 @@ public class ForgotPassword extends JPanel {
         panel.add(addReset());
         panel.add(addBack());
         panel.setAlignmentX(LEFT_ALIGNMENT);
+        add(panel);
     }
 
     private Component addEmail(){
