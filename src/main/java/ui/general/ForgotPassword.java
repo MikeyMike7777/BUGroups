@@ -17,10 +17,12 @@ public class ForgotPassword extends JPanel {
     private void initForgot(){
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.add(new JLabel("Forgot Password"));
         panel.add(addEmail());
         panel.add(addReset());
         panel.add(addBack());
-        panel.setAlignmentX(LEFT_ALIGNMENT);
+        panel.setAlignmentX(CENTER_ALIGNMENT);
+        add(panel);
     }
 
     private Component addEmail(){
@@ -39,6 +41,7 @@ public class ForgotPassword extends JPanel {
                 JPanel temp = (JPanel)getParent();
                 setVisible(false);
                 temp.remove(0);
+                //send reset email
                 back();
             }
         });
@@ -60,7 +63,6 @@ public class ForgotPassword extends JPanel {
         return back;
     }
     private void back(){
-        JPanel temp = (JPanel)getParent().getParent().getParent();
-        temp.setVisible(true);
+        add(new Login(getPreferredSize()));
     }
 }
