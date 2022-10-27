@@ -13,6 +13,10 @@ public class ProfilePage extends JPanel {
 
     JPanel classList = new ProfileClassList();
 
+    JPanel tutorList = new ProfileTutorList();
+
+
+
 
     public ProfilePage(Dimension d) {
         super();
@@ -38,8 +42,7 @@ public class ProfilePage extends JPanel {
 
         add(classList);
 
-        buildProfileButtons();
-        add(profileButtons);
+        add(tutorList);
     }
 
     void buildUserInfoBox(){

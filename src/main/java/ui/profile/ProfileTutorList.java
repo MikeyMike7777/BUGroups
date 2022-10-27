@@ -6,8 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-public class ProfileClassList extends JPanel {
-
+public class ProfileTutorList extends JPanel {
     String[] classes = {
             "CSI 3336 - Systems Programming",
             "CSI 3471 - Software Engineering I",
@@ -17,13 +16,13 @@ public class ProfileClassList extends JPanel {
 
     JLabel header;
 
-    JList<String> classList;
+    JList<String> tutorList;
 
     JPanel buttons = new JPanel();
 
     DefaultListModel<String> model = new DefaultListModel<>();
 
-    public ProfileClassList(){
+    public ProfileTutorList(){
         super();
         //GridLayout grid = new GridLayout(3, 1);
         //setLayout(grid);
@@ -38,12 +37,12 @@ public class ProfileClassList extends JPanel {
 
     void addComponents() {
         // header label
-        header = new JLabel("Current Classes:");
+        header = new JLabel("Classes you are Tutoring:");
 
         add(header);
 
         buildClassList();
-        add(classList);
+        add(tutorList);
 
         buildAddRemoveButtons();
         add(buttons);
@@ -51,8 +50,8 @@ public class ProfileClassList extends JPanel {
     }
 
     void buildAddRemoveButtons(){
-        JButton add = new JButton("Add Class");
-        JButton remove = new JButton("Remove Class");
+        JButton add = new JButton("Add Tutoring Offer");
+        JButton remove = new JButton("Remove Tutoring");
 
         add.addActionListener(new AddActionListener());
         remove.addActionListener(new RemoveActionListener());
@@ -67,8 +66,8 @@ public class ProfileClassList extends JPanel {
     void buildClassList(){
         model.addAll(List.of(classes));
 
-        classList = new JList<>(model);
-        add(new JScrollPane(classList));
+        tutorList = new JList<>(model);
+        add(new JScrollPane(tutorList));
     }
 
     class AddActionListener implements ActionListener {
@@ -84,10 +83,10 @@ public class ProfileClassList extends JPanel {
         public void actionPerformed(ActionEvent e) {
             int answer = JOptionPane
                     .showConfirmDialog(null,
-                            "Do you want to remove " + classList.getSelectedValue() + "?",
+                            "Do you want to remove " + tutorList.getSelectedValue() + "?",
                             "Warning", JOptionPane.YES_NO_OPTION);
             if (answer == 0){
-                model.remove(classList.getSelectedIndex());
+                model.remove(tutorList.getSelectedIndex());
             }
         }
     }
@@ -95,5 +94,4 @@ public class ProfileClassList extends JPanel {
     public String[] getNames(){
         return classes;
     }
-
 }

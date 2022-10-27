@@ -60,7 +60,7 @@ public class Message extends JPanel {
         createMessage();
     }
 
-    Message(Message m) {
+    public Message(Message m) {
         name = m.name;
         isReply = m.isReply;
         message = m.message;
