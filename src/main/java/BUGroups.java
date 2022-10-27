@@ -8,6 +8,7 @@ class BUGroups {
         JFrame frame = new JFrame("BU Groups");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setPreferredSize(new Dimension(600, 400));
+        frame.setResizable(false);
 
         JPanel panel = new JPanel();
         panel.setPreferredSize(new Dimension(600, 400));
