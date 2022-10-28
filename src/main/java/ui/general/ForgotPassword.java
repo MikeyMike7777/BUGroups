@@ -17,7 +17,9 @@ public class ForgotPassword extends JPanel {
     private void initForgot(){
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        panel.add(new JLabel("Forgot Password"));
+        JLabel label = new JLabel("Forgot Password");
+        label.setAlignmentX(CENTER_ALIGNMENT);
+        panel.add(label, CENTER_ALIGNMENT);
         panel.add(addEmail());
         panel.add(addReset());
         panel.add(addBack());
@@ -34,10 +36,13 @@ public class ForgotPassword extends JPanel {
         return email;
     }
     private Component addReset(){
-        JButton reset = new JButton("Reset VIA Email");
+        JButton reset = new JButton("Get Temporary Password");
         reset.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(ForgotPassword.this.getRootPane()
+                    .getParent(), "Email sent!", "Confirmation",
+                        JOptionPane.QUESTION_MESSAGE);
                 JPanel temp = (JPanel)getParent();
                 setVisible(false);
                 temp.remove(0);
