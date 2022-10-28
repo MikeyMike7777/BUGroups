@@ -14,21 +14,23 @@ public class CreateAccount extends JPanel {
         initCreate();
         setBackground(Color.LIGHT_GRAY);
     }
+
     private void initCreate(){
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        panel.add(new JLabel("Create Account"));
+        JLabel label = new JLabel("Create Account");
+        label.setAlignmentX(CENTER_ALIGNMENT);
+        panel.add(label);
         panel.add(addFirstName());
         panel.add(addLastName());
-        panel.add(addClassification());
+        panel.add(addPhone());
         panel.add(addEmail());
-        panel.add(addPassword());
-        panel.add(addConfirmPassword());
         panel.add(addCreateAccount());
         panel.add(addBack());
         panel.setAlignmentX(LEFT_ALIGNMENT);
         add(panel);
     }
+
     private Component addFirstName(){
         JPanel first = new JPanel();
         first.setLayout(new BoxLayout(first, BoxLayout.X_AXIS));
@@ -37,6 +39,7 @@ public class CreateAccount extends JPanel {
         first.setAlignmentX(CENTER_ALIGNMENT);
         return first;
     }
+
     private Component addLastName(){
         JPanel last = new JPanel();
         last.setLayout(new BoxLayout(last, BoxLayout.X_AXIS));
@@ -45,14 +48,16 @@ public class CreateAccount extends JPanel {
         last.setAlignmentX(CENTER_ALIGNMENT);
         return last;
     }
-    private Component addClassification(){
+
+    private Component addPhone(){
         JPanel email = new JPanel();
         email.setLayout(new BoxLayout(email, BoxLayout.X_AXIS));
-        email.add(new JLabel("Classification: "));
-        email.add(new JTextField(15));
+        email.add(new JLabel("Phone: "));
+        email.add(new JTextField(40));
         email.setAlignmentX(CENTER_ALIGNMENT);
         return email;
     }
+
     private Component addEmail(){
         JPanel email = new JPanel();
         email.setLayout(new BoxLayout(email, BoxLayout.X_AXIS));
@@ -61,27 +66,15 @@ public class CreateAccount extends JPanel {
         email.setAlignmentX(CENTER_ALIGNMENT);
         return email;
     }
-    private Component addPassword(){
-        JPanel password = new JPanel();
-        password.setLayout(new BoxLayout(password, BoxLayout.X_AXIS));
-        password.add(new JLabel("Password: "));
-        password.add(new JPasswordField(15));
-        password.setAlignmentX(CENTER_ALIGNMENT);
-        return password;
-    }
-    private Component addConfirmPassword(){
-        JPanel confirm = new JPanel();
-        confirm.setLayout(new BoxLayout(confirm, BoxLayout.X_AXIS));
-        confirm.add(new JLabel("Confirm Password: "));
-        confirm.add(new JPasswordField(15));
-        confirm.setAlignmentX(CENTER_ALIGNMENT);
-        return confirm;
-    }
+
     private Component addCreateAccount(){
         JButton back = new JButton("Create Account");
         back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(CreateAccount.this.getRootPane()
+                    .getParent(), "Temporary password sent to email address!",
+                        "Confirmation", JOptionPane.QUESTION_MESSAGE);
                 JPanel temp = (JPanel)getParent();
                 setVisible(false);
                 temp.remove(0);
@@ -92,6 +85,7 @@ public class CreateAccount extends JPanel {
         back.setAlignmentX(CENTER_ALIGNMENT);
         return back;
     }
+
     private Component addBack(){
         JButton back = new JButton("Back");
         back.addActionListener(new ActionListener() {
