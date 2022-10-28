@@ -1,7 +1,4 @@
-package ui.classmates;
-
-import ui.messages.Message;
-import ui.messages.MessageDialog;
+package ui.tutors;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,15 +7,19 @@ import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class Classmate extends JPanel {
-    String name;
-    String email;
-    String phone;
+public class TutoringOffer extends JPanel {
+    String name; // of tutor-- eventually will be its own class but this is for UI purposes
+    String classTutoring;
+    String professor;
+    String semester;
+    String hourlyRate;
 
-    Classmate(String n, String e, String p){
+    TutoringOffer(String n, String c, String p, String s, String hr){
         name = n;
-        email = e;
-        phone = p;
+        classTutoring = c;
+        professor = p;
+        semester = s;
+        hourlyRate = hr;
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setMinimumSize(new Dimension(500, 100));
         setMaximumSize(new Dimension(500, 300));
@@ -26,30 +27,41 @@ public class Classmate extends JPanel {
         setOpaque(true);
         setFocusable(true);
         add(new JLabel(n));
-        addMouseListener(new Classmate.ClassmateClickListener());
-        addFocusListener(new Classmate.ClassmateFocusListener());
+        addMouseListener(new TutoringOffer.TutoringOfferClickListener());
+        addFocusListener(new TutoringOffer.TutoringOfferFocusListener());
     }
 
     @Override
-    public String getName() { return name; }
-    public String getEmail(){
-        return email;
+    public String getName() {
+        return name;
     }
 
-    public String getPhone(){
-        return phone;
+    public String getClassTutoring() {
+        return classTutoring;
     }
 
-    class ClassmateClickListener implements MouseListener {
+    public String getProfessor() {
+        return professor;
+    }
+
+    public String getSemester() {
+        return semester;
+    }
+
+    public String getHourlyRate() {
+        return hourlyRate;
+    }
+
+    class TutoringOfferClickListener implements MouseListener {
         @Override
         public void mouseClicked(MouseEvent e) {}
         @Override
         public void mousePressed(MouseEvent e) {}
         @Override
         public void mouseReleased(MouseEvent e) {
-            ClassmateInfoDialog info;
+            TutorDialog info;
             if (hasFocus()) {
-                info = new ClassmateInfoDialog(Classmate.this);
+                info = new TutorDialog(TutoringOffer.this);
                 getParent().requestFocusInWindow();
             }
             else requestFocusInWindow(true);
@@ -60,7 +72,7 @@ public class Classmate extends JPanel {
         public void mouseExited(MouseEvent e) {}
     }
 
-    class ClassmateFocusListener implements FocusListener {
+    class TutoringOfferFocusListener implements FocusListener {
         @Override
         public void focusGained(FocusEvent e) {
             setBackground(Color.blue);
