@@ -86,7 +86,7 @@ public class CreateAccount extends JPanel {
                 setVisible(false);
                 temp.remove(0);
                 //Create Account
-                back();
+                temp.add(new Login(getPreferredSize()));
             }
         });
         back.setAlignmentX(CENTER_ALIGNMENT);
@@ -100,14 +100,10 @@ public class CreateAccount extends JPanel {
                 JPanel temp = (JPanel)getParent();
                 setVisible(false);
                 temp.remove(0);
-                back();
+                temp.add(new Login(getPreferredSize()));
             }
         });
         back.setAlignmentX(CENTER_ALIGNMENT);
         return back;
-    }
-
-    private void back(){
-        add(new Login(getPreferredSize()));
     }
 }
