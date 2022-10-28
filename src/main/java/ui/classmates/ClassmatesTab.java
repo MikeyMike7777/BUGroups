@@ -12,6 +12,7 @@ public class ClassmatesTab extends JPanel{
     ProfileClassList list = new ProfileClassList();
     String [] classNames = new String[list.getNames().length + 1];
     HashMap<String, Integer> boardKeys = new HashMap<>();
+    JMenu select;
 
     ClassmatesTab() {
         super();
@@ -44,7 +45,7 @@ public class ClassmatesTab extends JPanel{
     Component addBoardMenu() {
         JMenuBar bar = new JMenuBar();
         bar.setPreferredSize(new Dimension(300, 30));
-        JMenu select = new JMenu();
+        select = new JMenu();
         select.setText("Select Class");
         select.setAlignmentX(CENTER_ALIGNMENT);
         select.setPreferredSize(new Dimension(300, 30));
@@ -79,6 +80,14 @@ public class ClassmatesTab extends JPanel{
             currClassmates.name = s;
             add(currClassmates);
         }
+    }
+
+    public JMenu getClassMenu(){
+        return select;
+    }
+
+    public String[] getClassNames(){
+        return classNames;
     }
 
 }

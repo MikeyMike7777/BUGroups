@@ -5,6 +5,7 @@ import java.awt.*;
 
 public class ClassmatesPage extends JPanel {
     JLabel mainHeader;
+    ClassmatesTab dropdown;
 
     public ClassmatesPage() {
         super();
@@ -31,7 +32,27 @@ public class ClassmatesPage extends JPanel {
         for iteration 2 we'll just have hardcoded values */
 
         // add(new JLabel ("No current classes"));
-        JPanel dropdown = new ClassmatesTab();
+        dropdown = new ClassmatesTab();
         add(dropdown);
     }
+
+    public void selectClass(String className){
+        JMenu menu = dropdown.getClassMenu();
+        String classNames[] = dropdown.getClassNames();
+
+        int index = -1;
+
+        for(int i = 0; i < classNames.length; i++){
+            if(classNames[i].equals(className)){
+                index = i;
+                break;
+            }
+        }
+
+        if(index == -1){
+            return;
+        }
+
+        menu.getItem(index).doClick();
+     }
 }

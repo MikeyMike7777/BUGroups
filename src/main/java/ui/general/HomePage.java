@@ -1,7 +1,9 @@
 package ui.general;
 
+import ui.classmates.ClassmatesPage;
 import ui.messages.MessageBoard;
 import ui.messages.MessagePage;
+import ui.profile.ProfileClassList;
 
 import javax.swing.*;
 import java.awt.*;
@@ -61,11 +63,15 @@ public class HomePage extends JPanel {
         previewContainer.setLayout(new BoxLayout(previewContainer, BoxLayout.Y_AXIS));
         //previewContainer.setLayout(new GridLayout());
 
+
         buildMessageBoardsPreview();
         previewContainer.add(viewMessageBoardsPreview);
-//        previewContainer.add(viewClassmatesPreview);
-//        previewContainer.add(viewTutorsPreview);
-//        previewContainer.add(viewProfilesPreview);
+        previewContainer.add(Box.createRigidArea(new Dimension(getPreferredSize().width- 20, 40)));
+        buildClassmatesPreview();
+        previewContainer.add(viewClassmatesPreview);
+        previewContainer.add(Box.createRigidArea(new Dimension(getPreferredSize().width- 20, 40)));
+        buildTutorsPreview();
+        previewContainer.add(viewTutorsPreview);
 
         add(previewContainer, BorderLayout.CENTER);
     }
@@ -153,73 +159,72 @@ public class HomePage extends JPanel {
         final int BUFFER = 20;
         final int COMPONENT_HEIGHT = getPreferredSize().height/4;
 
-        viewMessageBoardsPreview = new JPanel();
-        viewMessageBoardsPreview.setPreferredSize(new Dimension(getPreferredSize().width - BUFFER, COMPONENT_HEIGHT - BUFFER * 3));
-        System.out.println(viewMessageBoardsPreview.getSize());
-        viewMessageBoardsPreview.setBackground(Color.LIGHT_GRAY);
-        viewMessageBoardsPreview.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
+        viewClassmatesPreview = new JPanel();
+        viewClassmatesPreview.setPreferredSize(new Dimension(getPreferredSize().width - BUFFER, COMPONENT_HEIGHT + 60 - BUFFER * 3));
+        System.out.println(viewClassmatesPreview.getSize());
+        viewClassmatesPreview.setBackground(Color.LIGHT_GRAY);
+        viewClassmatesPreview.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
 
 
 
         JLabel titleLabel = new JLabel("Classmates");
-        titleLabel.setPreferredSize(new Dimension(viewMessageBoardsPreview.getPreferredSize().width, COMPONENT_HEIGHT/8));
+        titleLabel.setPreferredSize(new Dimension(viewClassmatesPreview.getPreferredSize().width, COMPONENT_HEIGHT/8));
 
-        JLabel subtitleLabel = new JLabel("The message boards is where you can discuss topics with your classmates! \n" +
-                "Most popular boards are below!");
-        subtitleLabel.setPreferredSize(new Dimension(viewMessageBoardsPreview.getPreferredSize().width, COMPONENT_HEIGHT/8));
+        JLabel subtitleLabel = new JLabel("Classmates is where you can see who's in your class and their profiles! \n" +
+                "Your classes are below!");
+        subtitleLabel.setPreferredSize(new Dimension(viewClassmatesPreview.getPreferredSize().width, COMPONENT_HEIGHT/8));
         subtitleLabel.setHorizontalAlignment(SwingConstants.LEFT);
 
+        viewClassmatesPreview.add(titleLabel);
+        viewClassmatesPreview.add(subtitleLabel);
 
+        ProfileClassList list = new ProfileClassList();
+        String classNames[] = list.getNames();
 
-        JButton biologyQuickSeek = new JButton("Biology and Health Sciences");
-        biologyQuickSeek.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                window.setSelectedIndex(1);
-                MessagePage mb = (MessagePage) window.getComponentAt(1);
-                mb.setCurrentMessageBoard("Biology and Health Sciences");
-            }
-        });
+        for(String className : classNames){
+            JButton classButton = new JButton(className);
+            classButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    window.setSelectedIndex(2);
+                    ClassmatesPage cm = (ClassmatesPage) window.getComponentAt(2);
+                    cm.selectClass(className);
+                }
+            });
+            viewClassmatesPreview.add(classButton);
+        }
 
-        JButton mathQuickSeek = new JButton("Math and Physics");
-        biologyQuickSeek.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                window.setSelectedIndex(1);
-                MessagePage mb = (MessagePage) window.getComponentAt(1);
-                mb.setCurrentMessageBoard("Math and Physics");
-            }
-        });
+    }
 
-        JButton engineeringQuickSeek = new JButton("Engineering and Comp Sci");
-        biologyQuickSeek.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                window.setSelectedIndex(1);
-                MessagePage mb = (MessagePage) window.getComponentAt(1);
-                mb.setCurrentMessageBoard("Engineering and Computer Science");
-            }
-        });
+    void buildTutorsPreview(){
+        final int BUFFER = 20;
+        final int COMPONENT_HEIGHT = getPreferredSize().height/4;
 
-        JButton chemistryQuickSeek = new JButton("Chem and Biochem");
-        biologyQuickSeek.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                window.setSelectedIndex(1);
-                MessagePage mb = (MessagePage) window.getComponentAt(1);
-                mb.setCurrentMessageBoard("Chemistry and Biochemistry");
-            }
-        });
+        viewTutorsPreview = new JPanel();
+        viewTutorsPreview.setPreferredSize(new Dimension(getPreferredSize().width - BUFFER, COMPONENT_HEIGHT - BUFFER * 3));
+        viewTutorsPreview.setBackground(Color.LIGHT_GRAY);
+        viewTutorsPreview.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
 
 
 
-        viewMessageBoardsPreview.add(titleLabel);
-        viewMessageBoardsPreview.add(subtitleLabel);
-        viewMessageBoardsPreview.add(mathQuickSeek);
-        viewMessageBoardsPreview.add(biologyQuickSeek);
-        viewMessageBoardsPreview.add(chemistryQuickSeek);
-        viewMessageBoardsPreview.add(engineeringQuickSeek);
+        JLabel titleLabel = new JLabel("Tutors");
+        titleLabel.setPreferredSize(new Dimension(viewTutorsPreview.getPreferredSize().width, COMPONENT_HEIGHT/8));
 
+        JLabel subtitleLabel = new JLabel("Tutors is where you can find available tutors for classes! \n" +
+                "Most popular tutors below!");
+        subtitleLabel.setPreferredSize(new Dimension(viewTutorsPreview.getPreferredSize().width, COMPONENT_HEIGHT/8));
+        subtitleLabel.setHorizontalAlignment(SwingConstants.LEFT);
+
+        viewTutorsPreview.add(titleLabel);
+        viewTutorsPreview.add(subtitleLabel);
+
+        ProfileClassList list = new ProfileClassList();
+        String tutorNames[] = {"TutorMan1", "TutorDude2", "TutorGal3", "TutorGirl4"};
+
+        for(String tutorName : tutorNames){
+            JButton tutorButton = new JButton(tutorName);
+            viewTutorsPreview.add(tutorButton);
+        }
 
     }
 }
