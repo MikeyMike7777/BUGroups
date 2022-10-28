@@ -69,7 +69,7 @@ public class Window extends JPanel {
     private Map<Integer, JPanel> initTabs() {
         Map<Integer, JPanel> tabMap = new HashMap<>();
         JPanel testPanel = new HomePage(tabbedPane,getPreferredSize()); //Create an instance of your JPanel extended class
-        testPanel.setName("HomePage"); //Set its name to be seen on tab
+        testPanel.setName("Home Page"); //Set its name to be seen on tab
         tabMap.put(0, testPanel);        //Put it in the map at the next available index
         JPanel testPanel1 = new MessagePage(tabSize);
         testPanel1.setName("Message Boards"); //Set its name to be seen on tab
