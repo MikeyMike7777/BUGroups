@@ -19,11 +19,12 @@ public class ReplyDialog extends JDialog {
     }
 
     void createAndDisplay() {
-        setPreferredSize(new Dimension(400, 350));
+        setMinimumSize(new Dimension(400, 300));
         setTitle("New Reply");
+        setResizable(false);
         panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        panel.setPreferredSize(new Dimension(400, 350));
+        panel.setMinimumSize(new Dimension(400, 300));
 
         addComponents();
         addButtons();
@@ -36,9 +37,9 @@ public class ReplyDialog extends JDialog {
 
     void addComponents() {
         ScrollPane scrolls = new ScrollPane(ScrollPane.SCROLLBARS_AS_NEEDED);
-        scrolls.setPreferredSize(new Dimension(250, 200));
+        scrolls.setMaximumSize(new Dimension(350, 200));
         reply = new JTextPane();
-        reply.setPreferredSize(new Dimension(250, 600));
+        reply.setMaximumSize(new Dimension(350, 600));
         scrolls.add(reply, Component.CENTER_ALIGNMENT);
         panel.add(scrolls, Component.CENTER_ALIGNMENT);
     }
@@ -68,7 +69,8 @@ public class ReplyDialog extends JDialog {
             parent.replies.add(new Message(reply.getText()));
             MessageDialog t = (MessageDialog)dialog.getRootPane().getParent();
             t.repaint(0);
-            parent.repaint();
+            JPanel board = (JPanel)parent.getParent().getParent().getParent().getParent().getParent();
+            // delete and redraw board pulling from database again?
             dispose();
         }
     }

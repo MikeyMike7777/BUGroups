@@ -88,7 +88,6 @@ public class HomePage extends JPanel {
 
         viewMessageBoardsPreview = new JPanel();
         viewMessageBoardsPreview.setPreferredSize(new Dimension(getPreferredSize().width - BUFFER, COMPONENT_HEIGHT - BUFFER * 3));
-        System.out.println(viewMessageBoardsPreview.getSize());
         viewMessageBoardsPreview.setBackground(Color.LIGHT_GRAY);
         viewMessageBoardsPreview.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
 
@@ -162,7 +161,6 @@ public class HomePage extends JPanel {
 
         viewClassmatesPreview = new JPanel();
         viewClassmatesPreview.setPreferredSize(new Dimension(getPreferredSize().width - BUFFER, COMPONENT_HEIGHT + 60 - BUFFER * 3));
-        System.out.println(viewClassmatesPreview.getSize());
         viewClassmatesPreview.setBackground(Color.LIGHT_GRAY);
         viewClassmatesPreview.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
 

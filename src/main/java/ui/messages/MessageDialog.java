@@ -18,11 +18,11 @@ public class MessageDialog extends JDialog {
     }
 
     void createAndDisplay() {
-        setPreferredSize(new Dimension(600, 450));
+        setPreferredSize(new Dimension(750, 450));
         setTitle("View Message");
         panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        panel.setPreferredSize(new Dimension(600, 450));
+        panel.setPreferredSize(new Dimension(750, 450));
 
         message.removeMouseListener(message.getMouseListeners()[0]);
         message.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -39,11 +39,11 @@ public class MessageDialog extends JDialog {
 
     void addComponents() {
         ScrollPane scrolls = new ScrollPane(ScrollPane.SCROLLBARS_AS_NEEDED);
-        scrolls.setPreferredSize(new Dimension(600, 100));
+        scrolls.setPreferredSize(new Dimension(750, 100));
         JPanel pane = new JPanel();
         pane.setLayout(new BoxLayout(pane, BoxLayout.Y_AXIS));
-        pane.setMinimumSize(new Dimension(600, 300));
-        pane.setMaximumSize(new Dimension(600, 8000));
+        pane.setMinimumSize(new Dimension(750, 300));
+        pane.setMaximumSize(new Dimension(750, 8000));
         pane.add(addMessages(), Component.CENTER_ALIGNMENT);
         scrolls.add(pane, Component.CENTER_ALIGNMENT);
         panel.add(scrolls, Component.CENTER_ALIGNMENT);
@@ -52,8 +52,8 @@ public class MessageDialog extends JDialog {
     Component addMessages() {
         JPanel messages = new JPanel();
         messages.setLayout(new BoxLayout(messages, BoxLayout.Y_AXIS));
-        messages.setMinimumSize(new Dimension(600, 300));
-        messages.setMaximumSize(new Dimension(600, 8000));
+        messages.setMinimumSize(new Dimension(750, 300));
+        messages.setMaximumSize(new Dimension(750, 8000));
         Vector<Message> replies = message.replies;
         for (Message m : replies) {
             m.setAlignmentX(Component.CENTER_ALIGNMENT);
