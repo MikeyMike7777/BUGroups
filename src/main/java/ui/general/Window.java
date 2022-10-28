@@ -144,13 +144,19 @@ public class Window extends JPanel {
         //tabbedPane = new JTabbedPane();
         tabbedPane.setPreferredSize(getPreferredSize());
 
-        ImageIcon icon = new ImageIcon("src/main/resources/userIcon.png");
+        ImageIcon userIcon = new ImageIcon("src/main/resources/userIcon.png");
+        ImageIcon homeIcon = new ImageIcon("src/main/resources/homeIcon.png");
+        ImageIcon messageIcon = new ImageIcon("src/main/resources/messageIcon.png");
+        ImageIcon tutorIcon = new ImageIcon("src/main/resources/tutorIcon.png");
 
+        ImageIcon icons[] = {homeIcon, messageIcon, userIcon, tutorIcon, userIcon};
+        int count = 0;
         //Build our navigation bar
         for (Map.Entry<Integer, JPanel> entry : tabMap.entrySet()) {
-            tabbedPane.addTab(entry.getValue().getName(), icon, entry.getValue(),
+            tabbedPane.addTab(entry.getValue().getName(), icons[count], entry.getValue(),
                     "Does nothing");
 
+            count++;
             //Sets key for auto navigation to a specified tab, uses the index of 0-?
             tabbedPane.setMnemonicAt(entry.getKey(), KeyEvent.VK_1 + entry.getKey());
         }
