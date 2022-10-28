@@ -83,6 +83,9 @@ public class Window extends JPanel {
         JPanel testPanel4 = new ProfilePage(tabSize); //Create an instance of your JPanel extended class
         testPanel4.setName("Profile"); //Set its name to be seen on tab
         tabMap.put(4, testPanel4);        //Put it in the map at the next available index
+        JPanel testPanel5 = new Settings(tabSize); //Create an instance of your JPanel extended class
+        testPanel5.setName("Settings"); //Set its name to be seen on tab
+        tabMap.put(5, testPanel5);        //Put it in the map at the next available index
         return tabMap;
     }
 
@@ -148,8 +151,9 @@ public class Window extends JPanel {
         ImageIcon homeIcon = new ImageIcon("src/main/resources/homeIcon.png");
         ImageIcon messageIcon = new ImageIcon("src/main/resources/messageIcon.png");
         ImageIcon tutorIcon = new ImageIcon("src/main/resources/tutorIcon.png");
+        ImageIcon settingsIcon = new ImageIcon("src/main/resources/settingsIcon.png");
 
-        ImageIcon icons[] = {homeIcon, messageIcon, userIcon, tutorIcon, userIcon};
+        ImageIcon icons[] = {homeIcon, messageIcon, userIcon, tutorIcon, userIcon, settingsIcon};
         int count = 0;
         //Build our navigation bar
         for (Map.Entry<Integer, JPanel> entry : tabMap.entrySet()) {
