@@ -63,6 +63,9 @@ public class ForgotPassword extends JPanel {
         return back;
     }
     private void back(){
-        add(new Login(getPreferredSize()));
+        JPanel panel = new JPanel();
+        panel.setPreferredSize(getPreferredSize());
+        panel.add(new Login(panel.getPreferredSize()));
+        getParent().getParent().add(panel);
     }
 }
