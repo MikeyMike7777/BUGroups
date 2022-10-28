@@ -12,17 +12,13 @@ import java.awt.event.MouseListener;
 
 public class Classmate extends JPanel {
     String name;
+    String email;
+    String phone;
 
-    private static final String[] names = {
-            "Carsyn Smeda",
-            "Bryce Robinson",
-            "Mikey Mathews",
-            "Gabriel Goulis",
-            "Carson Buntin"
-    };
-
-    Classmate(String n){
+    Classmate(String n, String e, String p){
         name = n;
+        email = e;
+        phone = p;
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setMinimumSize(new Dimension(500, 100));
         setMaximumSize(new Dimension(500, 300));
@@ -30,13 +26,19 @@ public class Classmate extends JPanel {
         setOpaque(true);
         setFocusable(true);
         add(new JLabel(n));
+        addMouseListener(new Classmate.ClassmateClickListener());
+        addFocusListener(new Classmate.ClassmateFocusListener());
     }
 
-    public String getName(){
-        return name;
+    String getEmail(){
+        return email;
     }
 
-    class MessageClickListener implements MouseListener {
+    String getPhone(){
+        return phone;
+    }
+
+    class ClassmateClickListener implements MouseListener {
         @Override
         public void mouseClicked(MouseEvent e) {}
         @Override
@@ -56,7 +58,7 @@ public class Classmate extends JPanel {
         public void mouseExited(MouseEvent e) {}
     }
 
-    class MessageFocusListener implements FocusListener {
+    class ClassmateFocusListener implements FocusListener {
         @Override
         public void focusGained(FocusEvent e) {
             setBackground(Color.blue);
