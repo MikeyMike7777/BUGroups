@@ -42,7 +42,7 @@ public class ForgotPassword extends JPanel {
                 setVisible(false);
                 temp.remove(0);
                 //send reset email
-                back();
+                temp.add(new Login(getPreferredSize()));
             }
         });
         reset.setAlignmentX(CENTER_ALIGNMENT);
@@ -56,13 +56,10 @@ public class ForgotPassword extends JPanel {
                 JPanel temp = (JPanel)getParent();
                 setVisible(false);
                 temp.remove(0);
-                back();
+                temp.add(new Login(getPreferredSize()));
             }
         });
         back.setAlignmentX(CENTER_ALIGNMENT);
         return back;
-    }
-    private void back(){
-        add(new Login(getPreferredSize()));
     }
 }

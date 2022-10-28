@@ -1,39 +1,44 @@
-package ui.classmates;
+package ui.tutors;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ClassmateInfoDialog extends JDialog{
-    Classmate cm;
-    Classmate parent;
+public class TutorDialog extends JDialog{
+    TutoringOffer t;
+    TutoringOffer parent;
     JPanel panel;
-    ClassmateInfoDialog(Classmate owner){
+
+    TutorDialog(TutoringOffer owner){
         super(SwingUtilities.windowForComponent(owner));
         parent = owner;
-        cm = new Classmate(parent.getName(), parent.getEmail(),
-                parent.getPhone());
-        cm.setFocusable(false);
+        t = new TutoringOffer(parent.getName(), parent.getClassTutoring(),
+                parent.getProfessor(), parent.getSemester(), parent.getHourlyRate());
+        t.setFocusable(false);
         createAndDisplay();
     }
 
     void createAndDisplay() {
         setPreferredSize(new Dimension(600, 450));
-        setTitle("View Classmate");
+        setTitle("View Tutoring Offer");
         panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.setPreferredSize(new Dimension(600, 450));
 
-        cm.removeMouseListener(cm.getMouseListeners()[0]);
-        cm.setAlignmentX(Component.CENTER_ALIGNMENT);
+        t.removeMouseListener(t.getMouseListeners()[0]);
+        t.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         panel.add(new JLabel(" "));
-        panel.add(new JLabel(cm.getName()));
+        panel.add(new JLabel("Tutor: " + t.getName()));
         panel.add(new JLabel(" "));
-        panel.add(new JLabel(cm.getEmail()));
+        panel.add(new JLabel("Class: " + t.getClassTutoring()));
         panel.add(new JLabel(" "));
-        panel.add(new JLabel(cm.getPhone()));
+        panel.add(new JLabel("Professor taken: " + t.getProfessor()));
+        panel.add(new JLabel(" "));
+        panel.add(new JLabel("Semester taken: " + t.getSemester()));
+        panel.add(new JLabel(" "));
+        panel.add(new JLabel("Hourly rate: " + t.getHourlyRate()));
         panel.add(new JLabel(" "));
 
         // availability-- same for everyone for demo purposes
