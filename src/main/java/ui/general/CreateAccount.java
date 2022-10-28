@@ -2,6 +2,8 @@ package ui.general;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class CreateAccount extends JPanel {
     CreateAccount(Dimension preferredSize){
@@ -22,6 +24,8 @@ public class CreateAccount extends JPanel {
         panel.add(addEmail());
         panel.add(addPassword());
         panel.add(addConfirmPassword());
+        panel.add(addCreateAccount());
+        panel.add(addBack());
         panel.setAlignmentX(LEFT_ALIGNMENT);
         add(panel);
     }
@@ -72,5 +76,38 @@ public class CreateAccount extends JPanel {
         confirm.add(new JPasswordField(15));
         confirm.setAlignmentX(CENTER_ALIGNMENT);
         return confirm;
+    }
+    private Component addCreateAccount(){
+        JButton back = new JButton("Create Account");
+        back.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JPanel temp = (JPanel)getParent();
+                setVisible(false);
+                temp.remove(0);
+                //Create Account
+                back();
+            }
+        });
+        back.setAlignmentX(CENTER_ALIGNMENT);
+        return back;
+    }
+    private Component addBack(){
+        JButton back = new JButton("Back");
+        back.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JPanel temp = (JPanel)getParent();
+                setVisible(false);
+                temp.remove(0);
+                back();
+            }
+        });
+        back.setAlignmentX(CENTER_ALIGNMENT);
+        return back;
+    }
+
+    private void back(){
+        add(new Login(getPreferredSize()));
     }
 }
