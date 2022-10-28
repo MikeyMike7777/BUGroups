@@ -82,12 +82,14 @@ public class ProfileClassList extends JPanel {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            int answer = JOptionPane
-                    .showConfirmDialog(null,
-                            "Do you want to remove " + classList.getSelectedValue() + "?",
-                            "Warning", JOptionPane.YES_NO_OPTION);
-            if (answer == 0){
-                model.remove(classList.getSelectedIndex());
+            if(classList.getSelectedValue() != null) {
+                int answer = JOptionPane
+                        .showConfirmDialog(null,
+                                "Do you want to remove " + classList.getSelectedValue() + "?",
+                                "Warning", JOptionPane.YES_NO_OPTION);
+                if (answer == 0) {
+                    model.remove(classList.getSelectedIndex());
+                }
             }
         }
     }
