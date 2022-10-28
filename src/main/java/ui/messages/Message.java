@@ -48,8 +48,8 @@ public class Message extends JPanel {
             replies.add(new Message(true));
         } else ++counter;
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        setMinimumSize(new Dimension(500, 100));
-        setMaximumSize(new Dimension(500, 300));
+        setMinimumSize(new Dimension(700, 100));
+        setMaximumSize(new Dimension(700, 500));
         setBackground(Color.white);
         setOpaque(true);
         setFocusable(true);
@@ -65,8 +65,8 @@ public class Message extends JPanel {
         name = "Carsyn Smeda";
         message = reply;
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        setMinimumSize(new Dimension(500, 100));
-        setMaximumSize(new Dimension(500, 300));
+        setMinimumSize(new Dimension(700, 100));
+        setMaximumSize(new Dimension(700, 500));
         setBackground(Color.white);
         setOpaque(true);
         setFocusable(true);
@@ -83,8 +83,8 @@ public class Message extends JPanel {
         message = m.message;
         replies = m.replies;
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        setMinimumSize(new Dimension(500, 100));
-        setMaximumSize(new Dimension(500, 300));
+        setMinimumSize(new Dimension(700, 100));
+        setMaximumSize(new Dimension(700, 500));
         setBackground(Color.white);
         setOpaque(true);
         setFocusable(true);
@@ -98,7 +98,8 @@ public class Message extends JPanel {
     void createMessage() {
         JLabel user = new JLabel(name);
         JLabel label = new JLabel("<html>" + message + "</html>");
-        label.setPreferredSize(new Dimension(450, 50));
+        label.setPreferredSize(new Dimension(650, 50));
+        setAlignmentX(CENTER_ALIGNMENT);
         add(user, LEFT_ALIGNMENT);
         add(new JLabel(" "), LEFT_ALIGNMENT);
         add(label, LEFT_ALIGNMENT);

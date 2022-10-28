@@ -9,7 +9,6 @@ public class MessageTab extends JPanel {
     JMenuBar bar;
     JMenu select;
     static final String[] names = {
-            "Select a Message Board",
             "Biology and Health Sciences",
             "Business",
             "Chemistry and Biochemistry",
@@ -51,11 +50,11 @@ public class MessageTab extends JPanel {
 
     Component addBoardMenu() {
         bar = new JMenuBar();
-        bar.setPreferredSize(new Dimension(200, 30));
+        bar.setPreferredSize(new Dimension(260, 30));
         select = new JMenu();
         select.setText("Select a Message Board");
         select.setAlignmentX(CENTER_ALIGNMENT);
-        select.setPreferredSize(new Dimension(200, 30));
+        select.setPreferredSize(new Dimension(260, 30));
         JMenuItem[] boards = createBoardOptions();
         for (int i = 0; i < names.length; ++i)
             select.add(boards[i]);
@@ -67,8 +66,7 @@ public class MessageTab extends JPanel {
         JMenuItem[] items = new JMenuItem[names.length];
         for (int i = 0; i < names.length; ++i) {
             items[i] = new JMenuItem(names[i]);
-            if (i > 0)
-                items[i].addActionListener(new MenuActionListener());
+            items[i].addActionListener(new MenuActionListener());
         }
         return items;
     }
@@ -84,7 +82,7 @@ public class MessageTab extends JPanel {
             MessageBoard board = new MessageBoard();
             board.iD = boardKeys.get(s);
             board.name = s;
-            add(board);
+            getParent().add(board);
         }
     }
 
