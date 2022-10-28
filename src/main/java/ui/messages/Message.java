@@ -60,6 +60,23 @@ public class Message extends JPanel {
         createMessage();
     }
 
+    Message(String reply) {
+        isReply = true;
+        name = "Carsyn Smeda";
+        message = reply;
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        setMinimumSize(new Dimension(500, 100));
+        setMaximumSize(new Dimension(500, 300));
+        setBackground(Color.white);
+        setOpaque(true);
+        setFocusable(true);
+        if (!isReply) {
+            addMouseListener(new MessageClickListener());
+            addFocusListener(new MessageFocusListener());
+        }
+        createMessage();
+    }
+
     public Message(Message m) {
         name = m.name;
         isReply = m.isReply;

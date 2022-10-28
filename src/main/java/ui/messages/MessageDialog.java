@@ -6,7 +6,6 @@ import java.awt.event.*;
 import java.util.Vector;
 
 public class MessageDialog extends JDialog {
-
     Message message;
     Message parent;
     JPanel panel;
@@ -85,8 +84,15 @@ public class MessageDialog extends JDialog {
     class ReplyActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            ReplyDialog reply = new ReplyDialog(parent, message);
+            repaint();
         }
+    }
+
+    @Override
+    public void repaint(long tm) {
+        MessageDialog newDialog = new MessageDialog(parent);
+        dispose();
     }
 
     @Override
