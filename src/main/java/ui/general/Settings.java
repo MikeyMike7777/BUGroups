@@ -13,12 +13,12 @@ public class Settings extends JPanel {
         initializeWindow(preferredSize);
     }
 
-    void initializeWindow(Dimension preferredSize) {
+    private void initializeWindow(Dimension preferredSize) {
         setMinimumSize(preferredSize);
-        addComponents();
+        initSettings();
     }
 
-    void addComponents() {
+    private void initSettings() {
 
     }
 
