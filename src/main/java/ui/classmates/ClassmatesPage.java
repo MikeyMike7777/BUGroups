@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 
 public class ClassmatesPage extends JPanel {
-    JLabel mainHeader;
     ClassmatesTab dropdown;
 
     public ClassmatesPage() {
@@ -20,10 +19,6 @@ public class ClassmatesPage extends JPanel {
     }
 
     void addComponents() {
-        // header label
-        //mainHeader = new JLabel("Class:");
-        //add(mainHeader);
-
         // scroll bar
         ScrollPane scrolls = new ScrollPane(ScrollPane.SCROLLBARS_AS_NEEDED);
         scrolls.setSize(500, 100);

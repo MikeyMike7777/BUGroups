@@ -4,8 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 
 public class TutorsPage extends JPanel{
-    JLabel mainHeader;
-
     TutorsTab dropdown;
 
     public TutorsPage() {
@@ -21,10 +19,6 @@ public class TutorsPage extends JPanel{
     }
 
     void addComponents() {
-        // header label
-        mainHeader = new JLabel("Class:");
-        add(mainHeader);
-
         // scroll bar
         ScrollPane scrolls = new ScrollPane(ScrollPane.SCROLLBARS_AS_NEEDED);
         scrolls.setSize(500, 100);
