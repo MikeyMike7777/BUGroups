@@ -6,6 +6,8 @@ import java.awt.*;
 public class TutorsPage extends JPanel{
     JLabel mainHeader;
 
+    TutorsTab dropdown;
+
     public TutorsPage() {
         super();
         createAndDisplay();
@@ -20,15 +22,35 @@ public class TutorsPage extends JPanel{
 
     void addComponents() {
         // header label
-        //mainHeader = new JLabel("Class:");
-        //add(mainHeader);
+        mainHeader = new JLabel("Class:");
+        add(mainHeader);
 
         // scroll bar
         ScrollPane scrolls = new ScrollPane(ScrollPane.SCROLLBARS_AS_NEEDED);
         scrolls.setSize(500, 100);
 
-        JPanel dropdown = new TutorsTab();
+        dropdown = new TutorsTab();
         add(dropdown);
+    }
+
+    public void selectClass(String className){
+        JMenu menu = dropdown.getClassMenu();
+        String[] classNames = dropdown.getClassNames();
+
+        int index = -1;
+
+        for(int i = 0; i < classNames.length; i++){
+            if(classNames[i].equals(className)){
+                index = i;
+                break;
+            }
+        }
+
+        if(index == -1){
+            return;
+        }
+
+        menu.getItem(index).doClick();
     }
 
 }

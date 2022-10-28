@@ -4,6 +4,7 @@ import ui.classmates.ClassmatesPage;
 import ui.messages.MessageBoard;
 import ui.messages.MessagePage;
 import ui.profile.ProfileClassList;
+import ui.tutors.TutorsPage;
 
 import javax.swing.*;
 import java.awt.*;
@@ -96,7 +97,7 @@ public class HomePage extends JPanel {
         JLabel titleLabel = new JLabel("Message Boards");
         titleLabel.setPreferredSize(new Dimension(viewMessageBoardsPreview.getPreferredSize().width, COMPONENT_HEIGHT/8));
 
-        JLabel subtitleLabel = new JLabel("The message boards is where you can discuss topics with your classmates! \n" +
+        JLabel subtitleLabel = new JLabel("The message boards are where you can discuss topics with your classmates! \n" +
                 "Most popular boards are below!");
         subtitleLabel.setPreferredSize(new Dimension(viewMessageBoardsPreview.getPreferredSize().width, COMPONENT_HEIGHT/8));
         subtitleLabel.setHorizontalAlignment(SwingConstants.LEFT);
@@ -179,7 +180,7 @@ public class HomePage extends JPanel {
         viewClassmatesPreview.add(subtitleLabel);
 
         ProfileClassList list = new ProfileClassList();
-        String classNames[] = list.getNames();
+        String[] classNames = list.getNames();
 
         for(String className : classNames){
             JButton classButton = new JButton(className);
@@ -201,7 +202,7 @@ public class HomePage extends JPanel {
         final int COMPONENT_HEIGHT = getPreferredSize().height/4;
 
         viewTutorsPreview = new JPanel();
-        viewTutorsPreview.setPreferredSize(new Dimension(getPreferredSize().width - BUFFER, COMPONENT_HEIGHT - BUFFER * 3));
+        viewTutorsPreview.setPreferredSize(new Dimension(getPreferredSize().width - BUFFER, COMPONENT_HEIGHT + 60 - BUFFER * 3));
         viewTutorsPreview.setBackground(Color.LIGHT_GRAY);
         viewTutorsPreview.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
 
@@ -211,7 +212,7 @@ public class HomePage extends JPanel {
         titleLabel.setPreferredSize(new Dimension(viewTutorsPreview.getPreferredSize().width, COMPONENT_HEIGHT/8));
 
         JLabel subtitleLabel = new JLabel("Tutors is where you can find available tutors for classes! \n" +
-                "Most popular tutors below!");
+                "Find tutors for each of your classes below!");
         subtitleLabel.setPreferredSize(new Dimension(viewTutorsPreview.getPreferredSize().width, COMPONENT_HEIGHT/8));
         subtitleLabel.setHorizontalAlignment(SwingConstants.LEFT);
 
@@ -219,11 +220,19 @@ public class HomePage extends JPanel {
         viewTutorsPreview.add(subtitleLabel);
 
         ProfileClassList list = new ProfileClassList();
-        String tutorNames[] = {"TutorMan1", "TutorDude2", "TutorGal3", "TutorGirl4"};
+        String[] classNames = list.getNames();
 
-        for(String tutorName : tutorNames){
-            JButton tutorButton = new JButton(tutorName);
-            viewTutorsPreview.add(tutorButton);
+        for(String className : classNames){
+            JButton classButton = new JButton(className);
+            classButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    window.setSelectedIndex(3);
+                    TutorsPage t = (TutorsPage) window.getComponentAt(3);
+                    t.selectClass(className);
+                }
+            });
+            viewTutorsPreview.add(classButton);
         }
 
     }
