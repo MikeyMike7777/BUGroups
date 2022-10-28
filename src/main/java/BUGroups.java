@@ -11,6 +11,7 @@ class BUGroups {
         JFrame app = new JFrame("BU Groups");
         app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         app.setPreferredSize(new Dimension(APP_WIDTH, APP_HEIGHT));
+        app.setResizable(false);
 
         JPanel panel = new JPanel();
         panel.setPreferredSize(app.getPreferredSize());

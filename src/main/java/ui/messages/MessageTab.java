@@ -6,7 +6,8 @@ import java.awt.event.*;
 import java.util.HashMap;
 
 public class MessageTab extends JPanel {
-
+    JMenuBar bar;
+    JMenu select;
     static final String[] names = {
             "Select a Message Board",
             "Biology and Health Sciences",
@@ -49,9 +50,9 @@ public class MessageTab extends JPanel {
     }
 
     Component addBoardMenu() {
-        JMenuBar bar = new JMenuBar();
+        bar = new JMenuBar();
         bar.setPreferredSize(new Dimension(200, 30));
-        JMenu select = new JMenu();
+        select = new JMenu();
         select.setText("Select a Message Board");
         select.setAlignmentX(CENTER_ALIGNMENT);
         select.setPreferredSize(new Dimension(200, 30));
@@ -85,5 +86,12 @@ public class MessageTab extends JPanel {
             board.name = s;
             add(board);
         }
+    }
+
+    public JMenu getMessageBoardMenu(){
+        return select;
+    }
+    public String[] getMessageBoardMenuItemNames(){
+        return names;
     }
 }

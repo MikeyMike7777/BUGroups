@@ -48,4 +48,8 @@ public class MessageBoard extends JPanel {
         Message.counter = 0;
         return component;
     }
+
+    public void setCurrentMessageBoard(){
+
+    }
 }

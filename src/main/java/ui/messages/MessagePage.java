@@ -5,6 +5,7 @@ import java.awt.*;
 
 public class MessagePage extends JPanel {
     JLabel mainHeader;
+    MessageTab dropdown;
 
     public MessagePage(Dimension d) {
         super();
@@ -27,7 +28,26 @@ public class MessagePage extends JPanel {
         ScrollPane scrolls = new ScrollPane(ScrollPane.SCROLLBARS_AS_NEEDED);
         scrolls.setSize(500, 100);
 
-        JPanel dropdown = new MessageTab(getMinimumSize());
+        dropdown = new MessageTab(getMinimumSize());
         add(dropdown);
+    }
+
+    public void setCurrentMessageBoard(String boardName){
+        String itemNames[] = dropdown.getMessageBoardMenuItemNames();
+        JMenu menu = dropdown.getMessageBoardMenu();
+        int index = -1;
+
+        for(int i = 0; i < itemNames.length; i++){
+            if(itemNames[i].equals(boardName)){
+                index = i;
+                break;
+            }
+        }
+
+        if(index == -1){
+            return;
+        }
+
+        menu.getItem(index).doClick();
     }
 }

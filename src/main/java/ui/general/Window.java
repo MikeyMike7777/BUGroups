@@ -28,6 +28,8 @@ public class Window extends JPanel {
     private String currLogoPath = "src/main/resources/BUGroups.png";
     private Dimension tabSize;
 
+    private static int LOGO_WIDTH_OFFSET = -10;
+
     Window(Dimension preferredSize) {
         super();
         preferredSize.setSize(preferredSize.getWidth(),
@@ -35,6 +37,7 @@ public class Window extends JPanel {
         setPreferredSize(preferredSize);
         tabSize = new Dimension((int) (preferredSize.getWidth() - 50),
                 (int) (preferredSize.getHeight() - 80));
+        tabbedPane = new JTabbedPane();
         this.tabMap = initTabs();
         initWindow();
         setBackground(Color.LIGHT_GRAY);
@@ -65,7 +68,7 @@ public class Window extends JPanel {
      */
     private Map<Integer, JPanel> initTabs() {
         Map<Integer, JPanel> tabMap = new HashMap<>();
-        JPanel testPanel = new HomePage(getPreferredSize()); //Create an instance of your JPanel extended class
+        JPanel testPanel = new HomePage(tabbedPane,getPreferredSize()); //Create an instance of your JPanel extended class
         testPanel.setName("HomePage"); //Set its name to be seen on tab
         tabMap.put(0, testPanel);        //Put it in the map at the next available index
         JPanel testPanel1 = new MessagePage(tabSize);
@@ -138,7 +141,7 @@ public class Window extends JPanel {
     }
 
     public void initNavigationBar(){
-        tabbedPane = new JTabbedPane();
+        //tabbedPane = new JTabbedPane();
         tabbedPane.setPreferredSize(getPreferredSize());
 
         ImageIcon icon = new ImageIcon("src/main/resources/userIcon.png");
@@ -177,7 +180,7 @@ public class Window extends JPanel {
     }
 
     void buildLayout(){
-        layout.putConstraint(SpringLayout.EAST, picLabel, 0, SpringLayout.EAST, this);
+        layout.putConstraint(SpringLayout.EAST, picLabel, LOGO_WIDTH_OFFSET, SpringLayout.EAST, this);
         layout.putConstraint(SpringLayout.NORTH, picLabel, 5, SpringLayout.NORTH, this);
         layout.putConstraint(SpringLayout.WEST, tabbedPane, 0, SpringLayout.WEST, this);
     }
