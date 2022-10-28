@@ -20,8 +20,8 @@ public class ClassmatesPage extends JPanel {
 
     void addComponents() {
         // header label
-        mainHeader = new JLabel("Class:");
-        add(mainHeader);
+        //mainHeader = new JLabel("Class:");
+        //add(mainHeader);
 
         // scroll bar
         ScrollPane scrolls = new ScrollPane(ScrollPane.SCROLLBARS_AS_NEEDED);
