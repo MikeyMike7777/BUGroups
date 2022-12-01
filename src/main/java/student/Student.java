@@ -1,8 +1,16 @@
 package student;
 
+import message.Message;
+
+import java.util.Vector;
+
 public class Student {
     private String username;
     private String password;
+    private Vector<Course> courses;
+    private Vector<Message> sentMessages;
+    private Vector<TutorOffer> offers;
+    private Profile profile;
 
     public void createAccount(String username, String password){
         // system operations has this as no parameters but i feel like there
@@ -27,4 +35,15 @@ public class Student {
         // system operations says "removeClass" but our class name is Course
         // i.e. need to change system operations
     }
+
+    public void setPassword(String password){
+        // design model has this in Profile but makes more sense in Student
+        // need to update design model
+    }
+
+    public void resetPassword(){
+        // design model has this in Profile but makes more sense in Student
+        // need to update design model
+    }
+
 }
