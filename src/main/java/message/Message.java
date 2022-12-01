@@ -12,6 +12,7 @@ public class Message {
     private Collection<Message> replies = new Vector<>();
     private MessageBoard board;
     private Student student;
+    private Message repliesTo;
 
     Message(String text, String author, String time, String courseNumber,
             MessageBoard board, Student student) {
@@ -25,5 +26,22 @@ public class Message {
 
     public void replyToMessage(Message message) {
         message.replies.add(this);
+        this.repliesTo = message;
+    }
+
+    void delete() {
+        this.repliesTo.replies.remove(this);
+    }
+
+    void edit(String text) {
+        this.text = text;
+    }
+
+    boolean isReply() {
+        return this.repliesTo != null;
+    }
+
+    Message getRepliesTo() {
+        return this.repliesTo;
     }
 }
