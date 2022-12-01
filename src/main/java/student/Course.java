@@ -1,3 +1,5 @@
+package student;
+
 public class Course {
     private String professor;
     private Integer section;

@@ -1,3 +1,5 @@
+package student;
+
 public class Settings {
     private String format; // not sure what this is ?
     private String date; // best way to represent this?

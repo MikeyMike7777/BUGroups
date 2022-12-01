@@ -1,3 +1,5 @@
+package student;
+
 import java.util.*;
 
 public class Availability {

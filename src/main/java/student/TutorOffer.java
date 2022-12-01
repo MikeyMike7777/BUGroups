@@ -1,3 +1,5 @@
+package student;
+
 public class TutorOffer {
     private Course course;
     private String professorTaken;
