@@ -1,15 +1,25 @@
-import java.util.Vector;
+import java.util.*;
 
 public class Availability {
-    // i think i'm still fuzzy on how we're representing these two
-    private Vector<String> days;
-    private Vector<String> times; // design model says "hours" but i think "times" makes more sense. need some sort of formatting
 
-    public void addAvailability(String day, String time){
+    private Collection<String> times = new Vector<>();
+    private static final Map<String, String> encode = new TreeMap<>();
 
+    Availability() {
+        encode.put("monday", "m");
+        encode.put("tuesday", "t");
+        encode.put("wednesday", "w");
+        encode.put("thursday", "r");
+        encode.put("friday", "f");
+        encode.put("saturday", "s");
+        encode.put("sunday", "n");
     }
 
-    public void removeAvailability(){
+    public void addAvailability(String day, String time) {
+        times.add(encode.get(day.toLowerCase()) + time);
+    }
 
+    public boolean removeAvailability(String availability) {
+        return times.remove(availability);
     }
 }
