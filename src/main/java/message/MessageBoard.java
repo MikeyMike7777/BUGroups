@@ -18,11 +18,16 @@ public class MessageBoard {
         this.messages.add(message);
     }
 
-    public void createMessage(String text, String author, String time,
-                              String courseNumber, Student student, Message message) {
-        Message m = new Message(text, author, time, courseNumber, this, student);
+    public Message createMessage(String text, Student author, String time,
+                              String courseNumber, Message message) {
+        Message m = new Message(text, author, time, courseNumber, this);
         messages.add(m);
         if (message != null)
             m.replyToMessage(message);
+        return m;
+    }
+
+    public int getID() {
+        return 0;
     }
 }

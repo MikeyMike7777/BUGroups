@@ -4,6 +4,10 @@ public class Student {
     private String username;
     private String password;
 
+    public Student() {
+        username = "testUser";
+    }
+
     public void createAccount(String username, String password){
         // system operations has this as no parameters but i feel like there
         // should be username and password ?
@@ -26,5 +30,9 @@ public class Student {
     public void removeCourse(){
         // system operations says "removeClass" but our class name is Course
         // i.e. need to change system operations
+    }
+
+    public String getID() {
+        return username;
     }
 }
