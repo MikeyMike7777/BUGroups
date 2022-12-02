@@ -16,10 +16,6 @@ public class MongoDBUtils {
         MongoClient mongoClient = MongoClients.create(settings);
         MongoDatabase db = mongoClient.getDatabase("test");
 
-        Student s = new Student();
-        MessageService mService = new MessageService();
-        mService.createMessage("hello", s, "12/01/2022 17:45:32", "CSI3471", null);
-
         MongoCollection<Document> messages = db.getCollection("BUGMessages");
         MongoCursor<Document> cursor = messages.find().cursor();
 
