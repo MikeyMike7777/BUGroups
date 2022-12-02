@@ -21,7 +21,7 @@ public class Message {
         this.time = time;
         this.courseNumber = courseNumber;
         this.board = board;
-        this.id = author.getID() + time;
+        this.id = author.getID() + Calendar.getInstance();
     }
 
     public void replyToMessage(Message message) {
@@ -45,59 +45,31 @@ public class Message {
         return this.repliesTo;
     }
 
-    public String getText() {
+    String getText() {
         return text;
     }
 
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public Student getAuthor() {
+    Student getAuthor() {
         return author;
     }
 
-    public void setAuthor(Student author) {
-        this.author = author;
-    }
-
-    public String getTime() {
+    String getTime() {
         return time;
     }
 
-    public void setTime(String time) {
-        this.time = time;
-    }
-
-    public String getCourseNumber() {
+    String getCourseNumber() {
         return courseNumber;
     }
 
-    public void setCourseNumber(String courseNumber) {
-        this.courseNumber = courseNumber;
-    }
-
-    public Collection<Message> getReplies() {
+    Collection<Message> getReplies() {
         return replies;
     }
 
-    public void setReplies(Collection<Message> replies) {
-        this.replies = replies;
-    }
-
-    public MessageBoard getBoard() {
+    MessageBoard getBoard() {
         return board;
     }
 
-    public void setBoard(MessageBoard board) {
-        this.board = board;
-    }
-
-    public void setRepliesTo(Message repliesTo) {
-        this.repliesTo = repliesTo;
-    }
-
     public String getID() {
-        return author.getID() + time;
+        return id;
     }
 }

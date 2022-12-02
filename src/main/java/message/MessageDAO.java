@@ -19,9 +19,8 @@ public class MessageDAO {
         MessageBoard temp = new MessageBoard();
         Message m = temp.createMessage(text, author, time, courseNumber, message);
         MongoCollection<Document> collection = database.getCollection("BUGMessages");
-        Document d = toDocument(m);
 
-        collection.insertOne(d);
+        collection.insertOne(toDocument(m));
     }
 
     public static Document toDocument(Message message) {
