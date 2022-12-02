@@ -12,6 +12,10 @@ public class Student {
     private Vector<TutorOffer> offers;
     private Profile profile;
 
+    public Student() {
+        username = "testUser";
+    }
+
     public void createAccount(String username, String password){
         // system operations has this as no parameters but i feel like there
         // should be username and password ?
@@ -46,4 +50,7 @@ public class Student {
         // need to update design model
     }
 
+    public String getID() {
+        return username;
+    }
 }
