@@ -6,14 +6,14 @@ import java.awt.event.*;
 import java.util.Vector;
 
 public class MessageDialog extends JDialog {
-    Message message;
-    Message parent;
+    MessageBox messageBox;
+    MessageBox parent;
     JPanel panel;
-    MessageDialog(Message owner) {
+    MessageDialog(MessageBox owner) {
         super(SwingUtilities.windowForComponent(owner));
         parent = owner;
-        message = new Message(parent);
-        message.setFocusable(false);
+        messageBox = new MessageBox();
+        messageBox.setFocusable(false);
         createAndDisplay();
     }
 
@@ -24,9 +24,9 @@ public class MessageDialog extends JDialog {
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.setPreferredSize(new Dimension(750, 450));
 
-        message.removeMouseListener(message.getMouseListeners()[0]);
-        message.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panel.add(message);
+        messageBox.removeMouseListener(messageBox.getMouseListeners()[0]);
+        messageBox.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panel.add(messageBox);
         panel.add(new JLabel(" "));
         addComponents();
         addButtons();
@@ -54,8 +54,8 @@ public class MessageDialog extends JDialog {
         messages.setLayout(new BoxLayout(messages, BoxLayout.Y_AXIS));
         messages.setMinimumSize(new Dimension(750, 300));
         messages.setMaximumSize(new Dimension(750, 8000));
-        Vector<Message> replies = message.replies;
-        for (Message m : replies) {
+        Vector<MessageBox> replies = messageBox.replies;
+        for (MessageBox m : replies) {
             m.setAlignmentX(Component.CENTER_ALIGNMENT);
             messages.add(m);
         }
@@ -84,7 +84,7 @@ public class MessageDialog extends JDialog {
     class ReplyActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            ReplyDialog reply = new ReplyDialog(parent, message);
+            ReplyDialog reply = new ReplyDialog(parent, messageBox);
             repaint();
         }
     }

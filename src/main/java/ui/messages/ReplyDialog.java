@@ -6,12 +6,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ReplyDialog extends JDialog {
-    Message parent;
-    Message dialog;
+    MessageBox parent;
+    MessageBox dialog;
     JPanel panel;
     JTextPane reply;
 
-    ReplyDialog(Message owner, Message dialog) {
+    ReplyDialog(MessageBox owner, MessageBox dialog) {
         super(SwingUtilities.windowForComponent(owner));
         parent = owner;
         this.dialog = dialog;
@@ -66,7 +66,7 @@ public class ReplyDialog extends JDialog {
     class PostActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            parent.replies.add(new Message(reply.getText()));
+            parent.replies.add(new MessageBox());
             MessageDialog t = (MessageDialog)dialog.getRootPane().getParent();
             t.repaint(0);
             JPanel board = (JPanel)parent.getParent().getParent().getParent().getParent().getParent();
