@@ -57,4 +57,10 @@ public class Profile {
     public String getPhoneNumber() {
         return phoneNumber;
     }
+
+    public Profile(String name, String email, Availability availability) {
+        this.name = name;
+        this.email = email;
+        this.availability = availability;
+    }
 }

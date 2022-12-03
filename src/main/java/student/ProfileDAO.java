@@ -21,6 +21,14 @@ public class ProfileDAO {
 
 
 
+    void createProfileInfo(String name, String email, Availability availability){
+        Profile p = new Profile(name, email, availability);
+        MongoCollection<Document> collection = database.getCollection("profileInfos");
+
+        Document d = toDocument(p);
+
+        collection.insertOne(d);
+    }
 
     public static Document toDocument(Profile profile) {
         return new Document("_id", "username")

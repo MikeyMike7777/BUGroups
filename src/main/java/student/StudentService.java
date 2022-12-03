@@ -5,12 +5,18 @@ import java.util.Vector;
 public class StudentService {
 
     StudentDAO studentDAO = new StudentDAO();
-
+    CourseDAO  courseDAO = new CourseDAO();
+    ProfileDAO profileDAO = new ProfileDAO();
 
 
     public void createProfileInfo(String name, String email, Availability availability){
-
+        profileDAO.createProfileInfo(name, email, availability);
     }
+
+    public void createCourse(String professor, Integer section, String courseCode){
+        courseDAO.createCourse(professor, section, courseCode);
+    }
+
 
     public void createStudent(String username, String password) {
         studentDAO.createStudent(username, password);
