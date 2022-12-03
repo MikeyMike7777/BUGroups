@@ -25,8 +25,6 @@ public class ProfileClassList extends JPanel {
 
     public ProfileClassList(){
         super();
-        //GridLayout grid = new GridLayout(3, 1);
-        //setLayout(grid);
         createAndDisplay();
     }
 
@@ -74,7 +72,7 @@ public class ProfileClassList extends JPanel {
     class AddActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            new AddClassTutorDialog(model, "Enter Class: ");
+            new AddClassTutorDialog(model);
         }
     }
 

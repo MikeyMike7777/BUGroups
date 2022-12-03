@@ -2,6 +2,9 @@ package ui.profile;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Objects;
 
 public class ProfilePage extends JPanel {
 
@@ -35,9 +38,11 @@ public class ProfilePage extends JPanel {
     void addComponents() {
 
         buildUserInfoBox();
+        buildEditButton("Edit Profile Info:");
         add(userInfo);
 
         buildAvalibilityInfo();
+        buildEditButton("Edit Availability:");
         add(availibilty);
 
         add(classList);
@@ -49,14 +54,13 @@ public class ProfilePage extends JPanel {
         JTextArea textArea = new JTextArea();
         JLabel textHeader = new JLabel("My Profile: ");
 
-        userInfo.setLayout(new GridLayout(2,1));
+        userInfo.setLayout(new GridLayout(3,1));
         userInfo.add(textHeader);
+
 
         textArea.setEditable(false);
         textArea.setText("""
-                Carsyn Smeda
-                carsyn_smeda1@baylor.edu
-                254-555-9762""");
+                Click "Edit Profile Info:" to add your profile info!""");
         textArea.setVisible(true);
 
         userInfo.add(textArea);
@@ -64,59 +68,51 @@ public class ProfilePage extends JPanel {
         userInfo.setVisible(true);
     }
 
-    void buildProfileButtons(){
-        JButton logout = new JButton("Logout");
-        JButton edit = new JButton("Edit Profile Info");
-        JButton tutor = new JButton("Tutor a Class");
-        JButton messages = new JButton("Sent Messages");
+    void buildEditButton(String s){
+        JPanel button = new JPanel();
+        JButton editInfo = new JButton(s);
 
 
-        profileButtons.setLayout(new GridLayout(4, 1));
-        profileButtons.add(logout);
-        profileButtons.add(edit);
-        profileButtons.add(tutor);
-        profileButtons.add(messages);
+        if(Objects.equals(s, "Edit Profile Info:")) {
+            editInfo.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    new EditProfileInfoDialog();
+                }
+            });
+        } else if(Objects.equals(s, "Edit Availability:")){
+            editInfo.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    new EditAvalibilityDialog();
+                }
+            });
+        }
 
-        profileButtons.setVisible(true);
+        button.add(editInfo);
+
+
+        if(Objects.equals(s, "Edit Profile Info:")) {
+            userInfo.add(button);
+        } else if (Objects.equals(s, "Edit Availability:")) {
+            availibilty.add(button);
+        }
     }
 
     void buildAvalibilityInfo(){
         JTextArea infoText = new JTextArea();
         JLabel infoLabel = new JLabel("Availability: ");
 
-        availibilty.setLayout(new GridLayout(2, 1));
+        availibilty.setLayout(new GridLayout(3, 1));
         availibilty.add(infoLabel);
 
         infoText.setEditable(false);
         infoText.setText("""
-                M:  12:00-5:00
-                T:  3:00-4:50
-                W:  2:15-3:30
-                TH: 4:45-6:15
-                F:  5:00-7:30""");
+                Click "Edit Availability" to add your availability!""");
         infoText.setVisible(true);
 
         availibilty.add(infoText);
         availibilty.setVisible(true);
-    }
-
-    void setLayout(){
-        SpringLayout springLayout = new SpringLayout();
-
-        //Put the springLayout constraints
-        springLayout.putConstraint(SpringLayout.WEST, userInfo, 20, SpringLayout.WEST, this);
-        springLayout.putConstraint(SpringLayout.NORTH, userInfo, 20, SpringLayout.NORTH, this);
-
-        springLayout.putConstraint(SpringLayout.EAST, availibilty, -50, SpringLayout.EAST, this);
-        springLayout.putConstraint(SpringLayout.NORTH, availibilty, 10, SpringLayout.NORTH, this);
-
-        springLayout.putConstraint(SpringLayout.WEST, classList, 20, SpringLayout.WEST, this);
-        springLayout.putConstraint(SpringLayout.SOUTH, classList, -10, SpringLayout.SOUTH, this);
-
-        springLayout.putConstraint(SpringLayout.EAST, profileButtons, -40, SpringLayout.EAST, this);
-        springLayout.putConstraint(SpringLayout.SOUTH, profileButtons, -40, SpringLayout.SOUTH, this);
-
-        setLayout(springLayout);
     }
 
 }

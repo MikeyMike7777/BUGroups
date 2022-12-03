@@ -7,7 +7,11 @@ import java.awt.event.ActionListener;
 
 public class AddClassTutorDialog extends JDialog {
 
-    JLabel addLabel;
+    JLabel codeLabel;
+
+    JLabel sectionLabel;
+
+    JLabel professorLabel;
 
     JPanel textPanel = new JPanel();
 
@@ -15,19 +19,23 @@ public class AddClassTutorDialog extends JDialog {
 
     DefaultListModel<String> List;
 
-    JTextField field = new JTextField(20);
+    JTextField classCode = new JTextField(20);
+
+    JTextField section = new JTextField(20);
+
+    JTextField professor = new JTextField(20);
 
 
-    AddClassTutorDialog(DefaultListModel<String> model, String label) {
+    AddClassTutorDialog(DefaultListModel<String> model) {
         super();
         List = model;
-        addLabel = new JLabel(label);
-        setSize(300,120);
+
+        setSize(300,350);
         createAndDisplay();
     }
 
     void createAndDisplay() {
-        setLayout(new FlowLayout());
+        setLayout(new GridLayout(2,2));
 
         buildTextPanel();
         add(textPanel);
@@ -52,8 +60,15 @@ public class AddClassTutorDialog extends JDialog {
     }
 
     void buildTextPanel(){
-        textPanel.add(addLabel);
-        textPanel.add(field);
+        codeLabel = new JLabel("Enter Course Code:");
+        sectionLabel = new JLabel("Enter Section:");
+        professorLabel = new JLabel("Enter Professor:");
+        textPanel.add(codeLabel);
+        textPanel.add(classCode);
+        textPanel.add(sectionLabel);
+        textPanel.add(section);
+        textPanel.add(professorLabel);
+        textPanel.add(professor);
 
         textPanel.setVisible(true);
     }
@@ -62,7 +77,7 @@ public class AddClassTutorDialog extends JDialog {
     class SaveActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            List.addElement(field.getText());
+            List.addElement(classCode.getText());
             dispose();
         }
     }
