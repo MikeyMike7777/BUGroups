@@ -6,12 +6,12 @@ import java.awt.event.*;
 import java.util.Vector;
 
 public class MessageBox extends JPanel {
-    static int counter = 0;
 
     String name;
     String message;
     Boolean isReply;
     String courseNum;
+    String id;
     Vector<MessageBox> replies = new Vector<>();
 
     MessageBox(MessageBox template) {
@@ -19,6 +19,7 @@ public class MessageBox extends JPanel {
         this.message = template.message;
         this.isReply = template.isReply;
         this.replies = template.replies;
+        this.id = template.id;
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setMinimumSize(new Dimension(700, 100));
@@ -37,7 +38,8 @@ public class MessageBox extends JPanel {
         this.name = (String)v.elementAt(0);
         this.message = (String)v.elementAt(1);
         this.isReply = !v.elementAt(2).equals("null");
-        for (Object m : (Vector<Object>)v.elementAt(3))
+        this.id = (String)v.elementAt(3);
+        for (Object m : (Vector<Object>)v.elementAt(4))
             this.replies.add(new MessageBox((Vector<Object>)m));
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));

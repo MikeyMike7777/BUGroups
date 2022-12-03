@@ -9,6 +9,7 @@ import org.bson.conversions.Bson;
 import java.util.*;
 
 import static com.mongodb.client.model.Filters.*;
+import static com.mongodb.client.model.Updates.*;
 import static java.util.Arrays.asList;
 
 class MessageDAO {
@@ -51,10 +52,18 @@ class MessageDAO {
 
     void createMessage(String text, String author, String courseNumber,
                        Integer board, String message) {
-        Message m = boards.elementAt(board).createMessage(text, author, courseNumber, message);
+        Message temp = null;
+        if (!message.equals("null"))
+            temp = fetchMessage(message);
+        Message m = boards.elementAt(board).createMessage(text, author, courseNumber, temp);
         MongoCollection<Document> collection = database.getCollection("BUGMessages");
         Document d = toDocument(m);
         collection.insertOne(d);
+        if (temp != null) {
+            Bson filter = eq("_id", temp.getID());
+            Bson update = addToSet("replies", m.getID());
+            collection.updateOne(filter, update);
+        }
     }
 
     void deleteMessage(String id) {
@@ -95,10 +104,11 @@ class MessageDAO {
 
     static Vector<Object> toVector(Message message) {
         return new Vector<>(List.of(message.getAuthor(), message.getText(),
-                message.getRepliesTo(), message.getReplies().size() == 0 ?
-                        new Vector<>(0) : new Vector<>(List.of(message.getReplies()
-                        .stream().sorted(Comparator.comparing(Message::getTime).reversed())
-                        .map(MessageDAO::toVector)))));
+                message.getRepliesTo(), message.getID(),
+                message.getReplies().size() == 0 ? new Vector<>(0) :
+                        new Vector<>(List.of(message.getReplies().stream()
+                                .sorted(Comparator.comparing(Message::getTime).reversed())
+                                .map(MessageDAO::toVector)))));
     }
 
     static Document toDocument(Message message) {
@@ -118,7 +128,8 @@ class MessageDAO {
                 document.getString("author"), document.getString("courseNumber"),
                 document.getInteger("messageBoard"), document.getDate("time"),
                 List.of(((Collection<String>)(document.get("replies"))).stream()
-                        .map(MessageDAO::fetchMessage).filter(Objects::nonNull).toArray(Message[]::new)),
+                        .map(MessageDAO::fetchMessage).filter(Objects::nonNull)
+                        .toArray(Message[]::new)),
                 document.getString("repliesTo"));
     }
 }

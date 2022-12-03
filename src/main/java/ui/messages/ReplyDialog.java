@@ -8,16 +8,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ReplyDialog extends PostDialog {
-    MessageBox parent;
+    MessageBox repliesTo;
     MessageBox dialog;
-    JPanel panel;
-    JTextPane reply;
 
-    ReplyDialog(MessageBox owner, MessageBox dialog) {
-        super(owner);
-        parent = owner;
+    ReplyDialog(MessageBox owner, MessageBox dialog, Component board, String title) {
+        super(owner, board, title);
+        repliesTo = owner;
         this.dialog = dialog;
-        createAndDisplay("New Reply");
     }
 
     void addButtons() {
@@ -42,13 +39,13 @@ public class ReplyDialog extends PostDialog {
     class PostActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-//            Window.controller.createMessage(dialog.message, dialog.name,
-//                    dialog.courseNum);
-//            parent.replies.add(new MessageBox());
-            MessageDialog t = (MessageDialog) dialog.getRootPane().getParent();
-            t.repaint(0);
-            JPanel board = (JPanel) parent.getParent().getParent().getParent().getParent().getParent();
-            // delete and redraw board pulling from database again?
+            Window.controller.createMessage(
+                    message.getText(), Window.username, course.getText(),
+                    parent.id, repliesTo.id
+            );
+
+            parent.refresh();
+
             dispose();
         }
     }

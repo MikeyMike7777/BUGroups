@@ -7,7 +7,7 @@ public class Message {
     private String author;
     private Date time;
     private String courseNumber;
-    private Collection<Message> replies = new ArrayList<>();
+    private List<Message> replies = new ArrayList<>();
     private Integer board;
     private String repliesTo;
     private String id;
@@ -29,6 +29,7 @@ public class Message {
         this(text, author, courseNumber, board, repliesTo);
         this.time = time;
         this.replies = replies;
+        this.id = author + time;
     }
 
     void replyToMessage(Message message) {

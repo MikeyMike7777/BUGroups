@@ -26,9 +26,12 @@ class MessageBoard {
     }
 
     public Message createMessage(String text, String author,
-                              String courseNumber, String message) {
-        Message m = new Message(text, author, courseNumber, this.index, message);
+                              String courseNumber, Message message) {
+        Message m = new Message(text, author, courseNumber, this.index,
+                message == null ? "null" : message.getID());
         messages.add(m);
+//        if (m.isReply() && message != null)
+//            m.replyToMessage(message);
         return m;
     }
 

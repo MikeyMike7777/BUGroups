@@ -75,7 +75,7 @@ public class MessageTab extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (board != null) {
-                    PostDialog post = new PostDialog(board);
+                    PostDialog post = new PostDialog(board, board, "New Post");
                     repaint();
                 } else {
                     JOptionPane.showMessageDialog(post.getRootPane().getParent(),
