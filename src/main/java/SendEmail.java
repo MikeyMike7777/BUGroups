@@ -1,5 +1,10 @@
 import java.util.*;
 
+/*
+email info
+from email: noreply.bugroups@gmail.com
+app password: wzbusofwkhzmfcug
+ */
 
 import java.util.Properties;
 
@@ -38,7 +43,7 @@ public class SendEmail {
 
             protected PasswordAuthentication getPasswordAuthentication() {
 
-                return new PasswordAuthentication("fromEmail", "password");
+                return new PasswordAuthentication("noreply.bugroups@gmail.com", "wzbusofwkhzmfcug");
 
             }
 
