@@ -6,6 +6,13 @@ import student.Student;
 
 import java.util.List;
 
+// There is a public static controller in the Window class
+// Use the below code to access it in your UI classes
+//
+// import ui.general.window.Window
+//
+// Window.controller.(method call)
+
 public class Controller {
     MessageService mService = new MessageService();
 
