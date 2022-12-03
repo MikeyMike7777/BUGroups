@@ -13,6 +13,7 @@ public class MessageBox extends JPanel {
     String name;
     String message;
     Boolean isReply;
+    String courseNum;
     Vector<MessageBox> replies = new Vector<>();
 
     MessageBox(Message message) {

@@ -84,7 +84,7 @@ public class MessageDialog extends JDialog {
     class ReplyActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            ReplyDialog reply = new ReplyDialog(parent, messageBox);
+            PostDialog reply = new ReplyDialog(parent, messageBox);
             repaint();
         }
     }

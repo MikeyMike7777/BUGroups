@@ -7,11 +7,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Collection;
 
-public class MessageBoard extends JPanel {
+public class MessageBoardPage extends JPanel {
     Integer iD;
     String name;
 
-    MessageBoard() {
+    MessageBoardPage() {
         super();
         createAndDisplay();
     }

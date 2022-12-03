@@ -1,7 +1,6 @@
 package ui.general;
 
 import ui.classmates.ClassmatesPage;
-import ui.messages.MessageBoard;
 import ui.messages.MessagePage;
 import ui.profile.ProfileClassList;
 import ui.tutors.TutorsPage;

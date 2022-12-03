@@ -1,13 +1,19 @@
 package ui.messages;
 
+import ui.general.ForgotPassword;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.HashMap;
 
 public class MessageTab extends JPanel {
+    JPanel messageHeader;
+    JButton post;
     JMenuBar bar;
     JMenu select;
+
+    MessageBoardPage board;
     static final String[] names = {
             "Biology and Health Sciences",
             "Business",
@@ -49,6 +55,8 @@ public class MessageTab extends JPanel {
     }
 
     Component addBoardMenu() {
+        messageHeader = new JPanel();
+        messageHeader.setLayout(new BoxLayout(messageHeader, BoxLayout.X_AXIS));
         bar = new JMenuBar();
         bar.setPreferredSize(new Dimension(260, 30));
         select = new JMenu();
@@ -59,7 +67,27 @@ public class MessageTab extends JPanel {
         for (int i = 0; i < names.length; ++i)
             select.add(boards[i]);
         bar.add(select);
-        return bar;
+        messageHeader.add(bar);
+        messageHeader.add(addPostButton());
+        return messageHeader;
+    }
+
+    JButton addPostButton() {
+        post = new JButton("Post");
+        post.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (board != null) {
+                    PostDialog post = new PostDialog(board);
+                    repaint();
+                } else {
+                    JOptionPane.showMessageDialog(post.getRootPane().getParent(),
+                            "No board selected!", "Error",
+                            JOptionPane.PLAIN_MESSAGE);
+                }
+            }
+        });
+        return post;
     }
 
     JMenuItem[] createBoardOptions() {
@@ -79,7 +107,7 @@ public class MessageTab extends JPanel {
                     getInvoker()).setText(s);
             if (getComponentCount() > 1)
                 remove(getComponentCount() - 1);
-            MessageBoard board = new MessageBoard();
+            board = new MessageBoardPage();
             board.iD = boardKeys.get(s);
             board.name = s;
             getParent().add(board);

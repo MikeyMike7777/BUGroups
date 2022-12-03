@@ -24,10 +24,6 @@ public class MessagePage extends JPanel {
         mainHeader = new JLabel("Message Board:");
         add(mainHeader);
 
-        // scroll bar
-        ScrollPane scrolls = new ScrollPane(ScrollPane.SCROLLBARS_AS_NEEDED);
-        scrolls.setSize(500, 100);
-
         dropdown = new MessageTab(getMinimumSize());
         add(dropdown);
     }
