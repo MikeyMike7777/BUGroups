@@ -9,8 +9,8 @@ public class StudentService {
     ProfileDAO profileDAO = new ProfileDAO();
 
 
-    public void createProfileInfo(String name, String email, Availability availability){
-        profileDAO.createProfileInfo(name, email, availability);
+    public void createProfileInfo(String name, String email, String phone, Availability availability){
+        profileDAO.createProfileInfo(name, email, phone, availability);
     }
 
     public void createCourse(String professor, Integer section, String courseCode){

@@ -58,9 +58,10 @@ public class Profile {
         return phoneNumber;
     }
 
-    public Profile(String name, String email, Availability availability) {
+    public Profile(String name, String email,String phoneNumber, Availability availability) {
         this.name = name;
         this.email = email;
+        this.phoneNumber = phoneNumber;
         this.availability = availability;
     }
 }

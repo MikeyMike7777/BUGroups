@@ -24,4 +24,5 @@ public class Availability {
     public boolean removeAvailability(String availability) {
         return times.remove(availability);
     }
+
 }
