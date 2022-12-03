@@ -9,15 +9,14 @@ import java.awt.event.ActionListener;
 
 public class PostDialog extends JDialog {
     JPanel panel;
-    JTextPane reply;
+    JTextPane message;
     JTextField course;
     MessageBoardPage parent;
-    MessagePage temp;
 
-    PostDialog(Component owner) {
-        super(SwingUtilities.windowForComponent(owner));
-        parent = (MessageBoardPage)owner;
-        createAndDisplay("New Post");
+    PostDialog(Component parent, Component board, String title) {
+        super(SwingUtilities.windowForComponent(parent));
+        this.parent = (MessageBoardPage)board;
+        createAndDisplay(title);
     }
 
     void createAndDisplay(String title) {
@@ -42,10 +41,10 @@ public class PostDialog extends JDialog {
         scrolls.setMaximumSize(new Dimension(350, 200));
         course = new JTextField(20);
         course.setToolTipText("Course Number");
-        reply = new JTextPane();
-        reply.setMaximumSize(new Dimension(350, 600));
-        reply.setToolTipText("Message");
-        scrolls.add(reply, Component.CENTER_ALIGNMENT);
+        message = new JTextPane();
+        message.setMaximumSize(new Dimension(350, 600));
+        message.setToolTipText("Message");
+        scrolls.add(message, Component.CENTER_ALIGNMENT);
         panel.add(course, Component.CENTER_ALIGNMENT);
         panel.add(scrolls, Component.CENTER_ALIGNMENT);
     }
@@ -73,7 +72,7 @@ public class PostDialog extends JDialog {
         @Override
         public void actionPerformed(ActionEvent e) {
             Window.controller.createMessage(
-                    reply.getText(), Window.username, course.getText(),
+                    message.getText(), Window.username, course.getText(),
                     parent.id, "null"
             );
             parent.refresh();
