@@ -5,6 +5,8 @@ public class Course {
     private Integer section;
     private String courseCode;
 
+    private String id = courseCode + section;
+
     Course(String professor, Integer section, String courseCode) {
         this.professor = professor;
         this.section = section;
@@ -33,5 +35,13 @@ public class Course {
 
     public void setCourseCode(String courseCode) {
         this.courseCode = courseCode;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

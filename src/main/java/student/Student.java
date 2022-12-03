@@ -7,7 +7,7 @@ import java.util.Vector;
 public class Student {
     private String username;
     private String password;
-    private Vector<Course> courses;
+    private Vector<Course> courses = new Vector<>(0);
     private Vector<Message> sentMessages;
     private Vector<TutorOffer> offers;
     private Profile profile;
@@ -16,9 +16,9 @@ public class Student {
         username = "testUser";
     }
 
-    public void createAccount(String username, String password){
-        // system operations has this as no parameters but i feel like there
-        // should be username and password ?
+    public Student(String username, String password) {
+        this.username = username;
+        this.password = password;
     }
 
     public void deleteAccount(String username, String password){
@@ -56,5 +56,21 @@ public class Student {
 
     public String getUsername() {
         return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public Vector<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(Vector<Course> courses) {
+        this.courses = courses;
     }
 }

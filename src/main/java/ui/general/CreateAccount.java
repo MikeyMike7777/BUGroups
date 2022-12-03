@@ -4,8 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import ui.general.Window;
 
 public class CreateAccount extends JPanel {
+
     CreateAccount(Dimension preferredSize){
         super();
         preferredSize.setSize(preferredSize.getWidth(),
@@ -75,6 +77,7 @@ public class CreateAccount extends JPanel {
                 JOptionPane.showMessageDialog(CreateAccount.this.getRootPane()
                     .getParent(), "Temporary password sent to email address!",
                         "Confirmation", JOptionPane.QUESTION_MESSAGE);
+                //Window.controller.createStudent();
                 JPanel temp = (JPanel)getParent();
                 setVisible(false);
                 temp.remove(0);

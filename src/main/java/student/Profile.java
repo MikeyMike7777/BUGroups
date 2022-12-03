@@ -7,8 +7,8 @@ public class Profile {
     private String email;
     private String description;
     private Settings settings;
-    private Vector<Availability> availability;
-    private Integer phoneNumber; // is this the best way to represent?
+    private Availability availability;
+    private String phoneNumber; // is this the best way to represent?
 
     public void setEmail(String email){
         this.email = email;
@@ -18,7 +18,43 @@ public class Profile {
         this.name = name;
     }
 
-    public void setPhoneNumber(Integer phoneNumber){
+    public void setPhoneNumber(String phoneNumber){
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Settings getSettings() {
+        return settings;
+    }
+
+    public void setSettings(Settings settings) {
+        this.settings = settings;
+    }
+
+    public Availability getAvailability() {
+        return availability;
+    }
+
+    public void setAvailability(Availability availability) {
+        this.availability = availability;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 }

@@ -27,7 +27,7 @@ public class CourseDAO {
     }
 
     public static Document toDocument(Course course) {
-        return new Document("_id", course.getCourseCode())
+        return new Document("_id", course.getCourseCode() + course.getSection())
                 .append("courseCode", course.getCourseCode())
                 .append("professor", course.getProfessor())
                 .append("section", course.getSection());

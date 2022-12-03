@@ -1,6 +1,7 @@
 package ui.controller;
 
 import message.MessageService;
+import student.Course;
 import student.StudentService;
 
 import java.util.Vector;
@@ -16,6 +17,11 @@ public class Controller {
     MessageService mService = new MessageService();
     StudentService sService = new StudentService();
 
+
+
+    public void createStudent(String username, String password){
+        sService.createStudent(username, password);
+    }
     public void createMessage(String text, String author,
                               String courseNumber, Integer board, String message) {
         mService.createMessage(text, author, courseNumber, board, message);
