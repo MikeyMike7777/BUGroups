@@ -1,9 +1,9 @@
 import com.mongodb.ConnectionString;
+import com.mongodb.Cursor;
 import com.mongodb.MongoClientSettings;
-import com.mongodb.client.*;
-import message.MessageService;
-import org.bson.Document;
-import student.Student;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoDatabase;
 
 public class MongoDBUtils {
 
@@ -14,16 +14,7 @@ public class MongoDBUtils {
                 .applyConnectionString(connectionString)
                 .build();
         MongoClient mongoClient = MongoClients.create(settings);
-        MongoDatabase db = mongoClient.getDatabase("test");
-
-        MongoCollection<Document> messages = db.getCollection("BUGMessages");
-        MongoCursor<Document> cursor = messages.find().cursor();
-
-        System.out.println(cursor.next().toJson());
-
-//        for(String str : mongoClient.listDatabaseNames()){
-//            System.out.println(str);
-//        }
+        //MongoDatabase database = mongoClient.getDatabase("test");
     }
 
 }

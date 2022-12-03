@@ -1,8 +1,5 @@
 package ui.messages;
 
-import ui.general.CreateAccount;
-import ui.messages.Message;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -36,17 +33,17 @@ public class MessageBoard extends JPanel {
     }
 
     Component addMessages() {
-        Message message;
+        MessageBox messageBox;
         JPanel component = new JPanel();
         component.setLayout(new BoxLayout(component, BoxLayout.Y_AXIS));
         component.setMinimumSize(new Dimension(750, 450));
         component.setMaximumSize(new Dimension(750, 9000));
         for (int i = 0; i < 4; ++i) {
-            message = new Message(false);
-            if (!message.isReply)
-                component.add(message);
+            messageBox = new MessageBox();
+            if (!messageBox.isReply)
+                component.add(messageBox);
         }
-        Message.counter = 0;
+        MessageBox.counter = 0;
         return component;
     }
 

@@ -1,52 +1,55 @@
-package ui.classmates;
+package ui.messages;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
+import java.util.Vector;
 
-public class Classmate extends JPanel {
+public class MessageBox extends JPanel {
+    static int counter = 0;
+
     String name;
-    String email;
-    String phone;
+    String message;
+    Boolean isReply;
+    Vector<MessageBox> replies = new Vector<>();
 
-    Classmate(String n, String e, String p){
-        name = n;
-        email = e;
-        phone = p;
+    MessageBox() {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        setMinimumSize(new Dimension(500, 100));
-        setMaximumSize(new Dimension(500, 300));
+        setMinimumSize(new Dimension(700, 100));
+        setMaximumSize(new Dimension(700, 500));
         setBackground(Color.white);
         setOpaque(true);
         setFocusable(true);
-        add(new JLabel(n));
-        addMouseListener(new Classmate.ClassmateClickListener());
-        addFocusListener(new Classmate.ClassmateFocusListener());
+        if (!isReply) {
+            addMouseListener(new MessageClickListener());
+            addFocusListener(new MessageFocusListener());
+        }
+        createMessage();
     }
 
-    @Override
-    public String getName() { return name; }
-    public String getEmail(){
-        return email;
+    void createMessage() {
+        JLabel user = new JLabel(name);
+        JLabel label = new JLabel("<html>" + message + "</html>");
+        label.setPreferredSize(new Dimension(650, 50));
+        setAlignmentX(CENTER_ALIGNMENT);
+        add(user, LEFT_ALIGNMENT);
+        add(new JLabel(" "), LEFT_ALIGNMENT);
+        add(label, LEFT_ALIGNMENT);
+        if (!isReply)
+            add(new JLabel("Replies: " + replies.size()));
+        add(new JLabel(" "), LEFT_ALIGNMENT);
     }
 
-    public String getPhone(){
-        return phone;
-    }
-
-    class ClassmateClickListener implements MouseListener {
+    class MessageClickListener implements MouseListener {
         @Override
         public void mouseClicked(MouseEvent e) {}
         @Override
         public void mousePressed(MouseEvent e) {}
         @Override
         public void mouseReleased(MouseEvent e) {
-            ClassmateInfoDialog info;
+            MessageDialog messageDialog;
             if (hasFocus()) {
-                info = new ClassmateInfoDialog(Classmate.this);
+                messageDialog = new MessageDialog(MessageBox.this);
                 getParent().requestFocusInWindow();
             }
             else requestFocusInWindow(true);
@@ -57,7 +60,7 @@ public class Classmate extends JPanel {
         public void mouseExited(MouseEvent e) {}
     }
 
-    class ClassmateFocusListener implements FocusListener {
+    class MessageFocusListener implements FocusListener {
         @Override
         public void focusGained(FocusEvent e) {
             setBackground(Color.blue);

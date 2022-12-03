@@ -7,24 +7,33 @@ import java.util.*;
 public class Message {
     private String text;
     private Student author;
-    private String time;
+    private Date time;
     private String courseNumber;
-    private Collection<Message> replies = new Vector<>();
-    private MessageBoard board;
+    private Collection<Message> replies = new ArrayList<>();
+    private Integer board;
     private Message repliesTo;
     private String id;
 
-    Message(String text, Student author, String time, String courseNumber,
-            MessageBoard board) {
+    Message(String text, Student author, String courseNumber,
+            Integer board) {
         this.text = text;
         this.author = author;
-        this.time = time;
+        this.time = new Date();
         this.courseNumber = courseNumber;
         this.board = board;
         this.id = author.getID() + time;
     }
 
-    public void replyToMessage(Message message) {
+    Message(String text, Student author, String courseNumber,
+            Integer board, Date time, List<Message> replies,
+            Message repliesTo) {
+        this(text, author, courseNumber, board);
+        this.time = time;
+        this.replies = replies;
+        this.repliesTo = repliesTo;
+    }
+
+    void replyToMessage(Message message) {
         message.replies.add(this);
         this.repliesTo = message;
     }
@@ -45,59 +54,31 @@ public class Message {
         return this.repliesTo;
     }
 
-    public String getText() {
+    String getText() {
         return text;
     }
 
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public Student getAuthor() {
+    Student getAuthor() {
         return author;
     }
 
-    public void setAuthor(Student author) {
-        this.author = author;
-    }
-
-    public String getTime() {
+    Date getTime() {
         return time;
     }
 
-    public void setTime(String time) {
-        this.time = time;
-    }
-
-    public String getCourseNumber() {
+    String getCourseNumber() {
         return courseNumber;
     }
 
-    public void setCourseNumber(String courseNumber) {
-        this.courseNumber = courseNumber;
-    }
-
-    public Collection<Message> getReplies() {
+    Collection<Message> getReplies() {
         return replies;
     }
 
-    public void setReplies(Collection<Message> replies) {
-        this.replies = replies;
-    }
-
-    public MessageBoard getBoard() {
+    Integer getBoard() {
         return board;
     }
 
-    public void setBoard(MessageBoard board) {
-        this.board = board;
-    }
-
-    public void setRepliesTo(Message repliesTo) {
-        this.repliesTo = repliesTo;
-    }
-
     public String getID() {
-        return author.getID() + time;
+        return id;
     }
 }
