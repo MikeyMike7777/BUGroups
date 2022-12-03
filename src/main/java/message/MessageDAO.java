@@ -5,7 +5,6 @@ import com.mongodb.MongoClientSettings;
 import com.mongodb.client.*;
 import org.bson.Document;
 import org.bson.conversions.Bson;
-import student.Student;
 
 import java.util.*;
 
@@ -46,7 +45,7 @@ class MessageDAO {
 
     MessageDAO() {
         boards = new Vector<>();
-        for (int i = 0; i < 12; ++i)
+        for (int i = 0; i < 13; ++i)
             boards.add(new MessageBoard(names[i], i));
     }
 

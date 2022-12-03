@@ -54,7 +54,11 @@ public class MessageBoardPage extends JPanel {
         return component;
     }
 
-    public void setCurrentMessageBoard(){
-
+    void refresh() {
+        setVisible(false);
+        removeAll();
+        addComponents();
+        setVisible(true);
+        getRootPane().validate();
     }
 }

@@ -32,7 +32,7 @@ public class MessageTab extends JPanel {
     MessageTab(Dimension d) {
         super();
         setSize(d);
-        for (int i = 1; i < names.length; ++i)
+        for (int i = 0; i < names.length; ++i)
             boardKeys.put(names[i], i);
         createAndDisplay();
     }
@@ -102,8 +102,9 @@ public class MessageTab extends JPanel {
             String s = ((JMenuItem)e.getSource()).getText();
             ((JMenu)((JPopupMenu)((JMenuItem)e.getSource()).getParent()).
                     getInvoker()).setText(s);
-            if (getComponentCount() > 1)
-                remove(getComponentCount() - 1);
+            if (board != null)
+                getParent().remove(board);
+            getParent().validate();
             board = new MessageBoardPage(s, boardKeys.get(s));
             getParent().add(board);
         }
