@@ -12,6 +12,7 @@ public class PostDialog extends JDialog {
     JTextPane reply;
     JTextField course;
     MessageBoardPage parent;
+    MessagePage temp;
 
     PostDialog(Component owner) {
         super(SwingUtilities.windowForComponent(owner));
@@ -75,7 +76,8 @@ public class PostDialog extends JDialog {
                     reply.getText(), Window.username, course.getText(),
                     parent.id, "null"
             );
-            parent = new MessageBoardPage(parent.name, parent.id);
+            parent.refresh();
+
             dispose();
         }
     }
