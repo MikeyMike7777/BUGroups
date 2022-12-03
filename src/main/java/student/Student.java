@@ -53,4 +53,8 @@ public class Student {
     public String getID() {
         return username;
     }
+
+    public String getUsername() {
+        return username;
+    }
 }

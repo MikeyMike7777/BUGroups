@@ -1,6 +1,7 @@
 package ui.general;
 
 import ui.classmates.ClassmatesPage;
+import ui.controller.Controller;
 import ui.general.HomePage;
 import ui.messages.MessagePage;
 import ui.profile.ProfilePage;
@@ -29,6 +30,8 @@ public class Window extends JPanel {
     private Dimension tabSize;
 
     private static int LOGO_WIDTH_OFFSET = -10;
+
+    public static Controller controller = new Controller();
 
     Window(Dimension preferredSize) {
         super();

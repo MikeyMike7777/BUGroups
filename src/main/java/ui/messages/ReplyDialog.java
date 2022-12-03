@@ -66,7 +66,7 @@ public class ReplyDialog extends JDialog {
     class PostActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            parent.replies.add(new MessageBox());
+            //parent.replies.add(new MessageBox());
             MessageDialog t = (MessageDialog)dialog.getRootPane().getParent();
             t.repaint(0);
             JPanel board = (JPanel)parent.getParent().getParent().getParent().getParent().getParent();

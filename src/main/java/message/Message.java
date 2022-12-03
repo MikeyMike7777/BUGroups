@@ -50,15 +50,15 @@ public class Message {
         return this.repliesTo != null;
     }
 
-    Message getRepliesTo() {
+    public Message getRepliesTo() {
         return this.repliesTo;
     }
 
-    String getText() {
+    public String getText() {
         return text;
     }
 
-    Student getAuthor() {
+    public Student getAuthor() {
         return author;
     }
 
@@ -70,7 +70,7 @@ public class Message {
         return courseNumber;
     }
 
-    Collection<Message> getReplies() {
+    public Collection<Message> getReplies() {
         return replies;
     }
 

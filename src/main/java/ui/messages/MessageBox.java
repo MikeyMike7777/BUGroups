@@ -1,5 +1,7 @@
 package ui.messages;
 
+import message.Message;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -13,7 +15,32 @@ public class MessageBox extends JPanel {
     Boolean isReply;
     Vector<MessageBox> replies = new Vector<>();
 
-    MessageBox() {
+    MessageBox(Message message) {
+        this.name = message.getAuthor().getUsername();
+        this.message = message.getText();
+        this.isReply = message.getRepliesTo() != null;
+        for (Message m : message.getReplies())
+            this.replies.add(new MessageBox(m));
+
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        setMinimumSize(new Dimension(700, 100));
+        setMaximumSize(new Dimension(700, 500));
+        setBackground(Color.white);
+        setOpaque(true);
+        setFocusable(true);
+        if (!isReply) {
+            addMouseListener(new MessageClickListener());
+            addFocusListener(new MessageFocusListener());
+        }
+        createMessage();
+    }
+
+    MessageBox(MessageBox template) {
+        this.name = template.name;
+        this.message = template.message;
+        this.isReply = template.isReply;
+        this.replies = template.replies;
+
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setMinimumSize(new Dimension(700, 100));
         setMaximumSize(new Dimension(700, 500));

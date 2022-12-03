@@ -12,7 +12,7 @@ public class MessageDialog extends JDialog {
     MessageDialog(MessageBox owner) {
         super(SwingUtilities.windowForComponent(owner));
         parent = owner;
-        messageBox = new MessageBox();
+        messageBox = new MessageBox(owner);
         messageBox.setFocusable(false);
         createAndDisplay();
     }

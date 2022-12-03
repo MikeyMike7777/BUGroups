@@ -1,7 +1,11 @@
 package ui.messages;
 
+import message.Message;
+import ui.general.Window;
+
 import javax.swing.*;
 import java.awt.*;
+import java.util.Collection;
 
 public class MessageBoard extends JPanel {
     Integer iD;
@@ -33,17 +37,19 @@ public class MessageBoard extends JPanel {
     }
 
     Component addMessages() {
-        MessageBox messageBox;
         JPanel component = new JPanel();
         component.setLayout(new BoxLayout(component, BoxLayout.Y_AXIS));
         component.setMinimumSize(new Dimension(750, 450));
         component.setMaximumSize(new Dimension(750, 9000));
-        for (int i = 0; i < 4; ++i) {
-            messageBox = new MessageBox();
+
+        Collection<Message> messages = Window.controller.fetchBoard(iD);
+        MessageBox messageBox;
+        for (Message m : messages) {
+            messageBox = new MessageBox(m);
             if (!messageBox.isReply)
                 component.add(messageBox);
         }
-        MessageBox.counter = 0;
+
         return component;
     }
 
