@@ -36,7 +36,7 @@ public class MessageBox extends JPanel {
     public MessageBox(Vector<Object> v) {
         this.name = (String)v.elementAt(0);
         this.message = (String)v.elementAt(1);
-        this.isReply = v.elementAt(2) == null;
+        this.isReply = !v.elementAt(2).equals("null");
         for (Object m : (Vector<Object>)v.elementAt(3))
             this.replies.add(new MessageBox((Vector<Object>)m));
 

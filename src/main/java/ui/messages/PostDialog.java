@@ -1,5 +1,7 @@
 package ui.messages;
 
+import ui.general.Window;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -8,9 +10,12 @@ import java.awt.event.ActionListener;
 public class PostDialog extends JDialog {
     JPanel panel;
     JTextPane reply;
+    JTextField course;
+    MessageBoardPage parent;
 
     PostDialog(Component owner) {
         super(SwingUtilities.windowForComponent(owner));
+        parent = (MessageBoardPage)owner;
         createAndDisplay("New Post");
     }
 
@@ -34,9 +39,13 @@ public class PostDialog extends JDialog {
     void addComponents() {
         ScrollPane scrolls = new ScrollPane(ScrollPane.SCROLLBARS_AS_NEEDED);
         scrolls.setMaximumSize(new Dimension(350, 200));
+        course = new JTextField(20);
+        course.setToolTipText("Course Number");
         reply = new JTextPane();
         reply.setMaximumSize(new Dimension(350, 600));
+        reply.setToolTipText("Message");
         scrolls.add(reply, Component.CENTER_ALIGNMENT);
+        panel.add(course, Component.CENTER_ALIGNMENT);
         panel.add(scrolls, Component.CENTER_ALIGNMENT);
     }
 
@@ -62,9 +71,11 @@ public class PostDialog extends JDialog {
     class PostActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            //parent.replies.add(new MessageBox());
-
-            // delete and redraw board pulling from database again?
+            Window.controller.createMessage(
+                    reply.getText(), Window.username, course.getText(),
+                    parent.id, "null"
+            );
+            parent = new MessageBoardPage(parent.name, parent.id);
             dispose();
         }
     }

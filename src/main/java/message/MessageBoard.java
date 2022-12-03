@@ -15,26 +15,24 @@ class MessageBoard {
         this.messages = new ArrayList<>();
     }
 
-    public void editRepostMessage(Message message, String text) {
+    public void editRepostMessage(Message message, String text, Message repliesTo) {
         this.messages.remove(message);
-        if (message.isReply())
-            message.delete();
+        if (repliesTo != null)
+            repliesTo.delete(message);
         message.edit(text);
-        if (message.isReply())
-            message.replyToMessage(message.getRepliesTo());
+        if (message.isReply() && repliesTo != null)
+            message.replyToMessage(repliesTo);
         this.messages.add(message);
     }
 
-    public Message createMessage(String text, Student author,
-                              String courseNumber, Message message) {
-        Message m = new Message(text, author, courseNumber, this.index);
+    public Message createMessage(String text, String author,
+                              String courseNumber, String message) {
+        Message m = new Message(text, author, courseNumber, this.index, message);
         messages.add(m);
-        if (message != null)
-            m.replyToMessage(message);
         return m;
     }
 
     public int getID() {
-        return 0;
+        return index;
     }
 }

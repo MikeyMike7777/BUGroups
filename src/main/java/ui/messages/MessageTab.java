@@ -1,7 +1,5 @@
 package ui.messages;
 
-import ui.general.ForgotPassword;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -12,7 +10,6 @@ public class MessageTab extends JPanel {
     JButton post;
     JMenuBar bar;
     JMenu select;
-
     MessageBoardPage board;
     static final String[] names = {
             "Biology and Health Sciences",
@@ -107,9 +104,7 @@ public class MessageTab extends JPanel {
                     getInvoker()).setText(s);
             if (getComponentCount() > 1)
                 remove(getComponentCount() - 1);
-            board = new MessageBoardPage();
-            board.iD = boardKeys.get(s);
-            board.name = s;
+            board = new MessageBoardPage(s, boardKeys.get(s));
             getParent().add(board);
         }
     }

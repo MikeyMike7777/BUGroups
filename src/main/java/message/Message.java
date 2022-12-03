@@ -1,45 +1,43 @@
 package message;
 
-import student.Student;
-
 import java.util.*;
 
 public class Message {
     private String text;
-    private Student author;
+    private String author;
     private Date time;
     private String courseNumber;
     private Collection<Message> replies = new ArrayList<>();
     private Integer board;
-    private Message repliesTo;
+    private String repliesTo;
     private String id;
 
-    Message(String text, Student author, String courseNumber,
-            Integer board) {
+    Message(String text, String author, String courseNumber,
+            Integer board, String repliesTo) {
         this.text = text;
         this.author = author;
         this.time = new Date();
         this.courseNumber = courseNumber;
         this.board = board;
-        this.id = author.getID() + time;
+        this.id = author + time;
+        this.repliesTo = repliesTo;
     }
 
-    Message(String text, Student author, String courseNumber,
+    Message(String text, String author, String courseNumber,
             Integer board, Date time, List<Message> replies,
-            Message repliesTo) {
-        this(text, author, courseNumber, board);
+            String repliesTo) {
+        this(text, author, courseNumber, board, repliesTo);
         this.time = time;
         this.replies = replies;
-        this.repliesTo = repliesTo;
     }
 
     void replyToMessage(Message message) {
         message.replies.add(this);
-        this.repliesTo = message;
+        this.repliesTo = message.id;
     }
 
-    void delete() {
-        this.repliesTo.replies.remove(this);
+    void delete(Message message) {
+        this.replies.remove(message);
     }
 
     void edit(String text) {
@@ -47,10 +45,10 @@ public class Message {
     }
 
     boolean isReply() {
-        return this.repliesTo != null;
+        return !this.repliesTo.equals("null");
     }
 
-    Message getRepliesTo() {
+    String getRepliesTo() {
         return this.repliesTo;
     }
 
@@ -58,7 +56,7 @@ public class Message {
         return text;
     }
 
-    Student getAuthor() {
+    String getAuthor() {
         return author;
     }
 

@@ -9,8 +9,8 @@ import java.util.Vector;
 public class MessageService {
     MessageDAO mDAO = new MessageDAO();
 
-    public void createMessage(String text, Student author,
-                       String courseNumber, Integer board, Message message) {
+    public void createMessage(String text, String author,
+                       String courseNumber, Integer board, String message) {
         mDAO.createMessage(text, author, courseNumber, board, message);
     }
 

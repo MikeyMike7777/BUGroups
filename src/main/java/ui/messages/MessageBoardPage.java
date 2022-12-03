@@ -7,11 +7,13 @@ import java.awt.*;
 import java.util.Vector;
 
 public class MessageBoardPage extends JPanel {
-    Integer iD;
+    Integer id;
     String name;
 
-    MessageBoardPage() {
+    MessageBoardPage(String name, Integer id) {
         super();
+        this.name = name;
+        this.id = id;
         createAndDisplay();
     }
 
@@ -41,7 +43,7 @@ public class MessageBoardPage extends JPanel {
         component.setMinimumSize(new Dimension(750, 450));
         component.setMaximumSize(new Dimension(750, 9000));
 
-        Vector<Object> messages = Window.controller.fetchBoard(iD);
+        Vector<Object> messages = Window.controller.fetchBoard(id);
         MessageBox messageBox;
         for (Object v : messages) {
             messageBox = new MessageBox((Vector<Object>)v);
