@@ -1,7 +1,5 @@
 package ui.messages;
 
-import message.Message;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -16,12 +14,11 @@ public class MessageBox extends JPanel {
     String courseNum;
     Vector<MessageBox> replies = new Vector<>();
 
-    MessageBox(Message message) {
-        this.name = message.getAuthor().getUsername();
-        this.message = message.getText();
-        this.isReply = message.getRepliesTo() != null;
-        for (Message m : message.getReplies())
-            this.replies.add(new MessageBox(m));
+    MessageBox(MessageBox template) {
+        this.name = template.name;
+        this.message = template.message;
+        this.isReply = template.isReply;
+        this.replies = template.replies;
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setMinimumSize(new Dimension(700, 100));
@@ -36,11 +33,12 @@ public class MessageBox extends JPanel {
         createMessage();
     }
 
-    MessageBox(MessageBox template) {
-        this.name = template.name;
-        this.message = template.message;
-        this.isReply = template.isReply;
-        this.replies = template.replies;
+    public MessageBox(Vector<Object> v) {
+        this.name = (String)v.elementAt(0);
+        this.message = (String)v.elementAt(1);
+        this.isReply = v.elementAt(2) == null;
+        for (Object m : (Vector<Object>)v.elementAt(3))
+            this.replies.add(new MessageBox((Vector<Object>)m));
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setMinimumSize(new Dimension(700, 100));

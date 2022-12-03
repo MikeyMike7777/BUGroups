@@ -4,7 +4,7 @@ import message.Message;
 import message.MessageService;
 import student.Student;
 
-import java.util.List;
+import java.util.Vector;
 
 // There is a public static controller in the Window class
 // Use the below code to access it in your UI classes
@@ -29,7 +29,7 @@ public class Controller {
         mService.editRepostMessage(id, text);
     }
 
-    public List<Message> fetchBoard(Integer messageBoard) {
+    public Vector<Object> fetchBoard(Integer messageBoard) {
         return mService.fetchBoard(messageBoard);
     }
 }

@@ -2,7 +2,7 @@ package message;
 
 import student.Student;
 
-import java.util.List;
+import java.util.Vector;
 
 public class MessageService {
     MessageDAO mDAO = new MessageDAO();
@@ -20,7 +20,7 @@ public class MessageService {
         mDAO.editRepostMessage(id, text);
     }
 
-    public List<Message> fetchBoard(Integer messageBoard) {
+    public Vector<Object> fetchBoard(Integer messageBoard) {
         return mDAO.fetchBoard(messageBoard);
     }
 }

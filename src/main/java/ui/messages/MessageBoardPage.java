@@ -1,11 +1,10 @@
 package ui.messages;
 
-import message.Message;
 import ui.general.Window;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Collection;
+import java.util.Vector;
 
 public class MessageBoardPage extends JPanel {
     Integer iD;
@@ -42,10 +41,10 @@ public class MessageBoardPage extends JPanel {
         component.setMinimumSize(new Dimension(750, 450));
         component.setMaximumSize(new Dimension(750, 9000));
 
-        Collection<Message> messages = Window.controller.fetchBoard(iD);
+        Vector<Object> messages = Window.controller.fetchBoard(iD);
         MessageBox messageBox;
-        for (Message m : messages) {
-            messageBox = new MessageBox(m);
+        for (Object v : messages) {
+            messageBox = new MessageBox((Vector<Object>)v);
             if (!messageBox.isReply)
                 component.add(messageBox);
         }
