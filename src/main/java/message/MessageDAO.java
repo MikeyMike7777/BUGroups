@@ -78,7 +78,7 @@ class MessageDAO {
         return toMessage(cursor.next());
     }
 
-    Vector<Object> fetchBoard(Integer messageBoard) {
+    List<Message> fetchBoard(Integer messageBoard) {
         MongoCollection<Document> collection = database.getCollection("BUGMessages");
         Bson filter = and(eq("messageBoard", messageBoard),
                 eq("repliesTo", null));
@@ -86,12 +86,7 @@ class MessageDAO {
         List<Message> messages = new ArrayList<>();
         while (cursor.hasNext())
             messages.add(toMessage(cursor.next()));
-        Vector<Object> returning = new Vector<>(
-                List.of(messages.stream()
-                        .sorted(Comparator.comparing(Message::getTime).reversed())
-                        .map(MessageDAO::toVector).toArray())
-        );
-        return returning;
+        return messages;
     }
 
     static Vector<Object> toVector(Message message) {

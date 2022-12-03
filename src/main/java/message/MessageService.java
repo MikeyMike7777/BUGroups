@@ -2,6 +2,8 @@ package message;
 
 import student.Student;
 
+import java.util.Comparator;
+import java.util.List;
 import java.util.Vector;
 
 public class MessageService {
@@ -21,6 +23,10 @@ public class MessageService {
     }
 
     public Vector<Object> fetchBoard(Integer messageBoard) {
-        return mDAO.fetchBoard(messageBoard);
+        return new Vector<>(
+                List.of(mDAO.fetchBoard(messageBoard).stream()
+                        .sorted(Comparator.comparing(Message::getTime).reversed())
+                        .map(MessageDAO::toVector).toArray())
+        );
     }
 }

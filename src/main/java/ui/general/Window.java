@@ -32,9 +32,11 @@ public class Window extends JPanel {
     private static int LOGO_WIDTH_OFFSET = -10;
 
     public static Controller controller = new Controller();
+    public static String username;
 
-    Window(Dimension preferredSize) {
+    Window(Dimension preferredSize, String username) {
         super();
+        Window.username = username;
         preferredSize.setSize(preferredSize.getWidth(),
                 preferredSize.getHeight() - 30);
         setPreferredSize(preferredSize);

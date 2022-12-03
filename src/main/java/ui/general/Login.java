@@ -5,6 +5,8 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class Login extends JPanel {
+
+    JPanel username;
     public Login(Dimension d) {
         super();
         createAndDisplay(d);
@@ -37,7 +39,7 @@ public class Login extends JPanel {
     }
 
     private Component addUsername() {
-        JPanel username = new JPanel();
+        username = new JPanel();
         username.setLayout(new BoxLayout(username, BoxLayout.X_AXIS));
         username.add(new JLabel("Username: "));
         username.add(new JTextField(15));
@@ -62,7 +64,8 @@ public class Login extends JPanel {
                 JPanel temp = (JPanel)getParent();
                 setVisible(false);
                 temp.remove(0);
-                temp.add(new Window(getPreferredSize()));
+                temp.add(new Window(getPreferredSize(),
+                        ((JTextField)username.getComponent(1)).getText()));
             }
         });
         login.setAlignmentX(CENTER_ALIGNMENT);
