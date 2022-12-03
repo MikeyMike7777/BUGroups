@@ -7,24 +7,33 @@ import java.util.*;
 public class Message {
     private String text;
     private Student author;
-    private String time;
+    private Date time;
     private String courseNumber;
-    private Collection<Message> replies = new Vector<>();
-    private MessageBoard board;
+    private Collection<Message> replies = new ArrayList<>();
+    private Integer board;
     private Message repliesTo;
     private String id;
 
-    Message(String text, Student author, String time, String courseNumber,
-            MessageBoard board) {
+    Message(String text, Student author, String courseNumber,
+            Integer board) {
         this.text = text;
         this.author = author;
-        this.time = time;
+        this.time = new Date();
         this.courseNumber = courseNumber;
         this.board = board;
-        this.id = author.getID() + Calendar.getInstance();
+        this.id = author.getID() + time;
     }
 
-    public void replyToMessage(Message message) {
+    Message(String text, Student author, String courseNumber,
+            Integer board, Date time, List<Message> replies,
+            Message repliesTo) {
+        this(text, author, courseNumber, board);
+        this.time = time;
+        this.replies = replies;
+        this.repliesTo = repliesTo;
+    }
+
+    void replyToMessage(Message message) {
         message.replies.add(this);
         this.repliesTo = message;
     }
@@ -53,7 +62,7 @@ public class Message {
         return author;
     }
 
-    String getTime() {
+    Date getTime() {
         return time;
     }
 
@@ -65,7 +74,7 @@ public class Message {
         return replies;
     }
 
-    MessageBoard getBoard() {
+    Integer getBoard() {
         return board;
     }
 

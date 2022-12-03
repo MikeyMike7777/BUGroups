@@ -4,9 +4,16 @@ import student.Student;
 
 import java.util.*;
 
-public class MessageBoard {
+class MessageBoard {
     private String boardName;
-    private Collection<Message> messages = new Vector<>();
+    private Integer index;
+    private Collection<Message> messages;
+
+    MessageBoard(String boardName, Integer index) {
+        this.boardName = boardName;
+        this.index = index;
+        this.messages = new ArrayList<>();
+    }
 
     public void editRepostMessage(Message message, String text) {
         this.messages.remove(message);
@@ -18,9 +25,9 @@ public class MessageBoard {
         this.messages.add(message);
     }
 
-    public Message createMessage(String text, Student author, String time,
+    public Message createMessage(String text, Student author,
                               String courseNumber, Message message) {
-        Message m = new Message(text, author, time, courseNumber, this);
+        Message m = new Message(text, author, courseNumber, this.index);
         messages.add(m);
         if (message != null)
             m.replyToMessage(message);
