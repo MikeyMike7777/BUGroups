@@ -21,7 +21,7 @@ public class ProfilePage extends JPanel {
 
     static Vector<Object> info = new Vector<>(4);
 
-
+    static Vector<String> times = new Vector<>(7);
 
     public ProfilePage(Dimension d) {
         super();
@@ -133,7 +133,6 @@ public class ProfilePage extends JPanel {
         infoText.setEditable(false);
 
         info = Window.controller.fetchProfileInfo(Window.username);
-        Vector<String> times = new Vector<>();
 
         if(info.size() > 0) {
             try {

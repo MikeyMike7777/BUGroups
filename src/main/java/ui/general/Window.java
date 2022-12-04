@@ -37,7 +37,7 @@ public class Window extends JPanel {
     Window(Dimension preferredSize, String username) {
         super();
         Window.username = username;
-        preferredSize.setSize(preferredSize.getWidth(),
+        preferredSize.setSize(preferredSize.getWidth() - 10,
                 preferredSize.getHeight() - 30);
         setPreferredSize(preferredSize);
         tabSize = new Dimension((int) (preferredSize.getWidth() - 50),

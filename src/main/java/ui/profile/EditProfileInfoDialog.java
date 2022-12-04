@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Vector;
 
 public class EditProfileInfoDialog extends JDialog {
 
@@ -37,8 +38,15 @@ public class EditProfileInfoDialog extends JDialog {
         createAndDisplay();
     }
 
+    void setText(){
+        name.setText("Name:");
+        email.setText("Email:");
+        phoneNumber.setText("Phone #:");
+    }
     void createAndDisplay() {
         setLayout(new GridLayout(2,2));
+
+        setText();
 
         buildTextPanel();
         add(textPanel);
@@ -64,7 +72,7 @@ public class EditProfileInfoDialog extends JDialog {
     class SaveInfoActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            Window.controller.createProfileInfo(Window.username, name.getText(), email.getText(), phoneNumber.getText(), null);
+            Window.controller.createProfileInfo(Window.username, name.getText(), email.getText(), phoneNumber.getText(), (Vector<String>) ProfilePage.info.elementAt(3));
             ProfilePage.repaintUserInfo();
             dispose();
         }
