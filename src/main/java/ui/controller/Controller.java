@@ -51,4 +51,9 @@ public class Controller {
         return sService.getClassmates(courseId);
     }
 
+    // generates dummy data (used when testing classmates tab) FIXME: remove when done testing
+    public void generate(){
+        sService.generate();
+    }
+
 }

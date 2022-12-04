@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Vector;
 
 public class ClassmateInfoDialog extends JDialog{
     Classmate cm;
@@ -12,8 +13,12 @@ public class ClassmateInfoDialog extends JDialog{
     ClassmateInfoDialog(Classmate owner){
         super(SwingUtilities.windowForComponent(owner));
         parent = owner;
-        cm = new Classmate(parent.getName(), parent.getEmail(),
-                parent.getPhone());
+        Vector<String> parentInfo = new Vector<>();
+        parentInfo.add(parent.getName());
+        parentInfo.add(parent.getEmail());
+        parentInfo.add(parent.getPhone());
+        //FIXME: also availability
+        cm = new Classmate(parentInfo);
         cm.setFocusable(false);
         createAndDisplay();
     }
@@ -36,7 +41,7 @@ public class ClassmateInfoDialog extends JDialog{
         panel.add(new JLabel(cm.getPhone()));
         panel.add(new JLabel(" "));
 
-        // availability-- same for everyone for demo purposes
+        // availability-- same for everyone for demo purposes FIXME-- needs to be dynamic
         panel.add(new JLabel("Availability:"));
         panel.add(new JLabel("Monday: 8:00 AM - 12:00 PM"));
         panel.add(new JLabel("Tuesday: 2:30 PM - 4:30 PM"));

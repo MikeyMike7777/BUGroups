@@ -6,23 +6,25 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Vector;
 
 public class Classmate extends JPanel {
     String name;
     String email;
     String phone;
+    // FIXME: also need to add availability
 
-    Classmate(String n, String e, String p){
-        name = n;
-        email = e;
-        phone = p;
+    Classmate(Vector<String> info){
+        name = info.get(0);
+        email = info.get(1);
+        phone = info.get(2);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setMinimumSize(new Dimension(500, 100));
         setMaximumSize(new Dimension(500, 300));
         setBackground(Color.white);
         setOpaque(true);
         setFocusable(true);
-        add(new JLabel(n));
+        add(new JLabel(name));
         addMouseListener(new Classmate.ClassmateClickListener());
         addFocusListener(new Classmate.ClassmateFocusListener());
     }

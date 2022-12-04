@@ -1,14 +1,20 @@
 package ui.classmates;
 
+import ui.controller.Controller;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class ClassmatesPage extends JPanel {
     ClassmatesTab dropdown;
+    public static Controller controller = new Controller(); //FIXME: remove when done
 
     public ClassmatesPage() {
         super();
         createAndDisplay();
+
+        // create dummy data for testing purposes FIXME: come back to this when you're done
+        controller.generate();
     }
 
     void createAndDisplay() {

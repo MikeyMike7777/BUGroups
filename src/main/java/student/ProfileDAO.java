@@ -85,4 +85,18 @@ public class ProfileDAO {
         return classmates;
     }
 
+    // generates dummy data in profile collection for testing classmates FIXME: remove when done testing
+    // id is username
+    void generate(){
+        MongoCollection<Document> profileCollection = database.getCollection("profileInfos");
+        if (profileCollection.countDocuments() > 0){
+            // if there is stuff in the collection, delete everything
+            profileCollection.deleteMany(new Document());
+        }
+        Availability a = new Availability();
+        createProfileInfo("tomas_cerny1", "Tomas Cerny", "tomas_cerny1@baylor.edu", "254-900-1852", a);
+        createProfileInfo("greg_hamerly1", "Greg Hamerly", "greg_hamerly1@baylor.edu", "708-351-5325", a);
+        createProfileInfo("bill_booth1", "Bill Booth", "bill_booth1@baylor.edu", "396-135-9223", a);
+    }
+
 }

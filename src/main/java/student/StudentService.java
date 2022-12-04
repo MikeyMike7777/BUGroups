@@ -46,4 +46,10 @@ public class StudentService {
         Vector<String> students = courseDAO.getStudents(courseCode);
         return profileDAO.getClassmates(students);
     }
+
+    // generates dummy data in course collection and profile collection for testing classmates FIXME: remove when done testing
+    public void generate(){
+        courseDAO.generate();
+        profileDAO.generate();
+    }
 }
