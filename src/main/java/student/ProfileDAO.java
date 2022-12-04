@@ -100,10 +100,12 @@ public class ProfileDAO {
             // if there is stuff in the collection, delete everything
             profileCollection.deleteMany(new Document());
         }
-        Availability a = new Availability();
-        createProfileInfo("tomas_cerny1", "Tomas Cerny", "tomas_cerny1@baylor.edu", "254-900-1852", a);
-        createProfileInfo("greg_hamerly1", "Greg Hamerly", "greg_hamerly1@baylor.edu", "708-351-5325", a);
-        createProfileInfo("bill_booth1", "Bill Booth", "bill_booth1@baylor.edu", "396-135-9223", a);
+        Vector<String> times = new Vector<>();
+        times.add("Monday 5:00-6:00");
+        Availability a = new Availability(times);
+//        createProfileInfo("tomas_cerny1", "Tomas Cerny", "tomas_cerny1@baylor.edu", "254-900-1852", a);
+//        createProfileInfo("greg_hamerly1", "Greg Hamerly", "greg_hamerly1@baylor.edu", "708-351-5325", a);
+//        createProfileInfo("bill_booth1", "Bill Booth", "bill_booth1@baylor.edu", "396-135-9223", a);
     }
 
 }

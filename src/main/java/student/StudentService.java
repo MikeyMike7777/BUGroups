@@ -52,6 +52,6 @@ public class StudentService {
     // generates dummy data in course collection and profile collection for testing classmates FIXME: remove when done testing
     public void generate(){
         courseDAO.generate();
-        profileDAO.generate();
+        //profileDAO.generate();
     }
 }
