@@ -38,4 +38,8 @@ public class Controller {
     public Vector<Object> fetchBoard(Integer messageBoard) {
         return mService.fetchBoard(messageBoard);
     }
+
+    public Vector<String> getClassmates(String courseCode){
+        return sService.getClassmates(courseCode);
+    }
 }

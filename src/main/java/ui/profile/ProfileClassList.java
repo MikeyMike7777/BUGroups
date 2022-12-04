@@ -9,10 +9,10 @@ import java.util.List;
 public class ProfileClassList extends JPanel {
 
     String[] classes = {
-            "CSI 3336 - Systems Programming",
-            "CSI 3471 - Software Engineering I",
-            "WGS 2300 - Women and Gender Studies",
-            "GEO 1306 - The Dynamic Earth"
+            "CSI 3336",
+            "CSI 3471",
+            "WGS 2300",
+            "GEO 1306"
     };
 
     JLabel header;

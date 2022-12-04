@@ -13,8 +13,8 @@ public class StudentService {
         profileDAO.createProfileInfo(name, email, phone, availability);
     }
 
-    public void createCourse(String professor, Integer section, String courseCode){
-        courseDAO.createCourse(professor, section, courseCode);
+    public void createCourse(String professor, Integer section, String courseCode, Vector<Student> students){
+        courseDAO.createCourse(professor, section, courseCode, students);
     }
 
 
@@ -25,5 +25,9 @@ public class StudentService {
     // return vector of relevant student info, put username first please :)
     public Vector<Object> fetchStudent(String id) {
         return new Vector<>(1);
+    }
+
+    public Vector<String> getClassmates(String courseCode){
+        return courseDAO.getClassmates(courseCode);
     }
 }

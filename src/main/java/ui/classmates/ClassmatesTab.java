@@ -1,5 +1,6 @@
 package ui.classmates;
 
+import ui.controller.Controller;
 import ui.profile.ProfileClassList;
 
 import javax.swing.*;
@@ -13,6 +14,7 @@ public class ClassmatesTab extends JPanel{
     String [] classNames = new String[list.getNames().length + 1];
     HashMap<String, Integer> boardKeys = new HashMap<>();
     JMenu select;
+    public static Controller controller = new Controller();
 
     ClassmatesTab() {
         super();
@@ -75,7 +77,8 @@ public class ClassmatesTab extends JPanel{
                     getInvoker()).setText(s);
             if (getComponentCount() > 1)
                 remove(getComponentCount() - 1);
-            ClassmatesList currClassmates = new ClassmatesList();
+            // call controller
+            ClassmatesList currClassmates = new ClassmatesList(controller.getClassmates(s)); // pass course code to controller
             currClassmates.iD = boardKeys.get(s);
             currClassmates.name = s;
             add(currClassmates);

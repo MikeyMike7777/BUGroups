@@ -60,7 +60,8 @@ public class ProfilePage extends JPanel {
 
         textArea.setEditable(false);
         textArea.setText("""
-                Click "Edit Profile Info:" to add your profile info!""");
+                Click "Edit Profile Info" to add your name, email, and phone
+                 number!""");
         textArea.setVisible(true);
 
         userInfo.add(textArea);

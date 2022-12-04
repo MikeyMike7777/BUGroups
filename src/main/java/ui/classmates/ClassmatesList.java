@@ -2,10 +2,16 @@ package ui.classmates;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Vector;
 
 public class ClassmatesList extends JPanel {
     Integer iD;
     String name;
+
+    // constructor takes a vector of strings containing the classmates' info
+    ClassmatesList(Vector<String> classmatesInfo){
+        // fixme: rework this. previously had hardcoded values. will also need to rework addClassmates function
+    }
     private static final String[] classmates = {
             "Carsyn Smeda",
             "Bryce Robinson",
