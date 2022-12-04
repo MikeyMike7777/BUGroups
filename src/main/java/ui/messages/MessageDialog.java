@@ -9,6 +9,7 @@ public class MessageDialog extends JDialog {
     MessageBox messageBox;
     MessageBox parent;
     JPanel panel;
+
     MessageDialog(MessageBox owner) {
         super(SwingUtilities.windowForComponent(owner));
         parent = owner;
@@ -24,7 +25,8 @@ public class MessageDialog extends JDialog {
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.setPreferredSize(new Dimension(750, 450));
 
-        messageBox.removeMouseListener(messageBox.getMouseListeners()[0]);
+        if (messageBox.getMouseListeners().length > 0)
+            messageBox.removeMouseListener(messageBox.getMouseListeners()[0]);
         messageBox.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(messageBox);
         panel.add(new JLabel(" "));
@@ -86,15 +88,16 @@ public class MessageDialog extends JDialog {
         public void actionPerformed(ActionEvent e) {
             PostDialog reply = new ReplyDialog(parent, messageBox,
                     parent.getParent().getParent().getParent().getParent().getParent(),
-                    "New Reply");
+                    "New Reply", (MessageDialog)panel.getTopLevelAncestor());
             repaint();
         }
     }
 
-    @Override
-    public void repaint(long tm) {
-        MessageDialog newDialog = new MessageDialog(parent);
-        dispose();
+    void refresh() {
+        setVisible(false);
+        removeAll();
+        createAndDisplay();
+        getRootPane().validate();
     }
 
     @Override
