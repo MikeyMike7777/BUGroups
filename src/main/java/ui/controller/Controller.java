@@ -31,8 +31,8 @@ public class Controller {
         return sService.fetchProfileInfo(id);
     }
 
-    public void createProfileInfo(String id, String name, String email, String phoneNumber){
-        sService.createProfileInfo(id, name, email, phoneNumber, null);
+    public void createProfileInfo(String id, String name, String email, String phoneNumber, Vector<String> availibility){
+        sService.createProfileInfo(id, name, email, phoneNumber, availibility);
     }
 
     public void deleteMessage(String id) {

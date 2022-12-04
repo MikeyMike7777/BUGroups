@@ -19,6 +19,8 @@ public class ProfilePage extends JPanel {
     JPanel tutorList = new ProfileTutorList();
 
 
+    static Vector<Object> info = null;
+
 
 
     public ProfilePage(Dimension d) {
@@ -53,7 +55,7 @@ public class ProfilePage extends JPanel {
     static void buildUserInfoBox(){
         JTextArea textArea = new JTextArea();
         JLabel textHeader = new JLabel("My Profile: ");
-        Vector<Object> info = null;
+
 
         userInfo.setLayout(new GridLayout(3,1));
         userInfo.add(textHeader);
@@ -114,7 +116,14 @@ public class ProfilePage extends JPanel {
         buildEditButton("Edit Profile Info:");
     }
 
-    void buildAvalibilityInfo(){
+    static void repaintAvailInfo(){
+        availibilty.setVisible(false);
+        availibilty.removeAll();
+        buildAvalibilityInfo();
+        buildEditButton("Edit Availability:");
+    }
+
+    static void buildAvalibilityInfo(){
         JTextArea infoText = new JTextArea();
         JLabel infoLabel = new JLabel("Availability: ");
 
@@ -123,8 +132,27 @@ public class ProfilePage extends JPanel {
 
         infoText.setEditable(false);
 
-        infoText.setText("""
-                Click "Edit Availability" to add your availability!""");
+        info = Window.controller.fetchProfileInfo(Window.username);
+        Vector<String> times = new Vector<>();
+
+        if(info.size() > 0) {
+            try {
+                times = (Vector<String>) info.elementAt(3);
+            } catch (NullPointerException e) {
+                times = null;
+            }
+        } else{
+            times = null;
+        }
+
+        if(times == null) {
+            infoText.setText("""
+                    Click "Edit Availability" to add your availability!""");
+        } else {
+            infoText.setText(times.elementAt(0) + "\n" + times.elementAt(1) + "\n" + times.elementAt(2)
+                    + "\n" + times.elementAt(3) + "\n"+  times.elementAt(4) + "\n" + times.elementAt(5)
+                    + "\n" + times.elementAt(6) + "\n" );
+        }
         infoText.setVisible(true);
 
         availibilty.add(infoText);

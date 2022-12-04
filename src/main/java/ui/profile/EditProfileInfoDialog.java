@@ -64,7 +64,7 @@ public class EditProfileInfoDialog extends JDialog {
     class SaveInfoActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            Window.controller.createProfileInfo(Window.username, name.getText(), email.getText(), phoneNumber.getText());
+            Window.controller.createProfileInfo(Window.username, name.getText(), email.getText(), phoneNumber.getText(), null);
             ProfilePage.repaintUserInfo();
             dispose();
         }

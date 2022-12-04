@@ -1,7 +1,12 @@
 package ui.profile;
 
+import ui.general.Window;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Vector;
 
 public class EditAvalibilityDialog extends JDialog{
 
@@ -57,12 +62,34 @@ public class EditAvalibilityDialog extends JDialog{
         JButton save = new JButton("Save");
         JButton cancel = new JButton("Cancel");
 
+        save.addActionListener(new SaveAvailActionListener());
+
         buttonPanel.add(save);
         buttonPanel.add(cancel);
 
         buttonPanel.setVisible(true);
     }
 
+    class SaveAvailActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Vector<String> times = new Vector<>();
+            times.add(m.getText());
+            times.add(t.getText());
+            times.add(w.getText());
+            times.add(thu.getText());
+            times.add(fri.getText());
+            times.add(sat.getText());
+            times.add(sun.getText());
+
+            ui.general.Window.controller.createProfileInfo(Window.username, (String) ProfilePage.info.elementAt(0),
+                    (String) ProfilePage.info.elementAt(1),
+                    (String) ProfilePage.info.elementAt(2), times);
+
+            ProfilePage.repaintAvailInfo();
+            dispose();
+        }
+    }
     void buildTextPanel(){
         mLabel = new JLabel("Monday:");
         tLabel = new JLabel("Tuesday:");

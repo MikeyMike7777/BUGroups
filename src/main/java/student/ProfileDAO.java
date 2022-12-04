@@ -7,10 +7,7 @@ import org.bson.Document;
 import org.bson.conversions.Bson;
 import ui.general.Window;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
-import java.util.Vector;
+import java.util.*;
 
 import static com.mongodb.client.model.Filters.eq;
 
@@ -25,8 +22,9 @@ public class ProfileDAO {
     private static MongoCursor<Document> cursor;
 
 
-    void createProfileInfo(String id,String name, String email, String phone, Availability availability){
-        Profile p = new Profile(id, name, email, phone, availability);
+    void createProfileInfo(String id,String name, String email, String phone, Vector<String> availability){
+        Availability a = new Availability(availability);
+        Profile p = new Profile(id, name, email, phone, a);
         MongoCollection<Document> collection = database.getCollection("profileInfos");
         Bson filter = eq("_id", id);
 
@@ -49,17 +47,26 @@ public class ProfileDAO {
     }
 
     public static Document toDocument(Profile profile) {
+        ArrayList<String> a = new ArrayList<>();
+        if(profile.getAvailability().getTimes() != null) {
+            a.addAll(profile.getAvailability().getTimes());
+        }
         return new Document("_id", profile.getId())
                 .append("name", profile.getName())
                 .append("email", profile.getEmail())
                 .append("phoneNumber", profile.getPhoneNumber())
-                .append("availability", profile.getAvailability());
+                .append("availability", a);
     }
 
     static Profile toProfile(Document document) {
-        Availability a;
-        a = (Availability) document.get("availability");
-        return new Profile(document.getString("_id"), document.getString("name"), document.getString("email"), document.getString("phoneNumber"), a);
+        ArrayList<String> a = (ArrayList<String>) document.get("availability");
+        Vector<String> convert = new Vector<>();
+
+        convert.addAll(a);
+
+        Availability avail = new Availability(convert);
+
+        return new Profile(document.getString("_id"), document.getString("name"), document.getString("email"), document.getString("phoneNumber"), avail);
     }
 
 
