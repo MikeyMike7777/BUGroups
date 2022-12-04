@@ -77,7 +77,7 @@ public class ClassmatesTab extends JPanel{
                     getInvoker()).setText(s);
             if (getComponentCount() > 1)
                 remove(getComponentCount() - 1);
-            // call controller
+            // call controller FIXME: need to pass courseID (course code + section)-- where are we getting section?
             ClassmatesList currClassmates = new ClassmatesList(controller.getClassmates(s)); // pass course code to controller
             currClassmates.iD = boardKeys.get(s);
             currClassmates.name = s;

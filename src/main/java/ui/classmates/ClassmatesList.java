@@ -9,7 +9,7 @@ public class ClassmatesList extends JPanel {
     String name;
 
     // constructor takes a vector of strings containing the classmates' info
-    ClassmatesList(Vector<String> classmatesInfo){
+    ClassmatesList(Vector<Vector<String>> classmatesInfo){
         // fixme: rework this. previously had hardcoded values. will also need to rework addClassmates function
     }
     private static final String[] classmates = {
