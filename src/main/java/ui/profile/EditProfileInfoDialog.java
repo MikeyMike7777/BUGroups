@@ -1,5 +1,8 @@
 package ui.profile;
 
+import ui.general.Window;
+import ui.profile.ProfilePage;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -9,6 +12,8 @@ public class EditProfileInfoDialog extends JDialog {
 
     JLabel nameLabel;
 
+    JPanel ogPanel;
+
     JLabel emailLabel;
 
     JLabel phoneLabel;
@@ -17,16 +22,17 @@ public class EditProfileInfoDialog extends JDialog {
 
     JPanel buttonPanel = new JPanel();
 
-    JTextField classCode = new JTextField(20);
+    JTextField name = new JTextField(20);
 
-    JTextField section = new JTextField(20);
+    JTextField email = new JTextField(20);
 
-    JTextField professor = new JTextField(20);
+    JTextField phoneNumber = new JTextField(20);
 
 
-    EditProfileInfoDialog() {
+    EditProfileInfoDialog(JPanel panel) {
         super();
 
+        ogPanel = panel;
         setSize(250,350);
         createAndDisplay();
     }
@@ -47,10 +53,21 @@ public class EditProfileInfoDialog extends JDialog {
         JButton save = new JButton("Save");
         JButton cancel = new JButton("Cancel");
 
+        save.addActionListener(new SaveInfoActionListener());
+
         buttonPanel.add(save);
         buttonPanel.add(cancel);
 
         buttonPanel.setVisible(true);
+    }
+
+    class SaveInfoActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Window.controller.createProfileInfo(Window.username, name.getText(), email.getText(), phoneNumber.getText());
+            ProfilePage.repaintUserInfo();
+            dispose();
+        }
     }
 
     void buildTextPanel(){
@@ -58,11 +75,11 @@ public class EditProfileInfoDialog extends JDialog {
         emailLabel = new JLabel("Enter Email:");
         phoneLabel = new JLabel("Enter Phone #:");
         textPanel.add(nameLabel);
-        textPanel.add(classCode);
+        textPanel.add(name);
         textPanel.add(emailLabel);
-        textPanel.add(section);
+        textPanel.add(email);
         textPanel.add(phoneLabel);
-        textPanel.add(professor);
+        textPanel.add(phoneNumber);
 
         textPanel.setVisible(true);
     }

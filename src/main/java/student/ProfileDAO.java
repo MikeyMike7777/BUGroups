@@ -25,13 +25,18 @@ public class ProfileDAO {
     private static MongoCursor<Document> cursor;
 
 
-    void createProfileInfo(String name, String email, String phone, Availability availability){
-        Profile p = new Profile(name, email, phone, availability);
+    void createProfileInfo(String id,String name, String email, String phone, Availability availability){
+        Profile p = new Profile(id, name, email, phone, availability);
         MongoCollection<Document> collection = database.getCollection("profileInfos");
+        Bson filter = eq("_id", id);
 
         Document d = toDocument(p);
-
-        collection.insertOne(d);
+        if(fetchProfileInfo(p.getId()) == null) {
+            collection.insertOne(d);
+        } else {
+            collection.deleteOne(filter);
+            collection.insertOne(d);
+        }
     }
 
     Profile fetchProfileInfo(String id){
@@ -44,7 +49,7 @@ public class ProfileDAO {
     }
 
     public static Document toDocument(Profile profile) {
-        return new Document("_id", "username")
+        return new Document("_id", profile.getId())
                 .append("name", profile.getName())
                 .append("email", profile.getEmail())
                 .append("phoneNumber", profile.getPhoneNumber())
@@ -54,7 +59,7 @@ public class ProfileDAO {
     static Profile toProfile(Document document) {
         Availability a;
         a = (Availability) document.get("availability");
-        return new Profile(document.getString("name"), document.getString("email"), document.getString("phoneNumber"), a);
+        return new Profile(document.getString("_id"), document.getString("name"), document.getString("email"), document.getString("phoneNumber"), a);
     }
 
 

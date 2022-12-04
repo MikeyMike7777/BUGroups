@@ -9,8 +9,23 @@ public class StudentService {
     ProfileDAO profileDAO = new ProfileDAO();
 
 
-    public void createProfileInfo(String name, String email, String phone, Availability availability){
-        profileDAO.createProfileInfo(name, email, phone, availability);
+    public void createProfileInfo(String id, String name, String email, String phone, Availability availability){
+        profileDAO.createProfileInfo(id, name, email, phone, availability);
+    }
+
+    public Vector<Object> fetchProfileInfo(String id){
+        Profile p = profileDAO.fetchProfileInfo(id);
+        Vector<Object> v = new Vector<>();
+        if(p == null){
+            return v;
+        } else {
+            v.add(p.getName());
+            v.add(p.getEmail());
+            v.add(p.getPhoneNumber());
+            v.add(p.getAvailability());
+        }
+
+        return v;
     }
 
     public void createCourse(String professor, Integer section, String courseCode, Vector<Student> students){

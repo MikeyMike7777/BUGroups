@@ -27,6 +27,14 @@ public class Controller {
         mService.createMessage(text, author, courseNumber, board, message);
     }
 
+    public Vector<Object> fetchProfileInfo(String id){
+        return sService.fetchProfileInfo(id);
+    }
+
+    public void createProfileInfo(String id, String name, String email, String phoneNumber){
+        sService.createProfileInfo(id, name, email, phoneNumber, null);
+    }
+
     public void deleteMessage(String id) {
         mService.deleteMessage(id);
     }

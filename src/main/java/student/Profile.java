@@ -4,8 +4,9 @@ import java.util.Vector;
 
 public class Profile {
     private String name;
+
+    private String id;
     private String email;
-    private String description;
     private Settings settings;
     private Availability availability;
     private String phoneNumber; // is this the best way to represent?
@@ -30,12 +31,12 @@ public class Profile {
         return email;
     }
 
-    public String getDescription() {
-        return description;
+    public String getId() {
+        return id;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public Settings getSettings() {
@@ -58,7 +59,8 @@ public class Profile {
         return phoneNumber;
     }
 
-    public Profile(String name, String email,String phoneNumber, Availability availability) {
+    public Profile(String id, String name, String email,String phoneNumber, Availability availability) {
+        this.id = id;
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;

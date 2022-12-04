@@ -5,14 +5,14 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Objects;
+import java.util.Vector;
+import ui.general.Window;
 
 public class ProfilePage extends JPanel {
 
-    JPanel userInfo = new JPanel();
+    static JPanel userInfo = new JPanel();
 
-    JPanel profileButtons = new JPanel();
-
-    JPanel availibilty = new JPanel();
+    static JPanel availibilty = new JPanel();
 
     JPanel classList = new ProfileClassList();
 
@@ -50,26 +50,33 @@ public class ProfilePage extends JPanel {
         add(tutorList);
     }
 
-    void buildUserInfoBox(){
+    static void buildUserInfoBox(){
         JTextArea textArea = new JTextArea();
         JLabel textHeader = new JLabel("My Profile: ");
+        Vector<Object> info = null;
 
         userInfo.setLayout(new GridLayout(3,1));
         userInfo.add(textHeader);
 
+        info = Window.controller.fetchProfileInfo(Window.username);
 
         textArea.setEditable(false);
-        textArea.setText("""
-                Click "Edit Profile Info" to add your name, email, and phone
-                 number!""");
-        textArea.setVisible(true);
+        if(info.size() == 0) {
+            textArea.setText("""
+                    Click "Edit Profile Info" to add your name, email, and phone
+                     number!""");
+        } else {
+            textArea.setText(info.get(0) + "\n" + info.get(1) + "\n" + info.get(2) + "\n");
+        }
 
+
+        textArea.setVisible(true);
         userInfo.add(textArea);
         userInfo.setSize(new Dimension(225, 145));
         userInfo.setVisible(true);
     }
 
-    void buildEditButton(String s){
+    static void buildEditButton(String s){
         JPanel button = new JPanel();
         JButton editInfo = new JButton(s);
 
@@ -78,7 +85,7 @@ public class ProfilePage extends JPanel {
             editInfo.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    new EditProfileInfoDialog();
+                    new EditProfileInfoDialog(userInfo);
                 }
             });
         } else if(Objects.equals(s, "Edit Availability:")){
@@ -100,6 +107,13 @@ public class ProfilePage extends JPanel {
         }
     }
 
+    static void repaintUserInfo(){
+        userInfo.setVisible(false);
+        userInfo.removeAll();
+        buildUserInfoBox();
+        buildEditButton("Edit Profile Info:");
+    }
+
     void buildAvalibilityInfo(){
         JTextArea infoText = new JTextArea();
         JLabel infoLabel = new JLabel("Availability: ");
@@ -108,6 +122,7 @@ public class ProfilePage extends JPanel {
         availibilty.add(infoLabel);
 
         infoText.setEditable(false);
+
         infoText.setText("""
                 Click "Edit Availability" to add your availability!""");
         infoText.setVisible(true);
