@@ -48,4 +48,18 @@ public class CourseDAO {
         // from the course Document object, return the list of Student IDs
         return (Vector<String>)(course.get("students"));
     }
+
+    // generates dummy data in course collection for testing classmates FIXME: remove when done testing
+    void generate(){
+        MongoCollection<Document> courseCollection = database.getCollection("courses");
+        if (courseCollection.countDocuments() > 0){
+            // if there is stuff in the collection, delete everything
+            courseCollection.deleteMany(new Document());
+        }
+        Vector<String> students = new Vector<>();
+        students.add("tomas_cerny1");
+        students.add("greg_hamerly1");
+        students.add("bill_booth1");
+        createCourse("Prof Name", 1, "CSI 3471", students);
+    }
 }

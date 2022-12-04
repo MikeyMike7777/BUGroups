@@ -7,12 +7,14 @@ import java.util.Vector;
 public class ClassmatesList extends JPanel {
     Integer iD;
     String name;
+    Vector<Vector<String>> classmatesInfo;
 
     // constructor takes a vector of strings containing the classmates' info
     ClassmatesList(Vector<Vector<String>> classmatesInfo){
-        // fixme: rework this. previously had hardcoded values. will also need to rework addClassmates function
+        // reworked this. previously had hardcoded values. will also need to rework addClassmates function
+        this.classmatesInfo = classmatesInfo;
     }
-    private static final String[] classmates = {
+    /*private static final String[] classmates = {
             "Carsyn Smeda",
             "Bryce Robinson",
             "Mikey Mathews",
@@ -34,7 +36,7 @@ public class ClassmatesList extends JPanel {
             "michael_mathews1@baylor.edu",
             "gabriel_goulis1@baylor.edu",
             "carson_buntin1@baylor.edu"
-    };
+    };*/
 
     ClassmatesList(){
         super();
@@ -56,18 +58,18 @@ public class ClassmatesList extends JPanel {
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.setMinimumSize(new Dimension(600, 300));
         panel.setMaximumSize(new Dimension(600, 8000));
-        panel.add(addClassmates(classmates, classmatesEmails, classmatesPhones));
+        panel.add(addClassmates());
         scrolls.add(panel);
         add(scrolls);
     }
 
-    Component addClassmates(String[] names, String[] emails, String[] phones) {
+    Component addClassmates() {
         JPanel component = new JPanel();
         component.setLayout(new BoxLayout(component, BoxLayout.Y_AXIS));
         component.setMinimumSize(new Dimension(600, 300));
         component.setMaximumSize(new Dimension(600, 8000));
-        for (int i = 0; i < names.length; ++i) {
-            Classmate cm = new Classmate(names[i], emails[i], phones[i]);
+        for (Vector<String> student : classmatesInfo){
+            Classmate cm = new Classmate(student);
             component.add(cm);
         }
         return component;
