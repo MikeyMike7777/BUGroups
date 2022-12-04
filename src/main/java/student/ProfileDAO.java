@@ -69,5 +69,27 @@ public class ProfileDAO {
         return new Profile(document.getString("_id"), document.getString("name"), document.getString("email"), document.getString("phoneNumber"), avail);
     }
 
+    Vector<Vector<String>> getClassmates(Vector<String> students){
+        Vector<Vector<String>> classmates = new Vector<>();
+
+        // querying profileInfos collection
+        MongoCollection<Document> profileCollection = database.getCollection("profileInfos");
+        // for each student, get their name, email, phone number, and availability
+        for (String id : students){
+            Vector<String> classmateInfo = new Vector<>();
+            // find student based on their username (id)
+            Document student = profileCollection.find(eq("_id", id)).first();
+            // add vector of that student's information to vector
+            Profile profile = toProfile(student);
+            classmateInfo.add(profile.getName());
+            classmateInfo.add(profile.getEmail());
+            classmateInfo.add(profile.getPhoneNumber());
+            //FIXME: also need to add availability but availability class is being redone
+
+            classmates.add(classmateInfo);
+        }
+
+        return classmates;
+    }
 
 }

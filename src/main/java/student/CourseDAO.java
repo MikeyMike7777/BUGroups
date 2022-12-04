@@ -8,6 +8,8 @@ import org.bson.conversions.Bson;
 
 import java.util.Vector;
 
+import static com.mongodb.client.model.Filters.eq;
+
 public class CourseDAO {
     ConnectionString connectionString = new ConnectionString("mongodb+srv://gouligab:vwZBMKRZ1vQizZ43@dynamic-chat-app.u9l9jli.mongodb.net/?retryWrites=true&w=majority");
     MongoClientSettings settings = MongoClientSettings.builder()
@@ -17,7 +19,7 @@ public class CourseDAO {
     MongoDatabase database = mongoClient.getDatabase("test");
     private static MongoCursor<Document> cursor;
 
-    void createCourse(String professor, Integer section, String courseCode, Vector<Student> students){
+    void createCourse(String professor, Integer section, String courseCode, Vector<String> students){
         Course c = new Course(professor, section, courseCode, students);
         MongoCollection<Document> collection = database.getCollection("courses");
 
@@ -35,18 +37,15 @@ public class CourseDAO {
                 .append("students", course.getStudents());
     }
 
-//    Vector<String> getClassmates(String courseCode){ // FIXME: doesn't work, i'm tired and want to sleep
-//        Vector<String> classmatesInfo = new Vector<>();
-//
-//        // query for all students' profiles that have the given course code in their course list
-//        MongoCollection<Document> collection = database.getCollection("courses");
-//        Bson filter = eq("_id", courseCode);
-//        cursor = collection.find(filter).iterator();
-//
-//        return classmatesInfo;
-//    }
-//
-//    String toString(Document document){ // FIXME: doesn't work, i'm tired and want to sleep
-//        document.getString("courseCode"), document.getString("professor"),
-//    }
+    Vector<String> getStudents(String courseId){
+        // query for all students' profiles that have the given course code in their course list
+        // get all students in a course
+
+        // querying courses collection
+        MongoCollection<Document> courseCollection = database.getCollection("courses");
+        // looking for course that matches courseId (course code + section)
+        Document course = courseCollection.find(eq("_id", courseId)).first();
+        // from the course Document object, return the list of Student IDs
+        return (Vector<String>)(course.get("students"));
+    }
 }

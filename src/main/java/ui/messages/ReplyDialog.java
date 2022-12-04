@@ -10,11 +10,14 @@ import java.awt.event.ActionListener;
 public class ReplyDialog extends PostDialog {
     MessageBox repliesTo;
     MessageBox dialog;
+    MessageDialog window;
 
-    ReplyDialog(MessageBox owner, MessageBox dialog, Component board, String title) {
+    ReplyDialog(MessageBox owner, MessageBox dialog, Component board,
+                String title, MessageDialog window) {
         super(owner, board, title);
         repliesTo = owner;
         this.dialog = dialog;
+        this.window = window;
     }
 
     void addButtons() {
@@ -43,7 +46,7 @@ public class ReplyDialog extends PostDialog {
                     message.getText(), Window.username, course.getText(),
                     parent.id, repliesTo.id
             );
-
+            window.refresh();
             parent.refresh();
 
             dispose();
