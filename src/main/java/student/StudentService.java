@@ -42,7 +42,8 @@ public class StudentService {
         return new Vector<>(1);
     }
 
-//    public Vector<String> getClassmates(String courseCode){
-//        return courseDAO.getClassmates(courseCode);
-//    }
+    public Vector<Vector<String>> getClassmates(String courseCode){
+        Vector<String> students = courseDAO.getStudents(courseCode);
+        return profileDAO.getClassmates(students);
+    }
 }

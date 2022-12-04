@@ -47,7 +47,8 @@ public class Controller {
         return mService.fetchBoard(messageBoard);
     }
 
-//    public Vector<String> getClassmates(String courseCode){
-//        return sService.getClassmates(courseCode);
-//    }
+    public Vector<Vector<String>> getClassmates(String courseId){
+        return sService.getClassmates(courseId);
+    }
+
 }
