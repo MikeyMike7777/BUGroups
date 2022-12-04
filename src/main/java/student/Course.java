@@ -7,10 +7,10 @@ public class Course {
     private Integer section;
     private String courseCode;
     // when a course is added to a student's list, course has to keep track of student too
-    private Vector<Student> students;
+    private Vector<String> students; // stores the students' IDs from the Student collection
     private String id = courseCode + section;
 
-    Course(String professor, Integer section, String courseCode, Vector<Student> students) {
+    Course(String professor, Integer section, String courseCode, Vector<String> students) {
         this.professor = professor;
         this.section = section;
         this.courseCode = courseCode;
@@ -49,11 +49,11 @@ public class Course {
         this.id = id;
     }
 
-    public Vector<Student> getStudents() {
+    public Vector<String> getStudents() {
         return students;
     }
 
-    public void setStudents(Vector<Student> students) {
+    public void setStudents(Vector<String> students) {
         this.students = students;
     }
 }

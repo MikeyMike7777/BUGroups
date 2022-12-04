@@ -28,7 +28,7 @@ public class StudentService {
         return v;
     }
 
-    public void createCourse(String professor, Integer section, String courseCode, Vector<Student> students){
+    public void createCourse(String professor, Integer section, String courseCode, Vector<String> students){
         courseDAO.createCourse(professor, section, courseCode, students);
     }
 
