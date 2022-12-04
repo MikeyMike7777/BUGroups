@@ -7,6 +7,7 @@ import org.bson.Document;
 import org.bson.conversions.Bson;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static com.mongodb.client.model.Filters.*;
 import static com.mongodb.client.model.Updates.*;
@@ -103,12 +104,13 @@ class MessageDAO {
     }
 
     static Vector<Object> toVector(Message message) {
-        return new Vector<>(List.of(message.getAuthor(), message.getText(),
+        Vector<Object> v = new Vector<>(List.of(message.getAuthor(), message.getText(),
                 message.getRepliesTo(), message.getID(),
                 message.getReplies().size() == 0 ? new Vector<>(0) :
-                        new Vector<>(List.of(message.getReplies().stream()
+                        new Vector<>(message.getReplies().stream()
                                 .sorted(Comparator.comparing(Message::getTime).reversed())
-                                .map(MessageDAO::toVector)))));
+                                .map(MessageDAO::toVector).collect(Collectors.toList()))));
+        return v;
     }
 
     static Document toDocument(Message message) {
@@ -127,9 +129,10 @@ class MessageDAO {
         return new Message(document.getString("text"),
                 document.getString("author"), document.getString("courseNumber"),
                 document.getInteger("messageBoard"), document.getDate("time"),
-                List.of(((Collection<String>)(document.get("replies"))).stream()
+                !(((ArrayList)document.get("replies")).equals(new ArrayList<>(0))) ?
+                ((ArrayList<String>)(document.get("replies"))).stream()
                         .map(MessageDAO::fetchMessage).filter(Objects::nonNull)
-                        .toArray(Message[]::new)),
+                        .collect(Collectors.toList()) : (ArrayList)document.get("replies"),
                 document.getString("repliesTo"));
     }
 }

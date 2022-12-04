@@ -78,10 +78,10 @@ public class ClassmatesTab extends JPanel{
             if (getComponentCount() > 1)
                 remove(getComponentCount() - 1);
             // call controller
-            ClassmatesList currClassmates = new ClassmatesList(controller.getClassmates(s)); // pass course code to controller
-            currClassmates.iD = boardKeys.get(s);
-            currClassmates.name = s;
-            add(currClassmates);
+//            ClassmatesList currClassmates = new ClassmatesList(controller.getClassmates(s)); // pass course code to controller
+//            currClassmates.iD = boardKeys.get(s);
+//            currClassmates.name = s;
+//            add(currClassmates);
         }
     }
 

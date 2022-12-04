@@ -27,7 +27,7 @@ public class StudentService {
         return new Vector<>(1);
     }
 
-    public Vector<String> getClassmates(String courseCode){
-        return courseDAO.getClassmates(courseCode);
-    }
+//    public Vector<String> getClassmates(String courseCode){
+//        return courseDAO.getClassmates(courseCode);
+//    }
 }
