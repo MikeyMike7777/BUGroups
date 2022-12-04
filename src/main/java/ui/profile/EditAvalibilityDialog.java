@@ -46,8 +46,19 @@ public class EditAvalibilityDialog extends JDialog{
         createAndDisplay();
     }
 
+    void setTexts(){
+        m.setText("Mon:");
+        t.setText("Tue:");
+        w.setText("Wed:");
+        thu.setText("Thu:");
+        fri.setText("Fri:");
+        sat.setText("Sat:");
+        sun.setText("Sun:");
+    }
     void createAndDisplay() {
         setLayout(new GridLayout(2,2));
+
+        setTexts();
 
         buildTextPanel();
         add(textPanel);
@@ -82,9 +93,13 @@ public class EditAvalibilityDialog extends JDialog{
             times.add(sat.getText());
             times.add(sun.getText());
 
-            ui.general.Window.controller.createProfileInfo(Window.username, (String) ProfilePage.info.elementAt(0),
-                    (String) ProfilePage.info.elementAt(1),
-                    (String) ProfilePage.info.elementAt(2), times);
+            if(ProfilePage.info.size() != 0) {
+                ui.general.Window.controller.createProfileInfo(Window.username, (String) ProfilePage.info.elementAt(0),
+                        (String) ProfilePage.info.elementAt(1),
+                        (String) ProfilePage.info.elementAt(2), times);
+            } else {
+                ui.general.Window.controller.createProfileInfo(Window.username, null, null, null, times);
+            }
 
             ProfilePage.repaintAvailInfo();
             dispose();

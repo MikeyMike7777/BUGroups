@@ -19,7 +19,7 @@ public class ProfilePage extends JPanel {
     JPanel tutorList = new ProfileTutorList();
 
 
-    static Vector<Object> info = null;
+    static Vector<Object> info = new Vector<>(4);
 
 
 
@@ -145,7 +145,7 @@ public class ProfilePage extends JPanel {
             times = null;
         }
 
-        if(times == null) {
+        if(times == null || times.size() == 0) {
             infoText.setText("""
                     Click "Edit Availability" to add your availability!""");
         } else {
