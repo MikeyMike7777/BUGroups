@@ -5,6 +5,7 @@ import ui.messages.MessagePage;
 import ui.profile.ProfilePage;
 import ui.profile.Settings;
 import ui.tutors.TutorsPage;
+import database.utils.Controller;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

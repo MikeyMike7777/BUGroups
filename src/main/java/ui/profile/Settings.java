@@ -193,6 +193,7 @@ public class Settings extends JPanel {
                     public void actionPerformed(ActionEvent e) {
                         BUGUtils.controller.updateProfilePhoneNumber(Window.username, phone.getText());
                         changeDialog.dispose();
+                        ProfilePage.repaintUserInfo();
                     }
                 });
 
