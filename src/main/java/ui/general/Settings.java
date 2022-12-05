@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Vector;
 
 public class Settings extends JPanel {
     ClassmatesTab dropdown;
@@ -63,7 +64,7 @@ public class Settings extends JPanel {
                 done.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        Student student = BUGUtils.controller.fetchStudent(Window.username);
+                        Vector<Object> vector = BUGUtils.controller.fetchProfileInfo(Window.username);
                         changeDialog.dispose();
                     }
                 });
