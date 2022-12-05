@@ -38,6 +38,20 @@ public class ProfileDAO {
             return toProfile(cursor.next());
         else return null;
     }
+    public void updateProfileName(String id, String name){
+        MongoCollection<Document> collection = BUGUtils.database.getCollection("profileInfos");
+        Bson filter = eq("_id", id);
+//        ArrayList<String> a = (ArrayList<String>) document.get("availability");
+//        Document student = profileCollection.find(eq("_id", id)).first();
+//        Vector<String> convert = new Vector<>();
+//
+//        convert.addAll(a);
+//
+//        Availability avail = new Availability(convert);
+//
+//        return new Profile(document.getString("_id"), document.getString("name"), document.getString("email"), document.getString("phoneNumber"), avail);
+
+    }
 
     public static Document toDocument(Profile profile) {
         ArrayList<String> a = new ArrayList<>();
