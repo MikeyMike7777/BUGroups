@@ -24,10 +24,10 @@ public class tests {
 //        assertFalse(service.verifyAccount("renadommmmemailallalal@baylor.edu"));
 //    }
 
-//    @Test
-//    void testEmail1(){
-//        service.sendPasswordReset("Gabriel_Goulis1@baylor.edu");
-//    }
+    @Test
+    void testEmail1(){
+        service.sendPasswordReset("gabriel_goulis1@baylor.edu");
+    }
 
 //    @Test
 //    void createAccount(){

@@ -4,6 +4,9 @@ import database.utils.EmbeddedEmailUtil;
 import ui.general.Window;
 
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.*;
 import java.util.ArrayList;
 import java.util.Vector;
@@ -17,6 +20,25 @@ public class StudentService {
     ForgotPasswordDAO forgotPasswordDAO = new ForgotPasswordDAO();
 
     BugDAO bugDAO = new BugDAO();
+
+        String configFilePath = "src/main/config.properties";
+        FileInputStream propsInput;
+        Properties prop;
+
+    {
+        try {
+            propsInput = new FileInputStream(configFilePath);
+            prop = new Properties();
+            prop.load(propsInput);
+            System.out.println();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public void createProfileInfo(String id, String name, String email, String phone, Vector<String> availability){
         profileDAO.createProfileInfo(id, name, email, phone, availability);
@@ -103,14 +125,14 @@ public class StudentService {
 
     //Sends a password request email to target email and returns boolean of valid send or not
     public boolean sendPasswordReset(String email){
-        if(!email.endsWith("@baylor.edu")){
-            return false;
-        }
+//        if(!email.endsWith("@baylor.edu")){
+//            return false;
+//        }
 
         String host = "smtp.gmail.com";
         String port = "465";
         String mailFrom = "bugroups.bug@gmail.com";
-        String password = "lahnvhzzroaabxjv";
+        String password = prop.getProperty("APP_KEY");
 
         // message info
         String mailTo = email;
@@ -657,7 +679,7 @@ public class StudentService {
         String host = "smtp.gmail.com";
         String port = "465";
         String mailFrom = "bugroups.bug@gmail.com";
-        String password = "lahnvhzzroaabxjv";
+        String password = prop.getProperty("APP_KEY");
 
         // message info
         String mailTo = email;
