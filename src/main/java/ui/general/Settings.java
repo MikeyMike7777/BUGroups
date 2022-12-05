@@ -56,6 +56,7 @@ public class Settings extends JPanel {
                 changePanel.add(changeName);
                 changePanel.add(done);
 
+                changeName.setPreferredSize(new Dimension(250, 50));
                 label.setAlignmentX(CENTER_ALIGNMENT);
                 done.setAlignmentX(CENTER_ALIGNMENT);
                 changePanel.setAlignmentX(CENTER_ALIGNMENT);
@@ -69,7 +70,7 @@ public class Settings extends JPanel {
                 });
 
                 changeDialog.add(changePanel);
-                changeDialog.setPreferredSize(new Dimension(300, 150));
+                changeDialog.setSize(new Dimension(300, 150));
                 changeDialog.setVisible(true);
             }
         });
@@ -92,6 +93,7 @@ public class Settings extends JPanel {
                 changePanel.add(changePassword);
                 changePanel.add(done);
 
+                changePassword.setPreferredSize(new Dimension(250, 50));
                 label.setAlignmentX(CENTER_ALIGNMENT);
                 done.setAlignmentX(CENTER_ALIGNMENT);
                 changePanel.setAlignmentX(CENTER_ALIGNMENT);
@@ -104,7 +106,7 @@ public class Settings extends JPanel {
                 });
 
                 changeDialog.add(changePanel);
-                changeDialog.setPreferredSize(new Dimension(300, 150));
+                changeDialog.setSize(new Dimension(300, 150));
                 changeDialog.setVisible(true);
             }
         });
@@ -128,6 +130,7 @@ public class Settings extends JPanel {
                 changePanel.add(changePhone);
                 changePanel.add(done);
 
+                changePhone.setPreferredSize(new Dimension(250, 50));
                 label.setAlignmentX(CENTER_ALIGNMENT);
                 done.setAlignmentX(CENTER_ALIGNMENT);
                 changePanel.setAlignmentX(CENTER_ALIGNMENT);
@@ -140,7 +143,7 @@ public class Settings extends JPanel {
                 });
 
                 changeDialog.add(changePanel);
-                changeDialog.setPreferredSize(new Dimension(300, 150));
+                changeDialog.setSize(new Dimension(300, 150));
                 changeDialog.setVisible(true);
             }
         });
