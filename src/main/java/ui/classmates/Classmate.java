@@ -6,6 +6,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import java.util.Vector;
 
 public class Classmate extends JPanel {
@@ -14,7 +15,7 @@ public class Classmate extends JPanel {
     String phone;
     // FIXME: also need to add availability
 
-    Classmate(Vector<String> info){
+    Classmate(ArrayList<String> info){
         name = info.get(0);
         email = info.get(1);
         phone = info.get(2);

@@ -4,6 +4,7 @@ import com.mongodb.client.*;
 import database.utils.BUGUtils;
 import org.bson.Document;
 
+import java.util.ArrayList;
 import java.util.Vector;
 
 import static com.mongodb.client.model.Filters.eq;
@@ -23,14 +24,15 @@ public class CourseDAO {
 
     // Document is an object in the collection in the database
     public static Document toDocument(Course course) {
-        return new Document("_id", course.getCourseCode() + course.getSection())
+        //return new Document("_id", course.getCourseCode() + course.getSection()) // FIXME: ignoring course code for testing purposes
+        return new Document("_id", course.getCourseCode())
                 .append("courseCode", course.getCourseCode())
                 .append("professor", course.getProfessor())
                 .append("section", course.getSection())
                 .append("students", course.getStudents());
     }
 
-    Vector<String> getStudents(String courseId){
+    ArrayList<String> getStudents(String courseId){
         // query for all students' profiles that have the given course code in their course list
         // get all students in a course
 
@@ -39,7 +41,7 @@ public class CourseDAO {
         // looking for course that matches courseId (course code + section)
         Document course = courseCollection.find(eq("_id", courseId)).first();
         // from the course Document object, return the list of Student IDs
-        return (Vector<String>)(course.get("students"));
+        return (ArrayList<String>)(course.get("students"));
     }
 
     // generates dummy data in course collection for testing classmates FIXME: remove when done testing

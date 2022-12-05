@@ -3,6 +3,7 @@ package database.utils;
 import database.message.MessageService;
 import database.student.StudentService;
 
+import java.util.ArrayList;
 import java.util.Vector;
 
 // There is a public static controller in the BUGUtils class
@@ -44,7 +45,7 @@ public class Controller {
         return mService.fetchBoard(messageBoard);
     }
 
-    public Vector<Vector<String>> getClassmates(String courseId){
+    public Vector<ArrayList<String>> getClassmates(String courseId){
         return sService.getClassmates(courseId);
     }
 
