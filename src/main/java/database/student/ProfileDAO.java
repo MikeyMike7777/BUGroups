@@ -24,12 +24,7 @@ public class ProfileDAO {
         Bson filter = eq("_id", id);
 
         Document d = toDocument(p);
-        if(fetchProfileInfo(p.getId()) == null) {
-            collection.insertOne(d);
-        } else {
-            collection.deleteOne(filter);
-            collection.insertOne(d);
-        }
+        collection.insertOne(d);
     }
 
     Profile fetchProfileInfo(String id){
