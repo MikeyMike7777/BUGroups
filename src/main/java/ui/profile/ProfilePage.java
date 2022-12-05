@@ -117,8 +117,8 @@ public class ProfilePage extends JPanel {
     void repaintUserInfo(){
         userInfo.setVisible(false);
         userInfo.removeAll();
-        buildEditButton("View My Messages");
         buildUserInfoBox();
+        buildEditButton("View My Messages");
     }
 
     void repaintAvailInfo(){

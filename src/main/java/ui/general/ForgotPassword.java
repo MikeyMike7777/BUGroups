@@ -59,8 +59,9 @@ public class ForgotPassword extends JPanel {
                     temp.add(new Login(getPreferredSize()));
                 }
                 else {
-                    int a = JOptionPane.showConfirmDialog(getRootPane().getParent(), "Invalid Email", "Error", JOptionPane.ERROR_MESSAGE);
-                }
+                    JOptionPane.showMessageDialog(getRootPane().getParent(),
+                            "Invalid email",
+                            "Error", JOptionPane.ERROR_MESSAGE);                }
             }
         });
         reset.setAlignmentX(CENTER_ALIGNMENT);

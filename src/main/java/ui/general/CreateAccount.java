@@ -83,7 +83,7 @@ public class CreateAccount extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 if(emailField.getText().endsWith("@baylor.edu")) {
                     //verify account
-                    if(BUGUtils.controller.verifyAccount(emailField.getText())){
+                    if(!(BUGUtils.controller.verifyAccount(emailField.getText()))){
                         JOptionPane.showMessageDialog(CreateAccount.this.getRootPane()
                                         .getParent(), "Temporary password sent to email address!",
                                 "Confirmation", JOptionPane.QUESTION_MESSAGE);
@@ -98,22 +98,25 @@ public class CreateAccount extends JPanel {
                                 emailField.getText().toLowerCase());
                         BUGUtils.controller.createProfileInfo(username, name,
                                 emailField.getText().toLowerCase(), number.getText(), null);
+
+                        //go back to home page
+                        JPanel temp = (JPanel)getParent();
+                        setVisible(false);
+                        temp.remove(0);
+                        //Create Account
+                        temp.add(new Login(getPreferredSize()));
                     }
                     else {
-                        int a = JOptionPane.showConfirmDialog(getRootPane().getParent(),
-                                "No account is associated with this email", "Error",
-                                JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(getRootPane().getParent(),
+                                "An account is already associated with this email",
+                                "Error", JOptionPane.ERROR_MESSAGE);
                     }
                 }
                 else {
-                    int a = JOptionPane.showConfirmDialog(getRootPane().getParent(), "Invalid Email",
+                    JOptionPane.showMessageDialog(getRootPane().getParent(),
+                            "Invalid email",
                             "Error", JOptionPane.ERROR_MESSAGE);
                 }
-                JPanel temp = (JPanel)getParent();
-                setVisible(false);
-                temp.remove(0);
-                //Create Account
-                temp.add(new Login(getPreferredSize()));
             }
         });
         back.setAlignmentX(CENTER_ALIGNMENT);
