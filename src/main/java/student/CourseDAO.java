@@ -56,10 +56,18 @@ public class CourseDAO {
             // if there is stuff in the collection, delete everything
             courseCollection.deleteMany(new Document());
         }
-        Vector<String> students = new Vector<>();
-        students.add("tomas_cerny1");
-        students.add("greg_hamerly1");
-        students.add("bill_booth1");
-        createCourse("Prof Name", 1, "CSI 3471", students);
+        // course 1
+        Vector<String> students1 = new Vector<>();
+        students1.add("tomas_cerny1");
+        students1.add("greg_hamerly1");
+        students1.add("bill_booth1");
+        createCourse("CSI prof", 1, "CSI 3471", students1);
+
+        // course 2
+        Vector<String> students2 = new Vector<>();
+        students2.add("bill_booth1");
+        students2.add("cindy_fry1");
+        students2.add("greg_speegle1");
+        createCourse("WGS prof", 2, "WGS 2300", students2);
     }
 }
