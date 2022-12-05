@@ -35,6 +35,7 @@ public class Settings extends JPanel {
         panel.add(addChangePhoneNumber());
         panel.add(addDeleteAccount());
         panel.add(addReportBug());
+        panel.add(addLogOut());
         panel.setAlignmentX(CENTER_ALIGNMENT);
         add(panel);
     }
@@ -43,6 +44,23 @@ public class Settings extends JPanel {
         JLabel label = new JLabel("Settings");
         label.setAlignmentX(CENTER_ALIGNMENT);
         return label;
+    }
+    private Component addLogOut(){
+        JButton logOut = new JButton("Log Out");
+        logOut.setAlignmentX(CENTER_ALIGNMENT);
+        logOut.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Container temp = (Container)getRootPane().getContentPane();
+                JPanel root = new JPanel();
+                temp.removeAll();
+                root.add(new Login(new Dimension(BUGUtils.APP_WIDTH, BUGUtils.APP_HEIGHT)));
+                temp.add(root);
+                temp.validate();
+                temp.repaint();
+            }
+        });
+        return logOut;
     }
     private Component addReportBug(){
         JButton report = new JButton("Report Bug");
