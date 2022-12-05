@@ -115,4 +115,11 @@ public class StudentDAO {
         Bson update = addToSet("courses", courseCode + section);
         collection.findOneAndUpdate(filter, update);
     }
+
+    void addTutorOffer(String id, String offer) {
+        MongoCollection<Document> collection = BUGUtils.database.getCollection("BUGStudents");
+        Bson filter = Filters.eq("_id", id);
+        Bson update = addToSet("TutorOffers", offer);
+        collection.findOneAndUpdate(filter, update);
+    }
 }

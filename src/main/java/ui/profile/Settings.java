@@ -34,6 +34,7 @@ public class Settings extends JPanel {
         panel.add(addChangePassword());
         panel.add(addChangePhoneNumber());
         panel.add(addDeleteAccount());
+        panel.add(addReportBug());
         panel.setAlignmentX(CENTER_ALIGNMENT);
         add(panel);
     }
@@ -42,6 +43,42 @@ public class Settings extends JPanel {
         JLabel label = new JLabel("Settings");
         label.setAlignmentX(CENTER_ALIGNMENT);
         return label;
+    }
+    private Component addReportBug(){
+        JButton report = new JButton("Report Bug");
+        JLabel label = new JLabel("What issue were you having?");
+        report.setAlignmentX(CENTER_ALIGNMENT);
+        report.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JDialog dialog = new JDialog();
+                JPanel changePanel = new JPanel();
+                JButton done = new JButton("Done");
+                JTextPane bug = new JTextPane();
+                changePanel.setLayout(new BoxLayout(changePanel, BoxLayout.Y_AXIS));
+
+                done.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        BUGUtils.controller.reportBug(bug.getText());
+                        dialog.dispose();
+                    }
+                });
+                changePanel.add(label);
+                changePanel.add(bug);
+                changePanel.add(done);
+
+                dialog.add(changePanel);
+                dialog.setSize(new Dimension(300, 160));
+                dialog.setVisible(true);
+
+                changePanel.setAlignmentX(CENTER_ALIGNMENT);
+                label.setAlignmentX(CENTER_ALIGNMENT);
+                bug.setAlignmentX(CENTER_ALIGNMENT);
+                done.setAlignmentX(CENTER_ALIGNMENT);
+            }
+        });
+        return report;
     }
     private Component addDeleteAccount(){
         JButton deleteAccount = new JButton("Delete Account");
