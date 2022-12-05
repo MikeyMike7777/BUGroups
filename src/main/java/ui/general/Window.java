@@ -41,7 +41,7 @@ public class Window extends JPanel {
         setPreferredSize(preferredSize);
         tabSize = new Dimension((int) (preferredSize.getWidth() - 50),
                 (int) (preferredSize.getHeight() - 80));
-        tabbedPane = new JTabbedPane();
+        //tabbedPane = new JTabbedPane();
         this.tabMap = initTabs();
         initWindow();
         setBackground(Color.LIGHT_GRAY);
@@ -60,7 +60,6 @@ public class Window extends JPanel {
         preferredSize.setSize(preferredSize.getWidth(),
                 preferredSize.getHeight() - 20);
         setPreferredSize(preferredSize);
-        this.tabMap = tabs;
         initWindow();
         setBackground(Color.LIGHT_GRAY);
     }
@@ -148,7 +147,8 @@ public class Window extends JPanel {
     }
 
     public void initNavigationBar(){
-        //tabbedPane = new JTabbedPane();
+        this.tabMap = initTabs();
+        tabbedPane = new JTabbedPane();
         tabbedPane.setPreferredSize(getPreferredSize());
 
         ImageIcon userIcon = new ImageIcon("src/main/resources/userIcon.png");

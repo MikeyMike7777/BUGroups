@@ -90,7 +90,7 @@ public class ProfileTutorList extends JPanel {
     class AddActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            new AddClassTutorDialog(model, "tutor");
+            new AddClassTutorDialog(model, "tutor", ProfileTutorList.this);
         }
     }
 

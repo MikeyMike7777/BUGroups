@@ -87,7 +87,7 @@ public class ProfileClassList extends JPanel {
     class AddActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            new AddClassTutorDialog(model, "course");
+            new AddClassTutorDialog(model, "course", ProfileClassList.this);
         }
     }
 
@@ -101,12 +101,17 @@ public class ProfileClassList extends JPanel {
                                 "Do you want to remove " + classList.getSelectedValue() + "?",
                                 "Warning", JOptionPane.YES_NO_OPTION);
                 if (answer == 0) {
-                    String dbReadable = classList.getSelectedValue().substring(0,3) // course
-                            + classList.getSelectedValue().substring(4,8)  // code
-                            + classList.getSelectedValue().substring(9,11); // section
+                    String dbReadable = classList.getSelectedValue().replaceAll(" ", ""); // section
                     model.remove(classList.getSelectedIndex());
                     BUGUtils.controller.removeCourse(dbReadable);
-                    System.out.println("removing course " + dbReadable); // db reads something like CSI144002
+                    // System.out.println("removing course " + dbReadable); // db reads something like CSI144002
+                    Window temp = (Window)(getParent()
+                            .getParent().getParent());
+                    temp.setVisible(false);
+                    temp.remove(1);
+                    temp.initNavigationBar();
+                    ((JTabbedPane)temp.getComponent(1)).setSelectedIndex(4);
+                    temp.setVisible(true);
                 }
             }
         }

@@ -33,9 +33,12 @@ public class AddClassTutorDialog extends JDialog {
 
     String type;
 
+    JPanel parent;
 
-    AddClassTutorDialog(DefaultListModel<String> model, String s) {
+
+    AddClassTutorDialog(DefaultListModel<String> model, String s, JPanel parent) {
         super();
+        this.parent = parent;
         List = model;
         type = s;
         setSize(300,350);
@@ -97,6 +100,13 @@ public class AddClassTutorDialog extends JDialog {
                     normalizedCourseCode + " " + normalizedCourseNumber,
                     sec, professor.getText());
             List.addElement(normalizedCourseCode + " " + normalizedCourseNumber + " " + sec);
+            Window temp = (Window)(parent.getParent()
+                    .getParent().getParent());
+            temp.setVisible(false);
+            temp.remove(1);
+            temp.initNavigationBar();
+            ((JTabbedPane)temp.getComponent(1)).setSelectedIndex(4);
+            temp.setVisible(true);
             dispose();
         }
     }
