@@ -44,14 +44,14 @@ public class StudentService {
         return new Vector<>(1);
     }
 
-    public Vector<Vector<String>> getClassmates(String courseCode){
-        Vector<String> students = courseDAO.getStudents(courseCode);
+    public Vector<Vector<String>> getClassmates(String CourseId){
+        Vector<String> students = courseDAO.getStudents(CourseId);
         return profileDAO.getClassmates(students);
     }
 
     // generates dummy data in course collection and profile collection for testing classmates FIXME: remove when done testing
     public void generate(){
         courseDAO.generate();
-        //profileDAO.generate();
+        profileDAO.generate();
     }
 }
