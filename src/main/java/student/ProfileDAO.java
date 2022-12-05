@@ -107,5 +107,4 @@ public class ProfileDAO {
 //        createProfileInfo("greg_hamerly1", "Greg Hamerly", "greg_hamerly1@baylor.edu", "708-351-5325", a);
 //        createProfileInfo("bill_booth1", "Bill Booth", "bill_booth1@baylor.edu", "396-135-9223", a);
     }
-
 }
