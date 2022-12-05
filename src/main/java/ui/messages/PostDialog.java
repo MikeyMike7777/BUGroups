@@ -2,6 +2,7 @@ package ui.messages;
 
 import database.utils.BUGUtils;
 import ui.general.Window;
+import ui.profile.MyMessages;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,20 +14,24 @@ public class PostDialog extends JDialog {
     JPanel panel;
     JTextPane message;
     JTextField course;
-    MessageBoardPage parent;
+    Component parent;
     String tempText;
     String tempCourse;
+    Integer boardId;
 
     PostDialog(Component parent, Component board, String title) {
         super();
-        this.parent = (MessageBoardPage)board;
+        this.parent = board;
         createAndDisplay(title);
     }
 
-    public PostDialog(String text, String course, String title) {
+    public PostDialog(String text, String course, String title,
+                      Integer boardId, MyMessages window) {
         super();
         this.tempText = text;
         this.tempCourse = course;
+        this.boardId = boardId;
+        this.parent = window;
         createAndDisplay(title);
     }
 
@@ -55,7 +60,7 @@ public class PostDialog extends JDialog {
         temp.add(new JLabel("Course Number:"));
         course = new JTextField(20);
         if (tempCourse != null)
-            course.setText(tempText);
+            course.setText(tempCourse);
         temp.add(course);
         message = new JTextPane();
         message.setPreferredSize(new Dimension(330, 800));
@@ -91,9 +96,10 @@ public class PostDialog extends JDialog {
         public void actionPerformed(ActionEvent e) {
             Vector<Object> v = BUGUtils.controller.createMessage(
                     message.getText(), Window.username, course.getText(),
-                    parent.id, "null"
+                    parent.getX(), "null"
             );
-            parent.refresh();
+            if (parent != null)
+                parent.repaint();
 
             dispose();
         }
