@@ -94,6 +94,9 @@ public class CreateAccount extends JPanel {
                     BUGUtils.controller.registerStudent(username, password, name, number.getText(), emailField.getText());
                     BUGUtils.controller.createProfileInfo(username, name, emailField.getText(), number.getText(), null);
                 }
+                else {
+                    int a = JOptionPane.showConfirmDialog(getRootPane().getParent(), "Invalid Email", "Error", JOptionPane.YES_NO_OPTION);
+                }
                 JPanel temp = (JPanel)getParent();
                 setVisible(false);
                 temp.remove(0);
