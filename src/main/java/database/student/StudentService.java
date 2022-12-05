@@ -1225,4 +1225,8 @@ public class StudentService {
         System.out.println("student service");
         return TutorOfferDAO.getTutorOffers(courseId);
     }
+
+    public void changeAvail(String id, Vector<String> avail) {
+        profileDAO.updateProfileAvail(id, avail);
+    }
 }
