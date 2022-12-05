@@ -96,7 +96,7 @@ public class StudentDAO {
                 .append("tutors", tutorList);
     }
 
-    public boolean changePassword(String ID, String password){
+    boolean changePassword(String ID, String password){
         MongoCollection<Document> collection = BUGUtils.database.getCollection("BUGStudents");
         Bson filter = Filters.eq("_id", ID);
         cursor = collection.find(filter).iterator();
