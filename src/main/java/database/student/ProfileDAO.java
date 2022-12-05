@@ -47,6 +47,13 @@ public class ProfileDAO {
         collection.updateOne(filter, update);
     }
 
+    public void updateProfilePhoneNumber(String id, String number){
+        MongoCollection<Document> collection = BUGUtils.database.getCollection("profileInfos");
+        Bson filter = eq("_id", id);
+        Bson update = set("phoneNumber", number);
+        collection.updateOne(filter, update);
+    }
+
     public static Document toDocument(Profile profile) {
         ArrayList<String> a = new ArrayList<>();
         if(profile.getAvailability().getTimes() != null) {

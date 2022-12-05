@@ -30,6 +30,9 @@ public class Controller {
     public void updateProfileName(String id, String name){
         sService.updateProfileName(id, name);
     }
+    public void updateProfilePhoneNumber(String id, String number){
+        sService.updateProfileName(id, number);
+    }
 
     public Vector<Object> createMessage(String text, String author,
                               String courseNumber, Integer board, String message) {
