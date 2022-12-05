@@ -80,6 +80,16 @@ class MessageDAO {
         else return null;
     }
 
+    List<Message> fetchMessages(String id) {
+        MongoCollection<Document> collection = BUGUtils.database.getCollection("BUGMessages");
+        Bson filter = eq("author", id);
+        cursor = collection.find(filter).iterator();
+        List<Message> messages = new ArrayList<>();
+        while (cursor.hasNext())
+            messages.add(toMessage(cursor.next()));
+        return messages;
+    }
+
     List<Message> fetchBoard(Integer messageBoard) {
         MongoCollection<Document> collection = BUGUtils.database.getCollection("BUGMessages");
         Bson filter = and(eq("messageBoard", messageBoard),
