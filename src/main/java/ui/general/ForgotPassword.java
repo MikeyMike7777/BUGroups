@@ -1,11 +1,15 @@
 package ui.general;
 
+import database.utils.BUGUtils;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ForgotPassword extends JPanel {
+    JTextField emailField;
+
     ForgotPassword(Dimension preferredSize){
         super();
         preferredSize.setSize(preferredSize.getWidth(),
@@ -18,6 +22,7 @@ public class ForgotPassword extends JPanel {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         JLabel label = new JLabel("Forgot Password");
+        emailField = new JTextField(40);
         label.setAlignmentX(CENTER_ALIGNMENT);
         panel.add(label, CENTER_ALIGNMENT);
         panel.add(addEmail());
@@ -31,7 +36,7 @@ public class ForgotPassword extends JPanel {
         JPanel email = new JPanel();
         email.setLayout(new BoxLayout(email, BoxLayout.X_AXIS));
         email.add(new JLabel("Email: "));
-        email.add(new JTextField(40));
+        email.add(emailField);
         email.setAlignmentX(CENTER_ALIGNMENT);
         return email;
     }
@@ -47,6 +52,10 @@ public class ForgotPassword extends JPanel {
                 setVisible(false);
                 temp.remove(0);
                 //send reset email
+                if(BUGUtils.controller.verifyAccount(emailField.getText())){
+                    BUGUtils.controller.sendPasswordReset(emailField.getText());
+
+                }
                 temp.add(new Login(getPreferredSize()));
             }
         });

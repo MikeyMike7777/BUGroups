@@ -97,7 +97,7 @@ public class StudentService {
 
         // message info
         String mailTo = email;
-        String subject = "Test e-mail with inline images";
+        String subject = "BUGroups Password Reset";
         StringBuffer body
                 = new StringBuffer("<html xmlns=\"http://www.w3.org/1999/xhtml\">\n" +
                 "<head>\n" +

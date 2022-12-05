@@ -58,4 +58,12 @@ public class Controller {
         sService.generate();
     }
 
+    public boolean verifyAccount(String email) {
+        return sService.verifyAccount(email);
+    }
+
+    public boolean sendPasswordReset(String email) {
+        return sService.sendPasswordReset(email);
+    }
+
 }
