@@ -82,9 +82,7 @@ public class AddClassTutorDialog extends JDialog {
     class SaveActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            Vector<String> student = new Vector<String>();
-            student.add(Window.username);
-            BUGUtils.controller.createCourse(Window.username, classCode.getText(), professor.getText(), Integer.parseInt(section.getText()), student);
+            BUGUtils.controller.addCourse(Window.username, classCode.getText(), professor.getText(), Integer.parseInt(section.getText()));
             List.addElement(classCode.getText());
             dispose();
         }

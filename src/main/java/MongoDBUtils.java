@@ -4,8 +4,11 @@ import com.mongodb.client.MongoClient;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 
+import java.util.ArrayList;
+
 import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Filters.exists;
+import static com.mongodb.client.model.Updates.set;
 
 public class MongoDBUtils {
 
@@ -17,11 +20,11 @@ public class MongoDBUtils {
                 .build();
         MongoClient mongoClient = MongoClients.create(settings);
         MongoDatabase database = mongoClient.getDatabase("test");
-//        MongoCollection<Document> collection = database.getCollection("BUGMessages");
-//        Bson filter = exists("_id");
-//        collection.deleteMany(filter);
-//        filter = eq("messageBoard", 4);
-//        MongoCursor<Document> cursor = collection.find(filter).iterator();
+        MongoCollection<Document> collection = database.getCollection("BUGStudents");
+        Bson filter = exists("_id");
+//        Bson update = set("courses", new ArrayList<String>());
+        Bson update2 = set("tutors", new ArrayList<String>());
+        collection.updateMany(filter, update2);
     }
 
 }
