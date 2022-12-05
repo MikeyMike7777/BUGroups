@@ -82,23 +82,32 @@ public class CreateAccount extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(emailField.getText().endsWith("@baylor.edu")) {
-                    JOptionPane.showMessageDialog(CreateAccount.this.getRootPane()
-                                    .getParent(), "Temporary password sent to email address!",
-                            "Confirmation", JOptionPane.QUESTION_MESSAGE);
-                    String name = firstName.getText() + " " + lastName.getText();
-                    String password = BUGUtils.controller.generatePassword(8);
-                    BUGUtils.controller.sendRegisterEmail(emailField.getText()
-                            .toLowerCase(), password, name);
-                    String username = emailField.getText().toLowerCase()
-                            .substring(0, emailField.getText().length() - 11);
+                    //verify account
+                    if(BUGUtils.controller.verifyAccount(emailField.getText())){
+                        JOptionPane.showMessageDialog(CreateAccount.this.getRootPane()
+                                        .getParent(), "Temporary password sent to email address!",
+                                "Confirmation", JOptionPane.QUESTION_MESSAGE);
+                        String name = firstName.getText() + " " + lastName.getText();
+                        String password = BUGUtils.controller.generatePassword(8);
+                        BUGUtils.controller.sendRegisterEmail(emailField.getText()
+                                .toLowerCase(), password, name);
+                        String username = emailField.getText().toLowerCase()
+                                .substring(0, emailField.getText().length() - 11);
 
-                    BUGUtils.controller.registerStudent(username, password, name, number.getText(),
-                            emailField.getText().toLowerCase());
-                    BUGUtils.controller.createProfileInfo(username, name,
-                            emailField.getText().toLowerCase(), number.getText(), null);
+                        BUGUtils.controller.registerStudent(username, password, name, number.getText(),
+                                emailField.getText().toLowerCase());
+                        BUGUtils.controller.createProfileInfo(username, name,
+                                emailField.getText().toLowerCase(), number.getText(), null);
+                    }
+                    else {
+                        int a = JOptionPane.showConfirmDialog(getRootPane().getParent(),
+                                "No account is associated with this email", "Error",
+                                JOptionPane.ERROR_MESSAGE);
+                    }
                 }
                 else {
-                    int a = JOptionPane.showConfirmDialog(getRootPane().getParent(), "Invalid Email", "Error", JOptionPane.ERROR_MESSAGE);
+                    int a = JOptionPane.showConfirmDialog(getRootPane().getParent(), "Invalid Email",
+                            "Error", JOptionPane.ERROR_MESSAGE);
                 }
                 JPanel temp = (JPanel)getParent();
                 setVisible(false);
