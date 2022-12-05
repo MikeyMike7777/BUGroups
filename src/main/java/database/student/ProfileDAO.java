@@ -1,6 +1,7 @@
 package database.student;
 
 import com.mongodb.client.*;
+import com.mongodb.client.model.Filters;
 import database.utils.BUGUtils;
 import org.bson.Document;
 import org.bson.conversions.Bson;
@@ -15,7 +16,6 @@ import static com.mongodb.client.model.Updates.set;
 public class ProfileDAO {
 
     private static MongoCursor<Document> cursor;
-
 
     void createProfileInfo(String id,String name, String email, String phone, Vector<String> availability){
         Availability a = new Availability(availability);
@@ -40,18 +40,26 @@ public class ProfileDAO {
             return toProfile(cursor.next());
         else return null;
     }
-    public void updateProfileName(String id, String name){
+    void updateProfileName(String id, String name){
         MongoCollection<Document> collection = BUGUtils.database.getCollection("profileInfos");
         Bson filter = eq("_id", id);
         Bson update = set("name", name);
         collection.updateOne(filter, update);
     }
 
-    public void updateProfilePhoneNumber(String id, String number){
+
+    public void updateProfilePhoneNumber(String id, String number) {
         MongoCollection<Document> collection = BUGUtils.database.getCollection("profileInfos");
         Bson filter = eq("_id", id);
         Bson update = set("phoneNumber", number);
         collection.updateOne(filter, update);
+    }
+
+    boolean deleteAccount(String id) {
+        MongoCollection<Document> collection = BUGUtils.database.getCollection("profileInfos");
+        Bson filter = Filters.eq("_id", id);
+        collection.findOneAndDelete(filter);
+        return true;
     }
 
     public static Document toDocument(Profile profile) {
