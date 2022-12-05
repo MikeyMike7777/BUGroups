@@ -48,13 +48,23 @@ public class EditAvalibilityDialog extends JDialog{
     }
 
     void setTexts(){
-        m.setText("Mon:" + ProfilePage.times.elementAt(0).replace("Mon:", ""));
-        t.setText("Tue:" + ProfilePage.times.elementAt(1).replace("Tue:", ""));
-        w.setText("Wed:" + ProfilePage.times.elementAt(2).replace("Wed:", ""));
-        thu.setText("Thu:" + ProfilePage.times.elementAt(3).replace("Thu:", ""));
-        fri.setText("Fri:" + ProfilePage.times.elementAt(4).replace("Fri:", ""));
-        sat.setText("Sat:" + ProfilePage.times.elementAt(5).replace("Sat:", ""));
-        sun.setText("Sun:" + ProfilePage.times.elementAt(6).replace("Sun:", ""));
+        try {
+            m.setText("Mon:" + ProfilePage.times.elementAt(0).replace("Mon:", ""));
+            t.setText("Tue:" + ProfilePage.times.elementAt(1).replace("Tue:", ""));
+            w.setText("Wed:" + ProfilePage.times.elementAt(2).replace("Wed:", ""));
+            thu.setText("Thu:" + ProfilePage.times.elementAt(3).replace("Thu:", ""));
+            fri.setText("Fri:" + ProfilePage.times.elementAt(4).replace("Fri:", ""));
+            sat.setText("Sat:" + ProfilePage.times.elementAt(5).replace("Sat:", ""));
+            sun.setText("Sun:" + ProfilePage.times.elementAt(6).replace("Sun:", ""));
+        } catch (ArrayIndexOutOfBoundsException n){
+            m.setText("Mon:");
+            t.setText("Tue:");
+            w.setText("Wed:");
+            thu.setText("Thu:");
+            fri.setText("Fri:");
+            sat.setText("Sat:");
+            sun.setText("Sun:");
+        }
     }
     void createAndDisplay() {
         setLayout(new GridLayout(2,2));
@@ -74,12 +84,20 @@ public class EditAvalibilityDialog extends JDialog{
         JButton save = new JButton("Save");
         JButton cancel = new JButton("Cancel");
 
+        cancel.addActionListener(new CancelActionListener());
         save.addActionListener(new SaveAvailActionListener());
 
         buttonPanel.add(save);
         buttonPanel.add(cancel);
 
         buttonPanel.setVisible(true);
+    }
+
+    class CancelActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            dispose();
+        }
     }
 
     class SaveAvailActionListener implements ActionListener {

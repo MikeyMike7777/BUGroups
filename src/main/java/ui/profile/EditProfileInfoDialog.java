@@ -1,8 +1,8 @@
 package ui.profile;
 
 import database.utils.BUGUtils;
-import ui.general.Window;
 import ui.profile.ProfilePage;
+import ui.general.Window;
 
 import javax.swing.*;
 import java.awt.*;
@@ -63,17 +63,30 @@ public class EditProfileInfoDialog extends JDialog {
         JButton cancel = new JButton("Cancel");
 
         save.addActionListener(new SaveInfoActionListener());
+        cancel.addActionListener(new CancelActionListener());
 
         buttonPanel.add(save);
         buttonPanel.add(cancel);
 
         buttonPanel.setVisible(true);
     }
+    class CancelActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            dispose();
+        }
+    }
 
     class SaveInfoActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            BUGUtils.controller.createProfileInfo(Window.username, name.getText(), email.getText(), phoneNumber.getText(), (Vector<String>) ProfilePage.info.elementAt(3));
+            Vector<String> s = new Vector<>();
+            try {
+                s = (Vector<String>) ProfilePage.info.elementAt(3);
+            } catch(ArrayIndexOutOfBoundsException n){
+                s = null;
+            }
+            BUGUtils.controller.createProfileInfo(Window.username, name.getText(), email.getText(), phoneNumber.getText(), s);
             ProfilePage.repaintUserInfo();
             dispose();
         }

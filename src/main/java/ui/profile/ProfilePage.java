@@ -65,7 +65,7 @@ public class ProfilePage extends JPanel {
         info = BUGUtils.controller.fetchProfileInfo(Window.username);
 
         textArea.setEditable(false);
-        if(info.size() == 0) {
+        if(info.size() == 0 || info.elementAt(1 ) == null) {
             textArea.setText("""
                     Click "Edit Profile Info" to add your name, email, and phone
                      number!""");
@@ -140,19 +140,17 @@ public class ProfilePage extends JPanel {
             try {
                 times = (Vector<String>) info.elementAt(3);
             } catch (NullPointerException e) {
-                times = null;
             }
         } else{
-            times = null;
         }
 
         if(times == null || times.size() == 0) {
             infoText.setText("""
                     Click "Edit Availability" to add your availability!""");
         } else {
-            infoText.setText(times.elementAt(0) + "\n" + times.elementAt(1) + "\n" + times.elementAt(2)
-                    + "\n" + times.elementAt(3) + "\n"+  times.elementAt(4) + "\n" + times.elementAt(5)
-                    + "\n" + times.elementAt(6) + "\n" );
+            infoText.setText(times.elementAt(0) + "\t\t" + times.elementAt(5) + "\n" + times.elementAt(1)
+                    + "\t\t" + times.elementAt(6) + "\n"+  times.elementAt(2) + "\n" + times.elementAt(3)
+                    + "\n" + times.elementAt(4));
         }
         infoText.setVisible(true);
 
