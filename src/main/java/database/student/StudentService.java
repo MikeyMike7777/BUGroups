@@ -1,5 +1,6 @@
 package database.student;
 
+import java.util.ArrayList;
 import java.util.Vector;
 
 public class StudentService {
@@ -45,8 +46,8 @@ public class StudentService {
         return new Vector<>(1);
     }
 
-    public Vector<Vector<String>> getClassmates(String CourseId){
-        Vector<String> students = courseDAO.getStudents(CourseId);
+    public Vector<ArrayList<String>> getClassmates(String courseId){
+        ArrayList<String> students = courseDAO.getStudents(courseId);
         return profileDAO.getClassmates(students);
     }
 
