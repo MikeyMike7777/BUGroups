@@ -93,6 +93,9 @@ public class Controller {
         return true;
     }
 
+    public boolean deleteAccount(String id) {
+        return sService.deleteAccount(id);
+    }
 
     public Vector<ArrayList<String>> getTutorOffers(String courseId){
         return sService.getClassmates(courseId);

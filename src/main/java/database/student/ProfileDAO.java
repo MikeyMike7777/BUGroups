@@ -1,6 +1,7 @@
 package database.student;
 
 import com.mongodb.client.*;
+import com.mongodb.client.model.Filters;
 import database.utils.BUGUtils;
 import org.bson.Document;
 import org.bson.conversions.Bson;
@@ -62,6 +63,13 @@ public class ProfileDAO {
                 .append("phoneNumber", profile.getPhoneNumber())
                 .append("availability", a);
 
+    }
+
+    boolean deleteAccount(String id) {
+        MongoCollection<Document> collection = BUGUtils.database.getCollection("profileInfos");
+        Bson filter = Filters.eq("_id", id);
+        collection.findOneAndDelete(filter);
+        return true;
     }
 
     static Profile toProfile(Document document) {

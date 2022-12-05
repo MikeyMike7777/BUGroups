@@ -46,8 +46,18 @@ public class Settings extends JPanel {
         deleteAccount.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //confirm
-                JOptionPane option = new JOptionPane();
+                int answer = JOptionPane
+                        .showConfirmDialog(null,
+                                "Are you sure you want to delete your account?",
+                                "Warning", JOptionPane.YES_NO_OPTION);
+                if (answer == 0) {
+                    BUGUtils.controller.deleteAccount(Window.username);
+                    JPanel temp = (JPanel)getRootPane().getContentPane().getComponent(0);
+                    temp.removeAll();
+                    temp.add(new Login(new Dimension(BUGUtils.APP_WIDTH, BUGUtils.APP_HEIGHT)));
+                    temp.getRootPane().validate();
+                    temp.repaint();
+                }
             }
         });
         return deleteAccount;
