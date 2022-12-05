@@ -128,10 +128,10 @@ public class StudentDAO {
         return true;
     }
 
-    void addClass(String id, String courseCode, String section) {
+    void addClass(String username, String courseId) {
         MongoCollection<Document> collection = BUGUtils.database.getCollection("BUGStudents");
-        Bson filter = Filters.eq("_id", id);
-        Bson update = addToSet("courses", courseCode + section);
+        Bson filter = Filters.eq("_id", username);
+        Bson update = addToSet("courses", courseId);
         collection.findOneAndUpdate(filter, update);
     }
 
@@ -142,10 +142,15 @@ public class StudentDAO {
         collection.findOneAndUpdate(filter, update);
     }
 
-    static void removeCourse(String courseId){
-        MongoCollection<Document> profileCollection = BUGUtils.database.getCollection("profileInfos");
-        Bson filter = eq("_id", courseId);
-        Bson update = pull("courses", courseId.substring(0, 7)); // just courseCode is stored
-        profileCollection.updateOne(filter, update);
+    static void removeCourse(String username, String courseId){
+        MongoCollection<Document> studentCollection = BUGUtils.database.getCollection("BUGStudents");
+        Bson filter = eq("_id", username);
+        Bson update = pull("courses", courseId); // just courseCode is stored
+        studentCollection.updateOne(filter, update);
     }
 }
+
+/*
+TODO: classes were persisting? but also showing up on tutor offers, remove course functionality throws exception, need
+to check if the lists are removing too
+ */

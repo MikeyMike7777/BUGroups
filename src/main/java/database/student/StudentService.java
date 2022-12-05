@@ -71,13 +71,14 @@ public class StudentService {
         bugDAO.reportBug(report);
     }
 
-    public void addCourse(String id, String courseCode, String section, String professor){
+    public void addCourse(String id, String courseCode, String section, String professor){ // where id is courseID
         //String sec = section < 10 ? "0" + section : section.toString();
-        //String courseId = courseCode.toUpperCase().replaceAll(" ", "") + section;
-        if (!courseDAO.fetchCourse(id)) // if courses to fetch
+        //String courseId = courseCode.toUpperCase().replaceAll(" ", "") + section; // this is the same as id param
+
+        if (!courseDAO.fetchCourse(id)) // if course does not exist
             courseDAO.createCourse(id, courseCode, section, professor);
-        courseDAO.enroll(id, courseCode, section);
-        studentDAO.addClass(id, courseCode, section);
+        courseDAO.enroll(Window.username, id); // course gets student added to its list of students in it
+        studentDAO.addClass(Window.username, id); // student gets course added to the list of courses they're taking
     }
 
 
@@ -1239,7 +1240,6 @@ public class StudentService {
     }
 
     public Vector<ArrayList<String>> getTutorOffers(String courseId){
-        System.out.println("student service");
         return TutorOfferDAO.getTutorOffers(courseId);
     }
 
@@ -1263,6 +1263,6 @@ public class StudentService {
 
     public void removeCourse(String courseId){
         CourseDAO.removeCourse(courseId);
-        StudentDAO.removeCourse(courseId);
+        StudentDAO.removeCourse(Window.username, courseId);
     }
 }
