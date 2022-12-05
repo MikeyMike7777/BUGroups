@@ -64,7 +64,7 @@ public class Settings extends JPanel {
                 done.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        Vector<Object> vector = BUGUtils.controller.fetchProfileInfo(Window.username);
+                        //updateName(from JTextField);
                         changeDialog.dispose();
                     }
                 });
@@ -76,6 +76,9 @@ public class Settings extends JPanel {
         });
         phoneNumber.setAlignmentX(CENTER_ALIGNMENT);
         return phoneNumber;
+    }
+    public void updateName(String name){
+        Vector<Object> vector = BUGUtils.controller.fetchProfileInfo(Window.username);
     }
     private Component addChangePassword() {
         JButton phoneNumber = new JButton("Change Password");
