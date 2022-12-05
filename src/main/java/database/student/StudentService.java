@@ -53,8 +53,8 @@ public class StudentService {
     }
 
 
-    public void createStudent(String id, String username, String password, Vector<String> courses, Vector<String> tutors) {
-        studentDAO.createStudent(id, username, password, courses, tutors);
+    public boolean registerStudent(String username, String password, String name, String email, String phone) {
+        return studentDAO.registerStudent(username, password, name, email, phone);
     }
 
     // return vector of relevant student info, put username first please :)
@@ -92,6 +92,10 @@ public class StudentService {
             return false;
         }
         return forgotPasswordDAO.verifyAccount(email);
+    }
+
+    public boolean changePassword(String ID, String password){
+        return studentDAO.changePassword(ID, password);
     }
 
     //Sends a password request email to target email and returns boolean of valid send or not

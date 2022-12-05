@@ -13,19 +13,24 @@ public class tests {
         service = new StudentService();
     }
 
-    @Test
-    void verifyAccount1() {
-        assertTrue(service.verifyAccount("greg_hamerly1@baylor.edu"));
-    }
+//    @Test
+//    void verifyAccount1() {
+//        assertTrue(service.verifyAccount("greg_hamerly1@baylor.edu"));
+//    }
+//
+//    @Test
+//    void verifyAccount2() {
+//        assertFalse(service.verifyAccount("renadommmmemailallalal@baylor.edu"));
+//    }
+//
+//    @Test
+//    void testEmail1(){
+//        service.sendPasswordReset("bryce_robinson1@baylor.edu");
+//    }
 
     @Test
-    void verifyAccount2() {
-        assertFalse(service.verifyAccount("renadommmmemailallalal@baylor.edu"));
-    }
-
-    @Test
-    void testEmail1(){
-        service.sendPasswordReset("bryce_robinson1@baylor.edu");
+    void createAccount(){
+        service.createStudent("gouligab", "password");
     }
 
 

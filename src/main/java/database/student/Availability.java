@@ -23,7 +23,7 @@ public class Availability {
     public String toString(){
         String availability = "";
         for (String s : times){
-            availability += s + ", ";
+            availability += s + ",";
         }
         return availability;
     }

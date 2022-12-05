@@ -2,6 +2,7 @@ package database.student;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
+import com.mongodb.client.model.Filters;
 import database.utils.BUGUtils;
 import database.utils.MongoInit;
 import org.bson.Document;
@@ -11,22 +12,39 @@ import java.util.ArrayList;
 import java.util.Vector;
 
 import static com.mongodb.client.model.Filters.eq;
+import static com.mongodb.client.model.Updates.addToSet;
+import static com.mongodb.client.model.Updates.set;
 
 public class StudentDAO {
 
     private static MongoCursor<Document> cursor;
 
-    void createStudent(String id, String username, String password, Vector<String> courses, Vector<String> tutors){
+    public boolean registerStudent(String username, String password, String name, String email, String phone){
         Student s = new Student(username, password);
-        MongoCollection<Document> collection = BUGUtils.database.getCollection("students");
+        MongoCollection<Document> collection1 = BUGUtils.database.getCollection("BUGStudents");
+        MongoCollection<Document> collection2 = BUGUtils.database.getCollection("profileInfos");
 
-        Document d = toDocument(s);
+        Document d1 = new Document("_id", s.getUsername())
+                .append("username", s.getUsername())
+                .append("password", s.getPassword())
+                .append("courses", null)
+                .append("tutors", null);
 
-        collection.insertOne(d);
+        collection1.insertOne(d1);
+
+        Document d2 = new Document("_id", s.getUsername())
+                .append("name", name)
+                .append("email", email)
+                .append("phoneNumber", phone)
+                .append("availability", null);
+
+        collection2.insertOne(d2);
+
+        return true;
     }
 
     Student fetchStudent(String id){
-        MongoCollection<Document> collection = BUGUtils.database.getCollection("profileInfos");
+        MongoCollection<Document> collection = BUGUtils.database.getCollection("BUGStudents");
         Bson filter = eq("_id", id);
         cursor = collection.find(filter).iterator();
         if (cursor.hasNext())
@@ -34,7 +52,7 @@ public class StudentDAO {
         else return null;
     }
 
-    static Student toStudent(Document document) {
+    public static Student toStudent(Document document) {
         ArrayList<String> c = (ArrayList<String>) document.get("courses");
         Vector<String> convertc = new Vector<>();
         convertc.addAll(c);
@@ -73,6 +91,22 @@ public class StudentDAO {
                 .append("courses", courseList)
                 .append("tutors", tutorList);
     }
+
+    public boolean changePassword(String ID, String password){
+        MongoCollection<Document> collection = BUGUtils.database.getCollection("BUGStudents");
+        Bson filter = Filters.eq("_id", ID);
+        cursor = collection.find(filter).iterator();
+
+        if (cursor.hasNext()) {
+            Bson update = set("password", password);
+            collection.updateOne(filter, update);
+
+            return true;
+        }
+
+        return false;
+    }
+
 
 
 
