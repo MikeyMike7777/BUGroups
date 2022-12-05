@@ -9,7 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Vector;
 
-public class EditAvalibilityDialog extends JDialog{
+public class EditAvailabilityDialog extends JDialog{
 
     JLabel mLabel;
 
@@ -40,7 +40,7 @@ public class EditAvalibilityDialog extends JDialog{
     JTextField sun = new JTextField(20);
 
 
-    EditAvalibilityDialog() {
+    EditAvailabilityDialog() {
         super();
 
         setSize(250,700);

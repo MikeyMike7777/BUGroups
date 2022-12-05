@@ -96,7 +96,7 @@ public class ProfilePage extends JPanel {
             editInfo.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    new EditAvalibilityDialog();
+                    new EditAvailabilityDialog();
                 }
             });
         }

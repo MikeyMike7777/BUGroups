@@ -19,10 +19,9 @@ public class StudentDAO {
 
     private static MongoCursor<Document> cursor;
 
-    public boolean registerStudent(String username, String password, String name, String email, String phone){
+    boolean registerStudent(String username, String password, String name, String email, String phone){
         Student s = new Student(username, password);
         MongoCollection<Document> collection1 = BUGUtils.database.getCollection("BUGStudents");
-        MongoCollection<Document> collection2 = BUGUtils.database.getCollection("profileInfos");
 
         Document d1 = new Document("_id", s.getUsername())
                 .append("username", s.getUsername())
@@ -31,14 +30,6 @@ public class StudentDAO {
                 .append("tutors", null);
 
         collection1.insertOne(d1);
-
-        Document d2 = new Document("_id", s.getUsername())
-                .append("name", name)
-                .append("email", email)
-                .append("phoneNumber", phone)
-                .append("availability", null);
-
-        collection2.insertOne(d2);
 
         return true;
     }
@@ -111,7 +102,12 @@ public class StudentDAO {
         return false;
     }
 
-
+    boolean deleteAccount(String id) {
+        MongoCollection<Document> collection = BUGUtils.database.getCollection("BUGStudents");
+        Bson filter = Filters.eq("_id", id);
+        collection.findOneAndDelete(filter);
+        return true;
+    }
 
 
 }

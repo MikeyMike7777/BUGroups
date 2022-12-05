@@ -89,6 +89,11 @@ public class StudentService {
         profileDAO.generate();
     }
 
+    public boolean deleteAccount(String id) {
+        return studentDAO.deleteAccount(id) &&
+                profileDAO.deleteAccount(id);
+    }
+
     //Verify if a user's account is in profileInfos table based on email
     public boolean verifyAccount(String email){
         if(!email.endsWith("@baylor.edu")){
