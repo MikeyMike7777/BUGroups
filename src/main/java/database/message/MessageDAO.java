@@ -14,7 +14,6 @@ import static java.util.Arrays.asList;
 
 class MessageDAO {
 
-    private static MongoCursor<Document> cursor;
     static final String[] names = {
             "Biology and Health Sciences",
             "Business",
@@ -58,23 +57,30 @@ class MessageDAO {
     void deleteMessage(String id) {
         MongoCollection<Document> collection = BUGUtils.database.getCollection("BUGMessages");
         Bson filter = eq("_id", id);
+        Bson filter2 = eq("repliesTo", id);
         collection.deleteOne(filter);
+        collection.deleteMany(filter2);
     }
 
     void editRepostMessage(String id, String text) {
         MongoCollection<Document> collection = BUGUtils.database.getCollection("BUGMessages");
         Bson filter = eq("_id", id);
-        cursor = collection.find(filter).iterator();
+        MongoCursor<Document> cursor = collection.find(filter).iterator();
         Message message = toMessage(cursor.next());
         Message repliesTo = message.getRepliesTo().equals("null") ?
                 null : fetchMessage(message.getRepliesTo());
+        Bson update = set("text", text);
+        collection.updateOne(filter, update);
+        Date d = new Date();
+        update = set("time", d);
+        collection.updateOne(filter, update);
         boards.elementAt(message.getBoard()).editRepostMessage(message, text, repliesTo);
     }
 
     static Message fetchMessage(String id) {
         MongoCollection<Document> collection = BUGUtils.database.getCollection("BUGMessages");
         Bson filter = eq("_id", id);
-        cursor = collection.find(filter).iterator();
+        MongoCursor<Document> cursor = collection.find(filter).iterator();
         if (cursor.hasNext())
             return toMessage(cursor.next());
         else return null;
@@ -83,7 +89,7 @@ class MessageDAO {
     List<Message> fetchMessages(String id) {
         MongoCollection<Document> collection = BUGUtils.database.getCollection("BUGMessages");
         Bson filter = eq("author", id);
-        cursor = collection.find(filter).iterator();
+        MongoCursor<Document> cursor = collection.find(filter).iterator();
         List<Message> messages = new ArrayList<>();
         while (cursor.hasNext())
             messages.add(toMessage(cursor.next()));
@@ -94,7 +100,7 @@ class MessageDAO {
         MongoCollection<Document> collection = BUGUtils.database.getCollection("BUGMessages");
         Bson filter = and(eq("messageBoard", messageBoard),
                 eq("repliesTo", "null"));
-        cursor = collection.find(filter).iterator();
+        MongoCursor<Document> cursor = collection.find(filter).iterator();
         List<Message> messages = new ArrayList<>();
         while (cursor.hasNext())
             messages.add(toMessage(cursor.next()));
@@ -108,7 +114,7 @@ class MessageDAO {
                         new Vector<>(message.getReplies().stream()
                                 .sorted(Comparator.comparing(Message::getTime))
                                 .map(MessageDAO::toVector).collect(Collectors.toList())),
-                message.getCourseNumber(), message.getTime()));
+                message.getCourseNumber(), message.getTime(), message.getBoard()));
     }
 
     static Document toDocument(Message message) {
@@ -131,6 +137,6 @@ class MessageDAO {
                 ((ArrayList<String>)(document.get("replies"))).stream()
                         .map(MessageDAO::fetchMessage).filter(Objects::nonNull)
                         .collect(Collectors.toList()) : (ArrayList)document.get("replies"),
-                document.getString("repliesTo"));
+                document.getString("repliesTo"), document.getString("_id"));
     }
 }

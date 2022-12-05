@@ -78,7 +78,7 @@ public class MessageTab extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 if (board != null) {
                     PostDialog post = new PostDialog(board, board, "New Post");
-                    repaint();
+                    repaint(4);
                 } else {
                     JOptionPane.showMessageDialog(post.getRootPane().getParent(),
                             "No board selected!", "Error",
@@ -94,7 +94,14 @@ public class MessageTab extends JPanel {
         refresh.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                board.refresh();
+                if (board != null) {
+                    board.repaint(4);
+                } else {
+                    JOptionPane.showMessageDialog(post.getRootPane().getParent(),
+                            "No board selected!", "Error",
+                            JOptionPane.PLAIN_MESSAGE);
+                }
+
             }
         });
         return refresh;

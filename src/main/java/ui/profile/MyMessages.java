@@ -1,9 +1,9 @@
 package ui.profile;
 
 import database.utils.BUGUtils;
-import ui.general.CreateAccount;
 import ui.messages.MessageBox;
 import ui.messages.PostDialog;
+import ui.messages.RepostDialog;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,15 +11,18 @@ import java.awt.event.*;
 import java.util.Vector;
 import java.util.stream.Collectors;
 
+
 public class MyMessages extends JDialog {
     JPanel panel;
+    public MessageBox focused;
+    public int id = 0;
 
     MyMessages() {
         super();
-        createAndDisplay();
+        this.createAndDisplay();
     }
 
-    void createAndDisplay() {
+    public void createAndDisplay() {
         setPreferredSize(new Dimension(750, 500));
         setTitle("My Messages");
         panel = new JPanel();
@@ -58,6 +61,11 @@ public class MyMessages extends JDialog {
         return messages;
     }
 
+    @Override
+    public int getX() {
+        return id;
+    }
+
     void addActions() {
         JButton repost = new JButton();
         repost.setText("Repost");
@@ -87,39 +95,44 @@ public class MyMessages extends JDialog {
         @Override
         public void actionPerformed(ActionEvent e) {
             PostDialog edit;
-            if (isFocused())
-                edit = new PostDialog(((MessageBox)getFocusOwner()).getText(),
-                        ((MessageBox)getFocusOwner()).getCourse(), "Repost");
-            else JOptionPane.showMessageDialog(getRootPane().getParent(),
+            MessageBox temp = focused;
+            if (temp != null && isFocused()) {
+                id = temp.getBoardId();
+                edit = new RepostDialog(temp.getText(), temp.getCourse(),
+                        "Edit and Repost Message", id,
+                        (MyMessages)(getRootPane().getParent()), temp.getId());
+            } else JOptionPane.showMessageDialog(getRootPane().getParent(),
                     "No message selected!",
                     "Error", JOptionPane.WARNING_MESSAGE);
-            refresh();
+            repaint(4);
         }
     }
 
     class DeleteActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            if (isFocused())
+            if (isFocused()) {
+                MessageBox temp = focused;
                 if (JOptionPane.showOptionDialog(getRootPane().getParent(),
-                        "No message selected!",
-                        "Error", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE,
-                        null, new String[]{"Yes", "No"}, "Yes") == 1)
-                    BUGUtils.controller.deleteMessage(((MessageBox)getParent()).getId());
-            else JOptionPane.showMessageDialog(getRootPane().getParent(),
+                        "Are you sure you want to delete?",
+                        "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE,
+                        null, new String[]{"Yes", "No"}, "Yes") == 0)
+                    BUGUtils.controller.deleteMessage(temp.getId());
+            } else JOptionPane.showMessageDialog(getRootPane().getParent(),
                     "No message selected!",
                     "Error", JOptionPane.WARNING_MESSAGE);
 
-            refresh();
+            repaint(4);
         }
     }
 
-    void refresh() {
+    @Override
+    public void repaint(long l) {
         panel.setVisible(false);
 
         panel.removeAll();
         addComponents();
-        addComponents();
+        addActions();
 
         panel.setVisible(true);
         panel.validate();
