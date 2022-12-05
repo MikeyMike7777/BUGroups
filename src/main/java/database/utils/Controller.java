@@ -17,8 +17,12 @@ public class Controller {
     MessageService mService = new MessageService();
     StudentService sService = new StudentService();
 
-    public void createStudent(String username, String password){
-        sService.createStudent(username, password);
+    public void createStudent(String id, String username, String password, Vector<String> courses, Vector<String> tutors){
+        sService.createStudent(id, username, password, courses, tutors);
+    }
+
+    public Vector<Object> fetchStudent(String id){
+        return sService.fetchStudent(id);
     }
     public Vector<Object> createMessage(String text, String author,
                               String courseNumber, Integer board, String message) {

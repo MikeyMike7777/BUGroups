@@ -5,15 +5,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import java.util.Vector;
 
 public class ProfileClassList extends JPanel {
 
-    String[] classes = {
-            "CSI 3336",
-            "CSI 3471",
-            "WGS 2300",
-            "GEO 1306"
-    };
+    String[] classes;
 
     JLabel header;
 

@@ -37,12 +37,15 @@ public class StudentService {
     }
 
 
-    public void createStudent(String username, String password) {
-        studentDAO.createStudent(username, password);
+    public void createStudent(String id, String username, String password, Vector<String> courses, Vector<String> tutors) {
+        studentDAO.createStudent(id, username, password, courses, tutors);
     }
 
     // return vector of relevant student info, put username first please :)
     public Vector<Object> fetchStudent(String id) {
+        Student s = studentDAO.fetchStudent(id);
+
+
         return new Vector<>(1);
     }
 

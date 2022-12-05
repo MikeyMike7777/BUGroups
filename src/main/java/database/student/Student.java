@@ -8,6 +8,7 @@ public class Student {
     private String username;
     private String password;
     private Vector<Course> courses = new Vector<>(0);
+    private Vector<TutorOffer> tutorOffers = new Vector<>(0);
     private Vector<Message> sentMessages;
     private Vector<TutorOffer> offers;
     private Profile profile;
@@ -19,6 +20,13 @@ public class Student {
     public Student(String username, String password) {
         this.username = username;
         this.password = password;
+    }
+
+    public Student(String username, String password, Vector<Course> courses, Vector<TutorOffer> tutorOffers) {
+        this.username = username;
+        this.password = password;
+        this.courses = courses;
+        this.tutorOffers = tutorOffers;
     }
 
     public void deleteAccount(String username, String password){
@@ -72,5 +80,13 @@ public class Student {
 
     public void setCourses(Vector<Course> courses) {
         this.courses = courses;
+    }
+
+    public Vector<TutorOffer> getTutorOffers() {
+        return tutorOffers;
+    }
+
+    public void setTutorOffers(Vector<TutorOffer> tutorOffers) {
+        this.tutorOffers = tutorOffers;
     }
 }
