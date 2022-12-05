@@ -7,6 +7,7 @@ public class StudentService {
     StudentDAO studentDAO = new StudentDAO();
     CourseDAO  courseDAO = new CourseDAO();
     ProfileDAO profileDAO = new ProfileDAO();
+    ForgotPasswordDAO forgotPasswordDAO = new ForgotPasswordDAO();
 
 
     public void createProfileInfo(String id, String name, String email, String phone, Vector<String> availability){
@@ -53,5 +54,9 @@ public class StudentService {
     public void generate(){
         courseDAO.generate();
         profileDAO.generate();
+    }
+
+    public void verifyAccount(String email){
+        forgotPasswordDAO.verifyAccount(email);
     }
 }

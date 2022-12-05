@@ -1,16 +1,13 @@
-package student;
+package database.student;
 
 import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
 import com.mongodb.client.*;
-import com.mongodb.client.model.Aggregates;
 import com.mongodb.client.model.Filters;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 
-import java.util.Arrays;
-
-public class ForgetPasswordDAO {
+public class ForgotPasswordDAO {
     static ConnectionString connectionString = new ConnectionString(
             "mongodb+srv://gouligab:vwZBMKRZ1vQizZ43@dynamic-chat-app.u9l9jli." +
                     "mongodb.net/?retryWrites=true&w=majority"
@@ -22,7 +19,7 @@ public class ForgetPasswordDAO {
     //static MongoDatabase database = mongoClient.getDatabase("test");
     private static MongoCursor<Document> cursor;
 
-    ForgetPasswordDAO() {
+    ForgotPasswordDAO() {
 
     }
 
