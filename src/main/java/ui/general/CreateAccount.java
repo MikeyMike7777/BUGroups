@@ -87,8 +87,11 @@ public class CreateAccount extends JPanel {
 
                 if(emailField.getText().endsWith("@baylor.edu")) {
                     String password = BUGUtils.controller.generatePassword(8);
-                    BUGUtils.controller.sendRegisterEmail(emailField.getText(), password, firstName.getText() + lastName.getText());
-                    BUGUtils.controller.registerStudent(emailField.getText().substring(0, emailField.getText().length() - 11), password, firstName.getText() + lastName.getText(), number.getText(), emailField.getText());
+                    BUGUtils.controller.sendRegisterEmail(emailField.getText(), password);
+                    String username = emailField.getText().substring(0, emailField.getText().length() - 11);
+                    String name = firstName.getText() + " " + lastName.getText();
+                    BUGUtils.controller.registerStudent(username, password, name, number.getText(), emailField.getText());
+                    BUGUtils.controller.createProfileInfo(username, name, emailField.getText(), number.getText(), null);
                 }
                 JPanel temp = (JPanel)getParent();
                 setVisible(false);
