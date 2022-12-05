@@ -1,6 +1,4 @@
-package student;
-
-import java.util.Vector;
+package database.student;
 
 public class Profile {
     private String name;

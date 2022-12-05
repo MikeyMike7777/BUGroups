@@ -89,14 +89,19 @@ public class MessageDialog extends JDialog {
             PostDialog reply = new ReplyDialog(parent, messageBox,
                     parent.getParent().getParent().getParent().getParent().getParent(),
                     "New Reply", (MessageDialog)panel.getTopLevelAncestor());
-            repaint();
         }
     }
 
     void refresh() {
         setVisible(false);
         removeAll();
-        createAndDisplay();
+        panel.add(messageBox);
+        panel.add(new JLabel(" "));
+        addComponents();
+        addButtons();
+
+        add(panel);
+        setVisible(true);
         getRootPane().validate();
     }
 

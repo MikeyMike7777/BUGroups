@@ -1,5 +1,6 @@
 package ui.profile;
 
+import database.utils.BUGUtils;
 import ui.general.Window;
 import ui.profile.ProfilePage;
 
@@ -72,7 +73,7 @@ public class EditProfileInfoDialog extends JDialog {
     class SaveInfoActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            Window.controller.createProfileInfo(Window.username, name.getText(), email.getText(), phoneNumber.getText(), (Vector<String>) ProfilePage.info.elementAt(3));
+            BUGUtils.controller.createProfileInfo(Window.username, name.getText(), email.getText(), phoneNumber.getText(), (Vector<String>) ProfilePage.info.elementAt(3));
             ProfilePage.repaintUserInfo();
             dispose();
         }

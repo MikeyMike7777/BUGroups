@@ -1,6 +1,4 @@
-package message;
-
-import student.Student;
+package database.message;
 
 import java.util.*;
 
@@ -30,8 +28,6 @@ class MessageBoard {
         Message m = new Message(text, author, courseNumber, this.index,
                 message == null ? "null" : message.getID());
         messages.add(m);
-//        if (m.isReply() && message != null)
-//            m.replyToMessage(message);
         return m;
     }
 

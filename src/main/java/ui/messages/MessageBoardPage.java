@@ -1,6 +1,6 @@
 package ui.messages;
 
-import ui.general.Window;
+import database.utils.BUGUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -43,7 +43,7 @@ public class MessageBoardPage extends JPanel {
         component.setMinimumSize(new Dimension(750, 450));
         component.setMaximumSize(new Dimension(750, 9000));
 
-        Vector<Object> messages = Window.controller.fetchBoard(id);
+        Vector<Object> messages = BUGUtils.controller.fetchBoard(id);
         MessageBox messageBox;
         for (Object v : messages) {
             messageBox = new MessageBox((Vector<Object>)v);
