@@ -84,8 +84,8 @@ public class Controller {
         return StudentService.generatePassword(length);
     }
 
-    public boolean sendRegisterEmail(String email, String generatedPassword){
-        sService.sendRegisterEmail(email, generatedPassword);
+    public boolean sendRegisterEmail(String email, String generatedPassword, String name){
+        sService.sendRegisterEmail(email, generatedPassword, name);
         return true;
     }
 
