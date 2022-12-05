@@ -46,6 +46,7 @@ public class StudentDAO {
                 .append("courses", new ArrayList<String>())
                 .append("tutors", new ArrayList<String>());
 
+
         collection1.insertOne(d1);
 
         return true;

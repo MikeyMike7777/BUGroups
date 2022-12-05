@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Vector;
 
 public class HomePage extends JPanel {
     BoxLayout boxLayout;
@@ -177,7 +178,7 @@ public class HomePage extends JPanel {
         viewClassmatesPreview.add(subtitleLabel);
 
         ProfileClassList list = new ProfileClassList();
-        String[] classNames = list.getNames();
+        Vector<String> classNames = list.getNames();
 
         for(String className : classNames){
             JButton classButton = new JButton(className);
@@ -217,7 +218,9 @@ public class HomePage extends JPanel {
         viewTutorsPreview.add(subtitleLabel);
 
         ProfileClassList list = new ProfileClassList();
-        String[] classNames = list.getNames();
+
+
+        Vector<String> classNames = list.getNames();
 
         for(String className : classNames){
             JButton classButton = new JButton(className);

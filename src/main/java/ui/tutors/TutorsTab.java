@@ -12,7 +12,7 @@ public class TutorsTab extends JPanel{
 
     ProfileClassList list = new ProfileClassList();
 
-    String [] classNames = new String[list.getNames().length + 1];
+    String [] classNames = new String[list.getNames().size() + 1];
 
     HashMap<String, Integer> boardKeys = new HashMap<>();
 
@@ -22,7 +22,7 @@ public class TutorsTab extends JPanel{
         super();
         classNames[0] = "Select A Class";
         for (int i = 1; i < classNames.length; ++i) {
-            classNames[i] = list.getNames()[i - 1];
+            classNames[i] = list.getNames().elementAt(i - 1);
             boardKeys.put(classNames[i], i);
         }
         createAndDisplay();

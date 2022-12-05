@@ -25,6 +25,7 @@ public class ProfileDAO {
         Bson filter = eq("_id", id);
 
         Document d = toDocument(p);
+        collection.deleteOne(d);
         collection.insertOne(d);
     }
 

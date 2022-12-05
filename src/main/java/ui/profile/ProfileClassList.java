@@ -40,7 +40,7 @@ public class ProfileClassList extends JPanel {
 
     void addComponents() {
         // header label
-        header = new JLabel("Current Classes:");
+        header = new JLabel("Current Classes your In:");
 
         add(header);
 
@@ -78,6 +78,7 @@ public class ProfileClassList extends JPanel {
             model.addElement("No Current Classes!");
         }
         classList = new JList<>(model);
+        classList.setSize(50,50);
         add(new JScrollPane(classList));
     }
 
@@ -104,8 +105,8 @@ public class ProfileClassList extends JPanel {
         }
     }
 
-    public String[] getNames(){
-        return classesDataDummy;
+    public Vector<String> getNames(){
+        return classes;
     }
 
 }

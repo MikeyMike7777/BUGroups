@@ -80,9 +80,10 @@ public class Login extends JPanel {
                     ex.printStackTrace();
                 }
                 String pass = password.getText();
+                //BUGUtils.controller.registerStudent(usernameText.getText(), pass, "Carson Buntin", "carson_buntin1@baylor.edu", "830-730-7120");
                 Vector<Object> s = BUGUtils.controller.fetchStudent(usernameText.getText());
 
-                if(s.size() == 0){
+                if(s == null || s.size() == 0){
                     int action = JOptionPane.showConfirmDialog(getRootPane().getParent(),
                             "Username Not Found!",
                             null, JOptionPane.CANCEL_OPTION);
