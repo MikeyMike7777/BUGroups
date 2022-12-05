@@ -92,7 +92,7 @@ public class CreateAccount extends JPanel {
                     String username = emailField.getText().substring(0, emailField.getText().length() - 11);
 
                     BUGUtils.controller.registerStudent(username, password, name, number.getText(), emailField.getText());
-                    //BUGUtils.controller.createProfileInfo(username, name, emailField.getText(), number.getText(), null);
+                    BUGUtils.controller.createProfileInfo(username, name, emailField.getText(), number.getText(), null);
                 }
                 JPanel temp = (JPanel)getParent();
                 setVisible(false);
