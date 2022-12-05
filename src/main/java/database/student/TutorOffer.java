@@ -2,15 +2,17 @@ package database.student;
 
 public class TutorOffer {
     private String id;
+    private String username;
     private String courseCode;
     private String professorTaken;
     private String semesterTaken;
     private Double hourlyRate;
 
 
-    TutorOffer(String id, String courseCode, String professorTaken,
+    TutorOffer(String id, String username, String courseCode, String professorTaken,
                                  String semesterTaken, Double hourlyRate) {
         this.id = id;
+        this.username = username;
         this.courseCode = courseCode;
         this.professorTaken = professorTaken;
         this.semesterTaken = semesterTaken;
@@ -51,5 +53,9 @@ public class TutorOffer {
 
     public String getId() {
         return id;
+    }
+
+    public String getUsername(){
+        return username;
     }
 }

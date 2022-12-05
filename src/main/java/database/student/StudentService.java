@@ -1225,6 +1225,7 @@ public class StudentService {
     }
 
     public Vector<ArrayList<String>> getTutorOffers(String courseId){
+        System.out.println("student service");
         return TutorOfferDAO.getTutorOffers(courseId);
     }
 }

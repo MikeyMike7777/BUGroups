@@ -16,11 +16,11 @@ public class TutoringOffer extends JPanel {
     String hourlyRate;
 
     TutoringOffer(ArrayList<String> info){
-        //name = ;// FIXME: name of tutor
-        courseCode = info.get(0);
-        professor = info.get(1);
-        semester = info.get(2);
-        hourlyRate = info.get(3);
+        name = info.get(1);
+        courseCode = info.get(2);
+        professor = info.get(3);
+        semester = info.get(4);
+        hourlyRate = info.get(5);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setMinimumSize(new Dimension(500, 100));
         setMaximumSize(new Dimension(500, 300));
