@@ -5,7 +5,6 @@ public class Profile {
 
     private String id;
     private String email;
-    //private Settings settings;
     private Availability availability;
     private String phoneNumber; // is this the best way to represent?
 
@@ -36,14 +35,6 @@ public class Profile {
     public void setId(String id) {
         this.id = id;
     }
-
-//    public Settings getSettings() {
-//        return settings;
-//    }
-
-//    public void setSettings(Settings settings) {
-//        this.settings = settings;
-//    }
 
     public Availability getAvailability() {
         return availability;

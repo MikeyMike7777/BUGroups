@@ -12,18 +12,20 @@ import ui.general.Window;
 
 public class ProfilePage extends JPanel {
 
-    static JPanel userInfo = new JPanel();
+    JPanel userInfo = new JPanel();
 
-    static JPanel availibilty = new JPanel();
+    JPanel availibilty = new JPanel();
 
     JPanel classList = new ProfileClassList();
 
     JPanel tutorList = new ProfileTutorList();
 
 
-    static Vector<Object> info = new Vector<>(4);
+    Vector<Object> info = new Vector<>(4);
 
     static Vector<String> times = new Vector<>(7);
+
+    ProfilePage me = this;
 
     public ProfilePage(Dimension d) {
         super();
@@ -42,7 +44,7 @@ public class ProfilePage extends JPanel {
     void addComponents() {
 
         buildUserInfoBox();
-        buildEditButton("Edit Profile Info:");
+        buildEditButton("View My Messages:");
         add(userInfo);
 
         buildAvalibilityInfo();
@@ -54,7 +56,7 @@ public class ProfilePage extends JPanel {
         add(tutorList);
     }
 
-    static void buildUserInfoBox(){
+    void buildUserInfoBox(){
         JTextArea textArea = new JTextArea();
         JLabel textHeader = new JLabel("My Profile: ");
 
@@ -65,7 +67,7 @@ public class ProfilePage extends JPanel {
         info = BUGUtils.controller.fetchProfileInfo(Window.username);
 
         textArea.setEditable(false);
-        if(info.size() == 0 || info.elementAt(1 ) == null) {
+        if(info.size() == 0 || info.elementAt(0) == null) {
             textArea.setText("""
                     Click "Edit Profile Info" to add your name, email, and phone
                      number!""");
@@ -80,23 +82,24 @@ public class ProfilePage extends JPanel {
         userInfo.setVisible(true);
     }
 
-    static void buildEditButton(String s){
+    void buildEditButton(String s){
         JPanel button = new JPanel();
         JButton editInfo = new JButton(s);
 
 
-        if(Objects.equals(s, "Edit Profile Info:")) {
+        if(Objects.equals(s, "View My Messages:")) {
             editInfo.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    new EditProfileInfoDialog(userInfo);
+                    // View messages action is meant to go here
                 }
             });
         } else if(Objects.equals(s, "Edit Availability:")){
             editInfo.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    new EditAvailabilityDialog();
+                    new EditAvailabilityDialog(info, me);
+                    repaintAvailInfo();
                 }
             });
         }
@@ -104,28 +107,28 @@ public class ProfilePage extends JPanel {
         button.add(editInfo);
 
 
-        if(Objects.equals(s, "Edit Profile Info:")) {
+        if(Objects.equals(s, "View My Messages:")) {
             userInfo.add(button);
         } else if (Objects.equals(s, "Edit Availability:")) {
             availibilty.add(button);
         }
     }
 
-    static void repaintUserInfo(){
+    void repaintUserInfo(){
         userInfo.setVisible(false);
         userInfo.removeAll();
+        buildEditButton("View My Messages:");
         buildUserInfoBox();
-        buildEditButton("Edit Profile Info:");
     }
 
-    static void repaintAvailInfo(){
+    void repaintAvailInfo(){
         availibilty.setVisible(false);
         availibilty.removeAll();
         buildAvalibilityInfo();
         buildEditButton("Edit Availability:");
     }
 
-    static void buildAvalibilityInfo(){
+    void buildAvalibilityInfo(){
         JTextArea infoText = new JTextArea();
         JLabel infoLabel = new JLabel("Availability: ");
 

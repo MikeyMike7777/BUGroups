@@ -81,11 +81,10 @@ public class CreateAccount extends JPanel {
         back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(CreateAccount.this.getRootPane()
-                    .getParent(), "Temporary password sent to email address!",
-                        "Confirmation", JOptionPane.QUESTION_MESSAGE);
-
                 if(emailField.getText().endsWith("@baylor.edu")) {
+                    JOptionPane.showMessageDialog(CreateAccount.this.getRootPane()
+                                    .getParent(), "Temporary password sent to email address!",
+                            "Confirmation", JOptionPane.QUESTION_MESSAGE);
                     String name = firstName.getText() + " " + lastName.getText();
                     String password = BUGUtils.controller.generatePassword(8);
                     BUGUtils.controller.sendRegisterEmail(emailField.getText(), password, name);
@@ -93,6 +92,9 @@ public class CreateAccount extends JPanel {
 
                     BUGUtils.controller.registerStudent(username, password, name, number.getText(), emailField.getText());
                     BUGUtils.controller.createProfileInfo(username, name, emailField.getText(), number.getText(), null);
+                }
+                else {
+                    int a = JOptionPane.showConfirmDialog(getRootPane().getParent(), "Invalid Email", "Error", JOptionPane.ERROR_MESSAGE);
                 }
                 JPanel temp = (JPanel)getParent();
                 setVisible(false);

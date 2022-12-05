@@ -38,11 +38,15 @@ public class EditAvailabilityDialog extends JDialog{
     JTextField fri = new JTextField(20);
     JTextField sat = new JTextField(20);
     JTextField sun = new JTextField(20);
+    Vector<Object> info;
+
+    ProfilePage panel;
 
 
-    EditAvailabilityDialog() {
+    EditAvailabilityDialog(Vector<Object> info, ProfilePage panel) {
         super();
-
+        this.info = info;
+        this.panel = panel;
         setSize(250,700);
         createAndDisplay();
     }
@@ -112,15 +116,8 @@ public class EditAvailabilityDialog extends JDialog{
             times.add(sat.getText());
             times.add(sun.getText());
 
-            if(ProfilePage.info.size() != 0) {
-                BUGUtils.controller.createProfileInfo(Window.username, (String) ProfilePage.info.elementAt(0),
-                        (String) ProfilePage.info.elementAt(1),
-                        (String) ProfilePage.info.elementAt(2), times);
-            } else {
-                BUGUtils.controller.createProfileInfo(Window.username, null, null, null, times);
-            }
-
-            ProfilePage.repaintAvailInfo();
+            BUGUtils.controller.changeAvail(Window.username, times);
+            panel.repaintAvailInfo();
             dispose();
         }
     }

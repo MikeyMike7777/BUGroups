@@ -34,6 +34,7 @@ public class Settings extends JPanel {
         panel.add(addChangePassword());
         panel.add(addChangePhoneNumber());
         panel.add(addDeleteAccount());
+        panel.add(addReportBug());
         panel.setAlignmentX(CENTER_ALIGNMENT);
         add(panel);
     }
@@ -42,6 +43,42 @@ public class Settings extends JPanel {
         JLabel label = new JLabel("Settings");
         label.setAlignmentX(CENTER_ALIGNMENT);
         return label;
+    }
+    private Component addReportBug(){
+        JButton report = new JButton("Report Bug");
+        JLabel label = new JLabel("What issue were you having?");
+        report.setAlignmentX(CENTER_ALIGNMENT);
+        report.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JDialog dialog = new JDialog();
+                JPanel changePanel = new JPanel();
+                JButton done = new JButton("Done");
+                JTextPane bug = new JTextPane();
+                changePanel.setLayout(new BoxLayout(changePanel, BoxLayout.Y_AXIS));
+
+                done.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        BUGUtils.controller.reportBug(bug.getText());
+                        dialog.dispose();
+                    }
+                });
+                changePanel.add(label);
+                changePanel.add(bug);
+                changePanel.add(done);
+
+                dialog.add(changePanel);
+                dialog.setSize(new Dimension(300, 160));
+                dialog.setVisible(true);
+
+                changePanel.setAlignmentX(CENTER_ALIGNMENT);
+                label.setAlignmentX(CENTER_ALIGNMENT);
+                bug.setAlignmentX(CENTER_ALIGNMENT);
+                done.setAlignmentX(CENTER_ALIGNMENT);
+            }
+        });
+        return report;
     }
     private Component addDeleteAccount(){
         JButton deleteAccount = new JButton("Delete Account");
@@ -55,11 +92,14 @@ public class Settings extends JPanel {
                                 "Warning", JOptionPane.YES_NO_OPTION);
                 if (answer == 0) {
                     BUGUtils.controller.deleteAccount(Window.username);
-                    JPanel temp = (JPanel)getRootPane().getContentPane().getComponent(0);
+                    Container temp = (Container)getRootPane().getContentPane();
+                    JPanel root = new JPanel();
                     temp.removeAll();
-                    temp.add(new Login(new Dimension(BUGUtils.APP_WIDTH, BUGUtils.APP_HEIGHT)));
-                    temp.getRootPane().validate();
+                    root.add(new Login(new Dimension(BUGUtils.APP_WIDTH, BUGUtils.APP_HEIGHT)));
+                    temp.add(root);
+                    temp.validate();
                     temp.repaint();
+                   // System.exit(0);
                 }
             }
         });
@@ -101,7 +141,9 @@ public class Settings extends JPanel {
                         String name = first.getText() + " " + last.getText();
                         BUGUtils.controller.updateProfileName(Window.username, name);
                         changeDialog.dispose();
-                        ProfilePage.repaintUserInfo();
+                        ((ProfilePage)((Window)((JPanel)getRootPane().getContentPane()
+                                .getComponent(0)).getComponent(0)).tabMap.get(4))
+                                .repaintUserInfo();
                     }
                 });
 
@@ -193,7 +235,9 @@ public class Settings extends JPanel {
                     public void actionPerformed(ActionEvent e) {
                         BUGUtils.controller.updateProfilePhoneNumber(Window.username, phone.getText());
                         changeDialog.dispose();
-                        ProfilePage.repaintUserInfo();
+                        ((ProfilePage)((Window)((JPanel)getRootPane().getContentPane()
+                                .getComponent(0)).getComponent(0)).tabMap.get(4))
+                                .repaintUserInfo();
                     }
                 });
 

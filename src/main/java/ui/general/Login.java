@@ -80,7 +80,6 @@ public class Login extends JPanel {
                     ex.printStackTrace();
                 }
                 String pass = password.getText();
-                //BUGUtils.controller.registerStudent(usernameText.getText(), pass , null, null, null);
                 Vector<Object> s = BUGUtils.controller.fetchStudent(usernameText.getText());
 
                 if(s.size() == 0){
@@ -96,7 +95,6 @@ public class Login extends JPanel {
                                 "Incorrect Password!",
                                 null, JOptionPane.CANCEL_OPTION);
                     } else {
-
                         JPanel temp = (JPanel) getParent();
                         setVisible(false);
                         temp.remove(0);
@@ -104,6 +102,23 @@ public class Login extends JPanel {
                                 ((JTextField) username.getComponent(1)).getText()));
                     }
                 }
+            }
+        });
+        login.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER)
+                    login.doClick();
             }
         });
         login.setAlignmentX(CENTER_ALIGNMENT);

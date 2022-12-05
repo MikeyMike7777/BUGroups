@@ -42,9 +42,23 @@ public class Controller {
     public void addCourse(String id, String courseCode, String professor, Integer section){
         sService.addCourse(id, professor, section, courseCode);
     }
+
+    public void addTutorOffer(String courseCode, String professorTaken, String semesterTaken, Double hourlyRate) {
+        sService.addTutorOffer(courseCode, professorTaken, semesterTaken, hourlyRate);
+    }
+
     public Vector<Object> fetchProfileInfo(String id){
         return sService.fetchProfileInfo(id);
     }
+
+    public void reportBug(String report){
+        sService.reportBug(report);
+    }
+
+    public void changeAvail(String id, Vector<String> avail){
+        sService.changeAvail(id, avail);
+    }
+
 
     public void createProfileInfo(String id, String name, String email, String phoneNumber, Vector<String> availibility){
         sService.createProfileInfo(id, name, email, phoneNumber, availibility);
@@ -65,12 +79,6 @@ public class Controller {
     public Vector<ArrayList<String>> getClassmates(String courseId){
         return sService.getClassmates(courseId);
     }
-
-    // generates dummy data (used when testing classmates tab) FIXME: remove when done testing
-    public void generate(){
-        sService.generate();
-    }
-
 
     public boolean verifyAccount(String email) {
         return sService.verifyAccount(email);

@@ -23,7 +23,7 @@ import java.util.Map;
 public class Window extends JPanel {
     //SpringLayout is used here because it allows us to overlay items on eachother
     private SpringLayout layout;
-    private Map<Integer, JPanel> tabMap;
+    public Map<Integer, JPanel> tabMap;
     private JLabel picLabel;
     private JTabbedPane tabbedPane;
     private String currLogoPath = "src/main/resources/BUGroups.png";
