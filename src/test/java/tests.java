@@ -23,6 +23,10 @@ public class tests {
         assertFalse(service.verifyAccount("renadommmmemailallalal@baylor.edu"));
     }
 
+    @Test
+    void testEmail1(){
+        service.sendPasswordReset("bryce_robinson1@baylor.edu");
+    }
 
 
 }
