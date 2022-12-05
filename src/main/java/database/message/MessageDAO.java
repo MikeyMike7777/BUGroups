@@ -97,7 +97,7 @@ class MessageDAO {
                 message.getRepliesTo(), message.getID(),
                 message.getReplies().size() == 0 ? new Vector<>(0) :
                         new Vector<>(message.getReplies().stream()
-                                .sorted(Comparator.comparing(Message::getTime).reversed())
+                                .sorted(Comparator.comparing(Message::getTime))
                                 .map(MessageDAO::toVector).collect(Collectors.toList()))));
         return v;
     }
