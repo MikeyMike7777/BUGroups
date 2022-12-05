@@ -40,7 +40,7 @@ public class ProfileClassList extends JPanel {
 
     void addComponents() {
         // header label
-        header = new JLabel("Current Classes your In:");
+        header = new JLabel("Current Classes You're In:");
 
         add(header);
 

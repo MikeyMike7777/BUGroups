@@ -18,6 +18,7 @@ public class CourseDAO {
     private static MongoCursor<Document> cursor;
 
     void createCourse(String id, String courseCode, String section, String professor){
+
         Course c = new Course(courseCode, section, professor, new Vector<>());
         MongoCollection<Document> collection = BUGUtils.database.getCollection("courses");
 
@@ -32,17 +33,17 @@ public class CourseDAO {
         return collection.find(filter).iterator().hasNext();
     }
 
-    void enroll(String id, String section, String courseCode) {
+    void enroll(String username, String courseId) {
         MongoCollection<Document> collection = BUGUtils.database.getCollection("courses");
-        Bson filter = eq("_id", id);
-        Bson update = addToSet("students", id);
+        Bson filter = eq("_id", courseId);
+        Bson update = addToSet("students", username);
 
         collection.findOneAndUpdate(filter, update);
     }
 
     // Document is an object in the collection in the database
     public static Document toDocument(Course course) {
-        return new Document("_id", course.getCourseCode() + course.getSection())
+        return new Document("_id", course.getCourseCode().toUpperCase().replace(" ", "") + course.getSection())
                 .append("courseCode", course.getCourseCode())
                 .append("professor", course.getProfessor())
                 .append("section", course.getSection())
