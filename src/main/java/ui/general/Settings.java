@@ -28,7 +28,6 @@ public class Settings extends JPanel {
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.add(addLabel());
         panel.add(addChangeName());
-        panel.add(addChangeEmail());
         panel.add(addChangePassword());
         panel.add(addChangePhoneNumber());
         panel.setAlignmentX(CENTER_ALIGNMENT);
