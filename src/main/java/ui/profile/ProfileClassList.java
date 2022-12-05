@@ -1,15 +1,21 @@
 package ui.profile;
 
+import database.utils.BUGUtils;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Vector;
+import ui.general.Window;
 
 public class ProfileClassList extends JPanel {
 
-    String[] classes;
+    String[] classesDataDummy = {
+            "csi 2334"
+    };
+
+    Vector<String> classes;
 
     JLabel header;
 
@@ -59,10 +65,13 @@ public class ProfileClassList extends JPanel {
     }
 
     void buildClassList(){
-        model.addAll(List.of(classes));
-
-        classList = new JList<>(model);
-        add(new JScrollPane(classList));
+        BUGUtils.controller.fetchProfileInfo(Window.username);
+        if(classes != null) {
+            model.addAll(classes);
+            classList = new JList<>(model);
+            add(new JScrollPane(classList));
+        }
+        model.addElement("No Current Classes");
     }
 
     class AddActionListener implements ActionListener {
@@ -89,7 +98,7 @@ public class ProfileClassList extends JPanel {
     }
 
     public String[] getNames(){
-        return classes;
+        return classesDataDummy;
     }
 
 }
