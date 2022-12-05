@@ -53,7 +53,7 @@ public class Controller {
         return sService.getStudentCourses(id);
     }
 
-    public Vector<Object> getStudentTutors(String id){
+    public Vector<String> getStudentTutors(String id){
         return sService.getStudentTutors(id);
     }
 

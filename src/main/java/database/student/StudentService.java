@@ -1258,7 +1258,7 @@ public class StudentService {
         return studentDAO.getCourses(id);
     }
 
-    public Vector<Object> getStudentTutors(String id) {
+    public Vector<String> getStudentTutors(String id) {
         return studentDAO.getTutors(id);
     }
 

@@ -73,10 +73,13 @@ public class ProfileTutorList extends JPanel {
     }
 
     void buildClassList(){
-        ArrayList<String> s = BUGUtils.controller.getStudentCourses(Window.username);
-        for(int i = 0; i < s.size(); i++){
-            tutors.add(s.get(i).toString().substring(0,3) + " " + s.get(i).toString().substring(3,7));
-        } // FIXME: don't want this to be the same as courses
+        Vector<String> s = BUGUtils.controller.getStudentTutors(Window.username);
+        for (String value : s) {
+            for (String st : tutors){
+                String formatted = st.substring(0, 3) + " " + st.substring (3,7) + " " + st.substring(7);
+                s.add(formatted);
+            }
+        }
 
         if(!tutors.isEmpty()) {
             model.addAll(tutors);

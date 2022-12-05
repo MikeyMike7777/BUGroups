@@ -36,11 +36,11 @@ public class StudentDAO {
         return (ArrayList<String>)(course.get("courses"));
     }
 
-    Vector<Object> getTutors(String id){
+    Vector<String> getTutors(String id){
         MongoCollection<Document> collection1 = BUGUtils.database.getCollection("BUGStudents");
         Document courses = collection1.find(eq("_id", id)).first();
-        Vector<Object> s = new Vector<>();
-        s.addAll((Collection<?>) courses.get("tutors"));
+        Vector<String> s = new Vector<>();
+        s.addAll((Collection<? extends String>) courses.get("tutors"));
         return s;
     }
 
