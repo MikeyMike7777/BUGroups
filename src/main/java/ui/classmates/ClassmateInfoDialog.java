@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Vector;
 
 public class ClassmateInfoDialog extends JDialog{
@@ -13,7 +14,7 @@ public class ClassmateInfoDialog extends JDialog{
     ClassmateInfoDialog(Classmate owner){
         super(SwingUtilities.windowForComponent(owner));
         parent = owner;
-        Vector<String> parentInfo = new Vector<>();
+        ArrayList<String> parentInfo = new ArrayList<>();
         parentInfo.add(parent.getName());
         parentInfo.add(parent.getEmail());
         parentInfo.add(parent.getPhone());

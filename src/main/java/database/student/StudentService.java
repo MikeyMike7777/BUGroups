@@ -16,6 +16,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
+import java.util.ArrayList;
+import java.util.Vector;
 
 public class StudentService {
 
@@ -51,17 +53,20 @@ public class StudentService {
     }
 
 
-    public void createStudent(String username, String password) {
-        studentDAO.createStudent(username, password);
+    public void createStudent(String id, String username, String password, Vector<String> courses, Vector<String> tutors) {
+        studentDAO.createStudent(id, username, password, courses, tutors);
     }
 
     // return vector of relevant student info, put username first please :)
     public Vector<Object> fetchStudent(String id) {
+        Student s = studentDAO.fetchStudent(id);
+
+
         return new Vector<>(1);
     }
 
-    public Vector<Vector<String>> getClassmates(String CourseId){
-        Vector<String> students = courseDAO.getStudents(CourseId);
+    public Vector<ArrayList<String>> getClassmates(String courseId){
+        ArrayList<String> students = courseDAO.getStudents(courseId);
         return profileDAO.getClassmates(students);
     }
 
