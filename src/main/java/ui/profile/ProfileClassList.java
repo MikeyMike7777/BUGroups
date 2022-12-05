@@ -68,10 +68,11 @@ public class ProfileClassList extends JPanel {
         BUGUtils.controller.fetchProfileInfo(Window.username);
         if(classes != null) {
             model.addAll(classes);
-            classList = new JList<>(model);
-            add(new JScrollPane(classList));
+        } else {
+            model.addElement("No Current Classes");
         }
-        model.addElement("No Current Classes");
+        classList = new JList<>(model);
+        add(new JScrollPane(classList));
     }
 
     class AddActionListener implements ActionListener {
