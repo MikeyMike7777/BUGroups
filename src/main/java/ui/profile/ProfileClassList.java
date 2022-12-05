@@ -96,7 +96,12 @@ public class ProfileClassList extends JPanel {
                                 "Do you want to remove " + classList.getSelectedValue() + "?",
                                 "Warning", JOptionPane.YES_NO_OPTION);
                 if (answer == 0) {
+                    String dbReadable = classList.getSelectedValue().substring(0,3) // course
+                            + classList.getSelectedValue().substring(4,8)  // code
+                            + classList.getSelectedValue().substring(9,11); // section
                     model.remove(classList.getSelectedIndex());
+                    BUGUtils.controller.removeCourse(dbReadable);
+                    System.out.println("removing course " + dbReadable); // db reads something like CSI144002
                 }
             }
         }

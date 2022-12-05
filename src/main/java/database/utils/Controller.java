@@ -1,6 +1,7 @@
 package database.utils;
 
 import database.message.MessageService;
+import database.student.CourseDAO;
 import database.student.StudentService;
 
 import java.util.ArrayList;
@@ -39,8 +40,8 @@ public class Controller {
         return mService.createMessage(text, author, courseNumber, board, message);
     }
 
-    public void addCourse(String id, String courseCode, String professor, Integer section){
-        sService.addCourse(id, professor, section, courseCode);
+    public void addCourse(String id, String courseCode, String section, String professor){
+        sService.addCourse(id, courseCode, section, professor);
     }
 
     public void addTutorOffer(String courseCode, String professorTaken, String semesterTaken, Double hourlyRate) {
@@ -106,7 +107,10 @@ public class Controller {
     }
 
     public Vector<ArrayList<String>> getTutorOffers(String courseId){
-        System.out.println("Controller");
         return sService.getTutorOffers(courseId);
+    }
+
+    public void removeCourse(String courseId){
+        sService.removeCourse(courseId);
     }
 }

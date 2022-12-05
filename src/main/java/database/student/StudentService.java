@@ -48,11 +48,12 @@ public class StudentService {
         bugDAO.reportBug(report);
     }
 
-    public void addCourse(String id, String professor, Integer section, String courseCode){
-        courseCode = courseCode.toUpperCase().replaceAll(" ", "");
-        if (!courseDAO.fetchCourse(section, courseCode))
-            courseDAO.createCourse(professor, section, courseCode);
-        courseDAO.enroll(id, section, courseCode);
+    public void addCourse(String id, String courseCode, String section, String professor){
+        //String sec = section < 10 ? "0" + section : section.toString();
+        //String courseId = courseCode.toUpperCase().replaceAll(" ", "") + section;
+        if (!courseDAO.fetchCourse(id)) // if courses to fetch
+            courseDAO.createCourse(id, courseCode, section, professor);
+        courseDAO.enroll(id, courseCode, section);
         studentDAO.addClass(id, courseCode, section);
     }
 
@@ -85,11 +86,11 @@ public class StudentService {
     }
 
     // generates dummy data in course collection and profile collection for testing classmates FIXME: remove when done testing
-    public void generate(){
-        courseDAO.generate();
-        profileDAO.generate();
-        //tutorOfferDAO.generate();
-    }
+//    public void generate(){
+//        courseDAO.generate();
+//        profileDAO.generate();
+//        //tutorOfferDAO.generate();
+//    }
 
     public boolean deleteAccount(String id) {
         return true;
@@ -1228,5 +1229,10 @@ public class StudentService {
 
     public void changeAvail(String id, Vector<String> avail) {
         profileDAO.updateProfileAvail(id, avail);
+    }
+
+    public void removeCourse(String courseId){
+        CourseDAO.removeCourse(courseId);
+        StudentDAO.removeCourse(courseId);
     }
 }

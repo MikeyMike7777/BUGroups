@@ -17,8 +17,8 @@ public class CourseDAO {
 
     private static MongoCursor<Document> cursor;
 
-    void createCourse(String professor, Integer section, String courseCode){
-        Course c = new Course(professor, section, courseCode, new Vector<>());
+    void createCourse(String id, String courseCode, String section, String professor){
+        Course c = new Course(courseCode, section, professor, new Vector<>());
         MongoCollection<Document> collection = BUGUtils.database.getCollection("courses");
 
         Document d = toDocument(c);
@@ -26,17 +26,15 @@ public class CourseDAO {
         collection.insertOne(d);
     }
 
-    boolean fetchCourse(Integer section, String courseCode) {
-        String id = courseCode + section;
+    boolean fetchCourse(String courseId) {
         MongoCollection<Document> collection = BUGUtils.database.getCollection("courses");
-        Bson filter = eq("_id", id);
+        Bson filter = eq("_id", courseId);
         return collection.find(filter).iterator().hasNext();
     }
 
-    void enroll(String id, Integer section, String courseCode) {
-        String course = courseCode + section;
+    void enroll(String id, String section, String courseCode) {
         MongoCollection<Document> collection = BUGUtils.database.getCollection("courses");
-        Bson filter = eq("_id", course);
+        Bson filter = eq("_id", id);
         Bson update = addToSet("students", id);
 
         collection.findOneAndUpdate(filter, update);
@@ -65,25 +63,30 @@ public class CourseDAO {
         return (ArrayList<String>)(course.get("students"));
     }
 
-    // generates dummy data in course collection for testing classmates FIXME: remove when done testing
-    void generate(){
+    static void removeCourse(String courseId){
         MongoCollection<Document> courseCollection = BUGUtils.database.getCollection("courses");
-        if (courseCollection.countDocuments() > 0){
-            // if there is stuff in the collection, delete everything
-            courseCollection.deleteMany(new Document());
-        }
-        // course 1
-        Vector<String> students1 = new Vector<>();
-        students1.add("tomas_cerny1");
-        students1.add("greg_hamerly1");
-        students1.add("bill_booth1");
-        createCourse("CSI prof", 1, "CSI 3471");
-
-        // course 2
-        Vector<String> students2 = new Vector<>();
-        students2.add("bill_booth1");
-        students2.add("cindy_fry1");
-        students2.add("greg_speegle1");
-        createCourse("WGS prof", 2, "WGS 2300");
+        courseCollection.deleteOne(eq("_id", courseId));
     }
+
+    // generates dummy data in course collection for testing classmates FIXME: remove when done testing
+//    void generate(){
+//        MongoCollection<Document> courseCollection = BUGUtils.database.getCollection("courses");
+//        if (courseCollection.countDocuments() > 0){
+//            // if there is stuff in the collection, delete everything
+//            courseCollection.deleteMany(new Document());
+//        }
+//        // course 1
+//        Vector<String> students1 = new Vector<>();
+//        students1.add("tomas_cerny1");
+//        students1.add("greg_hamerly1");
+//        students1.add("bill_booth1");
+//        createCourse("CSI prof", "01", "CSI 3471");
+//
+//        // course 2
+//        Vector<String> students2 = new Vector<>();
+//        students2.add("bill_booth1");
+//        students2.add("cindy_fry1");
+//        students2.add("greg_speegle1");
+//        createCourse("WGS prof", "02", "WGS 2300");
+//    }
 }
