@@ -57,7 +57,7 @@ public class StudentService {
         profileDAO.generate();
     }
 
-    public void verifyAccount(String email){
-        forgotPasswordDAO.verifyAccount(email);
+    public boolean verifyAccount(String email){
+        return forgotPasswordDAO.verifyAccount(email);
     }
 }
