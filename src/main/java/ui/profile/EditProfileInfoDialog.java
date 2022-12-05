@@ -1,7 +1,6 @@
 package ui.profile;
 
 import database.utils.BUGUtils;
-import ui.profile.ProfilePage;
 import ui.general.Window;
 
 import javax.swing.*;
@@ -29,11 +28,12 @@ public class EditProfileInfoDialog extends JDialog {
     JTextField email = new JTextField(20);
 
     JTextField phoneNumber = new JTextField(20);
+    Vector<Object> info;
 
 
-    EditProfileInfoDialog(JPanel panel) {
+    EditProfileInfoDialog(JPanel panel, Vector<Object> info) {
         super();
-
+        this.info = info;
         ogPanel = panel;
         setSize(250,350);
         createAndDisplay();
@@ -83,12 +83,14 @@ public class EditProfileInfoDialog extends JDialog {
         public void actionPerformed(ActionEvent e) {
             Vector<String> s = new Vector<>();
             try {
-                s = (Vector<String>) ProfilePage.info.elementAt(3);
+                s = (Vector<String>)info.elementAt(3);
             } catch(ArrayIndexOutOfBoundsException n){
                 s = null;
             }
-            BUGUtils.controller.createProfileInfo(Window.username, name.getText(), email.getText(), phoneNumber.getText(), s);
-            ProfilePage.repaintUserInfo();
+            BUGUtils.controller.createProfileInfo(Window.username, name.getText(),
+                    email.getText(), phoneNumber.getText(), s);
+            ((ProfilePage)getParent().getParent()).repaintUserInfo();
+            //ProfilePage.repaintUserInfo();
             dispose();
         }
     }

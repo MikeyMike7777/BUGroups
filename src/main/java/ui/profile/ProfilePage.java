@@ -12,16 +12,16 @@ import ui.general.Window;
 
 public class ProfilePage extends JPanel {
 
-    static JPanel userInfo = new JPanel();
+    JPanel userInfo = new JPanel();
 
-    static JPanel availibilty = new JPanel();
+    JPanel availibilty = new JPanel();
 
     JPanel classList = new ProfileClassList();
 
     JPanel tutorList = new ProfileTutorList();
 
 
-    static Vector<Object> info = new Vector<>(4);
+    Vector<Object> info = new Vector<>(4);
 
     static Vector<String> times = new Vector<>(7);
 
@@ -54,7 +54,7 @@ public class ProfilePage extends JPanel {
         add(tutorList);
     }
 
-    static void buildUserInfoBox(){
+    void buildUserInfoBox(){
         JTextArea textArea = new JTextArea();
         JLabel textHeader = new JLabel("My Profile: ");
 
@@ -80,7 +80,7 @@ public class ProfilePage extends JPanel {
         userInfo.setVisible(true);
     }
 
-    static void buildEditButton(String s){
+    void buildEditButton(String s){
         JPanel button = new JPanel();
         JButton editInfo = new JButton(s);
 
@@ -89,14 +89,14 @@ public class ProfilePage extends JPanel {
             editInfo.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    new EditProfileInfoDialog(userInfo);
+                    new EditProfileInfoDialog(userInfo, info);
                 }
             });
         } else if(Objects.equals(s, "Edit Availability:")){
             editInfo.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    new EditAvailabilityDialog();
+                    new EditAvailabilityDialog(info);
                 }
             });
         }
@@ -111,21 +111,21 @@ public class ProfilePage extends JPanel {
         }
     }
 
-    static void repaintUserInfo(){
+    void repaintUserInfo(){
         userInfo.setVisible(false);
         userInfo.removeAll();
         buildUserInfoBox();
         buildEditButton("Edit Profile Info:");
     }
 
-    static void repaintAvailInfo(){
+    void repaintAvailInfo(){
         availibilty.setVisible(false);
         availibilty.removeAll();
         buildAvalibilityInfo();
         buildEditButton("Edit Availability:");
     }
 
-    static void buildAvalibilityInfo(){
+    void buildAvalibilityInfo(){
         JTextArea infoText = new JTextArea();
         JLabel infoLabel = new JLabel("Availability: ");
 
