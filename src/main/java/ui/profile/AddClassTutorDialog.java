@@ -87,14 +87,16 @@ public class AddClassTutorDialog extends JDialog {
             if ( List.size() != 0 && Objects.equals(List.get(0), "No Current Classes!")){
                 List.remove(0);
             }
-
-            String normalized = classCode.getText().substring(0,3).toUpperCase() + " " + classCode.getText().substring(classCode.getText().length() - 4, classCode.getText().length());
-            if(type.equals("tutor")){
-                BUGUtils.controller.addTutorOffer(Window.username, classCode.getText(), professor.getText(), (double) Integer.parseInt(section.getText()));
-            } else {
-                BUGUtils.controller.addCourse(Window.username, classCode.getText(), professor.getText(), Integer.parseInt(section.getText()));
+            String sec = "";
+            if (section.getText().length() < 2){
+                sec = "0" + section.getText();
             }
-            List.addElement(normalized);
+            String normalizedCourseId = classCode.getText().substring(0,3).toUpperCase() // course
+                    + " " + classCode.getText().substring(classCode.getText().length() - 4) // code
+                    + " " + sec; // section
+            BUGUtils.controller.addCourse(normalizedCourseId, classCode.getText(), sec, professor.getText());
+            List.addElement(normalizedCourseId);
+
             dispose();
         }
     }

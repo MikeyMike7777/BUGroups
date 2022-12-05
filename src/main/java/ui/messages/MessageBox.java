@@ -1,5 +1,7 @@
 package ui.messages;
 
+import ui.profile.MyMessages;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -14,6 +16,7 @@ public class MessageBox extends JPanel {
     String courseNum;
     String id;
     String date;
+    Integer boardId;
     SpringLayout layout = new SpringLayout();
     Vector<MessageBox> replies = new Vector<>();
     static SimpleDateFormat f = new SimpleDateFormat("M/d/yyyy h:mm a");
@@ -26,6 +29,7 @@ public class MessageBox extends JPanel {
         this.id = template.id;
         this.courseNum = template.courseNum;
         this.date = template.date;
+        this.boardId = template.boardId;
 
         setLayout(layout);
         setPreferredSize(new Dimension(630, 300));
@@ -48,6 +52,7 @@ public class MessageBox extends JPanel {
             this.replies.add(new MessageBox((Vector<Object>)m));
         this.courseNum = (String)v.elementAt(5);
         this.date = f.format(v.elementAt(6));
+        this.boardId = (Integer)v.elementAt(7);
 
         setLayout(layout);
         setPreferredSize(new Dimension(630, 300));
@@ -103,9 +108,14 @@ public class MessageBox extends JPanel {
     public String getId() {
         return id;
     }
+    public Integer getBoardId() {
+        return boardId;
+    }
 
     public void addListeners() {
-        addMouseListener(new MessageClickListener());
+        if (getMouseListeners().length > 0)
+            removeMouseListener(getMouseListeners()[0]);
+        addMouseListener(new ClickListener());
         addFocusListener(new MessageFocusListener());
     }
 
@@ -122,6 +132,22 @@ public class MessageBox extends JPanel {
                 getParent().requestFocusInWindow();
             }
             else requestFocusInWindow(true);
+        }
+        @Override
+        public void mouseEntered(MouseEvent e) {}
+        @Override
+        public void mouseExited(MouseEvent e) {}
+    }
+
+    class ClickListener implements MouseListener {
+        @Override
+        public void mouseClicked(MouseEvent e) {}
+        @Override
+        public void mousePressed(MouseEvent e) {}
+        @Override
+        public void mouseReleased(MouseEvent e) {
+            requestFocusInWindow(true);
+            ((MyMessages)getRootPane().getParent()).focused = MessageBox.this;
         }
         @Override
         public void mouseEntered(MouseEvent e) {}

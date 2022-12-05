@@ -46,10 +46,10 @@ public class ReplyDialog extends PostDialog {
         public void actionPerformed(ActionEvent e) {
             dialog = new MessageBox(BUGUtils.controller.createMessage(
                     message.getText(), Window.username, course.getText(),
-                    parent.id, repliesTo.id
+                    parent.getX(), repliesTo.id
             ));
             repliesTo.replies.add(dialog);
-            parent.refresh();
+            parent.repaint(4);
             window.refresh(repliesTo);
 
             dispose();

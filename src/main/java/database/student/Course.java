@@ -4,13 +4,13 @@ import java.util.Vector;
 
 public class Course {
     private String professor;
-    private Integer section;
+    private String section;
     private String courseCode;
     // when a course is added to a student's list, course has to keep track of student too
     private Vector<String> students; // stores the students' IDs from the Student collection
     private String id = courseCode + section;
 
-    Course(String professor, Integer section, String courseCode, Vector<String> students) {
+    Course(String courseCode, String section, String professor, Vector<String> students) {
         this.professor = professor;
         this.section = section;
         this.courseCode = courseCode;
@@ -25,11 +25,11 @@ public class Course {
         this.professor = professor;
     }
 
-    public Integer getSection() {
+    public String getSection() {
         return section;
     }
 
-    public void setSection(Integer section) {
+    public void setSection(String section) {
         this.section = section;
     }
 

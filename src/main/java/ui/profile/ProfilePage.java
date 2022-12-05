@@ -44,11 +44,11 @@ public class ProfilePage extends JPanel {
     void addComponents() {
 
         buildUserInfoBox();
-        buildEditButton("View My Messages:");
+        buildEditButton("View My Messages");
         add(userInfo);
 
         buildAvalibilityInfo();
-        buildEditButton("Edit Availability:");
+        buildEditButton("Edit Availability");
         add(availibilty);
 
         add(classList);
@@ -87,14 +87,14 @@ public class ProfilePage extends JPanel {
         JButton editInfo = new JButton(s);
 
 
-        if(Objects.equals(s, "View My Messages:")) {
+        if(Objects.equals(s, "View My Messages")) {
             editInfo.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    // View messages action is meant to go here
+                    MyMessages myMessages = new MyMessages();
                 }
             });
-        } else if(Objects.equals(s, "Edit Availability:")){
+        } else if(Objects.equals(s, "Edit Availability")){
             editInfo.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -107,9 +107,9 @@ public class ProfilePage extends JPanel {
         button.add(editInfo);
 
 
-        if(Objects.equals(s, "View My Messages:")) {
+        if(Objects.equals(s, "View My Messages")) {
             userInfo.add(button);
-        } else if (Objects.equals(s, "Edit Availability:")) {
+        } else if (Objects.equals(s, "Edit Availability")) {
             availibilty.add(button);
         }
     }

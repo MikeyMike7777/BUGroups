@@ -25,11 +25,11 @@ public class Message {
 
     Message(String text, String author, String courseNumber,
             Integer board, Date time, List<Message> replies,
-            String repliesTo) {
+            String repliesTo, String id) {
         this(text, author, courseNumber, board, repliesTo);
         this.time = time;
         this.replies = replies;
-        this.id = author + time;
+        this.id = id;
     }
 
     void replyToMessage(Message message) {
@@ -80,4 +80,5 @@ public class Message {
     String getID() {
         return id;
     }
+
 }

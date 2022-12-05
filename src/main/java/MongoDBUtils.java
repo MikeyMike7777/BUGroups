@@ -20,8 +20,8 @@ public class MongoDBUtils {
                 .build();
         MongoClient mongoClient = MongoClients.create(settings);
         MongoDatabase database = mongoClient.getDatabase("test");
-        MongoCollection<Document> collection = database.getCollection("profileInfos");
-        Bson filter = eq("username", "carson_buntin1");
+        MongoCollection<Document> collection = database.getCollection("courses");
+        Bson filter = exists("_id");
         Bson update = set("email", "bryce_robinson1@baylor.edu");
 //        Bson update2 = set("tutors", new ArrayList<String>());
         collection.deleteMany(filter);

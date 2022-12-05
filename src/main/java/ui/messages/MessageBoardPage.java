@@ -7,14 +7,14 @@ import java.awt.*;
 import java.util.Vector;
 
 public class MessageBoardPage extends JPanel {
-    Integer id;
+    public int id = 0;
     String name;
 
     MessageBoardPage(String name, Integer id) {
         super();
         this.name = name;
         this.id = id;
-        createAndDisplay();
+        this.createAndDisplay();
     }
 
     void createAndDisplay() {
@@ -51,11 +51,18 @@ public class MessageBoardPage extends JPanel {
         return component;
     }
 
-    void refresh() {
+    @Override
+    public int getX() {
+        return id;
+    }
+
+    @Override
+    public void repaint(long l) {
         setVisible(false);
         removeAll();
         addComponents();
         setVisible(true);
-        getRootPane().validate();
+        if (this.getRootPane() != null)
+            getRootPane().validate();
     }
 }

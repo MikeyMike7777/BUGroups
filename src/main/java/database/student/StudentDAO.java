@@ -15,6 +15,7 @@ import java.util.Vector;
 import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Updates.addToSet;
 import static com.mongodb.client.model.Updates.set;
+import static com.mongodb.client.model.Updates.pull;
 
 public class StudentDAO {
 
@@ -127,7 +128,7 @@ public class StudentDAO {
         return true;
     }
 
-    void addClass(String id, String courseCode, Integer section) {
+    void addClass(String id, String courseCode, String section) {
         MongoCollection<Document> collection = BUGUtils.database.getCollection("BUGStudents");
         Bson filter = Filters.eq("_id", id);
         Bson update = addToSet("courses", courseCode + section);
@@ -139,5 +140,12 @@ public class StudentDAO {
         Bson filter = Filters.eq("_id", id);
         Bson update = addToSet("TutorOffers", offer);
         collection.findOneAndUpdate(filter, update);
+    }
+
+    static void removeCourse(String courseId){
+        MongoCollection<Document> profileCollection = BUGUtils.database.getCollection("profileInfos");
+        Bson filter = eq("_id", courseId);
+        Bson update = pull("courses", courseId.substring(0, 7)); // just courseCode is stored
+        profileCollection.updateOne(filter, update);
     }
 }
