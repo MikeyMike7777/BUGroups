@@ -1253,8 +1253,8 @@ public class StudentService {
         studentDAO.addTutorOffer(Window.username, Window.username + d);
     }
 
-    public Vector<Object> getStudentCourses(String id){
-        return studentDAO.getClasses(id);
+    public ArrayList<String> getStudentCourses(String id){
+        return studentDAO.getCourses(id);
     }
 
     public Vector<Object> getStudentTutors(String id) {

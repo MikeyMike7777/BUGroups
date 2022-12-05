@@ -61,7 +61,11 @@ public class CourseDAO {
         // looking for course that matches courseId (course code + section)
         Document course = courseCollection.find(eq("_id", courseId)).first();
         // from the course Document object, return the list of Student IDs
-        return (ArrayList<String>)(course.get("students"));
+        try {
+            return (ArrayList<String>) (course.get("students"));
+        } catch (NullPointerException e){
+            return new ArrayList<String>();
+        }
     }
 
     static void removeCourse(String courseId){

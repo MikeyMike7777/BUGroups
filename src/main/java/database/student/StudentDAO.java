@@ -21,12 +21,19 @@ public class StudentDAO {
 
     private static MongoCursor<Document> cursor;
 
-    Vector<Object> getClasses(String id){
-        MongoCollection<Document> collection1 = BUGUtils.database.getCollection("BUGStudents");
-        Document courses = collection1.find(eq("_id", id)).first();
-        Vector<Object> s = new Vector<>();
-        s.addAll((Collection<?>) courses.get("courses"));
-        return s;
+    ArrayList<String> getCourses(String username){ // given username
+//        MongoCollection<Document> collection1 = BUGUtils.database.getCollection("BUGStudents");
+//        Document courses = collection1.find(eq("_id", id)).first();
+//        Vector<Object> s = new Vector<>();
+//        s.addAll((Collection<?>) courses.get("courses"));
+//        return s;
+
+        // querying courses collection
+        MongoCollection<Document> studentCollection = BUGUtils.database.getCollection("BUGStudents");
+        // looking for course that matches courseId (course code + section)
+        Document course = studentCollection.find(eq("_id", username)).first();
+        // from the course Document object, return the list of Student IDs
+        return (ArrayList<String>)(course.get("courses"));
     }
 
     Vector<Object> getTutors(String id){
@@ -151,6 +158,6 @@ public class StudentDAO {
 }
 
 /*
-TODO: classes were persisting? but also showing up on tutor offers, remove course functionality throws exception, need
-to check if the lists are removing too
+TODO: classes showing up on tutor offers, add and remove doesn't really persist
+ test another person in a course
  */

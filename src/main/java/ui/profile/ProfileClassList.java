@@ -5,6 +5,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Vector;
@@ -67,16 +68,17 @@ public class ProfileClassList extends JPanel {
     }
 
     void buildClassList(){
-        Vector<Object> s = BUGUtils.controller.getStudentClasses(Window.username);
-        for(int i = 0; i < s.size(); i++){
-            classes.add(s.elementAt(i).toString().substring(0,3) + " " + s.elementAt(i).toString().substring(3,7));
-        }
-
-        if(!classes.isEmpty()) {
+        ArrayList<String> courses = BUGUtils.controller.getStudentCourses(Window.username);
+        if (!courses.isEmpty()){
+            for (String s : courses){
+                String formatted = s.substring(0, 3) + " " + s.substring (3,7) + " " + s.substring(7);
+                classes.add(formatted);
+            }
             model.addAll(classes);
         } else {
             model.addElement("No Current Classes!");
         }
+
         classList = new JList<>(model);
         classList.setSize(50,50);
         add(new JScrollPane(classList));

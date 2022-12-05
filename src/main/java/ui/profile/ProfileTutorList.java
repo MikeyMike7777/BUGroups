@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
@@ -72,10 +73,10 @@ public class ProfileTutorList extends JPanel {
     }
 
     void buildClassList(){
-        Vector<Object> s = BUGUtils.controller.getStudentClasses(Window.username);
+        ArrayList<String> s = BUGUtils.controller.getStudentCourses(Window.username);
         for(int i = 0; i < s.size(); i++){
-            tutors.add(s.elementAt(i).toString().substring(0,3) + " " + s.elementAt(i).toString().substring(3,7));
-        }
+            tutors.add(s.get(i).toString().substring(0,3) + " " + s.get(i).toString().substring(3,7));
+        } // FIXME: don't want this to be the same as courses
 
         if(!tutors.isEmpty()) {
             model.addAll(tutors);

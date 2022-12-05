@@ -6,6 +6,7 @@ import ui.profile.ProfileClassList;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Vector;
 
@@ -78,11 +79,17 @@ public class ClassmatesTab extends JPanel{
             if (getComponentCount() > 1)
                 remove(getComponentCount() - 1);
 
-            // call controller FIXME: need to pass courseID (course code + section)-- where are we getting section?
-            ClassmatesList currClassmates = new ClassmatesList(BUGUtils.controller.getClassmates(s)); // pass course code to controller
-            currClassmates.iD = boardKeys.get(s);
-            currClassmates.name = s;
-            add(currClassmates);
+            // call controller
+            Vector<ArrayList<String>> info = BUGUtils.controller.getClassmates(s);
+            if (info.isEmpty()) {
+                add(new JLabel(" "));
+                add(new JLabel("No other classmates!"));
+            } else {
+                ClassmatesList currClassmates = new ClassmatesList(info); // pass course code to controller
+                currClassmates.iD = boardKeys.get(s);
+                currClassmates.name = s;
+                add(currClassmates);
+            }
         }
     }
 

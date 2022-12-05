@@ -49,7 +49,7 @@ public class Controller {
        sService.addTutorOffer(courseCode, professorTaken, semesterTaken, hourlyRate);
     }
 
-    public Vector<Object> getStudentClasses(String id){
+    public ArrayList<String> getStudentCourses(String id){
         return sService.getStudentCourses(id);
     }
 
