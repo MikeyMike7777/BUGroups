@@ -20,9 +20,9 @@ public class Controller {
     public void createStudent(String username, String password){
         sService.createStudent(username, password);
     }
-    public void createMessage(String text, String author,
+    public Vector<Object> createMessage(String text, String author,
                               String courseNumber, Integer board, String message) {
-        mService.createMessage(text, author, courseNumber, board, message);
+        return mService.createMessage(text, author, courseNumber, board, message);
     }
 
     public Vector<Object> fetchProfileInfo(String id){
