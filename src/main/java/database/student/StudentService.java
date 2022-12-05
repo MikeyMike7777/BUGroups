@@ -102,7 +102,6 @@ public class StudentService {
         return forgotPasswordDAO.verifyAccount(email);
     }
 
-<<<<<<< HEAD
     public boolean changePassword(String ID, String password){
         return studentDAO.changePassword(ID, password);
     }

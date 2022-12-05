@@ -2,7 +2,6 @@ package database.student;
 
 import com.mongodb.client.*;
 import database.utils.BUGUtils;
-import database.utils.MongoInit;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 
@@ -37,7 +36,6 @@ public class TutorOfferDAO {
     }
 
     public static Document toDocument(TutorOffer offer) {
-        ArrayList<String> a = new ArrayList<>();
         return new Document("_id", offer.getId())
                 .append("courseCode", offer.getCourseCode())
                 .append("professorTaken", offer.getProfessorTaken())
@@ -85,6 +83,6 @@ public class TutorOfferDAO {
             tutorOfferCollection.deleteMany(new Document());
         }
         createTutorOffer("tutorOffer1", "CSI 3471", "Dr. Cerny", "Fall 2022", 55.50);
-        createTutorOffer("tutorOffer2", "WGS 2300", "Dr. Jug", "Fall 2022", 1.00);
+        createTutorOffer("tutorOffer2", "WGS 2300", "Dr. Jug", "Spring 2021", 1.00);
     }
 }
