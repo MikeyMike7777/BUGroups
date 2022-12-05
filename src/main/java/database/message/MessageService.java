@@ -27,4 +27,12 @@ public class MessageService {
                         .map(MessageDAO::toVector).toArray())
         );
     }
+
+    public Vector<Object> fetchMessages(String id) {
+        return new Vector<>(
+                List.of(mDAO.fetchMessages(id).stream()
+                        .sorted(Comparator.comparing(Message::getTime).reversed())
+                        .map(MessageDAO::toVector).toArray())
+        );
+    }
 }

@@ -2,6 +2,7 @@ package database.utils;
 
 import database.message.MessageService;
 import database.student.StudentService;
+import ui.general.Window;
 
 import java.util.ArrayList;
 import java.util.Vector;
@@ -30,7 +31,7 @@ public class Controller {
     public void updateProfileName(String id, String name){
         sService.updateProfileName(id, name);
     }
-    public void updateProfilePhoneNumber(String id, String number){
+    public void updateProfilePhoneNumber(String id, String number) {
         sService.updateProfilePhoneNumber(id, number);
     }
 
@@ -39,19 +40,23 @@ public class Controller {
         return mService.createMessage(text, author, courseNumber, board, message);
     }
 
-    public void addCourse(String id, String courseCode, String professor, Integer section){
+    public void addCourse(String id, String courseCode, String professor, Integer section) {
         sService.addCourse(id, professor, section, courseCode);
     }
 
     public void addTutorOffer(String courseCode, String professorTaken, String semesterTaken, Double hourlyRate) {
-       // sService.addTutorOffer(courseCode, professorTaken, semesterTaken, hourlyRate);
+        //sService.addTutorOffer(courseCode, professorTaken, semesterTaken, hourlyRate);
     }
 
-    public Vector<Object> fetchProfileInfo(String id){
+    public Vector<Object> fetchProfileInfo(String id) {
         return sService.fetchProfileInfo(id);
     }
 
-    public void reportBug(String report){
+    public Vector<Object> fetchMessages() {
+        return mService.fetchMessages(Window.username);
+    }
+
+    public void reportBug(String report) {
         sService.reportBug(report);
     }
 
@@ -76,7 +81,7 @@ public class Controller {
         return mService.fetchBoard(messageBoard);
     }
 
-    public Vector<ArrayList<String>> getClassmates(String courseId){
+    public Vector<ArrayList<String>> getClassmates(String courseId) {
         return sService.getClassmates(courseId);
     }
 
@@ -105,7 +110,7 @@ public class Controller {
         return sService.deleteAccount(id);
     }
 
-    public Vector<ArrayList<String>> getTutorOffers(String courseId){
+    public Vector<ArrayList<String>> getTutorOffers(String courseId) {
         System.out.println("Controller");
         return sService.getTutorOffers(courseId);
     }

@@ -14,10 +14,19 @@ public class PostDialog extends JDialog {
     JTextPane message;
     JTextField course;
     MessageBoardPage parent;
+    String tempText;
+    String tempCourse;
 
     PostDialog(Component parent, Component board, String title) {
         super();
         this.parent = (MessageBoardPage)board;
+        createAndDisplay(title);
+    }
+
+    public PostDialog(String text, String course, String title) {
+        super();
+        this.tempText = text;
+        this.tempCourse = course;
         createAndDisplay(title);
     }
 
@@ -45,10 +54,14 @@ public class PostDialog extends JDialog {
         JPanel temp = new JPanel();
         temp.add(new JLabel("Course Number:"));
         course = new JTextField(20);
+        if (tempCourse != null)
+            course.setText(tempText);
         temp.add(course);
         message = new JTextPane();
         message.setPreferredSize(new Dimension(330, 800));
         message.setToolTipText("Message");
+        if (tempText != null)
+            message.setText(tempText);
         scrolls.add(message, Component.CENTER_ALIGNMENT);
         panel.add(temp);
         panel.add(scrolls);
