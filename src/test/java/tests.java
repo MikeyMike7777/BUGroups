@@ -28,10 +28,10 @@ public class tests {
 //        service.sendPasswordReset("bryce_robinson1@baylor.edu");
 //    }
 
-    @Test
-    void createAccount(){
-        service.createStudent("gouligab", "password");
-    }
+//    @Test
+//    void createAccount(){
+//        service.registerStudent("gouligab", "password", null, null, null);
+//    }
 
 
 }

@@ -17,6 +17,8 @@ public class Controller {
     MessageService mService = new MessageService();
     StudentService sService = new StudentService();
 
+    public void init() {}
+
     public void registerStudent(String username, String password, String name, String email, String phone){
         sService.registerStudent(username, password, name, email, phone);
     }
