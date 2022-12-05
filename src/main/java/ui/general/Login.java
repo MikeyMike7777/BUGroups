@@ -95,7 +95,6 @@ public class Login extends JPanel {
                                 "Incorrect Password!",
                                 null, JOptionPane.CANCEL_OPTION);
                     } else {
-
                         JPanel temp = (JPanel) getParent();
                         setVisible(false);
                         temp.remove(0);

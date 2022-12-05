@@ -104,7 +104,9 @@ public class Settings extends JPanel {
                         String name = first.getText() + " " + last.getText();
                         BUGUtils.controller.updateProfileName(Window.username, name);
                         changeDialog.dispose();
-                        ProfilePage.repaintUserInfo();
+                        ((ProfilePage)((Window)((JPanel)getRootPane().getContentPane()
+                                .getComponent(0)).getComponent(0)).tabMap.get(4))
+                                .repaintUserInfo();
                     }
                 });
 
@@ -196,7 +198,9 @@ public class Settings extends JPanel {
                     public void actionPerformed(ActionEvent e) {
                         BUGUtils.controller.updateProfilePhoneNumber(Window.username, phone.getText());
                         changeDialog.dispose();
-                        ProfilePage.repaintUserInfo();
+                        ((ProfilePage)((Window)((JPanel)getRootPane().getContentPane()
+                                .getComponent(0)).getComponent(0)).tabMap.get(4))
+                                .repaintUserInfo();
                     }
                 });
 
