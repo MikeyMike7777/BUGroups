@@ -14,6 +14,13 @@ public class ClassmatesList extends JPanel {
     ClassmatesList(Vector<ArrayList<String>> classmatesInfo){
         // reworked this. previously had hardcoded values. will also need to rework addClassmates function
         this.classmatesInfo = classmatesInfo;
+        createAndDisplay();
+        /*for (ArrayList<String> ar : classmatesInfo){
+            for (String s : ar){
+                System.out.print(s + ", ");
+            }
+            System.out.println();
+        }*/
     }
     /*private static final String[] classmates = {
             "Carsyn Smeda",
@@ -38,11 +45,6 @@ public class ClassmatesList extends JPanel {
             "gabriel_goulis1@baylor.edu",
             "carson_buntin1@baylor.edu"
     };*/
-
-    ClassmatesList(){
-        super();
-        createAndDisplay();
-    }
 
     void createAndDisplay() {
         setMinimumSize(new Dimension(600, 350));
