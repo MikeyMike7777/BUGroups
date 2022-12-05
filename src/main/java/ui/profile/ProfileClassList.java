@@ -12,7 +12,8 @@ import ui.general.Window;
 public class ProfileClassList extends JPanel {
 
     String[] classesDataDummy = {
-            "csi 2334"
+            "CSI 3471",
+            "WGS 2300"
     };
 
     Vector<String> classes;
