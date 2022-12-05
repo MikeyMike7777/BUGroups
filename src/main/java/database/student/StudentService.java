@@ -2,20 +2,8 @@ package database.student;
 
 import database.utils.EmbeddedEmailUtil;
 
-import javax.activation.DataHandler;
-import javax.mail.*;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
-import javax.mail.util.ByteArrayDataSource;
-import javax.sql.DataSource;
-import java.io.InputStream;
-import java.security.SecureRandom;
+
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -26,7 +14,6 @@ public class StudentService {
     ProfileDAO profileDAO = new ProfileDAO();
     TutorOfferDAO tutorOfferDAO = new TutorOfferDAO();
     ForgotPasswordDAO forgotPasswordDAO = new ForgotPasswordDAO();
-
 
     public void createProfileInfo(String id, String name, String email, String phone, Vector<String> availability){
         profileDAO.createProfileInfo(id, name, email, phone, availability);
@@ -55,8 +42,12 @@ public class StudentService {
         return v;
     }
 
-    public void createCourse(String professor, Integer section, String courseCode, Vector<String> students){
-        courseDAO.createCourse(professor, section, courseCode, students);
+    public void addCourse(String id, String professor, Integer section, String courseCode){
+        courseCode = courseCode.toUpperCase().replaceAll(" ", "");
+        if (courseDAO.fetchCourse(section, courseCode))
+            courseDAO.enroll(id, section, courseCode);
+        else courseDAO.createCourse(professor, section, courseCode);
+        studentDAO.addClass(id, courseCode, section);
     }
 
 

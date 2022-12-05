@@ -39,8 +39,8 @@ public class Controller {
         return mService.createMessage(text, author, courseNumber, board, message);
     }
 
-    public void createCourse(String id, String courseCode, String professor, Integer section, Vector<String> students){
-        sService.createCourse(courseCode, section, professor, students);
+    public void addCourse(String id, String courseCode, String professor, Integer section){
+        sService.addCourse(id, professor, section, courseCode);
     }
     public Vector<Object> fetchProfileInfo(String id){
         return sService.fetchProfileInfo(id);

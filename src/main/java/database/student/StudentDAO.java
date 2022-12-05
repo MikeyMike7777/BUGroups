@@ -26,8 +26,8 @@ public class StudentDAO {
         Document d1 = new Document("_id", s.getUsername())
                 .append("username", s.getUsername())
                 .append("password", s.getPassword())
-                .append("courses", null)
-                .append("tutors", null);
+                .append("courses", new ArrayList<String>())
+                .append("tutors", new ArrayList<String>());
 
         collection1.insertOne(d1);
 
@@ -109,5 +109,10 @@ public class StudentDAO {
         return true;
     }
 
-
+    void addClass(String id, String courseCode, Integer section) {
+        MongoCollection<Document> collection = BUGUtils.database.getCollection("BUGStudents");
+        Bson filter = Filters.eq("_id", id);
+        Bson update = addToSet("courses", courseCode + section);
+        collection.findOneAndUpdate(filter, update);
+    }
 }
