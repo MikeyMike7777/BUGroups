@@ -59,6 +59,7 @@ public class Controller {
     }
 
     public Vector<ArrayList<String>> getTutorOffers(String courseId){
-        return sService.getClassmates(courseId);
+        System.out.println("Controller");
+        return sService.getTutorOffers(courseId);
     }
 }

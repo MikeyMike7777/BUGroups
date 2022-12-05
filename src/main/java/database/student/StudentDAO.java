@@ -50,7 +50,7 @@ public class StudentDAO {
 
         Vector<TutorOffer> tutors = new Vector<>();
         for(int i = 0; i < convett.size(); i++){
-            tutors.add(new TutorOffer(convett.elementAt(i), null, null, null, null));
+            tutors.add(new TutorOffer(convett.elementAt(i), null, null, null, null, null));
         }
 
 

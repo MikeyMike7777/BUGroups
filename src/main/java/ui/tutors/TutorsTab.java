@@ -53,6 +53,7 @@ public class TutorsTab extends JPanel{
         JMenuItem[] boards = createBoardOptions();
         for (int i = 0; i < classNames.length; ++i)
             select.add(boards[i]);
+
         bar.add(select);
         return bar;
     }
@@ -78,6 +79,7 @@ public class TutorsTab extends JPanel{
 
             // call controller
             TutorsList tutors = new TutorsList(BUGUtils.controller.getTutorOffers(s));
+            System.out.println(s);
             add(tutors);
         }
     }
