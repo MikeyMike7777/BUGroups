@@ -43,12 +43,13 @@ public class ReplyDialog extends PostDialog {
     class PostActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            BUGUtils.controller.createMessage(
+            dialog = new MessageBox(BUGUtils.controller.createMessage(
                     message.getText(), Window.username, course.getText(),
                     parent.id, repliesTo.id
-            );
-            window.refresh();
+            ));
+            repliesTo.replies.add(dialog);
             parent.refresh();
+            window.refresh(repliesTo);
 
             dispose();
         }

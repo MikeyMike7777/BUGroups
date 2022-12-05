@@ -17,12 +17,16 @@ public class Controller {
     MessageService mService = new MessageService();
     StudentService sService = new StudentService();
 
-    public void createStudent(String username, String password){
-        sService.createStudent(username, password);
+    public void createStudent(String id, String username, String password, Vector<String> courses, Vector<String> tutors){
+        sService.createStudent(id, username, password, courses, tutors);
     }
-    public void createMessage(String text, String author,
+
+    public Vector<Object> fetchStudent(String id){
+        return sService.fetchStudent(id);
+    }
+    public Vector<Object> createMessage(String text, String author,
                               String courseNumber, Integer board, String message) {
-        mService.createMessage(text, author, courseNumber, board, message);
+        return mService.createMessage(text, author, courseNumber, board, message);
     }
 
     public Vector<Object> fetchProfileInfo(String id){

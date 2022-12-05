@@ -39,7 +39,7 @@ class MessageDAO {
             boards.add(new MessageBoard(names[i], i));
     }
 
-    void createMessage(String text, String author, String courseNumber,
+    Vector<Object> createMessage(String text, String author, String courseNumber,
                        Integer board, String message) {
         Message temp = null;
         if (!message.equals("null"))
@@ -53,6 +53,7 @@ class MessageDAO {
             Bson update = addToSet("replies", m.getID());
             collection.updateOne(filter, update);
         }
+        return toVector(m);
     }
 
     void deleteMessage(String id) {
@@ -96,7 +97,7 @@ class MessageDAO {
                 message.getRepliesTo(), message.getID(),
                 message.getReplies().size() == 0 ? new Vector<>(0) :
                         new Vector<>(message.getReplies().stream()
-                                .sorted(Comparator.comparing(Message::getTime).reversed())
+                                .sorted(Comparator.comparing(Message::getTime))
                                 .map(MessageDAO::toVector).collect(Collectors.toList()))));
         return v;
     }
