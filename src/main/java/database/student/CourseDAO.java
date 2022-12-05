@@ -32,6 +32,8 @@ public class CourseDAO {
                 .append("students", course.getStudents());
     }
 
+
+
     ArrayList<String> getStudents(String courseId){
         // query for all students' profiles that have the given course code in their course list
         // get all students in a course

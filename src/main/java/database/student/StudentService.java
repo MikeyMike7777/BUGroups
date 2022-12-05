@@ -60,7 +60,19 @@ public class StudentService {
     // return vector of relevant student info, put username first please :)
     public Vector<Object> fetchStudent(String id) {
         Student s = studentDAO.fetchStudent(id);
-        return s.toVector();
+        Vector<Object> v = new Vector<>();
+
+        if(s == null){
+            return v;
+        } else {
+            v.add(s.getUsername());
+            v.add(s.getPassword());
+            v.add(s.getCourses());
+            v.add(s.getTutorOffers());
+            v.add(s);
+        }
+
+        return v;
     }
 
     public Vector<ArrayList<String>> getClassmates(String courseId){
@@ -95,7 +107,7 @@ public class StudentService {
 
         // message info
         String mailTo = email;
-        String subject = "BUGroups Password Reset";
+        String subject = "Test e-mail with inline images";
         StringBuffer body
                 = new StringBuffer("<html xmlns=\"http://www.w3.org/1999/xhtml\">\n" +
                 "<head>\n" +

@@ -3,10 +3,17 @@ package ui.general;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Objects;
+import java.util.Vector;
+
+import database.utils.BUGUtils;
+
 
 public class Login extends JPanel {
 
     JPanel username;
+
+    JPasswordField password = new JPasswordField(15);
     public Login(Dimension d) {
         super();
         createAndDisplay(d);
@@ -48,12 +55,12 @@ public class Login extends JPanel {
     }
 
     private Component addPassword() {
-        JPanel password = new JPanel();
-        password.setLayout(new BoxLayout(password, BoxLayout.X_AXIS));
-        password.add(new JLabel("Password: "));
-        password.add(new JPasswordField(15));
-        password.setAlignmentX(CENTER_ALIGNMENT);
-        return password;
+        JPanel passwordPanel = new JPanel();
+        passwordPanel.setLayout(new BoxLayout(passwordPanel, BoxLayout.X_AXIS));
+        passwordPanel.add(new JLabel("Password: "));
+        passwordPanel.add(password);
+        passwordPanel.setAlignmentX(CENTER_ALIGNMENT);
+        return passwordPanel;
     }
 
     private Component addLogin() {
@@ -61,11 +68,29 @@ public class Login extends JPanel {
         login.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JPanel temp = (JPanel)getParent();
-                setVisible(false);
-                temp.remove(0);
-                temp.add(new Window(getPreferredSize(),
-                        ((JTextField)username.getComponent(1)).getText()));
+                Vector<Object> s = BUGUtils.controller.fetchStudent(Window.username);
+
+
+                if(s.size() == 0){
+                    int action = JOptionPane.showConfirmDialog(getRootPane().getParent(),
+                            "Username Not Found!",
+                            null, JOptionPane.CANCEL_OPTION);
+                } else {
+                    String user = (String) s.elementAt(0);
+                    String userPassword = (String) s.elementAt(1);
+
+                    if(!Objects.equals(password.getPassword().toString(), userPassword)){
+                        int action = JOptionPane.showConfirmDialog(getRootPane().getParent(),
+                                "Incorrect Password!",
+                                null, JOptionPane.CANCEL_OPTION);
+                    }
+
+                    JPanel temp = (JPanel) getParent();
+                    setVisible(false);
+                    temp.remove(0);
+                    temp.add(new Window(getPreferredSize(),
+                            ((JTextField) username.getComponent(1)).getText()));
+                }
             }
         });
         login.setAlignmentX(CENTER_ALIGNMENT);

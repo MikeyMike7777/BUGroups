@@ -44,11 +44,14 @@ public class ProfileDAO {
         if(profile.getAvailability().getTimes() != null) {
             a.addAll(profile.getAvailability().getTimes());
         }
+
+
         return new Document("_id", profile.getId())
                 .append("name", profile.getName())
                 .append("email", profile.getEmail())
                 .append("phoneNumber", profile.getPhoneNumber())
                 .append("availability", a);
+
     }
 
     static Profile toProfile(Document document) {
