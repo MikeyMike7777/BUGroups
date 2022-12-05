@@ -132,7 +132,7 @@ public class StudentService {
 
         String host = "smtp.gmail.com";
         String port = "465";
-        String mailFrom = "bugroups.bug@gmail.com";
+        String mailFrom = "info.bugroups@gmail.com";
         String password = prop.getProperty("APP_KEY");
 
         // message info
@@ -679,7 +679,7 @@ public class StudentService {
 
         String host = "smtp.gmail.com";
         String port = "465";
-        String mailFrom = "bugroups.bug@gmail.com";
+        String mailFrom = "info.bugroups@gmail.com";
         String password = prop.getProperty("APP_KEY");
 
         // message info
