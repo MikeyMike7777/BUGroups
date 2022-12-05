@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Vector;
 
 public class PostDialog extends JDialog {
     JPanel panel;
@@ -15,18 +16,18 @@ public class PostDialog extends JDialog {
     MessageBoardPage parent;
 
     PostDialog(Component parent, Component board, String title) {
-        super(SwingUtilities.windowForComponent(parent));
+        super();
         this.parent = (MessageBoardPage)board;
         createAndDisplay(title);
     }
 
     void createAndDisplay(String title) {
-        setMinimumSize(new Dimension(400, 300));
+        setPreferredSize(new Dimension(400, 300));
         setTitle(title);
         setResizable(false);
         panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        panel.setMinimumSize(new Dimension(400, 300));
+        panel.setPreferredSize(new Dimension(400, 300));
 
         addComponents();
         addButtons();
@@ -39,15 +40,18 @@ public class PostDialog extends JDialog {
 
     void addComponents() {
         ScrollPane scrolls = new ScrollPane(ScrollPane.SCROLLBARS_AS_NEEDED);
-        scrolls.setMaximumSize(new Dimension(350, 200));
+        scrolls.setMaximumSize(new Dimension(350, 500));
+        scrolls.setPreferredSize(new Dimension(350, 400));
+        JPanel temp = new JPanel();
+        temp.add(new JLabel("Course Number:"));
         course = new JTextField(20);
-        course.setToolTipText("Course Number");
+        temp.add(course);
         message = new JTextPane();
-        message.setMaximumSize(new Dimension(350, 600));
+        message.setPreferredSize(new Dimension(330, 800));
         message.setToolTipText("Message");
         scrolls.add(message, Component.CENTER_ALIGNMENT);
-        panel.add(course, Component.CENTER_ALIGNMENT);
-        panel.add(scrolls, Component.CENTER_ALIGNMENT);
+        panel.add(temp);
+        panel.add(scrolls);
     }
 
     void addButtons() {
@@ -72,7 +76,7 @@ public class PostDialog extends JDialog {
     class PostActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            BUGUtils.controller.createMessage(
+            Vector<Object> v = BUGUtils.controller.createMessage(
                     message.getText(), Window.username, course.getText(),
                     parent.id, "null"
             );

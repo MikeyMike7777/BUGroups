@@ -31,6 +31,9 @@ public class StudentService {
         profileDAO.createProfileInfo(id, name, email, phone, availability);
     }
 
+    public void updateProfileName(String id, String name){
+        profileDAO.updateProfileName(id, name);
+    }
     public Vector<Object> fetchProfileInfo(String id){
         Profile p = profileDAO.fetchProfileInfo(id);
         Vector<Object> v = new Vector<>();

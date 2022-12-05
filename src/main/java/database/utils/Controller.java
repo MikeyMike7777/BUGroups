@@ -25,6 +25,9 @@ public class Controller {
         return sService.fetchStudent(id);
     }
 
+    public void updateProfileName(String id, String name){
+        sService.updateProfileName(id, name);
+    }
 
     public Vector<Object> createMessage(String text, String author,
                               String courseNumber, Integer board, String message) {

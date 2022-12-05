@@ -3,6 +3,7 @@ package ui.messages;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.text.SimpleDateFormat;
 import java.util.Vector;
 
 public class MessageBox extends JPanel {
@@ -12,7 +13,10 @@ public class MessageBox extends JPanel {
     Boolean isReply;
     String courseNum;
     String id;
+    String date;
+    SpringLayout layout = new SpringLayout();
     Vector<MessageBox> replies = new Vector<>();
+    static SimpleDateFormat f = new SimpleDateFormat("M/d/yyyy h:mm a");
 
     MessageBox(MessageBox template) {
         this.name = template.name;
@@ -20,10 +24,11 @@ public class MessageBox extends JPanel {
         this.isReply = template.isReply;
         this.replies = template.replies;
         this.id = template.id;
+        this.courseNum = template.courseNum;
+        this.date = template.date;
 
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        setMinimumSize(new Dimension(700, 100));
-        setMaximumSize(new Dimension(700, 500));
+        setLayout(layout);
+        setPreferredSize(new Dimension(630, 300));
         setBackground(Color.white);
         setOpaque(true);
         setFocusable(true);
@@ -41,10 +46,11 @@ public class MessageBox extends JPanel {
         this.id = (String)v.elementAt(3);
         for (Object m : (Vector<Object>)v.elementAt(4))
             this.replies.add(new MessageBox((Vector<Object>)m));
+        this.courseNum = (String)v.elementAt(5);
+        this.date = f.format(v.elementAt(6));
 
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        setMinimumSize(new Dimension(700, 100));
-        setMaximumSize(new Dimension(700, 500));
+        setLayout(layout);
+        setPreferredSize(new Dimension(630, 300));
         setBackground(Color.white);
         setOpaque(true);
         setFocusable(true);
@@ -56,16 +62,34 @@ public class MessageBox extends JPanel {
     }
 
     void createMessage() {
-        JLabel user = new JLabel(name);
-        JLabel label = new JLabel("<html>" + message + "</html>");
-        label.setPreferredSize(new Dimension(650, 50));
         setAlignmentX(CENTER_ALIGNMENT);
-        add(user, LEFT_ALIGNMENT);
-        add(new JLabel(" "), LEFT_ALIGNMENT);
+        JLabel user = new JLabel(name);
+        add(user);
+        layout.putConstraint(SpringLayout.WEST, user, 5, SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.NORTH, user, 5, SpringLayout.NORTH, this);
+
+        JLabel time = new JLabel(date);
+        add(time);
+        layout.putConstraint(SpringLayout.EAST, time, -5, SpringLayout.EAST, this);
+        layout.putConstraint(SpringLayout.NORTH, time, 5, SpringLayout.NORTH, this);
+
+        JLabel course = new JLabel(courseNum);
+        add(course, LEFT_ALIGNMENT);
+        layout.putConstraint(SpringLayout.WEST, course, 5, SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.NORTH, course, 25, SpringLayout.NORTH, this);
+
+        JLabel label = new JLabel("<html>" + message + "</html>");
+        label.setPreferredSize(new Dimension(630, 100));
         add(label, LEFT_ALIGNMENT);
-        if (!isReply)
-            add(new JLabel("Replies: " + replies.size()));
-        add(new JLabel(" "), LEFT_ALIGNMENT);
+        layout.putConstraint(SpringLayout.WEST, label, 5, SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.NORTH, label, 35, SpringLayout.NORTH, this);
+
+        if (!isReply) {
+            JLabel replies = new JLabel("Replies: " + this.replies.size());
+            add(replies);
+            layout.putConstraint(SpringLayout.WEST, replies, 5, SpringLayout.WEST, this);
+            layout.putConstraint(SpringLayout.SOUTH, replies, -5, SpringLayout.SOUTH, this);
+        }
     }
 
     class MessageClickListener implements MouseListener {

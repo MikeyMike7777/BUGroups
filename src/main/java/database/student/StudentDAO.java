@@ -55,11 +55,15 @@ public class StudentDAO {
     public static Student toStudent(Document document) {
         ArrayList<String> c = (ArrayList<String>) document.get("courses");
         Vector<String> convertc = new Vector<>();
-        convertc.addAll(c);
+        if(c != null) {
+            convertc.addAll(c);
+        }
 
         ArrayList<String> t = (ArrayList<String>) document.get("tutors");
         Vector<String> convett = new Vector<>();
-        convett.addAll(t);
+        if(t != null) {
+            convett.addAll(t);
+        }
 
         Vector<Course> courses = new Vector<>();
         for(int i = 0; i < convertc.size(); i++){

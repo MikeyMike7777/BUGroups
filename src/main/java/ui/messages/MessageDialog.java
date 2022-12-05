@@ -13,7 +13,7 @@ public class MessageDialog extends JDialog {
     JPanel panel;
 
     MessageDialog(MessageBox owner) {
-        super(SwingUtilities.windowForComponent(owner));
+        super();
         parent = owner;
         messageBox = new MessageBox(owner);
         messageBox.setFocusable(false);
@@ -21,11 +21,11 @@ public class MessageDialog extends JDialog {
     }
 
     void createAndDisplay() {
-        setPreferredSize(new Dimension(750, 450));
+        setPreferredSize(new Dimension(750, 500));
         setTitle("View Message");
         panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        panel.setPreferredSize(new Dimension(750, 450));
+        panel.setPreferredSize(new Dimension(750, 500));
 
         addComponents();
         addButtons();
@@ -39,30 +39,25 @@ public class MessageDialog extends JDialog {
     void addComponents() {
         if (messageBox.getMouseListeners().length > 0)
             messageBox.removeMouseListener(messageBox.getMouseListeners()[0]);
-        messageBox.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(messageBox);
         panel.add(new JLabel(" "));
 
         ScrollPane scrolls = new ScrollPane(ScrollPane.SCROLLBARS_AS_NEEDED);
-        scrolls.setPreferredSize(new Dimension(750, 100));
-        JPanel pane = new JPanel();
-        pane.setLayout(new BoxLayout(pane, BoxLayout.Y_AXIS));
-        pane.setMinimumSize(new Dimension(750, 300));
-        pane.setMaximumSize(new Dimension(750, 8000));
-        pane.add(addMessages(), Component.CENTER_ALIGNMENT);
-        scrolls.add(pane, Component.CENTER_ALIGNMENT);
+        scrolls.setSize(new Dimension(750, 250));
+        scrolls.add(addMessages(), Component.CENTER_ALIGNMENT);
         panel.add(scrolls, Component.CENTER_ALIGNMENT);
     }
 
     Component addMessages() {
         JPanel messages = new JPanel();
         messages.setLayout(new BoxLayout(messages, BoxLayout.Y_AXIS));
-        messages.setMinimumSize(new Dimension(750, 300));
-        messages.setMaximumSize(new Dimension(750, 8000));
+        messages.setSize(new Dimension(730, 400));
+        messages.setMaximumSize(new Dimension(730, 8000));
         Vector<MessageBox> replies = messageBox.replies;
         for (MessageBox m : replies) {
             m.setAlignmentX(Component.CENTER_ALIGNMENT);
             messages.add(m);
+            messages.add(new JLabel(" "));
         }
         return messages;
     }
@@ -90,7 +85,7 @@ public class MessageDialog extends JDialog {
         @Override
         public void actionPerformed(ActionEvent e) {
             PostDialog reply = new ReplyDialog(parent, messageBox,
-                    parent.getParent().getParent().getParent().getParent().getParent(),
+                    parent.getParent().getParent().getParent().getParent(),
                     "New Reply", (MessageDialog)panel.getTopLevelAncestor());
         }
     }

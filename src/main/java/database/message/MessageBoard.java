@@ -30,8 +30,4 @@ class MessageBoard {
         messages.add(m);
         return m;
     }
-
-    public int getID() {
-        return index;
-    }
 }
