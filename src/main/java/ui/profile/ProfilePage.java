@@ -117,7 +117,7 @@ public class ProfilePage extends JPanel {
     void repaintUserInfo(){
         userInfo.setVisible(false);
         userInfo.removeAll();
-        buildEditButton("View My Messages:");
+        buildEditButton("View My Messages");
         buildUserInfoBox();
     }
 
@@ -125,7 +125,7 @@ public class ProfilePage extends JPanel {
         availibilty.setVisible(false);
         availibilty.removeAll();
         buildAvalibilityInfo();
-        buildEditButton("Edit Availability:");
+        buildEditButton("Edit Availability");
     }
 
     void buildAvalibilityInfo(){
@@ -151,8 +151,8 @@ public class ProfilePage extends JPanel {
             infoText.setText("""
                     Click "Edit Availability" to add your availability!""");
         } else {
-            infoText.setText(times.elementAt(0) + "\t\t" + times.elementAt(5) + "\n" + times.elementAt(1)
-                    + "\t\t" + times.elementAt(6) + "\n"+  times.elementAt(2) + "\n" + times.elementAt(3)
+            infoText.setText(times.elementAt(0) + "\t" + times.elementAt(5) + "\n" + times.elementAt(1)
+                    + "\t" + times.elementAt(6) + "\n"+  times.elementAt(2) + "\n" + times.elementAt(3)
                     + "\n" + times.elementAt(4));
         }
         infoText.setVisible(true);

@@ -6,9 +6,8 @@ import org.bson.conversions.Bson;
 
 import java.util.ArrayList;
 
-import static com.mongodb.client.model.Filters.eq;
-import static com.mongodb.client.model.Filters.exists;
-import static com.mongodb.client.model.Updates.set;
+import static com.mongodb.client.model.Filters.*;
+import static com.mongodb.client.model.Updates.pull;
 
 public class MongoDBUtils {
 
@@ -21,10 +20,10 @@ public class MongoDBUtils {
         MongoClient mongoClient = MongoClients.create(settings);
         MongoDatabase database = mongoClient.getDatabase("test");
         MongoCollection<Document> collection = database.getCollection("courses");
-        Bson filter = exists("_id");
-        Bson update = set("email", "bryce_robinson1@baylor.edu");
+        Bson filter = exists("courses");
+        Bson update = pull("students", "carsyn_smeda1");
 //        Bson update2 = set("tutors", new ArrayList<String>());
-        collection.deleteMany(filter);
+        collection.updateMany(filter, update);
     }
 
 }
