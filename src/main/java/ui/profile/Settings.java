@@ -55,12 +55,14 @@ public class Settings extends JPanel {
                                 "Warning", JOptionPane.YES_NO_OPTION);
                 if (answer == 0) {
                     BUGUtils.controller.deleteAccount(Window.username);
-                    JPanel temp = (JPanel)getRootPane().getContentPane().getComponent(0);
+                    Container temp = (Container)getRootPane().getContentPane();
+                    JPanel root = new JPanel();
                     temp.removeAll();
-                    temp.add(new Login(new Dimension(BUGUtils.APP_WIDTH, BUGUtils.APP_HEIGHT)));
-                    temp.getRootPane().validate();
+                    root.add(new Login(new Dimension(BUGUtils.APP_WIDTH, BUGUtils.APP_HEIGHT)));
+                    temp.add(root);
+                    temp.validate();
                     temp.repaint();
-                    System.exit(0);
+                   // System.exit(0);
                 }
             }
         });

@@ -15,6 +15,8 @@ public class StudentService {
     TutorOfferDAO tutorOfferDAO = new TutorOfferDAO();
     ForgotPasswordDAO forgotPasswordDAO = new ForgotPasswordDAO();
 
+    BugDAO bugDAO = new BugDAO();
+
     public void createProfileInfo(String id, String name, String email, String phone, Vector<String> availability){
         profileDAO.createProfileInfo(id, name, email, phone, availability);
     }
@@ -40,6 +42,10 @@ public class StudentService {
         }
 
         return v;
+    }
+
+    public void reportBug(String report){
+        bugDAO.reportBug(report);
     }
 
     public void addCourse(String id, String professor, Integer section, String courseCode){

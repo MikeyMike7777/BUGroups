@@ -46,6 +46,11 @@ public class Controller {
         return sService.fetchProfileInfo(id);
     }
 
+    public void reportBug(String report){
+        sService.reportBug(report);
+    }
+
+
     public void createProfileInfo(String id, String name, String email, String phoneNumber, Vector<String> availibility){
         sService.createProfileInfo(id, name, email, phoneNumber, availibility);
     }
