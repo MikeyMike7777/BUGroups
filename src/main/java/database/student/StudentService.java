@@ -632,7 +632,7 @@ public class StudentService {
 
         // inline images
         Map<String, String> inlineImages = new HashMap<String, String>();
-        inlineImages.put("image1", "C:\\Users\\ninja\\Downloads\\SequenceDiagram\\BUGroups\\src\\main\\resources\\BUGroups.png");
+        inlineImages.put("image1", "src/main/resources/BUGroups.png");
         //inlineImages.put("image2", "C:\\Users\\ninja\\Downloads\\SequenceDiagram\\BUGroups\\src\\main\\resources\\BUGroups.png");
 
         try {
@@ -1179,7 +1179,7 @@ public class StudentService {
 
         // inline images
         Map<String, String> inlineImages = new HashMap<String, String>();
-        inlineImages.put("image1", "C:\\Users\\ninja\\Downloads\\SequenceDiagram\\BUGroups\\src\\main\\resources\\BUGroups.png");
+        inlineImages.put("image1", "src/main/resources/BUGroups.png");
         //inlineImages.put("image2", "C:\\Users\\ninja\\Downloads\\SequenceDiagram\\BUGroups\\src\\main\\resources\\BUGroups.png");
 
         try {
