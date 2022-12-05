@@ -1,5 +1,7 @@
 package ui.messages;
 
+import database.utils.BUGUtils;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -25,11 +27,6 @@ public class MessageDialog extends JDialog {
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.setPreferredSize(new Dimension(750, 450));
 
-        if (messageBox.getMouseListeners().length > 0)
-            messageBox.removeMouseListener(messageBox.getMouseListeners()[0]);
-        messageBox.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panel.add(messageBox);
-        panel.add(new JLabel(" "));
         addComponents();
         addButtons();
 
@@ -40,6 +37,12 @@ public class MessageDialog extends JDialog {
     }
 
     void addComponents() {
+        if (messageBox.getMouseListeners().length > 0)
+            messageBox.removeMouseListener(messageBox.getMouseListeners()[0]);
+        messageBox.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panel.add(messageBox);
+        panel.add(new JLabel(" "));
+
         ScrollPane scrolls = new ScrollPane(ScrollPane.SCROLLBARS_AS_NEEDED);
         scrolls.setPreferredSize(new Dimension(750, 100));
         JPanel pane = new JPanel();
@@ -92,16 +95,18 @@ public class MessageDialog extends JDialog {
         }
     }
 
-    void refresh() {
-        setVisible(false);
-        removeAll();
-        panel.add(messageBox);
-        panel.add(new JLabel(" "));
+    void refresh(MessageBox dialog) {
+        panel.setVisible(false);
+
+        panel.removeAll();
+        parent = new MessageBox(dialog);
+        messageBox = parent;
+        messageBox.setFocusable(false);
         addComponents();
         addButtons();
 
-        add(panel);
-        setVisible(true);
+        panel.setVisible(true);
+        panel.validate();
         getRootPane().validate();
     }
 
