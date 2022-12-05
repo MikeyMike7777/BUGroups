@@ -85,7 +85,11 @@ public class CreateAccount extends JPanel {
                     .getParent(), "Temporary password sent to email address!",
                         "Confirmation", JOptionPane.QUESTION_MESSAGE);
 
-                BUGUtils.controller.registerStudent("t", "t",firstName.getText() + lastName.getText(), number.getText(), email.getText());
+                if(email.getText().endsWith("@baylor.edu")) {
+                    String password = BUGUtils.controller.generatePassword(8);
+                    BUGUtils.controller.sendRegisterEmail(email.getText(), password);
+                    BUGUtils.controller.registerStudent(email.getText().substring(0, email.getText().length() - 11), password, firstName.getText() + lastName.getText(), number.getText(), email.getText());
+                }
                 JPanel temp = (JPanel)getParent();
                 setVisible(false);
                 temp.remove(0);

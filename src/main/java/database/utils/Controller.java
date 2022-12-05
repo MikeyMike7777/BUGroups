@@ -75,6 +75,15 @@ public class Controller {
         return sService.changePassword(ID, password);
     }
 
+    public String generatePassword(int length){
+        return StudentService.generatePassword(length);
+    }
+
+    public boolean sendRegisterEmail(String email, String generatedPassword){
+        sService.sendRegisterEmail(email, generatedPassword);
+        return true;
+    }
+
 
 
 }
