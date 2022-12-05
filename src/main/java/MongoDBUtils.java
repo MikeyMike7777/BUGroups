@@ -21,6 +21,9 @@ public class MongoDBUtils {
         MongoDatabase database = mongoClient.getDatabase("test");
         MongoCollection<Document> collection = database.getCollection("courses");
         Bson filter = exists("_id");
+        MongoCursor<Document> cursor = collection.find(filter).iterator();
+        while (cursor.hasNext())
+            System.out.println(cursor.next());
 
         collection.deleteMany(filter);
     }
