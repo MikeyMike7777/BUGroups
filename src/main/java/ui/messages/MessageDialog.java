@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Vector;
+import java.util.stream.Collectors;
 
 public class MessageDialog extends JDialog {
     MessageBox messageBox;

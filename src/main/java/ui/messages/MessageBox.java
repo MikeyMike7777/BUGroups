@@ -92,6 +92,23 @@ public class MessageBox extends JPanel {
         }
     }
 
+    public String getText() {
+        return message;
+    }
+
+    public String getCourse() {
+        return courseNum;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void addListeners() {
+        addMouseListener(new MessageClickListener());
+        addFocusListener(new MessageFocusListener());
+    }
+
     class MessageClickListener implements MouseListener {
         @Override
         public void mouseClicked(MouseEvent e) {}
