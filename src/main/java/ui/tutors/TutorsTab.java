@@ -1,5 +1,6 @@
 package ui.tutors;
 
+import database.utils.BUGUtils;
 import ui.profile.ProfileClassList;
 
 import javax.swing.*;
@@ -74,7 +75,9 @@ public class TutorsTab extends JPanel{
                     getInvoker()).setText(s);
             if (getComponentCount() > 1)
                 remove(getComponentCount() - 1);
-            TutorsList tutors = new TutorsList();
+
+            // call controller
+            TutorsList tutors = new TutorsList(BUGUtils.controller.getTutorOffers(s));
             add(tutors);
         }
     }

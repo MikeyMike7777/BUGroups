@@ -1,29 +1,28 @@
 package database.student;
 
 public class TutorOffer {
-    private String course;
+    private String id;
+    private String courseCode;
     private String professorTaken;
     private String semesterTaken;
     private Double hourlyRate;
 
 
-    TutorOffer(String course, String professorTaken,
-                                 String semesterTaken, Double hourlyRate){
-        this.course = course;
+    TutorOffer(String id, String courseCode, String professorTaken,
+                                 String semesterTaken, Double hourlyRate) {
+        this.id = id;
+        this.courseCode = courseCode;
         this.professorTaken = professorTaken;
         this.semesterTaken = semesterTaken;
         this.hourlyRate = hourlyRate;
     }
 
-
-
-
-    public String getCourse() {
-        return course;
+    public String getCourseCode() {
+        return courseCode;
     }
 
-    public void setCourse(String course) {
-        this.course = course;
+    public void setCourseCode(String courseCode) {
+        this.courseCode = courseCode;
     }
 
     public String getProfessorTaken() {
@@ -48,5 +47,9 @@ public class TutorOffer {
 
     public void setHourlyRate(Double hourlyRate) {
         this.hourlyRate = hourlyRate;
+    }
+
+    public String getId() {
+        return id;
     }
 }

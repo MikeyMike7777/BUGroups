@@ -71,6 +71,7 @@ public class Controller {
         sService.generate();
     }
 
+
     public boolean verifyAccount(String email) {
         return sService.verifyAccount(email);
     }
@@ -93,5 +94,7 @@ public class Controller {
     }
 
 
-
+    public Vector<ArrayList<String>> getTutorOffers(String courseId){
+        return sService.getClassmates(courseId);
+    }
 }

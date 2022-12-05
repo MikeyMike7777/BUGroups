@@ -72,7 +72,7 @@ public class StudentDAO {
 
         Vector<TutorOffer> tutors = new Vector<>();
         for(int i = 0; i < convett.size(); i++){
-            tutors.add(new TutorOffer(convett.elementAt(i), null, null, null));
+            tutors.add(new TutorOffer(convett.elementAt(i), null, null, null, null));
         }
 
 
@@ -86,7 +86,7 @@ public class StudentDAO {
 
         Vector<String> tutorList = new Vector<>();
         for(int i = 0; i < student.getCourses().size(); i++){
-            tutorList.add(student.getTutorOffers().elementAt(i).getCourse());
+            tutorList.add(student.getTutorOffers().elementAt(i).getCourseCode());
         }
 
         return new Document("_id", student.getID())

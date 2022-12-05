@@ -77,7 +77,10 @@ public class ProfileDAO {
 
         Availability avail = new Availability(convert);
 
-        return new Profile(document.getString("_id"), document.getString("name"), document.getString("email"), document.getString("phoneNumber"), avail);
+        return new Profile(document.getString("_id"),
+                document.getString("name"),
+                document.getString("email"),
+                document.getString("phoneNumber"), avail);
     }
 
     Vector<ArrayList<String>> getClassmates(ArrayList<String> students){
@@ -96,7 +99,6 @@ public class ProfileDAO {
             classmateInfo.add(profile.getEmail());
             classmateInfo.add(profile.getPhoneNumber());
             classmateInfo.add(profile.getAvailability().toString());
-            //System.out.println(profile.getAvailability().toString());
 
             classmates.add(classmateInfo);
         }
