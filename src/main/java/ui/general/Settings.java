@@ -69,6 +69,7 @@ public class Settings extends JPanel {
                 });
 
                 changeDialog.add(changePanel);
+                changeDialog.setPreferredSize(new Dimension(300, 150));
                 changeDialog.setVisible(true);
             }
         });
@@ -103,6 +104,7 @@ public class Settings extends JPanel {
                 });
 
                 changeDialog.add(changePanel);
+                changeDialog.setPreferredSize(new Dimension(300, 150));
                 changeDialog.setVisible(true);
             }
         });
@@ -138,6 +140,7 @@ public class Settings extends JPanel {
                 });
 
                 changeDialog.add(changePanel);
+                changeDialog.setPreferredSize(new Dimension(300, 150));
                 changeDialog.setVisible(true);
             }
         });
