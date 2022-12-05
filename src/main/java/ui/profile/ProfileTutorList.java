@@ -1,18 +1,26 @@
 package ui.profile;
 
+import database.student.Course;
+import database.student.TutorOffer;
+import database.utils.BUGUtils;
+import ui.general.Window;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import java.util.Vector;
 
 public class ProfileTutorList extends JPanel {
-    String[] classes = {
-            "CSI 3336 - Systems Programming",
-            "CSI 3471 - Software Engineering I",
-            "WGS 2300 - Women and Gender Studies",
-            "GEO 1306 - The Dynamic Earth"
+    String[] classesDummyData = {
+            "CSI 3336",
+            "CSI 3471",
+            "WGS 2300",
+            "GEO 1306 "
     };
+
+    Vector<String> tutors = new Vector<>();
 
     JLabel header;
 
@@ -64,8 +72,16 @@ public class ProfileTutorList extends JPanel {
     }
 
     void buildClassList(){
-        model.addAll(List.of(classes));
+        Vector<Object> s = BUGUtils.controller.getStudentClasses(Window.username);
+        for(int i = 0; i < s.size(); i++){
+            tutors.add(s.elementAt(i).toString().substring(0,3) + " " + s.elementAt(i).toString().substring(3,7));
+        }
 
+        if(!tutors.isEmpty()) {
+            model.addAll(tutors);
+        } else {
+            model.addElement("No Current Classes!");
+        }
         tutorList = new JList<>(model);
         add(new JScrollPane(tutorList));
     }
@@ -73,7 +89,7 @@ public class ProfileTutorList extends JPanel {
     class AddActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            new AddClassTutorDialog(model);
+            new AddClassTutorDialog(model, "tutor");
         }
     }
 
@@ -94,6 +110,6 @@ public class ProfileTutorList extends JPanel {
     }
 
     public String[] getNames(){
-        return classes;
+        return classesDummyData;
     }
 }

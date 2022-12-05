@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Objects;
 import java.util.Vector;
 
 import database.student.Student;
@@ -30,11 +31,13 @@ public class AddClassTutorDialog extends JDialog {
 
     JTextField professor = new JTextField(20);
 
+    String type;
 
-    AddClassTutorDialog(DefaultListModel<String> model) {
+
+    AddClassTutorDialog(DefaultListModel<String> model, String s) {
         super();
         List = model;
-
+        type = s;
         setSize(300,350);
         createAndDisplay();
     }
@@ -81,11 +84,16 @@ public class AddClassTutorDialog extends JDialog {
     class SaveActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            if (List.get(0) == "No Current Classes!"){
+            if ( List.size() != 0 && Objects.equals(List.get(0), "No Current Classes!")){
                 List.remove(0);
             }
+
             String normalized = classCode.getText().substring(0,3).toUpperCase() + " " + classCode.getText().substring(classCode.getText().length() - 4, classCode.getText().length());
-            BUGUtils.controller.addCourse(Window.username, classCode.getText(), professor.getText(), Integer.parseInt(section.getText()));
+            if(type.equals("tutor")){
+                BUGUtils.controller.addTutorOffer(Window.username, classCode.getText(), professor.getText(), (double) Integer.parseInt(section.getText()));
+            } else {
+                BUGUtils.controller.addCourse(Window.username, classCode.getText(), professor.getText(), Integer.parseInt(section.getText()));
+            }
             List.addElement(normalized);
             dispose();
         }

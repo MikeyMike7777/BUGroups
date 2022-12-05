@@ -1,6 +1,7 @@
 package database.student;
 
 import database.utils.EmbeddedEmailUtil;
+import ui.general.Window;
 
 
 import java.util.*;
@@ -82,13 +83,6 @@ public class StudentService {
     public Vector<ArrayList<String>> getClassmates(String courseId){
         ArrayList<String> students = courseDAO.getStudents(courseId);
         return profileDAO.getClassmates(students);
-    }
-
-    // generates dummy data in course collection and profile collection for testing classmates FIXME: remove when done testing
-    public void generate(){
-        courseDAO.generate();
-        profileDAO.generate();
-        //tutorOfferDAO.generate();
     }
 
     public boolean deleteAccount(String id) {
@@ -1228,5 +1222,19 @@ public class StudentService {
 
     public void changeAvail(String id, Vector<String> avail) {
         profileDAO.updateProfileAvail(id, avail);
+    }
+
+    public void addTutorOffer(String courseCode, String professorTaken, String semesterTaken, Double hourlyRate) {
+        Date d = new Date();
+        tutorOfferDAO.createTutorOffer(Window.username + d, courseCode, professorTaken, semesterTaken, hourlyRate);
+        studentDAO.addTutorOffer(Window.username, Window.username + d);
+    }
+
+    public Vector<Object> getStudentCourses(String id){
+        return studentDAO.getClasses(id);
+    }
+
+    public Vector<Object> getStudentTutors(String id){
+        return studentDAO.getTutors(id);
     }
 }

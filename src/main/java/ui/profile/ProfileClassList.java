@@ -67,8 +67,10 @@ public class ProfileClassList extends JPanel {
     }
 
     void buildClassList(){
-        Vector<Object> s = BUGUtils.controller.fetchStudent(Window.username);
-        // get student's classes and put into "classes" vector
+        Vector<Object> s = BUGUtils.controller.getStudentClasses(Window.username);
+        for(int i = 0; i < s.size(); i++){
+            classes.add(s.elementAt(i).toString().substring(0,3) + " " + s.elementAt(i).toString().substring(3,7));
+        }
 
         if(!classes.isEmpty()) {
             model.addAll(classes);
@@ -82,7 +84,7 @@ public class ProfileClassList extends JPanel {
     class AddActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            new AddClassTutorDialog(model);
+            new AddClassTutorDialog(model, "course");
         }
     }
 

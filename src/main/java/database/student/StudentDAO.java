@@ -9,6 +9,7 @@ import org.bson.Document;
 import org.bson.conversions.Bson;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Vector;
 
 import static com.mongodb.client.model.Filters.eq;
@@ -18,6 +19,22 @@ import static com.mongodb.client.model.Updates.set;
 public class StudentDAO {
 
     private static MongoCursor<Document> cursor;
+
+    Vector<Object> getClasses(String id){
+        MongoCollection<Document> collection1 = BUGUtils.database.getCollection("BUGStudents");
+        Document courses = collection1.find(eq("_id", id)).first();
+        Vector<Object> s = new Vector<>();
+        s.addAll((Collection<?>) courses.get("courses"));
+        return s;
+    }
+
+    Vector<Object> getTutors(String id){
+        MongoCollection<Document> collection1 = BUGUtils.database.getCollection("BUGStudents");
+        Document courses = collection1.find(eq("_id", id)).first();
+        Vector<Object> s = new Vector<>();
+        s.addAll((Collection<?>) courses.get("tutors"));
+        return s;
+    }
 
     boolean registerStudent(String username, String password, String name, String email, String phone){
         Student s = new Student(username, password);

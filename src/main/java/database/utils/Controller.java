@@ -45,7 +45,15 @@ public class Controller {
     }
 
     public void addTutorOffer(String courseCode, String professorTaken, String semesterTaken, Double hourlyRate) {
-        //sService.addTutorOffer(courseCode, professorTaken, semesterTaken, hourlyRate);
+       sService.addTutorOffer(courseCode, professorTaken, semesterTaken, hourlyRate);
+    }
+
+    public Vector<Object> getStudentClasses(String id){
+        return sService.getStudentCourses(id);
+    }
+
+    public Vector<Object> getStudentTutors(String id){
+        return sService.getStudentTutors(id);
     }
 
     public Vector<Object> fetchProfileInfo(String id) {
