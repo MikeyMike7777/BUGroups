@@ -80,7 +80,7 @@ public class ClassmatesTab extends JPanel{
                 remove(getComponentCount() - 1);
 
             // call controller
-            Vector<ArrayList<String>> info = BUGUtils.controller.getClassmates(s);
+            Vector<ArrayList<String>> info = BUGUtils.controller.getClassmates(s.replaceAll(" ", ""));
             if (info.isEmpty()) {
                 add(new JLabel(" "));
                 add(new JLabel("No other classmates!"));
