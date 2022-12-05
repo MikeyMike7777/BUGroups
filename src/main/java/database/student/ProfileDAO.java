@@ -2,7 +2,6 @@ package database.student;
 
 import com.mongodb.client.*;
 import database.utils.BUGUtils;
-import database.utils.MongoInit;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 

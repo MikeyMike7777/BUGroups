@@ -7,6 +7,7 @@ import java.util.Objects;
 import java.util.Vector;
 
 import database.utils.BUGUtils;
+import database.utils.InitThread;
 
 
 public class Login extends JPanel {
@@ -16,6 +17,7 @@ public class Login extends JPanel {
     JPasswordField password = new JPasswordField(15);
 
     JTextField usernameText = new JTextField(15);
+    InitThread thread;
     public Login(Dimension d) {
         super();
         createAndDisplay(d);
@@ -25,6 +27,8 @@ public class Login extends JPanel {
         setPreferredSize(d);
         setAlignmentX(LEFT_ALIGNMENT);
         addComponents();
+        thread = new InitThread();
+        thread.start();
         setVisible(true);
     }
 
@@ -70,10 +74,14 @@ public class Login extends JPanel {
         login.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                try {
+                    thread.join();
+                } catch (InterruptedException ex) {
+                    ex.printStackTrace();
+                }
                 String pass = password.getText();
                 //BUGUtils.controller.registerStudent(usernameText.getText(), pass , null, null, null);
                 Vector<Object> s = BUGUtils.controller.fetchStudent(usernameText.getText());
-
 
                 if(s.size() == 0){
                     int action = JOptionPane.showConfirmDialog(getRootPane().getParent(),
