@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.Objects;
 import java.util.Vector;
 
@@ -110,7 +111,11 @@ public class AddClassTutorDialog extends JDialog {
                     .getParent().getParent());
             temp.setVisible(false);
             temp.remove(1);
-            temp.initNavigationBar();
+            try {
+                temp.initNavigationBar();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
             ((JTabbedPane)temp.getComponent(1)).setSelectedIndex(4);
             temp.setVisible(true);
             dispose();

@@ -26,8 +26,8 @@ public class Window extends JPanel {
     public Map<Integer, JPanel> tabMap;
     private JLabel picLabel;
     private JTabbedPane tabbedPane;
-    private String currLogoPath = "src/main/resources/BUGroups.png";
     private Dimension tabSize;
+    private String currLogoPath = "/BUGroups.png";
 
     private static int LOGO_WIDTH_OFFSET = -10;
 
@@ -100,16 +100,16 @@ public class Window extends JPanel {
         layout = new SpringLayout();
         try{
             initLogo();
+            initNavigationBar();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        initNavigationBar();
         buildLayout();
         setLayout(layout);
     }
 
     public void initLogo() throws IOException {
-        BufferedImage myPicture = ImageIO.read(new File(currLogoPath));
+        BufferedImage myPicture = ImageIO.read(getClass().getResource("/BUGroups.png"));
         picLabel = new JLabel(new ImageIcon(myPicture.getScaledInstance(100, 25, Image.SCALE_FAST)));
 
         //Init our logo listeners
@@ -146,22 +146,22 @@ public class Window extends JPanel {
         });
     }
 
-    public void initNavigationBar(){
+    public void initNavigationBar() throws IOException {
         this.tabMap = initTabs();
         tabbedPane = new JTabbedPane();
         tabbedPane.setPreferredSize(getPreferredSize());
 
-        ImageIcon userIcon = new ImageIcon("src/main/resources/userIcon.png");
-        ImageIcon homeIcon = new ImageIcon("src/main/resources/homeIcon.png");
-        ImageIcon messageIcon = new ImageIcon("src/main/resources/messageIcon.png");
-        ImageIcon tutorIcon = new ImageIcon("src/main/resources/tutorIcon.png");
-        ImageIcon settingsIcon = new ImageIcon("src/main/resources/settingsIcon.png");
+        BufferedImage userIcon = ImageIO.read(getClass().getResource("/userIcon.png"));
+        BufferedImage homeIcon = ImageIO.read(getClass().getResource("/homeIcon.png"));
+        BufferedImage messageIcon = ImageIO.read(getClass().getResource("/messageIcon.png"));
+        BufferedImage tutorIcon = ImageIO.read(getClass().getResource("/tutorIcon.png"));
+        BufferedImage settingsIcon = ImageIO.read(getClass().getResource("/settingsIcon.png"));
 
-        ImageIcon icons[] = {homeIcon, messageIcon, userIcon, tutorIcon, userIcon, settingsIcon};
+        BufferedImage icons[] = {homeIcon, messageIcon, userIcon, tutorIcon, userIcon, settingsIcon};
         int count = 0;
         //Build our navigation bar
         for (Map.Entry<Integer, JPanel> entry : tabMap.entrySet()) {
-            tabbedPane.addTab(entry.getValue().getName(), icons[count], entry.getValue(),
+            tabbedPane.addTab(entry.getValue().getName(), new ImageIcon(icons[count]), entry.getValue(),
                     "Does nothing");
 
             count++;
@@ -169,24 +169,18 @@ public class Window extends JPanel {
             tabbedPane.setMnemonicAt(entry.getKey(), KeyEvent.VK_1 + entry.getKey());
         }
 
-        //Init our navigation bar Listeners
-        initNavigationBarListeners();
         //Add the component to the JPanel
         add(tabbedPane);
     }
 
-    void initNavigationBarListeners(){
-
-    }
-
     void flipLogo() throws IOException {
-        if(currLogoPath.equals("src/main/resources/BUGroups.png")){
-            currLogoPath = "src/main/resources/BUGroups2.png";
+        if(currLogoPath.equals("/BUGroups.png")){
+            currLogoPath = "/BUGroups2.png";
         } else {
-            currLogoPath = "src/main/resources/BUGroups.png";
+            currLogoPath = "/BUGroups.png";
         }
 
-        BufferedImage myPicture = ImageIO.read(new File(currLogoPath));
+        BufferedImage myPicture = ImageIO.read(getClass().getResource(currLogoPath));
         picLabel.setIcon(new ImageIcon(myPicture.getScaledInstance(100, 25, Image.SCALE_FAST)));
 
         revalidate();
