@@ -99,7 +99,7 @@ public class PostDialog extends JDialog {
                     parent.getX(), "null"
             );
             if (parent != null)
-                parent.repaint();
+                parent.repaint(4);
 
             dispose();
         }

@@ -80,15 +80,15 @@ public class Login extends JPanel {
                     ex.printStackTrace();
                 }
                 String pass = password.getText();
-                //BUGUtils.controller.registerStudent(usernameText.getText(), pass, "Carson Buntin", "carson_buntin1@baylor.edu", "830-730-7120");
-                Vector<Object> s = BUGUtils.controller.fetchStudent(usernameText.getText());
+                //BUGUtils.controller.registerStudent(usernameText.getText().toLowerCase(), pass, "Carson Buntin", "carson_buntin1@baylor.edu", "830-730-7120");
+                Vector<Object> s = BUGUtils.controller.fetchStudent(usernameText.getText().toLowerCase());
 
                 if(s == null || s.size() == 0){
                     int action = JOptionPane.showConfirmDialog(getRootPane().getParent(),
                             "Username Not Found!",
                             null, JOptionPane.CANCEL_OPTION);
                 } else {
-                    String user = (String) s.elementAt(0);
+                    String user = ((String)s.elementAt(0)).toLowerCase();
                     String userPassword = (String) s.elementAt(1);
 
                     if(!Objects.equals(pass, userPassword)){
@@ -99,9 +99,7 @@ public class Login extends JPanel {
                         JPanel temp = (JPanel) getParent();
                         setVisible(false);
                         temp.remove(0);
-                        temp.add(new Window(getPreferredSize(),
-                                ((JTextField) username.getComponent(1))
-                                        .getText().toLowerCase()));
+                        temp.add(new Window(getPreferredSize(), user));
                     }
                 }
             }

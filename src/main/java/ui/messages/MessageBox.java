@@ -75,7 +75,7 @@ public class MessageBox extends JPanel {
 
         JLabel time = new JLabel(date);
         add(time);
-        layout.putConstraint(SpringLayout.EAST, time, -5, SpringLayout.EAST, this);
+        layout.putConstraint(SpringLayout.EAST, time, -20, SpringLayout.EAST, this);
         layout.putConstraint(SpringLayout.NORTH, time, 5, SpringLayout.NORTH, this);
 
         JLabel course = new JLabel(courseNum);
