@@ -64,7 +64,8 @@ public class AddClassTutorDialog extends JDialog {
         buttonPanel.setVisible(true);
     }
 
-    void buildTextPanel(){
+    void buildTextPanel() {
+        String s;
         codeLabel = new JLabel("Enter Course Code:");
         sectionLabel = new JLabel("Enter Section:");
         professorLabel = new JLabel("Enter Professor:");
@@ -74,14 +75,13 @@ public class AddClassTutorDialog extends JDialog {
         textPanel.add(section);
         textPanel.add(professorLabel);
         textPanel.add(professor);
-
         textPanel.setVisible(true);
     }
-
 
     class SaveActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
+            //String normalized = classCode.getText().substring(0,4) + " " + classCode.getText().substring(classCode.getText().length() - 4, classCode.getText().length());
             BUGUtils.controller.addCourse(Window.username, classCode.getText(), professor.getText(), Integer.parseInt(section.getText()));
             List.addElement(classCode.getText());
             dispose();

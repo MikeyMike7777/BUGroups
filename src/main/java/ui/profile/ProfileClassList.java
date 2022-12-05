@@ -17,7 +17,7 @@ public class ProfileClassList extends JPanel {
             "WGS 2300"
     };
 
-    Vector<String> classes;
+    Vector<String> classes = new Vector<>();
 
     JLabel header;
 
@@ -68,7 +68,9 @@ public class ProfileClassList extends JPanel {
 
     void buildClassList(){
         Vector<Object> s = BUGUtils.controller.fetchStudent(Window.username);
-        if(classes != null) {
+        // get student's classes and put into "classes" vector
+
+        if(!classes.isEmpty()) {
             model.addAll(classes);
         } else {
             model.addElement("No Current Classes!");
