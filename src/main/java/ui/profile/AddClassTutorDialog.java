@@ -95,11 +95,11 @@ public class AddClassTutorDialog extends JDialog {
             if (section.getText().length() < 2){
                 sec = "0" + section.getText();
             }
+            System.out.println(sec);
             String normalizedCourseCode = classCode.getText().substring(0,3).toUpperCase(); // course
             String normalizedCourseNumber = classCode.getText().substring(classCode.getText().length() - 4);
             if(Objects.equals(type, "course")) {
-                BUGUtils.controller.addCourse(normalizedCourseCode + normalizedCourseNumber + sec,
-                        normalizedCourseCode + " " + normalizedCourseNumber,
+                BUGUtils.controller.addCourse(normalizedCourseCode + normalizedCourseNumber + sec, normalizedCourseCode + " " + normalizedCourseNumber,
                         sec, professor.getText());
                 List.addElement(normalizedCourseCode + " " + normalizedCourseNumber + " " + sec);
             } else if (Objects.equals(type, "tutor")) {
