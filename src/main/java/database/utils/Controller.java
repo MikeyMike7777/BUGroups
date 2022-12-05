@@ -50,6 +50,10 @@ public class Controller {
         sService.reportBug(report);
     }
 
+    public void changeAvail(String id, Vector<String> avail){
+        sService.changeAvail(id, avail);
+    }
+
 
     public void createProfileInfo(String id, String name, String email, String phoneNumber, Vector<String> availibility){
         sService.createProfileInfo(id, name, email, phoneNumber, availibility);

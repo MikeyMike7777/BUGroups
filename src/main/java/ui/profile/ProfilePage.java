@@ -25,6 +25,8 @@ public class ProfilePage extends JPanel {
 
     static Vector<String> times = new Vector<>(7);
 
+    ProfilePage me = this;
+
     public ProfilePage(Dimension d) {
         super();
         setPreferredSize(d);
@@ -42,6 +44,7 @@ public class ProfilePage extends JPanel {
     void addComponents() {
 
         buildUserInfoBox();
+        buildEditButton("View My Messages:");
         add(userInfo);
 
         buildAvalibilityInfo();
@@ -84,18 +87,19 @@ public class ProfilePage extends JPanel {
         JButton editInfo = new JButton(s);
 
 
-        if(Objects.equals(s, "Edit Profile Info:")) {
+        if(Objects.equals(s, "View My Messages:")) {
             editInfo.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    new EditProfileInfoDialog(userInfo, info);
+                    // View messages action is meant to go here
                 }
             });
         } else if(Objects.equals(s, "Edit Availability:")){
             editInfo.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    new EditAvailabilityDialog(info);
+                    new EditAvailabilityDialog(info, me);
+                    repaintAvailInfo();
                 }
             });
         }
@@ -103,7 +107,7 @@ public class ProfilePage extends JPanel {
         button.add(editInfo);
 
 
-        if(Objects.equals(s, "Edit Profile Info:")) {
+        if(Objects.equals(s, "View My Messages:")) {
             userInfo.add(button);
         } else if (Objects.equals(s, "Edit Availability:")) {
             availibilty.add(button);
@@ -113,6 +117,7 @@ public class ProfilePage extends JPanel {
     void repaintUserInfo(){
         userInfo.setVisible(false);
         userInfo.removeAll();
+        buildEditButton("View My Messages:");
         buildUserInfoBox();
     }
 

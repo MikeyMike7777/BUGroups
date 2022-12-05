@@ -43,6 +43,13 @@ public class ProfileDAO {
         collection.updateOne(filter, update);
     }
 
+    public void updateProfileAvail(String id, Vector<String> avail){
+        MongoCollection<Document> collection = BUGUtils.database.getCollection("profileInfos");
+        Bson filter = eq("_id", id);
+        Bson update = set("availability", avail);
+        collection.updateOne(filter, update);
+    }
+
     public void updateProfilePhoneNumber(String id, String number){
         MongoCollection<Document> collection = BUGUtils.database.getCollection("profileInfos");
         Bson filter = eq("_id", id);
