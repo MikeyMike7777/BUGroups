@@ -47,6 +47,13 @@ public class ProfileDAO {
         collection.updateOne(filter, update);
     }
 
+    public void updateProfilePhoneNumber(String id, String number){
+        MongoCollection<Document> collection = BUGUtils.database.getCollection("profileInfos");
+        Bson filter = eq("_id", id);
+        Bson update = set("phoneNumber", number);
+        collection.updateOne(filter, update);
+    }
+
     public static Document toDocument(Profile profile) {
         ArrayList<String> a = new ArrayList<>();
         if(profile.getAvailability().getTimes() != null) {
@@ -70,7 +77,10 @@ public class ProfileDAO {
 
         Availability avail = new Availability(convert);
 
-        return new Profile(document.getString("_id"), document.getString("name"), document.getString("email"), document.getString("phoneNumber"), avail);
+        return new Profile(document.getString("_id"),
+                document.getString("name"),
+                document.getString("email"),
+                document.getString("phoneNumber"), avail);
     }
 
     Vector<ArrayList<String>> getClassmates(ArrayList<String> students){
@@ -89,7 +99,6 @@ public class ProfileDAO {
             classmateInfo.add(profile.getEmail());
             classmateInfo.add(profile.getPhoneNumber());
             classmateInfo.add(profile.getAvailability().toString());
-            //System.out.println(profile.getAvailability().toString());
 
             classmates.add(classmateInfo);
         }

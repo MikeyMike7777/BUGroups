@@ -2,9 +2,13 @@ package ui.tutors;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Vector;
 
 public class TutorsList extends JPanel{
-    private static final String[] tutorNames = {
+    Vector<ArrayList<String>> tutorOffersInfo;
+
+    /*private static final String[] tutorNames = {
             "Carsyn Smeda",
             "Bryce Robinson",
             "Mikey Mathews",
@@ -42,10 +46,11 @@ public class TutorsList extends JPanel{
             "$12.00/hr",
             "$5.00/hr",
             "$8.00/hr"
-    };
+    };*/
 
-    TutorsList(){
-        super();
+    TutorsList(Vector<ArrayList<String>> tutorOffersInfo){
+        // reworked this. previously had hardcoded values. will also need to rework addClassmates function
+        this.tutorOffersInfo = tutorOffersInfo;
         createAndDisplay();
     }
 
@@ -64,21 +69,18 @@ public class TutorsList extends JPanel{
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.setMinimumSize(new Dimension(600, 300));
         panel.setMaximumSize(new Dimension(600, 8000));
-        panel.add(addTutors(tutorNames, tutorClasses, professors, semesters,
-                rates));
+        panel.add(addTutors());
         scrolls.add(panel);
         add(scrolls);
     }
 
-    Component addTutors(String[] names, String[] classes, String[] profs,
-                        String[] sems, String[] hrates) {
+    Component addTutors() {
         JPanel component = new JPanel();
         component.setLayout(new BoxLayout(component, BoxLayout.Y_AXIS));
         component.setMinimumSize(new Dimension(600, 300));
         component.setMaximumSize(new Dimension(600, 8000));
-        for (int i = 0; i < names.length; ++i) {
-            TutoringOffer t = new TutoringOffer(tutorNames[i], tutorClasses[i],
-                    professors[i], semesters[i], rates[i]);
+        for (ArrayList<String> tutorOffer : tutorOffersInfo){
+            TutoringOffer t = new TutoringOffer(tutorOffer);
             component.add(t);
         }
         return component;

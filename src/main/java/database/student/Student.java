@@ -47,9 +47,8 @@ public class Student {
         // i.e. need to change system operations
     }
 
-    public void setPassword(String password){
-        // design model has this in Profile but makes more sense in Student
-        // need to update design model
+    void setPassword(String password){
+        this.password = password;
     }
 
     public void resetPassword(){

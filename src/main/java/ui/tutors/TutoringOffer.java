@@ -6,27 +6,28 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 public class TutoringOffer extends JPanel {
     String name; // of tutor-- eventually will be its own class but this is for UI purposes
-    String classTutoring;
+    String courseCode;
     String professor;
     String semester;
     String hourlyRate;
 
-    TutoringOffer(String n, String c, String p, String s, String hr){
-        name = n;
-        classTutoring = c;
-        professor = p;
-        semester = s;
-        hourlyRate = hr;
+    TutoringOffer(ArrayList<String> info){
+        //name = ;// FIXME: name of tutor
+        courseCode = info.get(0);
+        professor = info.get(1);
+        semester = info.get(2);
+        hourlyRate = info.get(3);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setMinimumSize(new Dimension(500, 100));
         setMaximumSize(new Dimension(500, 300));
         setBackground(Color.white);
         setOpaque(true);
         setFocusable(true);
-        add(new JLabel(n));
+        add(new JLabel(name));
         addMouseListener(new TutoringOffer.TutoringOfferClickListener());
         addFocusListener(new TutoringOffer.TutoringOfferFocusListener());
     }
@@ -36,8 +37,8 @@ public class TutoringOffer extends JPanel {
         return name;
     }
 
-    public String getClassTutoring() {
-        return classTutoring;
+    public String getCourseCode() {
+        return courseCode;
     }
 
     public String getProfessor() {

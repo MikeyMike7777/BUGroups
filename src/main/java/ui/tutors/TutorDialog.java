@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class TutorDialog extends JDialog{
     TutoringOffer t;
@@ -13,8 +14,12 @@ public class TutorDialog extends JDialog{
     TutorDialog(TutoringOffer owner){
         super(SwingUtilities.windowForComponent(owner));
         parent = owner;
-        t = new TutoringOffer(parent.getName(), parent.getClassTutoring(),
-                parent.getProfessor(), parent.getSemester(), parent.getHourlyRate());
+        ArrayList<String> parentInfo = new ArrayList<>();
+        parentInfo.add(parent.getCourseCode());
+        parentInfo.add(parent.getProfessor());
+        parentInfo.add(parent.getSemester());
+        parentInfo.add(parent.getHourlyRate());
+        t = new TutoringOffer(parentInfo);
         t.setFocusable(false);
         createAndDisplay();
     }
@@ -32,7 +37,7 @@ public class TutorDialog extends JDialog{
         panel.add(new JLabel(" "));
         panel.add(new JLabel("Tutor: " + t.getName()));
         panel.add(new JLabel(" "));
-        panel.add(new JLabel("Class: " + t.getClassTutoring()));
+        panel.add(new JLabel("Class: " + t.getCourseCode()));
         panel.add(new JLabel(" "));
         panel.add(new JLabel("Professor taken: " + t.getProfessor()));
         panel.add(new JLabel(" "));

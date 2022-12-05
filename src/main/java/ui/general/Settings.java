@@ -42,29 +42,38 @@ public class Settings extends JPanel {
 
     private Component addChangeName() {
         JButton phoneNumber = new JButton("Change Name");
-        JLabel label = new JLabel("Change Name");
+        JLabel label = new JLabel("First Name");
+        JLabel label1 = new JLabel("Last Name");
         phoneNumber.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JPanel changePanel = new JPanel();
                 JPanel text = new JPanel();
+                JPanel text1 = new JPanel();
                 JButton done = new JButton("Done");
                 JDialog changeDialog = new JDialog();
+                JTextField first = new JTextField(15);
+                JTextField last = new JTextField(15);
 
                 changePanel.setLayout(new BoxLayout(changePanel, BoxLayout.Y_AXIS));
                 changePanel.add(label);
-                text.add(new JTextField(15));
+                text.add(first);
                 changePanel.add(text);
+                changePanel.add(label1);
+                text1.add(last);
                 changePanel.add(done);
 
                 label.setAlignmentX(CENTER_ALIGNMENT);
+                label1.setAlignmentX(CENTER_ALIGNMENT);
                 done.setAlignmentX(CENTER_ALIGNMENT);
                 changePanel.setAlignmentX(CENTER_ALIGNMENT);
+
+                String name = first.getText() + " " + last.getText();
 
                 done.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        //updateName(from JTextField);
+                        BUGUtils.controller.updateProfilePhoneNumber(Window.username, name);
                         changeDialog.dispose();
                     }
                 });
@@ -81,10 +90,10 @@ public class Settings extends JPanel {
         Vector<Object> vector = BUGUtils.controller.fetchProfileInfo(Window.username);
     }
     private Component addChangePassword() {
-        JButton phoneNumber = new JButton("Change Password");
+        JButton password = new JButton("Change Password");
         JLabel label = new JLabel("Change Password");
         JLabel label1 = new JLabel("Confirm Password");
-        phoneNumber.addActionListener(new ActionListener() {
+        password.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JPanel changePanel = new JPanel();
@@ -95,10 +104,10 @@ public class Settings extends JPanel {
 
                 changePanel.setLayout(new BoxLayout(changePanel, BoxLayout.Y_AXIS));
                 changePanel.add(label);
-                text.add(new JTextField(15));
+                text.add(new JPasswordField(15));
                 changePanel.add(text);
                 changePanel.add(label1);
-                text1.add(new JTextField(15));
+                text1.add(new JPasswordField(15));
                 changePanel.add(text1);
                 changePanel.add(done);
 
@@ -109,8 +118,16 @@ public class Settings extends JPanel {
                 done.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        //updatePassword();
-                        changeDialog.dispose();
+                        if (((JPasswordField)text.getComponent(0)).getText()
+                                .equals(((JPasswordField)text1.getComponent(0)).getText())) {
+                            BUGUtils.controller.changePassword(Window.username,
+                                    ((JPasswordField)text.getComponent(0)).getText());
+                            changeDialog.dispose();
+                        } else {
+                            JOptionPane.showMessageDialog(getRootPane().getParent(),
+                                    "Passwords don't match!", "Error",
+                                    JOptionPane.WARNING_MESSAGE);
+                        }
                     }
                 });
 
@@ -119,8 +136,8 @@ public class Settings extends JPanel {
                 changeDialog.setVisible(true);
             }
         });
-        phoneNumber.setAlignmentX(CENTER_ALIGNMENT);
-        return phoneNumber;
+        password.setAlignmentX(CENTER_ALIGNMENT);
+        return password;
     }
 
     private Component addChangePhoneNumber() {
@@ -133,10 +150,11 @@ public class Settings extends JPanel {
                 JPanel text = new JPanel();
                 JButton done = new JButton("Done");
                 JDialog changeDialog = new JDialog();
+                JTextField phone = new JTextField(15);
 
                 changePanel.setLayout(new BoxLayout(changePanel, BoxLayout.Y_AXIS));
                 changePanel.add(label);
-                text.add(new JTextField(15));
+                text.add(phone);
                 changePanel.add(text);
                 changePanel.add(done);
 
@@ -146,7 +164,7 @@ public class Settings extends JPanel {
                 done.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        //updatePhoneNumber();
+                        BUGUtils.controller.updateProfilePhoneNumber(Window.username, phone.getText());
                         changeDialog.dispose();
                     }
                 });

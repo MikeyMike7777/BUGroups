@@ -24,6 +24,7 @@ public class StudentService {
     StudentDAO studentDAO = new StudentDAO();
     CourseDAO  courseDAO = new CourseDAO();
     ProfileDAO profileDAO = new ProfileDAO();
+    TutorOfferDAO tutorOfferDAO = new TutorOfferDAO();
     ForgotPasswordDAO forgotPasswordDAO = new ForgotPasswordDAO();
 
 
@@ -33,6 +34,9 @@ public class StudentService {
 
     public void updateProfileName(String id, String name){
         profileDAO.updateProfileName(id, name);
+    }
+    public void updateProfilePhoneNumber(String id, String number){
+        profileDAO.updateProfileName(id, number);
     }
     public Vector<Object> fetchProfileInfo(String id){
         Profile p = profileDAO.fetchProfileInfo(id);
@@ -87,6 +91,7 @@ public class StudentService {
     public void generate(){
         courseDAO.generate();
         profileDAO.generate();
+        tutorOfferDAO.generate();
     }
 
     //Verify if a user's account is in profileInfos table based on email
@@ -97,6 +102,7 @@ public class StudentService {
         return forgotPasswordDAO.verifyAccount(email);
     }
 
+<<<<<<< HEAD
     public boolean changePassword(String ID, String password){
         return studentDAO.changePassword(ID, password);
     }
@@ -1215,4 +1221,7 @@ public class StudentService {
         return password;
     }
 
+    public Vector<ArrayList<String>> getTutorOffers(String courseId){
+        return TutorOfferDAO.getTutorOffers(courseId);
+    }
 }

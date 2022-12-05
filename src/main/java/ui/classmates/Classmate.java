@@ -19,7 +19,7 @@ public class Classmate extends JPanel {
         name = info.get(0);
         email = info.get(1);
         phone = info.get(2);
-        availability = info.get(3); // FIXME: this is where the error is-- out of bounds
+        availability = info.get(3);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setMinimumSize(new Dimension(500, 100));
         setMaximumSize(new Dimension(500, 300));
