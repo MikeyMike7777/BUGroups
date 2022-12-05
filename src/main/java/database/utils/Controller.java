@@ -31,7 +31,7 @@ public class Controller {
         sService.updateProfileName(id, name);
     }
     public void updateProfilePhoneNumber(String id, String number){
-        sService.updateProfileName(id, number);
+        sService.updateProfilePhoneNumber(id, number);
     }
 
     public Vector<Object> createMessage(String text, String author,

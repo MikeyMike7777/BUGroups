@@ -14,7 +14,7 @@ public class ClassmatesPage extends JPanel {
         createAndDisplay();
 
         // create dummy data for testing purposes FIXME: come back to this when you're done
-        BUGUtils.controller.generate();
+        //BUGUtils.controller.generate();
     }
 
     void createAndDisplay() {

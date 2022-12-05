@@ -30,6 +30,7 @@ public class Settings extends JPanel {
         panel.add(addChangeName());
         panel.add(addChangePassword());
         panel.add(addChangePhoneNumber());
+        panel.add(addDeleteAccount());
         panel.setAlignmentX(CENTER_ALIGNMENT);
         add(panel);
     }
@@ -39,7 +40,18 @@ public class Settings extends JPanel {
         label.setAlignmentX(CENTER_ALIGNMENT);
         return label;
     }
-
+    private Component addDeleteAccount(){
+        JButton deleteAccount = new JButton("Delete Account");
+        deleteAccount.setAlignmentX(CENTER_ALIGNMENT);
+        deleteAccount.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //confirm
+                JOptionPane option = new JOptionPane();
+            }
+        });
+        return deleteAccount;
+    }
     private Component addChangeName() {
         JButton phoneNumber = new JButton("Change Name");
         JLabel label = new JLabel("First Name");
@@ -73,7 +85,7 @@ public class Settings extends JPanel {
                 done.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        BUGUtils.controller.updateProfilePhoneNumber(Window.username, name);
+                        BUGUtils.controller.updateProfileName(Window.username, name);
                         changeDialog.dispose();
                     }
                 });

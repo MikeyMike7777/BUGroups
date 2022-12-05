@@ -36,7 +36,7 @@ public class StudentService {
         profileDAO.updateProfileName(id, name);
     }
     public void updateProfilePhoneNumber(String id, String number){
-        profileDAO.updateProfileName(id, number);
+        profileDAO.updateProfilePhoneNumber(id, number);
     }
     public Vector<Object> fetchProfileInfo(String id){
         Profile p = profileDAO.fetchProfileInfo(id);
@@ -95,8 +95,7 @@ public class StudentService {
     }
 
     public boolean deleteAccount(String id) {
-        return studentDAO.deleteAccount(id) &&
-                profileDAO.deleteAccount(id);
+        return true;
     }
 
     //Verify if a user's account is in profileInfos table based on email
