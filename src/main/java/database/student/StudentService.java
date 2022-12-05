@@ -1,6 +1,7 @@
 package database.student;
 
 import database.utils.EmbeddedEmailUtil;
+import ui.general.Window;
 
 
 import java.util.*;
@@ -56,6 +57,13 @@ public class StudentService {
         studentDAO.addClass(id, courseCode, section);
     }
 
+    public void addTutorOffer(String courseCode, String professorTaken, String semesterTaken, Double hourlyRate) {
+        Date d = new Date();
+        tutorOfferDAO.createTutorOffer(Window.username + d, courseCode, professorTaken,
+                semesterTaken, hourlyRate);
+        studentDAO.addTutorOffer(Window.username, Window.username + d);
+    }
+
 
     public boolean registerStudent(String username, String password, String name, String email, String phone) {
         return studentDAO.registerStudent(username, password, name, email, phone);
@@ -84,15 +92,8 @@ public class StudentService {
         return profileDAO.getClassmates(students);
     }
 
-    // generates dummy data in course collection and profile collection for testing classmates FIXME: remove when done testing
-    public void generate(){
-        courseDAO.generate();
-        profileDAO.generate();
-        tutorOfferDAO.generate();
-    }
-
     public boolean deleteAccount(String id) {
-        return true;
+        return profileDAO.deleteAccount(id) && studentDAO.deleteAccount(id);
     }
 
     //Verify if a user's account is in profileInfos table based on email

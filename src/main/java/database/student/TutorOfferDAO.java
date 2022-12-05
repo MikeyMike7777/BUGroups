@@ -80,26 +80,6 @@ public class TutorOfferDAO {
             tutorOffers.add(tutorOfferInfo);
         }
 
-        // fixme: not calling this ???
-//        for (ArrayList<String> ar : tutorOffers){
-//            for (String s : ar){
-//                System.out.print(s + ", ");
-//            }
-//            System.out.println();
-//        }
-
         return tutorOffers;
-    }
-
-    // generates dummy data in tutorOffers collection for testing classmates FIXME: remove when done testing
-    // id is courseCode + ??? fixme: do we even need a meaningful courseCode
-    void generate(){
-        MongoCollection<Document> tutorOfferCollection = BUGUtils.database.getCollection("TutorOffer");
-        if (tutorOfferCollection.countDocuments() > 0){
-            // if there is stuff in the collection, delete everything
-            tutorOfferCollection.deleteMany(new Document());
-        }
-        createTutorOffer("tutorOffer1", "CSI 3471", "Dr. Cerny", "Fall 2022", 55.50);
-        createTutorOffer("tutorOffer2", "WGS 2300", "Dr. Jug", "Spring 2021", 1.00);
     }
 }
