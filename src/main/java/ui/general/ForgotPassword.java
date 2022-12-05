@@ -54,7 +54,6 @@ public class ForgotPassword extends JPanel {
                 //send reset email
                 if(BUGUtils.controller.verifyAccount(emailField.getText())){
                     BUGUtils.controller.sendPasswordReset(emailField.getText());
-
                 }
                 temp.add(new Login(getPreferredSize()));
             }

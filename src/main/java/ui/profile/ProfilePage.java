@@ -42,7 +42,6 @@ public class ProfilePage extends JPanel {
     void addComponents() {
 
         buildUserInfoBox();
-        buildEditButton("Edit Profile Info:");
         add(userInfo);
 
         buildAvalibilityInfo();
@@ -65,7 +64,7 @@ public class ProfilePage extends JPanel {
         info = BUGUtils.controller.fetchProfileInfo(Window.username);
 
         textArea.setEditable(false);
-        if(info.size() == 0 || info.elementAt(1 ) == null) {
+        if(info.size() == 0 || info.elementAt(0) == null) {
             textArea.setText("""
                     Click "Edit Profile Info" to add your name, email, and phone
                      number!""");
@@ -115,7 +114,6 @@ public class ProfilePage extends JPanel {
         userInfo.setVisible(false);
         userInfo.removeAll();
         buildUserInfoBox();
-        buildEditButton("Edit Profile Info:");
     }
 
     static void repaintAvailInfo(){

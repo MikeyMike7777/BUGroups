@@ -80,7 +80,6 @@ public class Login extends JPanel {
                     ex.printStackTrace();
                 }
                 String pass = password.getText();
-                //BUGUtils.controller.registerStudent(usernameText.getText(), pass , null, null, null);
                 Vector<Object> s = BUGUtils.controller.fetchStudent(usernameText.getText());
 
                 if(s.size() == 0){

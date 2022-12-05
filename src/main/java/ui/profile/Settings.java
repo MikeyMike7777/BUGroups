@@ -60,6 +60,7 @@ public class Settings extends JPanel {
                     temp.add(new Login(new Dimension(BUGUtils.APP_WIDTH, BUGUtils.APP_HEIGHT)));
                     temp.getRootPane().validate();
                     temp.repaint();
+                    System.exit(0);
                 }
             }
         });

@@ -86,7 +86,7 @@ public class StudentService {
     }
 
     public boolean deleteAccount(String id) {
-        return studentDAO.deleteAccount(id) && profileDAO.deleteAccount(id);
+        return true;
     }
 
     //Verify if a user's account is in profileInfos table based on email
