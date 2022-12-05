@@ -1,9 +1,11 @@
-import com.mongodb.ConnectionString;
-import com.mongodb.Cursor;
-import com.mongodb.MongoClientSettings;
+import com.mongodb.*;
+import com.mongodb.client.*;
 import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
-import com.mongodb.client.MongoDatabase;
+import org.bson.Document;
+import org.bson.conversions.Bson;
+
+import static com.mongodb.client.model.Filters.eq;
+import static com.mongodb.client.model.Filters.exists;
 
 public class MongoDBUtils {
 
@@ -14,7 +16,12 @@ public class MongoDBUtils {
                 .applyConnectionString(connectionString)
                 .build();
         MongoClient mongoClient = MongoClients.create(settings);
-        //MongoDatabase database = mongoClient.getDatabase("test");
+        MongoDatabase database = mongoClient.getDatabase("test");
+//        MongoCollection<Document> collection = database.getCollection("BUGMessages");
+//        Bson filter = exists("_id");
+//        collection.deleteMany(filter);
+//        filter = eq("messageBoard", 4);
+//        MongoCursor<Document> cursor = collection.find(filter).iterator();
     }
 
 }

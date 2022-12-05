@@ -19,6 +19,7 @@ public class ReplyDialog extends PostDialog {
         repliesTo = owner;
         this.dialog = dialog;
         this.window = window;
+        course.setText(dialog.courseNum);
     }
 
     void addButtons() {

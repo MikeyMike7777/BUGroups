@@ -18,8 +18,7 @@ public class MessageBoardPage extends JPanel {
     }
 
     void createAndDisplay() {
-        setMinimumSize(new Dimension(750, 550));
-        setMaximumSize(new Dimension(750, 1200));
+        setPreferredSize(new Dimension(750, 470));
         setAlignmentX(CENTER_ALIGNMENT);
         addComponents();
         setVisible(true);
@@ -27,30 +26,28 @@ public class MessageBoardPage extends JPanel {
 
     void addComponents() {
         ScrollPane scrolls = new ScrollPane(ScrollPane.SCROLLBARS_AS_NEEDED);
-        scrolls.setSize(750, 450);
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        panel.setMinimumSize(new Dimension(750, 450));
-        panel.setMaximumSize(new Dimension(750, 9000));
-        panel.add(addMessages());
-        scrolls.add(panel);
+        scrolls.setSize(new Dimension(750, 470));
+        scrolls.add(addMessages());
+        scrolls.doLayout();
         add(scrolls);
     }
 
     Component addMessages() {
         JPanel component = new JPanel();
         component.setLayout(new BoxLayout(component, BoxLayout.Y_AXIS));
-        component.setMinimumSize(new Dimension(750, 450));
-        component.setMaximumSize(new Dimension(750, 9000));
+        component.setSize(new Dimension(720, 400));
+        component.setMaximumSize(new Dimension(720, 9000));
 
         Vector<Object> messages = BUGUtils.controller.fetchBoard(id);
         MessageBox messageBox;
         for (Object v : messages) {
             messageBox = new MessageBox((Vector<Object>)v);
-            if (!messageBox.isReply)
+            if (!messageBox.isReply) {
                 component.add(messageBox);
+                component.add(new JLabel(" "));
+            }
         }
-
+        component.doLayout();
         return component;
     }
 
