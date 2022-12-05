@@ -99,7 +99,12 @@ public class ProfileDAO {
         }
         Vector<String> times = new Vector<>();
         times.add("Monday 5:00-6:00");
-        times.add("Friday 16:30-17:00");
+        times.add("Tuesday 2:30-3:45");
+        times.add("Wednesday 2:00-3:15");
+        times.add("Thursday 9:45-10:15");
+        times.add("Friday 5:00-6:45");
+        times.add("Saturday 16:30-17:00");
+        times.add("Sunday 16:00 - 17:30");
         createProfileInfo("tomas_cerny1", "Tomas Cerny", "tomas_cerny1@baylor.edu", "254-900-1852", times);
         createProfileInfo("greg_hamerly1", "Greg Hamerly", "greg_hamerly1@baylor.edu", "708-351-5325", times);
         createProfileInfo("bill_booth1", "Bill Booth", "bill_booth1@baylor.edu", "396-135-9223", times);

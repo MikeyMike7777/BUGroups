@@ -18,7 +18,7 @@ public class ClassmateInfoDialog extends JDialog{
         parentInfo.add(parent.getName());
         parentInfo.add(parent.getEmail());
         parentInfo.add(parent.getPhone());
-        parentInfo.add(parent.getAvailability()); // FIXME availability
+        parentInfo.add(parent.getAvailability());
         cm = new Classmate(parentInfo);
         cm.setFocusable(false);
         createAndDisplay();
@@ -41,18 +41,13 @@ public class ClassmateInfoDialog extends JDialog{
         panel.add(new JLabel(" "));
         panel.add(new JLabel(cm.getPhone()));
         panel.add(new JLabel(" "));
-        panel.add(new JLabel(cm.getAvailability())); // FIXME: formatting probably
-        panel.add(new JLabel(" "));
 
-//        // availability-- same for everyone for demo purposes FIXME-- needs to be dynamic
-//        panel.add(new JLabel("Availability:"));
-//        panel.add(new JLabel("Monday: 8:00 AM - 12:00 PM"));
-//        panel.add(new JLabel("Tuesday: 2:30 PM - 4:30 PM"));
-//        panel.add(new JLabel("Wednesday: 3:00 PM - 3:30 PM, " +
-//                "5:00 PM - 6:15 PM"));
-//        panel.add(new JLabel("Thursday: 2:30 PM - 4:30 PM"));
-//        panel.add(new JLabel("Friday: none"));
-//        panel.add(new JLabel(" "));
+        panel.add(new JLabel("Availability"));
+        String[] availabilities = cm.getAvailability().split(",");
+        for (String s : availabilities){
+            panel.add(new JLabel(s));
+            panel.add(new JLabel(" "));
+        }
 
         add(panel);
         addButton();
