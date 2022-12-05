@@ -44,9 +44,9 @@ public class StudentService {
 
     public void addCourse(String id, String professor, Integer section, String courseCode){
         courseCode = courseCode.toUpperCase().replaceAll(" ", "");
-        if (courseDAO.fetchCourse(section, courseCode))
-            courseDAO.enroll(id, section, courseCode);
-        else courseDAO.createCourse(professor, section, courseCode);
+        if (!courseDAO.fetchCourse(section, courseCode))
+            courseDAO.createCourse(professor, section, courseCode);
+        courseDAO.enroll(id, section, courseCode);
         studentDAO.addClass(id, courseCode, section);
     }
 
