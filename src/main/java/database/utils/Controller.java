@@ -17,8 +17,8 @@ public class Controller {
     MessageService mService = new MessageService();
     StudentService sService = new StudentService();
 
-    public void createStudent(String id, String username, String password, Vector<String> courses, Vector<String> tutors){
-        sService.createStudent(id, username, password, courses, tutors);
+    public void registerStudent(String username, String password, String name, String email, String phone){
+        sService.registerStudent(username, password, name, email, phone);
     }
 
     public Vector<Object> fetchStudent(String id){
@@ -65,5 +65,11 @@ public class Controller {
     public boolean sendPasswordReset(String email) {
         return sService.sendPasswordReset(email);
     }
+
+    public boolean changePassword(String ID, String password){
+        return sService.changePassword(ID, password);
+    }
+
+
 
 }

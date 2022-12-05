@@ -4,10 +4,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import database.utils.BUGUtils;
 import ui.general.Window;
 
 public class CreateAccount extends JPanel {
-
+    JTextField firstName, lastName, email, number;
     CreateAccount(Dimension preferredSize){
         super();
         preferredSize.setSize(preferredSize.getWidth(),
@@ -21,6 +23,11 @@ public class CreateAccount extends JPanel {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         JLabel label = new JLabel("Create Account");
+        firstName = new JTextField(15);
+        lastName = new JTextField(15);
+        email = new JTextField(40);
+        number = new JTextField(40);
+
         label.setAlignmentX(CENTER_ALIGNMENT);
         panel.add(label);
         panel.add(addFirstName());
@@ -37,7 +44,7 @@ public class CreateAccount extends JPanel {
         JPanel first = new JPanel();
         first.setLayout(new BoxLayout(first, BoxLayout.X_AXIS));
         first.add(new JLabel("First Name: "));
-        first.add(new JTextField(15));
+        first.add(firstName);
         first.setAlignmentX(CENTER_ALIGNMENT);
         return first;
     }
@@ -46,7 +53,7 @@ public class CreateAccount extends JPanel {
         JPanel last = new JPanel();
         last.setLayout(new BoxLayout(last, BoxLayout.X_AXIS));
         last.add(new JLabel("Last Name: "));
-        last.add(new JTextField(15));
+        last.add(lastName);
         last.setAlignmentX(CENTER_ALIGNMENT);
         return last;
     }
@@ -55,7 +62,7 @@ public class CreateAccount extends JPanel {
         JPanel email = new JPanel();
         email.setLayout(new BoxLayout(email, BoxLayout.X_AXIS));
         email.add(new JLabel("Phone: "));
-        email.add(new JTextField(40));
+        email.add(number);
         email.setAlignmentX(CENTER_ALIGNMENT);
         return email;
     }
@@ -64,7 +71,7 @@ public class CreateAccount extends JPanel {
         JPanel email = new JPanel();
         email.setLayout(new BoxLayout(email, BoxLayout.X_AXIS));
         email.add(new JLabel("Email: "));
-        email.add(new JTextField(40));
+        email.add(email);
         email.setAlignmentX(CENTER_ALIGNMENT);
         return email;
     }
@@ -77,7 +84,8 @@ public class CreateAccount extends JPanel {
                 JOptionPane.showMessageDialog(CreateAccount.this.getRootPane()
                     .getParent(), "Temporary password sent to email address!",
                         "Confirmation", JOptionPane.QUESTION_MESSAGE);
-                //Window.controller.createStudent();
+
+                BUGUtils.controller.registerStudent("t", "t",firstName.getText() + lastName.getText(), number.getText(), email.getText());
                 JPanel temp = (JPanel)getParent();
                 setVisible(false);
                 temp.remove(0);

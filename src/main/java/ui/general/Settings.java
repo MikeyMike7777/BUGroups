@@ -27,7 +27,7 @@ public class Settings extends JPanel {
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.add(addLabel());
         panel.add(addChangeName());
-        panel.add(addChangeEmail());
+        //panel.add(addChangeEmail());
         panel.add(addChangePassword());
         panel.add(addChangePhoneNumber());
         panel.setAlignmentX(CENTER_ALIGNMENT);
@@ -63,7 +63,7 @@ public class Settings extends JPanel {
                 done.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        Student student = BUGUtils.controller.fetchStudent(Window.username);
+                        //Student student = BUGUtils.controller.fetchStudent(Window.username);
                         changeDialog.dispose();
                     }
                 });
