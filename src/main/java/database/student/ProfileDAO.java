@@ -6,9 +6,12 @@ import database.utils.MongoInit;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 
+import javax.print.Doc;
 import java.util.*;
 
 import static com.mongodb.client.model.Filters.eq;
+import static com.mongodb.client.model.Updates.addToSet;
+import static com.mongodb.client.model.Updates.set;
 
 public class ProfileDAO {
 
@@ -41,16 +44,8 @@ public class ProfileDAO {
     public void updateProfileName(String id, String name){
         MongoCollection<Document> collection = BUGUtils.database.getCollection("profileInfos");
         Bson filter = eq("_id", id);
-//        ArrayList<String> a = (ArrayList<String>) document.get("availability");
-//        Document student = profileCollection.find(eq("_id", id)).first();
-//        Vector<String> convert = new Vector<>();
-//
-//        convert.addAll(a);
-//
-//        Availability avail = new Availability(convert);
-//
-//        return new Profile(document.getString("_id"), document.getString("name"), document.getString("email"), document.getString("phoneNumber"), avail);
-
+        Bson update = set("name", name);
+        collection.updateOne(filter, update);
     }
 
     public static Document toDocument(Profile profile) {
