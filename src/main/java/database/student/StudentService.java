@@ -88,7 +88,7 @@ public class StudentService {
     public void generate(){
         courseDAO.generate();
         profileDAO.generate();
-        tutorOfferDAO.generate();
+        //tutorOfferDAO.generate();
     }
 
     public boolean deleteAccount(String id) {
@@ -1224,5 +1224,9 @@ public class StudentService {
     public Vector<ArrayList<String>> getTutorOffers(String courseId){
         System.out.println("student service");
         return TutorOfferDAO.getTutorOffers(courseId);
+    }
+
+    public void changeAvail(String id, Vector<String> avail) {
+        profileDAO.updateProfileAvail(id, avail);
     }
 }

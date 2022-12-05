@@ -44,7 +44,7 @@ public class Controller {
     }
 
     public void addTutorOffer(String courseCode, String professorTaken, String semesterTaken, Double hourlyRate) {
-        sService.addTutorOffer(courseCode, professorTaken, semesterTaken, hourlyRate);
+       // sService.addTutorOffer(courseCode, professorTaken, semesterTaken, hourlyRate);
     }
 
     public Vector<Object> fetchProfileInfo(String id){
