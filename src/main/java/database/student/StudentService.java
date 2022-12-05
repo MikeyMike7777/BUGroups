@@ -649,7 +649,7 @@ public class StudentService {
     }
 
     //Sends a password request email to target email and returns boolean of valid send or not
-    public boolean sendRegisterEmail(String email, String generatedPassword){
+    public boolean sendRegisterEmail(String email, String generatedPassword, String name){
         if(!email.endsWith("@baylor.edu")){
             return false;
         }
@@ -1121,8 +1121,8 @@ public class StudentService {
                 "                            <tr>\n" +
                 "                                <td class=\"content-cell\">\n" +
                 "                                    <div class=\"f-fallback\">\n" +
-                "                                        <h1>Hi Person,</h1>\n" +
-                "                                        <p>You recently created a BUGroups account. Use the temporary password to login to your account and update your password!</p>\n" +
+                "                                        <h1>Hi " + name +
+                "                                        ,\n</h1><p>You recently created a BUGroups account. Use the following login credentials to access you BUGroups account. Welcome to the community!</p>\n" +
                 "                                        <!-- Action -->\n" +
                 "                                        <table class=\"body-action\" align=\"center\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\">\n" +
                 "                                            <tr>\n" +
@@ -1130,8 +1130,8 @@ public class StudentService {
                 "                                                    <!-- Border based button\n" +
                 "                                 https://litmus.com/blog/a-guide-to-bulletproof-buttons-in-email-design -->\n" +
                 "                                                    <table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" role=\"presentation\">\n" +
-                "                                                        <tr>\n" +
-                "                                                            <p>Your Temporary Password:</p><br><h1>\n" + generatedPassword +
+                "                                                        <tr>\n<p>Your Username:</p>\n<h1>" + email.substring(0, email.length() - 11) +
+                "                                                            </h1><p>Your Temporary Password:</p><br><h1>\n" + generatedPassword +
                 "                                                            </h1>\n" +
                 "                                                        </tr>\n" +
                 "                                                    </table>\n" +
