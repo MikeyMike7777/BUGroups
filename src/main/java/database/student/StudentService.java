@@ -8,6 +8,7 @@ public class StudentService {
     StudentDAO studentDAO = new StudentDAO();
     CourseDAO  courseDAO = new CourseDAO();
     ProfileDAO profileDAO = new ProfileDAO();
+    TutorOfferDAO tutorOfferDAO = new TutorOfferDAO();
     ForgotPasswordDAO forgotPasswordDAO = new ForgotPasswordDAO();
 
 
@@ -58,9 +59,14 @@ public class StudentService {
     public void generate(){
         courseDAO.generate();
         profileDAO.generate();
+        tutorOfferDAO.generate();
     }
 
     public boolean verifyAccount(String email){
         return forgotPasswordDAO.verifyAccount(email);
+    }
+
+    public Vector<ArrayList<String>> getTutorOffers(String courseId){
+        return TutorOfferDAO.getTutorOffers(courseId);
     }
 }

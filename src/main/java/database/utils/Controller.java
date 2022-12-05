@@ -58,4 +58,7 @@ public class Controller {
         sService.generate();
     }
 
+    public Vector<ArrayList<String>> getTutorOffers(String courseId){
+        return sService.getClassmates(courseId);
+    }
 }
