@@ -88,7 +88,7 @@ public class StudentService {
     public void generate(){
         courseDAO.generate();
         profileDAO.generate();
-        tutorOfferDAO.generate();
+        //tutorOfferDAO.generate();
     }
 
     public boolean deleteAccount(String id) {

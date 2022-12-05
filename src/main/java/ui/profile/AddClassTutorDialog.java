@@ -81,9 +81,9 @@ public class AddClassTutorDialog extends JDialog {
     class SaveActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            //String normalized = classCode.getText().substring(0,4) + " " + classCode.getText().substring(classCode.getText().length() - 4, classCode.getText().length());
+            String normalized = classCode.getText().substring(0,4) + " " + classCode.getText().substring(classCode.getText().length() - 4, classCode.getText().length());
             BUGUtils.controller.addCourse(Window.username, classCode.getText(), professor.getText(), Integer.parseInt(section.getText()));
-            List.addElement(classCode.getText());
+            List.addElement(normalized);
             dispose();
         }
     }
