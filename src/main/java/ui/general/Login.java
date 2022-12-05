@@ -100,21 +100,18 @@ public class Login extends JPanel {
                         setVisible(false);
                         temp.remove(0);
                         temp.add(new Window(getPreferredSize(),
-                                ((JTextField) username.getComponent(1)).getText()));
+                                ((JTextField) username.getComponent(1))
+                                        .getText().toLowerCase()));
                     }
                 }
             }
         });
         login.addKeyListener(new KeyListener() {
             @Override
-            public void keyTyped(KeyEvent e) {
-
-            }
+            public void keyTyped(KeyEvent e) {}
 
             @Override
-            public void keyPressed(KeyEvent e) {
-
-            }
+            public void keyPressed(KeyEvent e) {}
 
             @Override
             public void keyReleased(KeyEvent e) {

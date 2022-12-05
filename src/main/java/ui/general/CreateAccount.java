@@ -87,11 +87,15 @@ public class CreateAccount extends JPanel {
                             "Confirmation", JOptionPane.QUESTION_MESSAGE);
                     String name = firstName.getText() + " " + lastName.getText();
                     String password = BUGUtils.controller.generatePassword(8);
-                    BUGUtils.controller.sendRegisterEmail(emailField.getText(), password, name);
-                    String username = emailField.getText().substring(0, emailField.getText().length() - 11);
+                    BUGUtils.controller.sendRegisterEmail(emailField.getText()
+                            .toLowerCase(), password, name);
+                    String username = emailField.getText().toLowerCase()
+                            .substring(0, emailField.getText().length() - 11);
 
-                    BUGUtils.controller.registerStudent(username, password, name, number.getText(), emailField.getText());
-                    BUGUtils.controller.createProfileInfo(username, name, emailField.getText(), number.getText(), null);
+                    BUGUtils.controller.registerStudent(username, password, name, number.getText(),
+                            emailField.getText().toLowerCase());
+                    BUGUtils.controller.createProfileInfo(username, name,
+                            emailField.getText().toLowerCase(), number.getText(), null);
                 }
                 else {
                     int a = JOptionPane.showConfirmDialog(getRootPane().getParent(), "Invalid Email", "Error", JOptionPane.ERROR_MESSAGE);
