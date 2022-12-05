@@ -1,9 +1,12 @@
-package ui.general;
+package ui.profile;
 
 import database.student.Student;
 import database.utils.BUGUtils;
 import database.utils.Controller;
 import ui.classmates.ClassmatesTab;
+import ui.general.Login;
+import ui.general.Window;
+import ui.profile.ProfilePage;
 
 import javax.swing.*;
 import java.awt.*;
@@ -78,30 +81,32 @@ public class Settings extends JPanel {
                 JTextField last = new JTextField(15);
 
                 changePanel.setLayout(new BoxLayout(changePanel, BoxLayout.Y_AXIS));
+
                 changePanel.add(label);
                 text.add(first);
                 changePanel.add(text);
+
                 changePanel.add(label1);
                 text1.add(last);
-                changePanel.add(done);
+                changePanel.add(text1);
 
+                changePanel.add(done);
                 label.setAlignmentX(CENTER_ALIGNMENT);
                 label1.setAlignmentX(CENTER_ALIGNMENT);
                 done.setAlignmentX(CENTER_ALIGNMENT);
                 changePanel.setAlignmentX(CENTER_ALIGNMENT);
-
-                String name = first.getText() + " " + last.getText();
-
                 done.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
+                        String name = first.getText() + " " + last.getText();
                         BUGUtils.controller.updateProfileName(Window.username, name);
                         changeDialog.dispose();
+                        ProfilePage.repaintUserInfo();
                     }
                 });
 
                 changeDialog.add(changePanel);
-                changeDialog.setSize(new Dimension(300, 100));
+                changeDialog.setSize(new Dimension(300, 160));
                 changeDialog.setVisible(true);
             }
         });

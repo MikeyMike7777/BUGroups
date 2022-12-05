@@ -1,9 +1,9 @@
 package ui.general;
 
 import ui.classmates.ClassmatesPage;
-import database.utils.Controller;
 import ui.messages.MessagePage;
 import ui.profile.ProfilePage;
+import ui.profile.Settings;
 import ui.tutors.TutorsPage;
 
 import javax.imageio.ImageIO;
