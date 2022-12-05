@@ -1,9 +1,11 @@
 package database.student;
 
+import database.utils.BUGUtils;
 import database.utils.EmbeddedEmailUtil;
 import ui.general.Window;
 
 
+import javax.swing.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -127,14 +129,12 @@ public class StudentService {
 
     //Sends a password request email to target email and returns boolean of valid send or not
     public boolean sendPasswordReset(String email){
-//        if(!email.endsWith("@baylor.edu")){
-//            return false;
-//        }
 
         String host = "smtp.gmail.com";
         String port = "465";
         String mailFrom = "info.bugroups@gmail.com";
         String password = prop.getProperty("APP_KEY");
+        String newPassword = generatePassword(8);
 
         // message info
         String mailTo = email;
@@ -598,7 +598,7 @@ public class StudentService {
                 "                            <tr>\n" +
                 "                                <td class=\"content-cell\">\n" +
                 "                                    <div class=\"f-fallback\">\n" +
-                "                                        <h1>Hi Person,</h1>\n" +
+                "                                        <h1>Hello,</h1>\n" +
                 "                                        <p>You recently requested to reset your password for your BUGroups account. Use the temporary password to login to you account and update your password!</p>\n" +
                 "                                        <!-- Action -->\n" +
                 "                                        <table class=\"body-action\" align=\"center\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\">\n" +
@@ -608,7 +608,7 @@ public class StudentService {
                 "                                 https://litmus.com/blog/a-guide-to-bulletproof-buttons-in-email-design -->\n" +
                 "                                                    <table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" role=\"presentation\">\n" +
                 "                                                        <tr>\n" +
-                "                                                            <p>Your Temporary Password:</p><br><h1>\n" + generatePassword(8) +
+                "                                                            <p>Your Temporary Password:</p><br><h1>\n" + newPassword +
                 "                                                            </h1>\n" +
                 "                                                        </tr>\n" +
                 "                                                    </table>\n" +
@@ -659,8 +659,9 @@ public class StudentService {
         inlineImages.put("image1", "src/main/resources/BUGroups.png");
         //inlineImages.put("image2", "C:\\Users\\ninja\\Downloads\\SequenceDiagram\\BUGroups\\src\\main\\resources\\BUGroups.png");
 
-        try {
+        BUGUtils.controller.changePassword((email.substring(0, email.length() - 11)), newPassword);
 
+        try {
             EmbeddedEmailUtil.send(host, port, mailFrom, password, mailTo,
                     subject, body.toString(), inlineImages);
             System.out.println("Email sent.");

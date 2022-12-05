@@ -45,17 +45,22 @@ public class ForgotPassword extends JPanel {
         reset.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(ForgotPassword.this.getRootPane()
-                    .getParent(), "Email sent!", "Confirmation",
-                        JOptionPane.QUESTION_MESSAGE);
-                JPanel temp = (JPanel)getParent();
-                setVisible(false);
-                temp.remove(0);
-                //send reset email
-                if(BUGUtils.controller.verifyAccount(emailField.getText())){
-                    BUGUtils.controller.sendPasswordReset(emailField.getText());
+                if(emailField.getText().endsWith("@baylor.edu")) {
+                    JOptionPane.showMessageDialog(ForgotPassword.this.getRootPane()
+                                    .getParent(), "Email sent!", "Confirmation",
+                            JOptionPane.QUESTION_MESSAGE);
+                    JPanel temp = (JPanel) getParent();
+                    setVisible(false);
+                    temp.remove(0);
+                    //send reset email
+                    if (BUGUtils.controller.verifyAccount(emailField.getText())) {
+                        BUGUtils.controller.sendPasswordReset(emailField.getText());
+                    }
+                    temp.add(new Login(getPreferredSize()));
                 }
-                temp.add(new Login(getPreferredSize()));
+                else {
+                    int a = JOptionPane.showConfirmDialog(getRootPane().getParent(), "Invalid Email", "Error", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
         reset.setAlignmentX(CENTER_ALIGNMENT);
