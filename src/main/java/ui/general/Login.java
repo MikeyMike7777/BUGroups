@@ -14,6 +14,8 @@ public class Login extends JPanel {
     JPanel username;
 
     JPasswordField password = new JPasswordField(15);
+
+    JTextField usernameText = new JTextField(15);
     public Login(Dimension d) {
         super();
         createAndDisplay(d);
@@ -49,7 +51,7 @@ public class Login extends JPanel {
         username = new JPanel();
         username.setLayout(new BoxLayout(username, BoxLayout.X_AXIS));
         username.add(new JLabel("Username: "));
-        username.add(new JTextField(15));
+        username.add(usernameText);
         username.setAlignmentX(CENTER_ALIGNMENT);
         return username;
     }
@@ -68,7 +70,9 @@ public class Login extends JPanel {
         login.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Vector<Object> s = BUGUtils.controller.fetchStudent(Window.username);
+                String pass = password.getText();
+                //BUGUtils.controller.registerStudent(usernameText.getText(), pass , null, null, null);
+                Vector<Object> s = BUGUtils.controller.fetchStudent(usernameText.getText());
 
 
                 if(s.size() == 0){
@@ -79,17 +83,18 @@ public class Login extends JPanel {
                     String user = (String) s.elementAt(0);
                     String userPassword = (String) s.elementAt(1);
 
-                    if(!Objects.equals(password.getPassword().toString(), userPassword)){
+                    if(!Objects.equals(pass, userPassword)){
                         int action = JOptionPane.showConfirmDialog(getRootPane().getParent(),
                                 "Incorrect Password!",
                                 null, JOptionPane.CANCEL_OPTION);
-                    }
+                    } else {
 
-                    JPanel temp = (JPanel) getParent();
-                    setVisible(false);
-                    temp.remove(0);
-                    temp.add(new Window(getPreferredSize(),
-                            ((JTextField) username.getComponent(1)).getText()));
+                        JPanel temp = (JPanel) getParent();
+                        setVisible(false);
+                        temp.remove(0);
+                        temp.add(new Window(getPreferredSize(),
+                                ((JTextField) username.getComponent(1)).getText()));
+                    }
                 }
             }
         });
