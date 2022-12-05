@@ -1,6 +1,6 @@
 package ui.classmates;
 
-import database.utils.Controller;
+import database.utils.BUGUtils;
 import ui.profile.ProfileClassList;
 
 import javax.swing.*;
@@ -14,7 +14,6 @@ public class ClassmatesTab extends JPanel{
     String [] classNames = new String[list.getNames().length + 1];
     HashMap<String, Integer> boardKeys = new HashMap<>();
     JMenu select;
-    public static Controller controller = new Controller();
 
     ClassmatesTab() {
         super();
@@ -79,7 +78,7 @@ public class ClassmatesTab extends JPanel{
                 remove(getComponentCount() - 1);
 
             // call controller FIXME: need to pass courseID (course code + section)-- where are we getting section?
-            ClassmatesList currClassmates = new ClassmatesList(controller.getClassmates(s)); // pass course code to controller
+            ClassmatesList currClassmates = new ClassmatesList(BUGUtils.controller.getClassmates(s)); // pass course code to controller
             currClassmates.iD = boardKeys.get(s);
             currClassmates.name = s;
             add(currClassmates);

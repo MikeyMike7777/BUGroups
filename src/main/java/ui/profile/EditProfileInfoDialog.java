@@ -42,6 +42,7 @@ public class EditProfileInfoDialog extends JDialog {
     void setText(){
         name.setText("Name:");
         email.setText("Email:");
+        email.setEditable(false);
         phoneNumber.setText("Phone #:");
     }
     void createAndDisplay() {

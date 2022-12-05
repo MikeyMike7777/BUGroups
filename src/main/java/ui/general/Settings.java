@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Vector;
 
 public class Settings extends JPanel {
     ClassmatesTab dropdown;
@@ -27,7 +28,6 @@ public class Settings extends JPanel {
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.add(addLabel());
         panel.add(addChangeName());
-        //panel.add(addChangeEmail());
         panel.add(addChangePassword());
         panel.add(addChangePhoneNumber());
         panel.setAlignmentX(CENTER_ALIGNMENT);
@@ -47,13 +47,14 @@ public class Settings extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JPanel changePanel = new JPanel();
-                JTextField changeName = new JTextField();
+                JPanel text = new JPanel();
                 JButton done = new JButton("Done");
                 JDialog changeDialog = new JDialog();
 
                 changePanel.setLayout(new BoxLayout(changePanel, BoxLayout.Y_AXIS));
                 changePanel.add(label);
-                changePanel.add(changeName);
+                text.add(new JTextField(15));
+                changePanel.add(text);
                 changePanel.add(done);
 
                 label.setAlignmentX(CENTER_ALIGNMENT);
@@ -63,12 +64,13 @@ public class Settings extends JPanel {
                 done.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        //Student student = BUGUtils.controller.fetchStudent(Window.username);
+                        Vector<Object> vector = BUGUtils.controller.fetchProfileInfo(Window.username);
                         changeDialog.dispose();
                     }
                 });
 
                 changeDialog.add(changePanel);
+                changeDialog.setSize(new Dimension(300, 100));
                 changeDialog.setVisible(true);
             }
         });
@@ -78,20 +80,27 @@ public class Settings extends JPanel {
     private Component addChangePassword() {
         JButton phoneNumber = new JButton("Change Password");
         JLabel label = new JLabel("Change Password");
+        JLabel label1 = new JLabel("Confirm Password");
         phoneNumber.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JPanel changePanel = new JPanel();
-                JTextField changePassword = new JTextField();
+                JPanel text = new JPanel();
+                JPanel text1 = new JPanel();
                 JButton done = new JButton("Done");
                 JDialog changeDialog = new JDialog();
 
                 changePanel.setLayout(new BoxLayout(changePanel, BoxLayout.Y_AXIS));
                 changePanel.add(label);
-                changePanel.add(changePassword);
+                text.add(new JTextField(15));
+                changePanel.add(text);
+                changePanel.add(label1);
+                text1.add(new JTextField(15));
+                changePanel.add(text1);
                 changePanel.add(done);
 
                 label.setAlignmentX(CENTER_ALIGNMENT);
+                label1.setAlignmentX(CENTER_ALIGNMENT);
                 done.setAlignmentX(CENTER_ALIGNMENT);
                 changePanel.setAlignmentX(CENTER_ALIGNMENT);
                 done.addActionListener(new ActionListener() {
@@ -103,6 +112,7 @@ public class Settings extends JPanel {
                 });
 
                 changeDialog.add(changePanel);
+                changeDialog.setSize(new Dimension(300, 160));
                 changeDialog.setVisible(true);
             }
         });
@@ -117,13 +127,14 @@ public class Settings extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JPanel changePanel = new JPanel();
-                JTextField changePhone = new JTextField();
+                JPanel text = new JPanel();
                 JButton done = new JButton("Done");
                 JDialog changeDialog = new JDialog();
 
                 changePanel.setLayout(new BoxLayout(changePanel, BoxLayout.Y_AXIS));
                 changePanel.add(label);
-                changePanel.add(changePhone);
+                text.add(new JTextField(15));
+                changePanel.add(text);
                 changePanel.add(done);
 
                 label.setAlignmentX(CENTER_ALIGNMENT);
@@ -138,6 +149,7 @@ public class Settings extends JPanel {
                 });
 
                 changeDialog.add(changePanel);
+                changeDialog.setSize(new Dimension(300, 100));
                 changeDialog.setVisible(true);
             }
         });

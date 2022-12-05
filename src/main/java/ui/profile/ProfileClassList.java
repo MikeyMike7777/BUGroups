@@ -6,13 +6,15 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import java.util.Objects;
 import java.util.Vector;
 import ui.general.Window;
 
 public class ProfileClassList extends JPanel {
 
     String[] classesDataDummy = {
-            "csi 2334"
+            "CSI 3471",
+            "WGS 2300"
     };
 
     Vector<String> classes;
@@ -65,11 +67,11 @@ public class ProfileClassList extends JPanel {
     }
 
     void buildClassList(){
-        BUGUtils.controller.fetchProfileInfo(Window.username);
+        Vector<Object> s = BUGUtils.controller.fetchStudent(Window.username);
         if(classes != null) {
             model.addAll(classes);
         } else {
-            model.addElement("No Current Classes");
+            model.addElement("No Current Classes!");
         }
         classList = new JList<>(model);
         add(new JScrollPane(classList));

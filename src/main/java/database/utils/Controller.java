@@ -24,11 +24,16 @@ public class Controller {
     public Vector<Object> fetchStudent(String id){
         return sService.fetchStudent(id);
     }
+
+
     public Vector<Object> createMessage(String text, String author,
                               String courseNumber, Integer board, String message) {
         return mService.createMessage(text, author, courseNumber, board, message);
     }
 
+    public void createCourse(String id, String courseCode, String professor, Integer section, Vector<String> students){
+        sService.createCourse(courseCode, section, professor, students);
+    }
     public Vector<Object> fetchProfileInfo(String id){
         return sService.fetchProfileInfo(id);
     }
