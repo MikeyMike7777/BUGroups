@@ -9,7 +9,7 @@ import database.utils.BUGUtils;
 import ui.general.Window;
 
 public class CreateAccount extends JPanel {
-    JTextField firstName, lastName, email, number;
+    JTextField firstName, lastName, emailField, number;
     CreateAccount(Dimension preferredSize){
         super();
         preferredSize.setSize(preferredSize.getWidth(),
@@ -25,7 +25,7 @@ public class CreateAccount extends JPanel {
         JLabel label = new JLabel("Create Account");
         firstName = new JTextField(15);
         lastName = new JTextField(15);
-        email = new JTextField(40);
+        emailField = new JTextField(40);
         number = new JTextField(40);
 
         label.setAlignmentX(CENTER_ALIGNMENT);
@@ -71,7 +71,7 @@ public class CreateAccount extends JPanel {
         JPanel email = new JPanel();
         email.setLayout(new BoxLayout(email, BoxLayout.X_AXIS));
         email.add(new JLabel("Email: "));
-        email.add(email);
+        email.add(emailField);
         email.setAlignmentX(CENTER_ALIGNMENT);
         return email;
     }
@@ -85,10 +85,10 @@ public class CreateAccount extends JPanel {
                     .getParent(), "Temporary password sent to email address!",
                         "Confirmation", JOptionPane.QUESTION_MESSAGE);
 
-                if(email.getText().endsWith("@baylor.edu")) {
+                if(emailField.getText().endsWith("@baylor.edu")) {
                     String password = BUGUtils.controller.generatePassword(8);
-                    BUGUtils.controller.sendRegisterEmail(email.getText(), password);
-                    BUGUtils.controller.registerStudent(email.getText().substring(0, email.getText().length() - 11), password, firstName.getText() + lastName.getText(), number.getText(), email.getText());
+                    BUGUtils.controller.sendRegisterEmail(emailField.getText(), password);
+                    BUGUtils.controller.registerStudent(emailField.getText().substring(0, emailField.getText().length() - 11), password, firstName.getText() + lastName.getText(), number.getText(), emailField.getText());
                 }
                 JPanel temp = (JPanel)getParent();
                 setVisible(false);

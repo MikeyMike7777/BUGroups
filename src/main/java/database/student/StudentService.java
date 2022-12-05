@@ -109,8 +109,8 @@ public class StudentService {
 
         String host = "smtp.gmail.com";
         String port = "465";
-        String mailFrom = "noreply.bugroups@gmail.com";
-        String password = "ucrnhqbmdyrjqhyk";
+        String mailFrom = "bugroups.bug@gmail.com";
+        String password = "lahnvhzzroaabxjv";
 
         // message info
         String mailTo = email;
@@ -656,8 +656,8 @@ public class StudentService {
 
         String host = "smtp.gmail.com";
         String port = "465";
-        String mailFrom = "noreply.bugroups@gmail.com";
-        String password = "ucrnhqbmdyrjqhyk";
+        String mailFrom = "bugroups.bug@gmail.com";
+        String password = "lahnvhzzroaabxjv";
 
         // message info
         String mailTo = email;
