@@ -137,4 +137,5 @@ public class ProfileDAO {
         createProfileInfo("greg_speegle1", "Greg Speegle", "greg_speegle1@baylor.edu", "924-539-2945", times);
         createProfileInfo("cindy_fry1", "Cindy Fry", "cindy_fry1@baylor.edu", "334-642-1391", times);
     }
+
 }
