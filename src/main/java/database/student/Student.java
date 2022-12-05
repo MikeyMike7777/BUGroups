@@ -89,4 +89,11 @@ public class Student {
     public void setTutorOffers(Vector<TutorOffer> tutorOffers) {
         this.tutorOffers = tutorOffers;
     }
+    public Vector<Object> toVector(){
+        Vector<Object> studentInfo = new Vector<>();
+        studentInfo.add(this.getUsername());
+        studentInfo.add(this.getPassword());
+        //courses?
+        return studentInfo;
+    }
 }

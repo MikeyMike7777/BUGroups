@@ -60,9 +60,7 @@ public class StudentService {
     // return vector of relevant student info, put username first please :)
     public Vector<Object> fetchStudent(String id) {
         Student s = studentDAO.fetchStudent(id);
-
-
-        return new Vector<>(1);
+        return s.toVector();
     }
 
     public Vector<ArrayList<String>> getClassmates(String courseId){
