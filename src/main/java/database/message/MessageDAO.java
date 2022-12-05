@@ -2,7 +2,6 @@ package database.message;
 
 import com.mongodb.client.*;
 import database.utils.BUGUtils;
-import database.utils.MongoInit;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 
@@ -93,13 +92,13 @@ class MessageDAO {
     }
 
     static Vector<Object> toVector(Message message) {
-        Vector<Object> v = new Vector<>(List.of(message.getAuthor(), message.getText(),
+        return  new Vector<>(List.of(message.getAuthor(), message.getText(),
                 message.getRepliesTo(), message.getID(),
                 message.getReplies().size() == 0 ? new Vector<>(0) :
                         new Vector<>(message.getReplies().stream()
                                 .sorted(Comparator.comparing(Message::getTime))
-                                .map(MessageDAO::toVector).collect(Collectors.toList()))));
-        return v;
+                                .map(MessageDAO::toVector).collect(Collectors.toList())),
+                message.getCourseNumber(), message.getTime()));
     }
 
     static Document toDocument(Message message) {

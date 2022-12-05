@@ -33,16 +33,14 @@ public class MessagePage extends JPanel {
         JMenu menu = dropdown.getMessageBoardMenu();
         int index = -1;
 
-        for(int i = 0; i < itemNames.length; i++){
+        for(int i = 0; i < itemNames.length; i++)
             if(itemNames[i].equals(boardName)){
                 index = i;
                 break;
             }
-        }
 
-        if(index == -1){
+        if(index == -1)
             return;
-        }
 
         menu.getItem(index).doClick();
     }
