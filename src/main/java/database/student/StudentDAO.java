@@ -1,27 +1,17 @@
-package student;
+package database.student;
 
-import com.mongodb.ConnectionString;
-import com.mongodb.MongoClientSettings;
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
+import database.utils.BUGUtils;
+import database.utils.MongoInit;
 import org.bson.Document;
 
 import java.util.Vector;
 
 public class StudentDAO {
-    ConnectionString connectionString = new ConnectionString("mongodb+srv://gouligab:vwZBMKRZ1vQizZ43@dynamic-chat-app.u9l9jli.mongodb.net/?retryWrites=true&w=majority");
-    MongoClientSettings settings = MongoClientSettings.builder()
-            .applyConnectionString(connectionString)
-            .build();
-    MongoClient mongoClient = MongoClients.create(settings);
-    MongoDatabase database = mongoClient.getDatabase("test");
-
 
     void createStudent(String username, String password){
         Student s = new Student(username, password);
-        MongoCollection<Document> collection = database.getCollection("students");
+        MongoCollection<Document> collection = BUGUtils.database.getCollection("students");
 
         Document d = toDocument(s);
 

@@ -1,5 +1,6 @@
 package ui.profile;
 
+import database.utils.BUGUtils;
 import ui.general.Window;
 
 import javax.swing.*;
@@ -94,11 +95,11 @@ public class EditAvalibilityDialog extends JDialog{
             times.add(sun.getText());
 
             if(ProfilePage.info.size() != 0) {
-                ui.general.Window.controller.createProfileInfo(Window.username, (String) ProfilePage.info.elementAt(0),
+                BUGUtils.controller.createProfileInfo(Window.username, (String) ProfilePage.info.elementAt(0),
                         (String) ProfilePage.info.elementAt(1),
                         (String) ProfilePage.info.elementAt(2), times);
             } else {
-                ui.general.Window.controller.createProfileInfo(Window.username, null, null, null, times);
+                BUGUtils.controller.createProfileInfo(Window.username, null, null, null, times);
             }
 
             ProfilePage.repaintAvailInfo();

@@ -1,4 +1,4 @@
-package message;
+package database.message;
 
 import java.util.*;
 

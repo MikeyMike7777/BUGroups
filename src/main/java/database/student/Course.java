@@ -1,4 +1,4 @@
-package student;
+package database.student;
 
 import java.util.Vector;
 

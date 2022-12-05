@@ -6,6 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Objects;
 import java.util.Vector;
+
+import database.utils.BUGUtils;
 import ui.general.Window;
 
 public class ProfilePage extends JPanel {
@@ -60,7 +62,7 @@ public class ProfilePage extends JPanel {
         userInfo.setLayout(new GridLayout(3,1));
         userInfo.add(textHeader);
 
-        info = Window.controller.fetchProfileInfo(Window.username);
+        info = BUGUtils.controller.fetchProfileInfo(Window.username);
 
         textArea.setEditable(false);
         if(info.size() == 0) {
@@ -132,7 +134,7 @@ public class ProfilePage extends JPanel {
 
         infoText.setEditable(false);
 
-        info = Window.controller.fetchProfileInfo(Window.username);
+        info = BUGUtils.controller.fetchProfileInfo(Window.username);
 
         if(info.size() > 0) {
             try {

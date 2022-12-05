@@ -1,5 +1,6 @@
 package ui.messages;
 
+import database.utils.BUGUtils;
 import ui.general.Window;
 
 import javax.swing.*;
@@ -71,7 +72,7 @@ public class PostDialog extends JDialog {
     class PostActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            Window.controller.createMessage(
+            BUGUtils.controller.createMessage(
                     message.getText(), Window.username, course.getText(),
                     parent.id, "null"
             );

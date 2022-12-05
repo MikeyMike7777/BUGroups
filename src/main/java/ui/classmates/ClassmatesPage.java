@@ -1,6 +1,6 @@
 package ui.classmates;
 
-import ui.controller.Controller;
+import database.utils.Controller;
 
 import javax.swing.*;
 import java.awt.*;

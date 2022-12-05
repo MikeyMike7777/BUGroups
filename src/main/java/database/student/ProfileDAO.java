@@ -1,23 +1,16 @@
-package student;
+package database.student;
 
-import com.mongodb.ConnectionString;
-import com.mongodb.MongoClientSettings;
 import com.mongodb.client.*;
+import database.utils.BUGUtils;
+import database.utils.MongoInit;
 import org.bson.Document;
 import org.bson.conversions.Bson;
-import ui.general.Window;
 
 import java.util.*;
 
 import static com.mongodb.client.model.Filters.eq;
 
 public class ProfileDAO {
-    ConnectionString connectionString = new ConnectionString("mongodb+srv://gouligab:vwZBMKRZ1vQizZ43@dynamic-chat-app.u9l9jli.mongodb.net/?retryWrites=true&w=majority");
-    MongoClientSettings settings = MongoClientSettings.builder()
-            .applyConnectionString(connectionString)
-            .build();
-    MongoClient mongoClient = MongoClients.create(settings);
-    MongoDatabase database = mongoClient.getDatabase("test");
 
     private static MongoCursor<Document> cursor;
 
@@ -25,7 +18,7 @@ public class ProfileDAO {
     void createProfileInfo(String id,String name, String email, String phone, Vector<String> availability){
         Availability a = new Availability(availability);
         Profile p = new Profile(id, name, email, phone, a);
-        MongoCollection<Document> collection = database.getCollection("profileInfos");
+        MongoCollection<Document> collection = BUGUtils.database.getCollection("profileInfos");
         Bson filter = eq("_id", id);
 
         Document d = toDocument(p);
@@ -38,7 +31,7 @@ public class ProfileDAO {
     }
 
     Profile fetchProfileInfo(String id){
-        MongoCollection<Document> collection = database.getCollection("profileInfos");
+        MongoCollection<Document> collection = BUGUtils.database.getCollection("profileInfos");
         Bson filter = eq("_id", id);
         cursor = collection.find(filter).iterator();
         if (cursor.hasNext())
@@ -73,7 +66,7 @@ public class ProfileDAO {
         Vector<Vector<String>> classmates = new Vector<>();
 
         // querying profileInfos collection
-        MongoCollection<Document> profileCollection = database.getCollection("profileInfos");
+        MongoCollection<Document> profileCollection = BUGUtils.database.getCollection("profileInfos");
         // for each student, get their name, email, phone number, and availability
         for (String id : students){
             Vector<String> classmateInfo = new Vector<>();
@@ -95,7 +88,7 @@ public class ProfileDAO {
     // generates dummy data in profile collection for testing classmates FIXME: remove when done testing
     // id is username
     void generate(){
-        MongoCollection<Document> profileCollection = database.getCollection("profileInfos");
+        MongoCollection<Document> profileCollection = BUGUtils.database.getCollection("profileInfos");
         if (profileCollection.countDocuments() > 0){
             // if there is stuff in the collection, delete everything
             profileCollection.deleteMany(new Document());

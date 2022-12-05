@@ -1,4 +1,4 @@
-package student;
+package database.student;
 
 public class TutorOffer {
     private Course course;

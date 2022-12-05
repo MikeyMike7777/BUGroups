@@ -1,6 +1,6 @@
-package student;
+package database.student;
 
-import message.Message;
+import database.message.Message;
 
 import java.util.Vector;
 

@@ -1,8 +1,8 @@
-package message;
+package database.message;
 
-import com.mongodb.ConnectionString;
-import com.mongodb.MongoClientSettings;
 import com.mongodb.client.*;
+import database.utils.BUGUtils;
+import database.utils.MongoInit;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 
@@ -14,18 +14,6 @@ import static com.mongodb.client.model.Updates.*;
 import static java.util.Arrays.asList;
 
 class MessageDAO {
-
-    // do we need these once we set up a controller? from *** here ***
-    static ConnectionString connectionString = new ConnectionString(
-            "mongodb+srv://gouligab:vwZBMKRZ1vQizZ43@dynamic-chat-app.u9l9jli." +
-                    "mongodb.net/?retryWrites=true&w=majority"
-    );
-    static MongoClientSettings settings = MongoClientSettings.builder()
-            .applyConnectionString(connectionString)
-            .build();
-    static MongoClient mongoClient = MongoClients.create(settings);
-    static MongoDatabase database = mongoClient.getDatabase("test");
-    // down to *** here ***
 
     private static MongoCursor<Document> cursor;
     static final String[] names = {
@@ -57,7 +45,7 @@ class MessageDAO {
         if (!message.equals("null"))
             temp = fetchMessage(message);
         Message m = boards.elementAt(board).createMessage(text, author, courseNumber, temp);
-        MongoCollection<Document> collection = database.getCollection("BUGMessages");
+        MongoCollection<Document> collection = BUGUtils.database.getCollection("BUGMessages");
         Document d = toDocument(m);
         collection.insertOne(d);
         if (temp != null) {
@@ -68,13 +56,13 @@ class MessageDAO {
     }
 
     void deleteMessage(String id) {
-        MongoCollection<Document> collection = database.getCollection("BUGMessages");
+        MongoCollection<Document> collection = BUGUtils.database.getCollection("BUGMessages");
         Bson filter = eq("_id", id);
         collection.deleteOne(filter);
     }
 
     void editRepostMessage(String id, String text) {
-        MongoCollection<Document> collection = database.getCollection("BUGMessages");
+        MongoCollection<Document> collection = BUGUtils.database.getCollection("BUGMessages");
         Bson filter = eq("_id", id);
         cursor = collection.find(filter).iterator();
         Message message = toMessage(cursor.next());
@@ -84,7 +72,7 @@ class MessageDAO {
     }
 
     static Message fetchMessage(String id) {
-        MongoCollection<Document> collection = database.getCollection("BUGMessages");
+        MongoCollection<Document> collection = BUGUtils.database.getCollection("BUGMessages");
         Bson filter = eq("_id", id);
         cursor = collection.find(filter).iterator();
         if (cursor.hasNext())
@@ -93,7 +81,7 @@ class MessageDAO {
     }
 
     List<Message> fetchBoard(Integer messageBoard) {
-        MongoCollection<Document> collection = database.getCollection("BUGMessages");
+        MongoCollection<Document> collection = BUGUtils.database.getCollection("BUGMessages");
         Bson filter = and(eq("messageBoard", messageBoard),
                 eq("repliesTo", "null"));
         cursor = collection.find(filter).iterator();
