@@ -8,6 +8,7 @@ import java.util.HashMap;
 public class MessageTab extends JPanel {
     JPanel messageHeader;
     JButton post;
+    JButton refresh;
     JMenuBar bar;
     JMenu select;
     MessageBoardPage board;
@@ -66,6 +67,7 @@ public class MessageTab extends JPanel {
         bar.add(select);
         messageHeader.add(bar);
         messageHeader.add(addPostButton());
+        messageHeader.add(addRefreshButton());
         return messageHeader;
     }
 
@@ -85,6 +87,17 @@ public class MessageTab extends JPanel {
             }
         });
         return post;
+    }
+
+    JButton addRefreshButton() {
+        refresh = new JButton("Refresh");
+        refresh.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                board.refresh();
+            }
+        });
+        return refresh;
     }
 
     JMenuItem[] createBoardOptions() {
