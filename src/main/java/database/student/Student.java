@@ -10,7 +10,6 @@ public class Student {
     private Vector<Course> courses = new Vector<>(0);
     private Vector<TutorOffer> tutorOffers = new Vector<>(0);
     private Vector<Message> sentMessages;
-    private Vector<TutorOffer> offers;
     private Profile profile;
 
     public Student() {

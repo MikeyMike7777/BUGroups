@@ -15,36 +15,7 @@ public class ClassmatesList extends JPanel {
         // reworked this. previously had hardcoded values. will also need to rework addClassmates function
         this.classmatesInfo = classmatesInfo;
         createAndDisplay();
-        /*for (ArrayList<String> ar : classmatesInfo){
-            for (String s : ar){
-                System.out.print(s + ", ");
-            }
-            System.out.println();
-        }*/
     }
-    /*private static final String[] classmates = {
-            "Carsyn Smeda",
-            "Bryce Robinson",
-            "Mikey Mathews",
-            "Gabriel Goulis",
-            "Carson Buntin"
-    };
-
-    private static final String[] classmatesPhones = {
-            "849-135-1364",
-            "124-362-3577",
-            "642-246-6642",
-            "133-920-9042",
-            "399-230-0321"
-    };
-
-    private static final String[] classmatesEmails = {
-            "carsyn_smeda1@baylor.edu",
-            "bryce_robinson1@baylor.edu",
-            "michael_mathews1@baylor.edu",
-            "gabriel_goulis1@baylor.edu",
-            "carson_buntin1@baylor.edu"
-    };*/
 
     void createAndDisplay() {
         setMinimumSize(new Dimension(600, 350));

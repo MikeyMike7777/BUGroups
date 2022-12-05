@@ -13,12 +13,13 @@ public class Classmate extends JPanel {
     String name;
     String email;
     String phone;
-    // FIXME: also need to add availability
+    String availability;
 
     Classmate(ArrayList<String> info){
         name = info.get(0);
         email = info.get(1);
         phone = info.get(2);
+        availability = info.get(3); // FIXME: this is where the error is-- out of bounds
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setMinimumSize(new Dimension(500, 100));
         setMaximumSize(new Dimension(500, 300));
@@ -39,6 +40,7 @@ public class Classmate extends JPanel {
     public String getPhone(){
         return phone;
     }
+    public String getAvailability() { return availability; }
 
     class ClassmateClickListener implements MouseListener {
         @Override

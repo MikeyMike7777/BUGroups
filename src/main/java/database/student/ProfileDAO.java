@@ -77,7 +77,8 @@ public class ProfileDAO {
             classmateInfo.add(profile.getName());
             classmateInfo.add(profile.getEmail());
             classmateInfo.add(profile.getPhoneNumber());
-            //FIXME: also need to add availability but availability class is being redone
+            classmateInfo.add(profile.getAvailability().toString());
+            //System.out.println(profile.getAvailability().toString());
 
             classmates.add(classmateInfo);
         }
