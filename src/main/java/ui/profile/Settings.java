@@ -51,13 +51,19 @@ public class Settings extends JPanel {
         logOut.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Container temp = (Container)getRootPane().getContentPane();
-                JPanel root = new JPanel();
-                temp.removeAll();
-                root.add(new Login(new Dimension(BUGUtils.APP_WIDTH, BUGUtils.APP_HEIGHT)));
-                temp.add(root);
-                temp.validate();
-                temp.repaint();
+                int answer = JOptionPane
+                        .showConfirmDialog(null,
+                                "Are you sure you want to log out?",
+                                "Warning", JOptionPane.YES_NO_OPTION);
+                if (answer == 0) {
+                    Container temp = (Container)getRootPane().getContentPane();
+                    JPanel root = new JPanel();
+                    temp.removeAll();
+                    root.add(new Login(new Dimension(BUGUtils.APP_WIDTH, BUGUtils.APP_HEIGHT)));
+                    temp.add(root);
+                    temp.validate();
+                    temp.repaint();
+                }
             }
         });
         return logOut;
@@ -69,9 +75,12 @@ public class Settings extends JPanel {
         report.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                JPanel labelPanel = new JPanel();
+                JPanel buttonPanel = new JPanel();
                 JDialog dialog = new JDialog();
                 JPanel changePanel = new JPanel();
                 JButton done = new JButton("Done");
+                JButton back = new JButton("Cancel");
                 JTextPane bug = new JTextPane();
                 changePanel.setLayout(new BoxLayout(changePanel, BoxLayout.Y_AXIS));
 
@@ -93,18 +102,27 @@ public class Settings extends JPanel {
                         }
                     }
                 });
-                changePanel.add(label);
+                back.addActionListener(new BackActionListener(dialog));
+
+                labelPanel.add(label);
+                buttonPanel.add(done);
+                buttonPanel.add(back);
+
+                changePanel.add(labelPanel);
                 changePanel.add(bug);
-                changePanel.add(done);
+                changePanel.add(buttonPanel);
 
                 dialog.add(changePanel);
-                dialog.setSize(new Dimension(300, 160));
+                dialog.setSize(new Dimension(300, 175));
                 dialog.setVisible(true);
 
                 changePanel.setAlignmentX(CENTER_ALIGNMENT);
                 label.setAlignmentX(CENTER_ALIGNMENT);
                 bug.setAlignmentX(CENTER_ALIGNMENT);
                 done.setAlignmentX(CENTER_ALIGNMENT);
+                back.setAlignmentX(CENTER_ALIGNMENT);
+                buttonPanel.setAlignmentX(CENTER_ALIGNMENT);
+                labelPanel.setAlignmentX(CENTER_ALIGNMENT);
             }
         });
         return report;
@@ -128,7 +146,6 @@ public class Settings extends JPanel {
                     temp.add(root);
                     temp.validate();
                     temp.repaint();
-                   // System.exit(0);
                 }
             }
         });
@@ -144,7 +161,9 @@ public class Settings extends JPanel {
                 JPanel changePanel = new JPanel();
                 JPanel text = new JPanel();
                 JPanel text1 = new JPanel();
+                JPanel buttonPanel = new JPanel();
                 JButton done = new JButton("Done");
+                JButton back = new JButton("Cancel");
                 JDialog changeDialog = new JDialog();
                 JTextField first = new JTextField(15);
                 JTextField last = new JTextField(15);
@@ -159,7 +178,11 @@ public class Settings extends JPanel {
                 text1.add(last);
                 changePanel.add(text1);
 
-                changePanel.add(done);
+                buttonPanel.add(done);
+                buttonPanel.add(back);
+                changePanel.add(buttonPanel);
+
+                buttonPanel.setAlignmentX(CENTER_ALIGNMENT);
                 label.setAlignmentX(CENTER_ALIGNMENT);
                 label1.setAlignmentX(CENTER_ALIGNMENT);
                 done.setAlignmentX(CENTER_ALIGNMENT);
@@ -189,9 +212,10 @@ public class Settings extends JPanel {
                         }
                     }
                 });
+                back.addActionListener(new BackActionListener(changeDialog));
 
                 changeDialog.add(changePanel);
-                changeDialog.setSize(new Dimension(300, 160));
+                changeDialog.setSize(new Dimension(300, 175));
                 changeDialog.setVisible(true);
             }
         });
@@ -208,7 +232,9 @@ public class Settings extends JPanel {
                 JPanel changePanel = new JPanel();
                 JPanel text = new JPanel();
                 JPanel text1 = new JPanel();
+                JPanel buttonPanel = new JPanel();
                 JButton done = new JButton("Done");
+                JButton back = new JButton("Cancel");
                 JDialog changeDialog = new JDialog();
                 JPasswordField password = new JPasswordField(15);
 
@@ -219,8 +245,11 @@ public class Settings extends JPanel {
                 changePanel.add(label1);
                 text1.add(new JPasswordField(15));
                 changePanel.add(text1);
-                changePanel.add(done);
+                buttonPanel.add(done);
+                buttonPanel.add(back);
+                changePanel.add(buttonPanel);
 
+                buttonPanel.setAlignmentX(CENTER_ALIGNMENT);
                 label.setAlignmentX(CENTER_ALIGNMENT);
                 label1.setAlignmentX(CENTER_ALIGNMENT);
                 done.setAlignmentX(CENTER_ALIGNMENT);
@@ -251,9 +280,10 @@ public class Settings extends JPanel {
                         }
                     }
                 });
+                back.addActionListener(new BackActionListener(changeDialog));
 
                 changeDialog.add(changePanel);
-                changeDialog.setSize(new Dimension(300, 160));
+                changeDialog.setSize(new Dimension(300, 175));
                 changeDialog.setVisible(true);
             }
         });
@@ -268,8 +298,10 @@ public class Settings extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JPanel changePanel = new JPanel();
+                JPanel buttonPanel = new JPanel();
                 JPanel text = new JPanel();
                 JButton done = new JButton("Done");
+                JButton back = new JButton("Cancel");
                 JDialog changeDialog = new JDialog();
                 JTextField phone = new JTextField(15);
 
@@ -277,8 +309,11 @@ public class Settings extends JPanel {
                 changePanel.add(label);
                 text.add(phone);
                 changePanel.add(text);
-                changePanel.add(done);
+                buttonPanel.add(done);
+                buttonPanel.add(back);
+                changePanel.add(buttonPanel);
 
+                buttonPanel.setAlignmentX(CENTER_ALIGNMENT);
                 label.setAlignmentX(CENTER_ALIGNMENT);
                 done.setAlignmentX(CENTER_ALIGNMENT);
                 changePanel.setAlignmentX(CENTER_ALIGNMENT);
@@ -309,13 +344,27 @@ public class Settings extends JPanel {
                         }
                     }
                 });
+                back.addActionListener(new BackActionListener(changeDialog));
 
                 changeDialog.add(changePanel);
-                changeDialog.setSize(new Dimension(300, 100));
+                changeDialog.setSize(new Dimension(300, 110));
                 changeDialog.setVisible(true);
             }
         });
         phoneNumber.setAlignmentX(CENTER_ALIGNMENT);
         return phoneNumber;
+    }
+
+    private static class BackActionListener implements ActionListener {
+        private final JDialog changeDialog;
+
+        public BackActionListener(JDialog changeDialog) {
+            this.changeDialog = changeDialog;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            changeDialog.dispose();
+        }
     }
 }

@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 
 import database.utils.BUGUtils;
 import ui.general.Window;
+import ui.profile.ProfilePage;
 
 public class CreateAccount extends JPanel {
     JTextField firstName, lastName, emailField, number;
@@ -81,41 +82,68 @@ public class CreateAccount extends JPanel {
         back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(emailField.getText().endsWith("@baylor.edu")) {
-                    //verify account
-                    if(!(BUGUtils.controller.verifyAccount(emailField.getText()))){
-                        JOptionPane.showMessageDialog(CreateAccount.this.getRootPane()
-                                        .getParent(), "Temporary password sent to email address!",
-                                "Confirmation", JOptionPane.QUESTION_MESSAGE);
-                        String name = firstName.getText() + " " + lastName.getText();
-                        String password = BUGUtils.controller.generatePassword(8);
-                        BUGUtils.controller.sendRegisterEmail(emailField.getText()
-                                .toLowerCase(), password, name);
-                        String username = emailField.getText().toLowerCase()
-                                .substring(0, emailField.getText().length() - 11);
-
-                        BUGUtils.controller.registerStudent(username, password, name, number.getText(),
-                                emailField.getText().toLowerCase());
-                        BUGUtils.controller.createProfileInfo(username, name,
-                                emailField.getText().toLowerCase(), number.getText(), null);
-
-                        //go back to home page
-                        JPanel temp = (JPanel)getParent();
-                        setVisible(false);
-                        temp.remove(0);
-                        //Create Account
-                        temp.add(new Login(getPreferredSize()));
-                    }
-                    else {
-                        JOptionPane.showMessageDialog(getRootPane().getParent(),
-                                "An account is already associated with this email",
-                                "Error", JOptionPane.ERROR_MESSAGE);
-                    }
+                //check first name, last name, number, email
+                if(firstName.getText().length() < 1) {
+                    JOptionPane.showMessageDialog(getRootPane().getParent(),
+                            "Please enter a valid first name",
+                            "Error", JOptionPane.ERROR_MESSAGE);
+                }
+                else if(lastName.getText().length() < 1) {
+                    JOptionPane.showMessageDialog(getRootPane().getParent(),
+                            "Please enter a valid last name",
+                            "Error", JOptionPane.ERROR_MESSAGE);
+                }
+                else if(number.getText().length() < 10) {
+                    JOptionPane.showMessageDialog(getRootPane().getParent(),
+                            "Please enter a valid phone number",
+                            "Error", JOptionPane.ERROR_MESSAGE);
                 }
                 else {
-                    JOptionPane.showMessageDialog(getRootPane().getParent(),
-                            "Invalid email",
-                            "Error", JOptionPane.ERROR_MESSAGE);
+                    try {
+                        //test if number is digits
+                        Long.parseLong(number.getText());
+
+                        if(emailField.getText().endsWith("@baylor.edu")) {
+                            //verify account
+                            if(!(BUGUtils.controller.verifyAccount(emailField.getText()))){
+                                JOptionPane.showMessageDialog(CreateAccount.this.getRootPane()
+                                                .getParent(), "Temporary password sent to email address!",
+                                        "Confirmation", JOptionPane.QUESTION_MESSAGE);
+                                String name = firstName.getText() + " " + lastName.getText();
+                                String password = BUGUtils.controller.generatePassword(8);
+                                BUGUtils.controller.sendRegisterEmail(emailField.getText()
+                                        .toLowerCase(), password, name);
+                                String username = emailField.getText().toLowerCase()
+                                        .substring(0, emailField.getText().length() - 11);
+
+                                BUGUtils.controller.registerStudent(username, password, name, number.getText(),
+                                        emailField.getText().toLowerCase());
+                                BUGUtils.controller.createProfileInfo(username, name,
+                                        emailField.getText().toLowerCase(), number.getText(), null);
+
+                                //go back to home page
+                                JPanel temp = (JPanel)getParent();
+                                setVisible(false);
+                                temp.remove(0);
+                                //Create Account
+                                temp.add(new Login(getPreferredSize()));
+                            }
+                            else {
+                                JOptionPane.showMessageDialog(getRootPane().getParent(),
+                                        "An account is already associated with this email",
+                                        "Error", JOptionPane.ERROR_MESSAGE);
+                            }
+                        }
+                        else {
+                            JOptionPane.showMessageDialog(getRootPane().getParent(),
+                                    "Invalid email",
+                                    "Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                    } catch (NumberFormatException nan){
+                        JOptionPane.showMessageDialog(getRootPane().getParent(),
+                                "Please only use numbers in \"Phone\"",
+                                "Error", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
             }
         });
