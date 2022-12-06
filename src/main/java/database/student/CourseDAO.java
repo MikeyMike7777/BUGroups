@@ -12,6 +12,7 @@ import java.util.Vector;
 
 import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Updates.addToSet;
+import static com.mongodb.client.model.Updates.pull;
 
 public class CourseDAO {
 
@@ -68,9 +69,13 @@ public class CourseDAO {
         }
     }
 
-    static void removeCourse(String courseId){
+    // removes student from course's list of students that are enrolled in it
+    static void removeCourse(String username, String courseId){
         MongoCollection<Document> courseCollection = BUGUtils.database.getCollection("courses");
-        courseCollection.deleteOne(eq("_id", courseId));
+        // fixme: should just delete student from list of students enrolled in that course, not the whole course
+        Bson filter = eq("_id", courseId);
+        Bson update = pull("students", username);
+        courseCollection.updateOne(filter, update);
     }
 
     // generates dummy data in course collection for testing classmates FIXME: remove when done testing

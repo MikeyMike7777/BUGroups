@@ -1260,7 +1260,9 @@ public class StudentService {
     }
 
     public void removeCourse(String courseId){
-        CourseDAO.removeCourse(courseId);
+        // removes student from course's list of students that are enrolled in it
+        CourseDAO.removeCourse(Window.username, courseId);
+        // removes course from students' list of courses they're enrolled in
         StudentDAO.removeCourse(Window.username, courseId);
     }
 }

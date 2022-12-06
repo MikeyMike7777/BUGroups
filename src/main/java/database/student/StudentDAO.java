@@ -149,10 +149,11 @@ public class StudentDAO {
         collection.findOneAndUpdate(filter, update);
     }
 
+    // removes course from students' list of courses they're enrolled in
     static void removeCourse(String username, String courseId){
         MongoCollection<Document> studentCollection = BUGUtils.database.getCollection("BUGStudents");
         Bson filter = eq("_id", username);
-        Bson update = pull("courses", courseId); // just courseCode is stored
+        Bson update = pull("courses", courseId);
         studentCollection.updateOne(filter, update);
     }
 }
