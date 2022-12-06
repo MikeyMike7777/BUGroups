@@ -78,8 +78,19 @@ public class Settings extends JPanel {
                 done.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        BUGUtils.controller.reportBug(bug.getText());
-                        dialog.dispose();
+                        if(bug.getText().length() < 1){
+                            JOptionPane.showMessageDialog(getRootPane().getParent(),
+                                    "Please enter something that's BUGging you",
+                                    "Error", JOptionPane.ERROR_MESSAGE);
+                            dialog.setVisible(true);
+                        }
+                        else {
+                            JOptionPane.showMessageDialog(null,
+                                    "Your BUG has been reported!",
+                                    "BUG Report", JOptionPane.PLAIN_MESSAGE);
+                            BUGUtils.controller.reportBug(bug.getText());
+                            dialog.dispose();
+                        }
                     }
                 });
                 changePanel.add(label);
@@ -157,11 +168,25 @@ public class Settings extends JPanel {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         String name = first.getText() + " " + last.getText();
-                        BUGUtils.controller.updateProfileName(Window.username, name);
-                        changeDialog.dispose();
-                        ((ProfilePage)((Window)((JPanel)getRootPane().getContentPane()
-                                .getComponent(0)).getComponent(0)).tabMap.get(4))
-                                .repaintUserInfo();
+                        if(first.getText().length() < 1){
+                            JOptionPane.showMessageDialog(getRootPane().getParent(),
+                                    "Please enter a valid first name",
+                                    "Error", JOptionPane.ERROR_MESSAGE);
+                            changeDialog.setVisible(true);
+                        }
+                        else if(last.getText().length() < 1){
+                            JOptionPane.showMessageDialog(getRootPane().getParent(),
+                                    "Please enter a valid last name",
+                                    "Error", JOptionPane.ERROR_MESSAGE);
+                            changeDialog.setVisible(true);
+                        }
+                        else {
+                            BUGUtils.controller.updateProfileName(Window.username, name);
+                            changeDialog.dispose();
+                            ((ProfilePage) ((Window) ((JPanel) getRootPane().getContentPane()
+                                    .getComponent(0)).getComponent(0)).tabMap.get(4))
+                                    .repaintUserInfo();
+                        }
                     }
                 });
 
@@ -172,9 +197,6 @@ public class Settings extends JPanel {
         });
         phoneNumber.setAlignmentX(CENTER_ALIGNMENT);
         return phoneNumber;
-    }
-    public void updateName(String name){
-        Vector<Object> vector = BUGUtils.controller.fetchProfileInfo(Window.username);
     }
     private Component addChangePassword() {
         JButton password = new JButton("Change Password");
@@ -188,10 +210,11 @@ public class Settings extends JPanel {
                 JPanel text1 = new JPanel();
                 JButton done = new JButton("Done");
                 JDialog changeDialog = new JDialog();
+                JPasswordField password = new JPasswordField(15);
 
                 changePanel.setLayout(new BoxLayout(changePanel, BoxLayout.Y_AXIS));
                 changePanel.add(label);
-                text.add(new JPasswordField(15));
+                text.add(password);
                 changePanel.add(text);
                 changePanel.add(label1);
                 text1.add(new JPasswordField(15));
@@ -205,15 +228,24 @@ public class Settings extends JPanel {
                 done.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        if (((JPasswordField)text.getComponent(0)).getText()
-                                .equals(((JPasswordField)text1.getComponent(0)).getText())) {
-                            BUGUtils.controller.changePassword(Window.username,
-                                    ((JPasswordField)text.getComponent(0)).getText());
-                            changeDialog.dispose();
-                        } else {
+                        if(password.getText().length() < 1) {
                             JOptionPane.showMessageDialog(getRootPane().getParent(),
-                                    "Passwords don't match!", "Error",
-                                    JOptionPane.WARNING_MESSAGE);
+                                    "Please enter a valid password",
+                                    "Error", JOptionPane.ERROR_MESSAGE);
+                            changeDialog.setVisible(true);
+                        }
+                        else {
+                            if (((JPasswordField) text.getComponent(0)).getText()
+                                    .equals(((JPasswordField) text1.getComponent(0)).getText())) {
+                                BUGUtils.controller.changePassword(Window.username,
+                                        ((JPasswordField) text.getComponent(0)).getText());
+                                changeDialog.dispose();
+                            } else {
+                                JOptionPane.showMessageDialog(getRootPane().getParent(),
+                                        "Passwords don't match!", "Error",
+                                        JOptionPane.WARNING_MESSAGE);
+                                changeDialog.setVisible(true);
+                            }
                         }
                     }
                 });
@@ -251,11 +283,28 @@ public class Settings extends JPanel {
                 done.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        BUGUtils.controller.updateProfilePhoneNumber(Window.username, phone.getText());
-                        changeDialog.dispose();
-                        ((ProfilePage)((Window)((JPanel)getRootPane().getContentPane()
-                                .getComponent(0)).getComponent(0)).tabMap.get(4))
-                                .repaintUserInfo();
+                        if(phone.getText().length() < 10) {
+                            JOptionPane.showMessageDialog(getRootPane().getParent(),
+                                    "Please enter a valid phone number",
+                                    "Error", JOptionPane.ERROR_MESSAGE);
+                            changeDialog.setVisible(true);
+                        }
+                        else {
+                            try {
+                                Long.parseLong(phone.getText());
+                                //continue if is numerical
+                                BUGUtils.controller.updateProfilePhoneNumber(Window.username, phone.getText());
+                                changeDialog.dispose();
+                                ((ProfilePage) ((Window) ((JPanel) getRootPane().getContentPane()
+                                        .getComponent(0)).getComponent(0)).tabMap.get(4))
+                                        .repaintUserInfo();
+                            } catch (NumberFormatException nan) {
+                                JOptionPane.showMessageDialog(getRootPane().getParent(),
+                                        "Please only use numbers",
+                                        "Error", JOptionPane.ERROR_MESSAGE);
+                                changeDialog.setVisible(true);
+                            }
+                        }
                     }
                 });
 
