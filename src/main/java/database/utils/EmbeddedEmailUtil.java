@@ -1,23 +1,16 @@
 package database.utils;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
-import javax.mail.Authenticator;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Multipart;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
+import javax.imageio.ImageIO;
+import javax.mail.*;
+import javax.mail.internet.*;
 
 /**
  * This utility class provides a functionality to send an HTML e-mail message
@@ -78,7 +71,7 @@ public class EmbeddedEmailUtil {
         messageBodyPart.setContent(htmlBody, "text/html");
 
         // creates multi-part
-        Multipart multipart = new MimeMultipart();
+        Multipart multipart = new MimeMultipart("related");
         multipart.addBodyPart(messageBodyPart);
 
         // adds inline image attachments
@@ -88,6 +81,7 @@ public class EmbeddedEmailUtil {
             for (String contentId : setImageID) {
                 MimeBodyPart imagePart = new MimeBodyPart();
                 imagePart.setHeader("Content-ID", "<" + contentId + ">");
+                imagePart.setContentID("<" + contentId + ">");
                 imagePart.setDisposition(MimeBodyPart.INLINE);
 
                 String imageFilePath = mapInlineImages.get(contentId);

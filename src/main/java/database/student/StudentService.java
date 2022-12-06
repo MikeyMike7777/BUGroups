@@ -575,7 +575,7 @@ public class StudentService {
                 "    <![endif]-->\n" +
                 "</head>\n" +
                 "<body>\n" +
-                "<span class=\"preheader\">Use this link to reset your password.</span>\n" +
+                "<span class=\"preheader\">Your password has been reset!</span>\n" +
                 "<table class=\"email-wrapper\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\">\n" +
                 "    <tr>\n" +
                 "        <td align=\"center\">\n" +
@@ -660,14 +660,15 @@ public class StudentService {
 
         try {
             EmbeddedEmailUtil.send(host, port, mailFrom, password, mailTo,
-                    subject, body.toString(), inlineImages);
+//                    subject, body.toString(), inlineImages);
+                    subject, body.toString(), null);
             System.out.println("Email sent.");
+            return true;
         } catch (Exception ex) {
             System.out.println("Could not send email.");
             ex.printStackTrace();
+            return false;
         }
-
-        return true;
     }
 
     //Sends a password request email to target email and returns boolean of valid send or not
@@ -1123,14 +1124,14 @@ public class StudentService {
                 "    <![endif]-->\n" +
                 "</head>\n" +
                 "<body>\n" +
-                "<span class=\"preheader\">Use this link to reset your password.</span>\n" +
+                "<span class=\"preheader\">Welcome to BUGroups!</span>\n" +
                 "<table class=\"email-wrapper\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\">\n" +
                 "    <tr>\n" +
                 "        <td align=\"center\">\n" +
                 "            <table class=\"email-content\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\">\n" +
                 "                <tr>\n" +
                 "                    <td class=\"email-masthead\">\n" +
-                "                        <a href=\"https://example.com\" class=\"f-fallback email-masthead_name\">\n" +
+                "                        <a href=\"https://docs.google.com/document/d/1PnFPtSEP0n4_UnJt4TQUT-_ZyQGIcV-3LpHYX06O6P4/edit?usp=sharing\" class=\"f-fallback email-masthead_name\">\n" +
                 "                            BUGroups\n" +
                 "                        </a>\n" +
                 "                    </td>\n" +
@@ -1144,7 +1145,7 @@ public class StudentService {
                 "                                <td class=\"content-cell\">\n" +
                 "                                    <div class=\"f-fallback\">\n" +
                 "                                        <h1>Hi " + name +
-                "                                        ,\n</h1><p>You recently created a BUGroups account. Use the following login credentials to access you BUGroups account. Welcome to the community!</p>\n" +
+                "                                        ,\n</h1><p>You recently created a BUGroups account. Use the following login credentials to access your BUGroups account. Welcome to the community!</p>\n" +
                 "                                        <!-- Action -->\n" +
                 "                                        <table class=\"body-action\" align=\"center\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\">\n" +
                 "                                            <tr>\n" +
@@ -1200,7 +1201,7 @@ public class StudentService {
 //        body.append("</html>");
 
         // inline images
-        Map<String, String> inlineImages = new HashMap<String, String>();
+        Map<String, String> inlineImages = new HashMap<>();
         inlineImages.put("image1", "src/main/resources/BUGroups.png");
         //inlineImages.put("image2", "C:\\Users\\ninja\\Downloads\\SequenceDiagram\\BUGroups\\src\\main\\resources\\BUGroups.png");
 
@@ -1209,12 +1210,12 @@ public class StudentService {
             EmbeddedEmailUtil.send(host, port, mailFrom, password, mailTo,
                     subject, body.toString(), inlineImages);
             System.out.println("Email sent.");
+            return true;
         } catch (Exception ex) {
             System.out.println("Could not send email.");
             ex.printStackTrace();
+            return false;
         }
-
-        return true;
     }
 
     public static String generatePassword(int length) {

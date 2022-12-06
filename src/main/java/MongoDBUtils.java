@@ -1,6 +1,7 @@
 import com.mongodb.*;
 import com.mongodb.client.*;
 import com.mongodb.client.MongoClient;
+import database.student.StudentService;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 
@@ -25,7 +26,9 @@ public class MongoDBUtils {
         while (cursor.hasNext())
             System.out.println(cursor.next());
 
-        collection.deleteMany(filter);
+//        collection.deleteMany(filter);
+//        StudentService ss = new StudentService();
+//        ss.sendRegisterEmail("bryce_robinson1@baylor.edu", StudentService.generatePassword(8), "John Appleseed");
     }
 
 }
