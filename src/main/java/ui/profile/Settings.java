@@ -246,6 +246,8 @@ public class Settings extends JPanel {
                                         JOptionPane.WARNING_MESSAGE);
                                 changeDialog.setVisible(true);
                             }
+
+
                         }
                     }
                 });
