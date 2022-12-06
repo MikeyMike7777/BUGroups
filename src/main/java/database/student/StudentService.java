@@ -73,14 +73,14 @@ public class StudentService {
         bugDAO.reportBug(report);
     }
 
-    public void addCourse(String id, String courseCode, String section, String professor){ // where id is courseID
+    public void addCourse(String id, String username, String courseCode, String section, String professor){ // where id is courseID
         //String sec = section < 10 ? "0" + section : section.toString();
         //String courseId = courseCode.toUpperCase().replaceAll(" ", "") + section; // this is the same as id param
 
         if (!courseDAO.fetchCourse(id)) // if course does not exist
             courseDAO.createCourse(id, courseCode, section, professor);
-        courseDAO.enroll(Window.username, id); // course gets student added to its list of students in it
-        studentDAO.addClass(Window.username, id); // student gets course added to the list of courses they're taking
+        courseDAO.enroll(username, id); // course gets student added to its list of students in it
+        studentDAO.addClass(username, id); // student gets course added to the list of courses they're taking
     }
 
 
@@ -106,9 +106,9 @@ public class StudentService {
         return v;
     }
 
-    public Vector<ArrayList<String>> getClassmates(String courseId){
-        ArrayList<String> students = courseDAO.getStudents(courseId);
-        return profileDAO.getClassmates(students);
+    public Vector<ArrayList<String>> getClassmates(String courseId, String username){
+        ArrayList<String> students = courseDAO.getStudents(courseId, username); // get all the students in the given course
+        return profileDAO.getClassmates(students); // get the students' info (availability, name, number, etc.)
     }
 
     public boolean deleteAccount(String id) {
@@ -1246,10 +1246,10 @@ public class StudentService {
         profileDAO.updateProfileAvail(id, avail);
     }
 
-    public void addTutorOffer(String courseCode, String professorTaken, String semesterTaken, Double hourlyRate) {
+    public void addTutorOffer(String username, String courseCode, String professorTaken, String semesterTaken, Double hourlyRate) {
         Date d = new Date();
-        tutorOfferDAO.createTutorOffer(Window.username + d, courseCode, professorTaken, semesterTaken, hourlyRate);
-        studentDAO.addTutorOffer(Window.username, Window.username + d);
+        tutorOfferDAO.createTutorOffer(username + d, username, courseCode, professorTaken, semesterTaken, hourlyRate);
+        studentDAO.addTutorOffer(username, username + d);
     }
 
     public ArrayList<String> getStudentCourses(String id){
@@ -1260,10 +1260,10 @@ public class StudentService {
         return studentDAO.getTutors(id);
     }
 
-    public void removeCourse(String courseId){
+    public void removeCourse(String username, String courseId){
         // removes student from course's list of students that are enrolled in it
-        CourseDAO.removeCourse(Window.username, courseId);
+        CourseDAO.removeCourse(username, courseId);
         // removes course from students' list of courses they're enrolled in
-        StudentDAO.removeCourse(Window.username, courseId);
+        StudentDAO.removeCourse(username, courseId);
     }
 }

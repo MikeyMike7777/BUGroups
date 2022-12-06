@@ -19,6 +19,7 @@ public class ClassmatesPage extends JPanel {
 
     void createAndDisplay() {
         setMinimumSize(new Dimension(600, 350));
+        setMaximumSize(new Dimension(600, 600));
         setAlignmentX(CENTER_ALIGNMENT);
         addComponents();
         setVisible(true);

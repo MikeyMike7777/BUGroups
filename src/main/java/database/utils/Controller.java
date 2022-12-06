@@ -41,12 +41,12 @@ public class Controller {
         return mService.createMessage(text, author, courseNumber, board, message);
     }
 
-    public void addCourse(String id, String courseCode, String section, String professor){
-        sService.addCourse(id, courseCode, section, professor);
+    public void addCourse(String id, String username, String courseCode, String section, String professor){
+        sService.addCourse(id, username, courseCode, section, professor);
     }
 
-    public void addTutorOffer(String courseCode, String professorTaken, String semesterTaken, Double hourlyRate) {
-       sService.addTutorOffer(courseCode, professorTaken, semesterTaken, hourlyRate);
+    public void addTutorOffer(String username, String courseCode, String professorTaken, String semesterTaken, Double hourlyRate) {
+       sService.addTutorOffer(username, courseCode, professorTaken, semesterTaken, hourlyRate);
     }
 
     public ArrayList<String> getStudentCourses(String id){
@@ -61,8 +61,8 @@ public class Controller {
         return sService.fetchProfileInfo(id);
     }
 
-    public Vector<Object> fetchMessages() {
-        return mService.fetchMessages(Window.username);
+    public Vector<Object> fetchMessages(String username) {
+        return mService.fetchMessages(username);
     }
 
     public void reportBug(String report) {
@@ -90,8 +90,8 @@ public class Controller {
         return mService.fetchBoard(messageBoard);
     }
 
-    public Vector<ArrayList<String>> getClassmates(String courseId) {
-        return sService.getClassmates(courseId);
+    public Vector<ArrayList<String>> getClassmates(String courseId, String username) {
+        return sService.getClassmates(courseId, username);
     }
 
     public boolean verifyAccount(String email) {
@@ -124,7 +124,7 @@ public class Controller {
         return sService.getTutorOffers(courseId);
     }
 
-    public void removeCourse(String courseId){
-        sService.removeCourse(courseId);
+    public void removeCourse(String username, String courseId){
+        sService.removeCourse(username, courseId);
     }
 }

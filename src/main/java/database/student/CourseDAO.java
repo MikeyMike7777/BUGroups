@@ -1,7 +1,5 @@
 package database.student;
 
-import ui.general.Window;
-
 import com.mongodb.client.*;
 import database.utils.BUGUtils;
 import org.bson.Document;
@@ -53,20 +51,21 @@ public class CourseDAO {
 
 
 
-    ArrayList<String> getStudents(String courseId){
+    ArrayList<String> getStudents(String courseId, String username){
         // query for all students' profiles that have the given course code in their course list
         // get all students in a course
+
+        ArrayList<String> students = new ArrayList<>();
 
         // querying courses collection
         MongoCollection<Document> courseCollection = BUGUtils.database.getCollection("courses");
         // looking for course that matches courseId (course code + section)
         Document course = courseCollection.find(eq("_id", courseId)).first();
         // from the course Document object, return the list of Student IDs
-        try {
-            return (ArrayList<String>) (course.get("students"));
-        } catch (NullPointerException e){
-            return new ArrayList<String>();
-        }
+        students = (ArrayList<String>)(course.get("students"));
+        students.remove(username);
+
+        return students;
     }
 
     // removes student from course's list of students that are enrolled in it

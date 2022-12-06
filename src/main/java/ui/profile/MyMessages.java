@@ -4,6 +4,7 @@ import database.utils.BUGUtils;
 import ui.messages.MessageBox;
 import ui.messages.PostDialog;
 import ui.messages.RepostDialog;
+import ui.general.Window;
 
 import javax.swing.*;
 import java.awt.*;
@@ -50,7 +51,7 @@ public class MyMessages extends JDialog {
         messages.setLayout(new BoxLayout(messages, BoxLayout.Y_AXIS));
         messages.setSize(new Dimension(730, 400));
         messages.setMaximumSize(new Dimension(730, 8000));
-        Vector<MessageBox> fetched = new Vector<>(BUGUtils.controller.fetchMessages().stream()
+        Vector<MessageBox> fetched = new Vector<>(BUGUtils.controller.fetchMessages(Window.username).stream()
                 .map(v -> new MessageBox((Vector<Object>)v)).collect(Collectors.toList()));
         for (MessageBox m : fetched) {
             m.setAlignmentX(Component.CENTER_ALIGNMENT);
