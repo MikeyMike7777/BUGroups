@@ -7,28 +7,27 @@ import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
-import java.util.Vector;
 
-public class Classmate extends JPanel {
+public class ClassmateBox extends JPanel {
     String name;
     String email;
     String phone;
     String availability;
 
-    Classmate(ArrayList<String> info){
+    ClassmateBox(ArrayList<String> info){
         name = info.get(0);
         email = info.get(1);
         phone = info.get(2);
         availability = info.get(3);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        setMinimumSize(new Dimension(500, 100));
-        setMaximumSize(new Dimension(500, 300));
+        setPreferredSize(new Dimension(500, 100));
+        setMaximumSize(new Dimension(500, 100));
         setBackground(Color.white);
         setOpaque(true);
         setFocusable(true);
         add(new JLabel(name));
-        addMouseListener(new Classmate.ClassmateClickListener());
-        addFocusListener(new Classmate.ClassmateFocusListener());
+        addMouseListener(new ClassmateBox.ClassmateClickListener());
+        addFocusListener(new ClassmateBox.ClassmateFocusListener());
     }
 
     @Override
@@ -51,7 +50,7 @@ public class Classmate extends JPanel {
         public void mouseReleased(MouseEvent e) {
             ClassmateInfoDialog info;
             if (hasFocus()) {
-                info = new ClassmateInfoDialog(Classmate.this);
+                info = new ClassmateInfoDialog(ClassmateBox.this);
                 getParent().requestFocusInWindow();
             }
             else requestFocusInWindow(true);

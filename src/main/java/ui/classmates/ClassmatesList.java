@@ -18,8 +18,7 @@ public class ClassmatesList extends JPanel {
     }
 
     void createAndDisplay() {
-        setMinimumSize(new Dimension(600, 350));
-        setMaximumSize(new Dimension(600, 800));
+        setPreferredSize(new Dimension(550, 800));
         setAlignmentX(CENTER_ALIGNMENT);
         addComponents();
         setVisible(true);
@@ -27,11 +26,11 @@ public class ClassmatesList extends JPanel {
 
     void addComponents() {
         ScrollPane scrolls = new ScrollPane(ScrollPane.SCROLLBARS_AS_NEEDED);
-        scrolls.setSize(520, 250);
+        scrolls.setSize(500, 600);
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        panel.setMinimumSize(new Dimension(600, 300));
-        panel.setMaximumSize(new Dimension(600, 8000));
+        panel.setMinimumSize(new Dimension(500, 600));
+        panel.setMaximumSize(new Dimension(500, 8000));
         panel.add(addClassmates());
         scrolls.add(panel);
         add(scrolls);
@@ -40,11 +39,12 @@ public class ClassmatesList extends JPanel {
     Component addClassmates() {
         JPanel component = new JPanel();
         component.setLayout(new BoxLayout(component, BoxLayout.Y_AXIS));
-        component.setMinimumSize(new Dimension(600, 300));
-        component.setMaximumSize(new Dimension(600, 8000));
+        component.setMinimumSize(new Dimension(500, 600));
+        component.setMaximumSize(new Dimension(500, 8000));
         for (ArrayList<String> student : classmatesInfo){
-            Classmate cm = new Classmate(student);
+            ClassmateBox cm = new ClassmateBox(student);
             component.add(cm);
+            component.add(new JLabel(" "));
         }
         return component;
     }
