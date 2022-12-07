@@ -37,13 +37,18 @@ public class StudentDAO {
         return (ArrayList<String>)(course.get("courses"));
     }
 
-    Vector<String> getTutors(String id){
+    // get all courses that a student has (their id is student who made it and date they made it)
+    Vector<String> getTutors(String username){
+        ArrayList<String> tutorOffers = new ArrayList<>();
         MongoCollection<Document> collection1 = BUGUtils.database.getCollection("BUGStudents");
-        Document courses = collection1.find(eq("_id", id)).first();
+        Document student = collection1.find(eq("_id", username)).first();
         Vector<String> s = new Vector<>();
-        if(courses.size() == 6) {
-            s.addAll((Collection<? extends String>) courses.get("TutorOffers"));
+        try {
+            s.addAll((Collection<? extends String>) student.get("tutors"));
+        } catch(NullPointerException e){
+            return s;
         }
+
         return s;
     }
 
@@ -157,7 +162,7 @@ public class StudentDAO {
         MongoCollection<Document> studentCollection = BUGUtils.database.getCollection("BUGStudents");
         MongoCollection<Document> profileCollection = BUGUtils.database.getCollection("profileInfos");
         MongoCollection<Document> messageCollection = BUGUtils.database.getCollection("BUGMessages");
-        MongoCollection<Document> tutorCollection = BUGUtils.database.getCollection("tutorOffers");
+        MongoCollection<Document> tutorCollection = BUGUtils.database.getCollection("tutors");
 
         MessageService ms = new MessageService();
 
@@ -198,7 +203,7 @@ public class StudentDAO {
     void addTutorOffer(String id, String offer) {
         MongoCollection<Document> collection = BUGUtils.database.getCollection("BUGStudents");
         Bson filter = Filters.eq("_id", id);
-        Bson update = addToSet("TutorOffers", offer);
+        Bson update = addToSet("tutors", offer);
         collection.findOneAndUpdate(filter, update);
     }
 
@@ -210,8 +215,3 @@ public class StudentDAO {
         studentCollection.updateOne(filter, update);
     }
 }
-
-/*
-TODO: classes showing up on tutor offers, add and remove doesn't really persist
- test another person in a course
- */

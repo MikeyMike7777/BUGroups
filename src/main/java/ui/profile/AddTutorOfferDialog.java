@@ -88,7 +88,7 @@ public class AddTutorOfferDialog extends JDialog{
     class SaveActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            if (List.size() != 0 && Objects.equals(List.get(0), "No Current Classes!")) {
+            if (List.size() != 0 && Objects.equals(List.get(0), "No Current Offers!")) {
                 List.remove(0);
             }
             String normalizedCourseCode = classCode.getText().substring(0, 3).toUpperCase(); // course e.g. CSI

@@ -12,12 +12,6 @@ import java.util.ArrayList;
 import java.util.Vector;
 
 public class ProfileTutorList extends JPanel {
-    String[] classesDummyData = {
-            "CSI 3336",
-            "CSI 3471",
-            "WGS 2300",
-            "GEO 1306 "
-    };
 
     Vector<String> tutors = new Vector<>();
 
@@ -71,35 +65,18 @@ public class ProfileTutorList extends JPanel {
     }
 
     void buildClassList(){
+        // pretend like this returns course numbers e.g. CSI 3322
+        Vector<String> tutorOffers = BUGUtils.controller.getStudentTutors(Window.username);
 
-//        Vector<String> s = BUGUtils.controller.getStudentTutors(Window.username);
-//        Vector<String> t = new Vector<>();
-//
-//        if(s.size() > 0) {
-//            for (String value : s) {
-//              String tutor = String.valueOf(BUGUtils.controller.fetchTutorOfferCourse(value));
-//              String formatted = tutor.substring(0, 3) + " " + tutor.substring (3,7);
-//              tutors.add(formatted);
-//            }
-//        }
-//
-//        if(!tutors.isEmpty()) {
-//            model.addAll(tutors);
-//        } else {
-//            model.addElement("No Current Classes!");
-//        }
-//        tutorList = new JList<>(model);
-//        add(new JScrollPane(tutorList));
-
-        ArrayList<String> courses = BUGUtils.controller.getStudentCourses(Window.username);
-        if (!courses.isEmpty()){
-            for (String s : courses){
-                String formatted = s.substring(0, 3) + " " + s.substring (3);
-                tutors.add(formatted);
+        if(tutorOffers.size() > 0) {
+            for (String course : tutorOffers) {
+              //String offer = String.valueOf(BUGUtils.controller.fetchTutorOfferCourse(s));
+              String formatted = course.substring(0, 3) + " " + course.substring (3);
+              tutors.add(formatted);
             }
             model.addAll(tutors);
         } else {
-            model.addElement("No Current Classes!");
+            model.addElement("No Current Courses!");
         }
 
         tutorList = new JList<>(model);
@@ -142,9 +119,5 @@ public class ProfileTutorList extends JPanel {
                 }
             }
         }
-    }
-
-    public String[] getNames(){
-        return classesDummyData;
     }
 }

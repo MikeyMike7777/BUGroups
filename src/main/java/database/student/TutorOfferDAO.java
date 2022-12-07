@@ -59,7 +59,7 @@ public class TutorOfferDAO {
     static Vector<ArrayList<String>> getTutorOffers(String courseCode){
         Vector<ArrayList<String>> tutorOffers = new Vector<>();
         // querying TutorOffers collection
-        MongoCollection<Document> tutorOffersCollection = BUGUtils.database.getCollection("TutorOffers");
+        MongoCollection<Document> tutorOffersCollection = BUGUtils.database.getCollection("tutorOffers");
         Bson filter = eq("courseCode", courseCode);
         cursor = tutorOffersCollection.find(filter).iterator();
         if (cursor.hasNext()){
@@ -81,5 +81,12 @@ public class TutorOfferDAO {
         }
 
         return tutorOffers;
+    }
+
+    String getTutorCourse(String tutorId){
+        MongoCollection<Document> collection = BUGUtils.database.getCollection("tutorOffers");
+        Bson filter = eq("_id", tutorId);
+        Document d = collection.find(filter).first();
+        return d.getString("courseCode");
     }
 }

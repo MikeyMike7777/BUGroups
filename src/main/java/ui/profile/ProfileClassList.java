@@ -12,11 +12,6 @@ import ui.general.Window;
 
 public class ProfileClassList extends JPanel {
 
-    String[] classesDataDummy = {
-            "CSI 3471",
-            "WGS 2300"
-    };
-
     Vector<String> classes = new Vector<>();
 
     JLabel header;

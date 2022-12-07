@@ -8,7 +8,7 @@ import org.bson.conversions.Bson;
 import java.util.ArrayList;
 
 import static com.mongodb.client.model.Filters.*;
-import static com.mongodb.client.model.Updates.pull;
+import static com.mongodb.client.model.Updates.*;
 
 public class MongoDBUtils {
 
@@ -20,19 +20,22 @@ public class MongoDBUtils {
                 .build();
         MongoClient mongoClient = MongoClients.create(settings);
         MongoDatabase database = mongoClient.getDatabase("test");
+        MongoCollection<Document> collection = database.getCollection("BUGStudents");
 
-        MongoCollection<Document> collection = database.getCollection("BUGMessages");
-        Bson filter = exists("_id");
+//        Bson filter = exists("_id");
+//        Bson update = set("courses", new ArrayList<>());
+//        collection.deleteMany(filter);
 
-        MongoCursor<Document> cursor = collection.find(filter).iterator();
+//        MongoCursor<Document> cursor = collection.find(filter).iterator();
+
 //        Document d = new Document("_id", "john_appleseed1")
 //                .append("name", "")
 //                .append("email", "john_appleseed1@baylor.edu")
 //                .append("phoneNumber", "")
 //                .append("availability", new ArrayList<>());
 //        collection.insertOne(d);
-        while (cursor.hasNext())
-            System.out.println(cursor.next());
+//        while (cursor.hasNext())
+//            System.out.println(cursor.next());
 
 //        collection.deleteMany(filter);
 //        StudentService ss = new StudentService();

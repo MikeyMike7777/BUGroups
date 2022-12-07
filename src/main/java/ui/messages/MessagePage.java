@@ -29,8 +29,7 @@ public class MessagePage extends JPanel {
     }
 
     public void setCurrentMessageBoard(String boardName){
-        String itemNames[] = dropdown.getMessageBoardMenuItemNames();
-        JMenu menu = dropdown.getMessageBoardMenu();
+        String[] itemNames = dropdown.getMessageBoardMenuItemNames();
         int index = -1;
 
         for(int i = 0; i < itemNames.length; i++)
@@ -42,6 +41,6 @@ public class MessagePage extends JPanel {
         if(index == -1)
             return;
 
-        menu.getItem(index).doClick();
+        dropdown.getMessageBoardMenu().getItem(index).doClick();
     }
 }
