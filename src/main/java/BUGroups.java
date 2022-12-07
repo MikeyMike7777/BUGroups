@@ -8,7 +8,7 @@ class BUGroups {
     final static int APP_HEIGHT = 600;
 
     private static void createAndShowGUI() {
-        JFrame app = new JFrame("BU Groups");
+        JFrame app = new JFrame("BUGroups");
         app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         app.setPreferredSize(new Dimension(APP_WIDTH, APP_HEIGHT));
         app.setResizable(false);

@@ -3,6 +3,8 @@ package ui.general;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Objects;
 import java.util.Vector;
 
@@ -100,6 +102,17 @@ public class Login extends JPanel {
                         setVisible(false);
                         temp.remove(0);
                         temp.add(new Window(getPreferredSize(), user));
+                        Date d = new Date();
+                        if (d.getMonth() == Calendar.JANUARY && d.getDate() == 1 && !BUGUtils.controller.confirmed()) {
+                            BUGUtils.controller.confirmActivities();
+                        }
+                        if (!BUGUtils.controller.isActive(Window.username)) {
+                            BUGUtils.controller.setActivity(Window.username,
+                                    JOptionPane.showConfirmDialog(null,
+                                            "Will you be using BUG in the coming year?",
+                                            null, JOptionPane.YES_NO_OPTION)
+                            );
+                        }
                     }
                 }
             }
