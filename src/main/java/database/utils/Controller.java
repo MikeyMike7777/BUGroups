@@ -131,4 +131,9 @@ public class Controller {
     public void removeCourse(String username, String courseId){
         sService.removeCourse(username, courseId);
     }
+
+    public void removeTutoringOffer(String username, String courseCode){
+        sService.removeTutoringOffer(username, courseCode);
+    }
+
 }
