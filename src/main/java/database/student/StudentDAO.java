@@ -225,7 +225,7 @@ public class StudentDAO {
             }
 
             Bson filterUsername = eq("username", studentDocument.get("username"));
-            tutorCollection.findOneAndDelete(filterUsername);
+            tutorCollection.deleteMany(filterUsername);
 
             Bson filterProfileCollectionID = eq("_id", studentDocument.get("username"));
             profileCollection.findOneAndDelete(filterProfileCollectionID);
