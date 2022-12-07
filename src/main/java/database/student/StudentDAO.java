@@ -40,7 +40,9 @@ public class StudentDAO {
         MongoCollection<Document> collection1 = BUGUtils.database.getCollection("BUGStudents");
         Document courses = collection1.find(eq("_id", id)).first();
         Vector<String> s = new Vector<>();
-        s.addAll((Collection<? extends String>) courses.get("tutors"));
+        if(courses.size() == 6) {
+            s.addAll((Collection<? extends String>) courses.get("TutorOffers"));
+        }
         return s;
     }
 

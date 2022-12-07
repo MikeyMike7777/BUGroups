@@ -41,6 +41,12 @@ public class StudentService {
         }
     }
 
+    public String fetchTutorOffer (String id){
+        TutorOffer t = tutorOfferDAO.fetchTutorOfferInfo(id);
+        String s = t.getCourseCode();
+        return s;
+    }
+
 
     public void createProfileInfo(String id, String name, String email, String phone, Vector<String> availability){
         profileDAO.createProfileInfo(id, name, email, phone, availability);

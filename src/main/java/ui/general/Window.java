@@ -25,7 +25,7 @@ public class Window extends JPanel {
     private SpringLayout layout;
     public Map<Integer, JPanel> tabMap;
     private JLabel picLabel;
-    private JTabbedPane tabbedPane;
+    private JTabbedPane tabbedPane = new JTabbedPane();
     private Dimension tabSize;
     private String currLogoPath = "/BUGroups.png";
 

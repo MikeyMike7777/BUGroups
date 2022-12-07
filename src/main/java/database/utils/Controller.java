@@ -61,6 +61,10 @@ public class Controller {
         return sService.fetchProfileInfo(id);
     }
 
+    public String fetchTutorOfferCourse(String id){
+        return sService.fetchTutorOffer(id);
+    }
+
     public Vector<Object> fetchMessages() {
         return mService.fetchMessages(Window.username);
     }

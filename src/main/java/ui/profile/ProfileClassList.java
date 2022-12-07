@@ -7,8 +7,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 import java.util.Vector;
 import ui.general.Window;
 
@@ -88,7 +86,7 @@ public class ProfileClassList extends JPanel {
     class AddActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            new AddClassTutorDialog(model, "course", ProfileClassList.this);
+            new AddClassDialog(model, "course", ProfileClassList.this);
         }
     }
 

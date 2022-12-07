@@ -1,7 +1,5 @@
 package ui.profile;
 
-import database.student.Course;
-import database.student.TutorOffer;
 import database.utils.BUGUtils;
 import ui.general.Window;
 
@@ -9,8 +7,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Vector;
 
 public class ProfileTutorList extends JPanel {
@@ -39,7 +35,7 @@ public class ProfileTutorList extends JPanel {
     }
 
     void createAndDisplay() {
-        setMinimumSize(new Dimension(100,100));
+        setMinimumSize(new Dimension(100,150));
         addComponents();
         setVisible(true);
     }
@@ -73,11 +69,15 @@ public class ProfileTutorList extends JPanel {
     }
 
     void buildClassList(){
+
         Vector<String> s = BUGUtils.controller.getStudentTutors(Window.username);
-        for (String value : s) {
-            for (String st : tutors){
-                String formatted = st.substring(0, 3) + " " + st.substring (3,7) + " " + st.substring(7);
-                s.add(formatted);
+        Vector<String> t = new Vector<>();
+
+        if(s.size() > 0) {
+            for (String value : s) {
+              String tutor = String.valueOf(BUGUtils.controller.fetchTutorOfferCourse(value));
+              String formatted = tutor.substring(0, 3) + " " + tutor.substring (3,7);
+              tutors.add(formatted);
             }
         }
 
@@ -93,7 +93,7 @@ public class ProfileTutorList extends JPanel {
     class AddActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            new AddClassTutorDialog(model, "tutor", ProfileTutorList.this);
+            new AddTutorDialog(model, "tutor", ProfileTutorList.this);
         }
     }
 

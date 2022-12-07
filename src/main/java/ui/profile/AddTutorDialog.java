@@ -1,24 +1,23 @@
 package ui.profile;
 
+import database.utils.BUGUtils;
+import ui.general.Window;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.Objects;
-import java.util.Vector;
 
-import database.student.Student;
-import database.utils.BUGUtils;
-import  ui.general.Window;
-
-public class AddClassTutorDialog extends JDialog {
+public class AddTutorDialog extends JDialog{
 
     JLabel codeLabel;
 
     JLabel sectionLabel;
 
     JLabel professorLabel;
+    JLabel hourlyRateLabel;
 
     JPanel textPanel = new JPanel();
 
@@ -32,17 +31,19 @@ public class AddClassTutorDialog extends JDialog {
 
     JTextField professor = new JTextField(20);
 
+    JTextField hourlyRate = new JTextField(20);
+
     String type;
 
     JPanel parent;
 
 
-    AddClassTutorDialog(DefaultListModel<String> model, String s, JPanel parent) {
+    AddTutorDialog(DefaultListModel<String> model, String s, JPanel parent) {
         super();
         this.parent = parent;
         List = model;
         type = s;
-        setSize(300,350);
+        setSize(300,410);
         createAndDisplay();
     }
 
@@ -62,8 +63,8 @@ public class AddClassTutorDialog extends JDialog {
         JButton save = new JButton("Save");
         JButton cancel = new JButton("Cancel");
 
-        cancel.addActionListener(new CancelActionListener());
-        save.addActionListener(new SaveActionListener());
+        cancel.addActionListener(new AddTutorDialog.CancelActionListener());
+        save.addActionListener(new AddTutorDialog.SaveActionListener());
 
         buttonPanel.add(save);
         buttonPanel.add(cancel);
@@ -74,14 +75,19 @@ public class AddClassTutorDialog extends JDialog {
     void buildTextPanel() {
         String s;
         codeLabel = new JLabel("Enter Course Code:");
-        sectionLabel = new JLabel("Enter Section:");
-        professorLabel = new JLabel("Enter Professor:");
+        professorLabel = new JLabel("Enter Professor You took:");
+        sectionLabel = new JLabel("Enter Semester Taken:");
+        hourlyRateLabel = new JLabel("Enter hourly rate:");
+
+
         textPanel.add(codeLabel);
         textPanel.add(classCode);
         textPanel.add(sectionLabel);
         textPanel.add(section);
         textPanel.add(professorLabel);
         textPanel.add(professor);
+        textPanel.add(hourlyRateLabel);
+        textPanel.add(hourlyRate);
         textPanel.setVisible(true);
     }
 
@@ -91,23 +97,15 @@ public class AddClassTutorDialog extends JDialog {
             if ( List.size() != 0 && Objects.equals(List.get(0), "No Current Classes!")){
                 List.remove(0);
             }
-            String sec = "";
-            if (section.getText().length() < 2){
-                sec = "0" + section.getText();
-            }
-            System.out.println(sec);
+
             String normalizedCourseCode = classCode.getText().substring(0,3).toUpperCase(); // course
             String normalizedCourseNumber = classCode.getText().substring(classCode.getText().length() - 4);
-            if(Objects.equals(type, "course")) {
-                BUGUtils.controller.addCourse(normalizedCourseCode + normalizedCourseNumber + sec, normalizedCourseCode + " " + normalizedCourseNumber,
-                        sec, professor.getText());
-                List.addElement(normalizedCourseCode + " " + normalizedCourseNumber + " " + sec);
-            } else if (Objects.equals(type, "tutor")) {
-                BUGUtils.controller.addTutorOffer(normalizedCourseCode , professor.getText(),"Fall 2022",2.50);
 
-                List.addElement(normalizedCourseCode + " " + normalizedCourseNumber + " " + sec);
-            }
-            Window temp = (Window)(parent.getParent()
+            BUGUtils.controller.addTutorOffer(normalizedCourseCode + normalizedCourseNumber, professor.getText(),
+                    section.getText(), Double.parseDouble(hourlyRate.getText()));
+            List.addElement(normalizedCourseCode + " " + normalizedCourseNumber);
+
+            ui.general.Window temp = (Window)(parent.getParent()
                     .getParent().getParent());
             temp.setVisible(false);
             temp.remove(1);
@@ -130,3 +128,4 @@ public class AddClassTutorDialog extends JDialog {
     }
 
 }
+

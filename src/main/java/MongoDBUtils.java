@@ -20,8 +20,8 @@ public class MongoDBUtils {
                 .build();
         MongoClient mongoClient = MongoClients.create(settings);
         MongoDatabase database = mongoClient.getDatabase("test");
-        MongoCollection<Document> collection = database.getCollection("courses");
-        Bson filter = exists("_id");
+        MongoCollection<Document> collection = database.getCollection("students");
+        Bson filter = exists("TutorOffers");
         MongoCursor<Document> cursor = collection.find(filter).iterator();
         while (cursor.hasNext())
             System.out.println(cursor.next());
