@@ -91,7 +91,7 @@ public class AddCourseDialog extends JDialog {
             }
             String normalizedCourseCode = classCode.getText().substring(0, 3).toUpperCase(); // course e.g. CSI
             String normalizedCourseNumber = classCode.getText().substring(classCode.getText().length() - 4); // number e.g 2334
-            BUGUtils.controller.addCourse(Window.username,normalizedCourseCode + normalizedCourseNumber + sec, normalizedCourseCode + " " + normalizedCourseNumber,
+            BUGUtils.controller.addCourse(normalizedCourseCode + normalizedCourseNumber + sec, Window.username, normalizedCourseCode + " " + normalizedCourseNumber,
                     sec, professor.getText());
             List.addElement(normalizedCourseCode + " " + normalizedCourseNumber + " " + sec);
             Window temp = (Window) (parent.getParent()

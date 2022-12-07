@@ -71,31 +71,13 @@ public class ProfileTutorList extends JPanel {
     }
 
     void buildClassList(){
+        Vector<String> s = BUGUtils.controller.getStudentTutors(Window.username);
 
-//        Vector<String> s = BUGUtils.controller.getStudentTutors(Window.username);
-//        Vector<String> t = new Vector<>();
-//
-//        if(s.size() > 0) {
-//            for (String value : s) {
-//              String tutor = String.valueOf(BUGUtils.controller.fetchTutorOfferCourse(value));
-//              String formatted = tutor.substring(0, 3) + " " + tutor.substring (3,7);
-//              tutors.add(formatted);
-//            }
-//        }
-//
-//        if(!tutors.isEmpty()) {
-//            model.addAll(tutors);
-//        } else {
-//            model.addElement("No Current Classes!");
-//        }
-//        tutorList = new JList<>(model);
-//        add(new JScrollPane(tutorList));
-
-        ArrayList<String> courses = BUGUtils.controller.getStudentCourses(Window.username);
-        if (!courses.isEmpty()){
-            for (String s : courses){
-                String formatted = s.substring(0, 3) + " " + s.substring (3);
-                tutors.add(formatted);
+        if(s.size() > 0) {
+            for (String value : s) {
+              String tutor = String.valueOf(BUGUtils.controller.fetchTutorOfferCourse(value));
+              String formatted = tutor.substring(0, 3) + " " + tutor.substring (3,7);
+              tutors.add(formatted);
             }
             model.addAll(tutors);
         } else {
