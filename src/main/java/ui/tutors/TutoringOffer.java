@@ -16,7 +16,6 @@ public class TutoringOffer extends JPanel {
     String semester;
     String hourlyRate;
     String availability;
-
     TutoringOffer(ArrayList<String> info){
         email = info.get(0);
         courseCode = info.get(1);
