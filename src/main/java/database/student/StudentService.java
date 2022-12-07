@@ -1270,6 +1270,9 @@ public class StudentService {
         Vector<String> tutorCourses = new Vector<>();
         // get course IDs that a student has (their id is student who made it and date they made it)
         Vector<String> tutorIds = studentDAO.getTutors(username);
+        for(String s : tutorIds){
+            System.out.println(s);
+        }
         // look in tutor DAO for that tutor offer's course
         for (String s : tutorIds){
             tutorCourses.add(tutorOfferDAO.getTutorCourse(s));
@@ -1286,5 +1289,8 @@ public class StudentService {
 
     public void removeTutoringOffer(String username, String courseCode){
         // remove tutoring offer from tutorOffers
+        tutorOfferDAO.removeOffer(username, courseCode);
+        // remove offer from students' list of tutoring offers
+        studentDAO.removeOffer(username, courseCode);
     }
 }

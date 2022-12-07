@@ -103,7 +103,6 @@ public class ProfileClassList extends JPanel {
                     String dbReadable = classList.getSelectedValue().replaceAll(" ", ""); // section
                     model.remove(classList.getSelectedIndex());
                     BUGUtils.controller.removeCourse(Window.username, dbReadable);
-                    // System.out.println("removing course " + dbReadable); // db reads something like CSI144002
                     Window temp = (Window)(getParent()
                             .getParent().getParent());
                     temp.setVisible(false);

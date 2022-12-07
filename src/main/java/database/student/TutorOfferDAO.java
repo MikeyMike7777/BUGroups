@@ -4,11 +4,12 @@ import com.mongodb.client.*;
 import database.utils.BUGUtils;
 import org.bson.Document;
 import org.bson.conversions.Bson;
-import ui.general.Window;
 
 import java.util.*;
 
+import static com.mongodb.client.model.Filters.and;
 import static com.mongodb.client.model.Filters.eq;
+import static com.mongodb.client.model.Updates.pull;
 
 public class TutorOfferDAO {
     private static MongoCursor<Document> cursor;
@@ -88,5 +89,11 @@ public class TutorOfferDAO {
         Bson filter = eq("_id", tutorId);
         Document d = collection.find(filter).first();
         return d.getString("courseCode");
+    }
+
+    void removeOffer(String username, String courseCode){
+        MongoCollection<Document> tutorOfferCollection = BUGUtils.database.getCollection("tutorOffers");
+        Bson filter = and(eq("courseCode", courseCode), eq("username", username));
+        tutorOfferCollection.deleteOne(filter);
     }
 }
