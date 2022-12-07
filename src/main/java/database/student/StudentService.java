@@ -51,6 +51,10 @@ public class StudentService {
         profileDAO.createProfileInfo(id, name, email, phone, availability);
     }
 
+    public void deleteProfileInfo(String id){
+        profileDAO.deleteProfileInfo(id);
+    }
+
     public void updateProfileName(String id, String name){
         profileDAO.updateProfileName(id, name);
     }
@@ -106,7 +110,6 @@ public class StudentService {
             v.add(s.getPassword());
             v.add(s.getCourses());
             v.add(s.getTutorOffers());
-            v.add(s);
         }
 
         return v;

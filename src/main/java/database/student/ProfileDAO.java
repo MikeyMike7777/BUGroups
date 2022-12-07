@@ -29,6 +29,12 @@ public class ProfileDAO {
         collection.insertOne(d);
     }
 
+    void deleteProfileInfo(String id){
+        MongoCollection<Document> collection = BUGUtils.database.getCollection("profileInfos");
+        Bson filter = eq("_id", id);
+        collection.findOneAndDelete(filter);
+    }
+
     Profile fetchProfileInfo(String id){
         MongoCollection<Document> collection = BUGUtils.database.getCollection("profileInfos");
         Bson filter = eq("_id", id);
@@ -77,7 +83,9 @@ public class ProfileDAO {
         ArrayList<String> a = (ArrayList<String>) document.get("availability");
         Vector<String> convert = new Vector<>();
 
-        convert.addAll(a);
+        if(a != null) {
+            convert.addAll(a);
+        }
 
         Availability avail = new Availability(convert);
 
