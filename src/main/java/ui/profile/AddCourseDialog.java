@@ -6,13 +6,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.Objects;
-import java.util.Vector;
 
-import database.student.Student;
 import database.utils.BUGUtils;
 import  ui.general.Window;
 
-public class AddClassTutorDialog extends JDialog {
+public class AddCourseDialog extends JDialog {
 
     JLabel codeLabel;
 
@@ -37,7 +35,7 @@ public class AddClassTutorDialog extends JDialog {
     JPanel parent;
 
 
-    AddClassTutorDialog(DefaultListModel<String> model, String s, JPanel parent) {
+    AddCourseDialog(DefaultListModel<String> model, String s, JPanel parent) {
         super();
         this.parent = parent;
         List = model;

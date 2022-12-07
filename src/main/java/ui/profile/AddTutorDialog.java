@@ -101,7 +101,7 @@ public class AddTutorDialog extends JDialog{
             String normalizedCourseCode = classCode.getText().substring(0,3).toUpperCase(); // course
             String normalizedCourseNumber = classCode.getText().substring(classCode.getText().length() - 4);
 
-            BUGUtils.controller.addTutorOffer(normalizedCourseCode + normalizedCourseNumber, professor.getText(),
+            BUGUtils.controller.addTutorOffer(Window.username,normalizedCourseCode + normalizedCourseNumber, professor.getText(),
                     section.getText(), Double.parseDouble(hourlyRate.getText()));
             List.addElement(normalizedCourseCode + " " + normalizedCourseNumber);
 
