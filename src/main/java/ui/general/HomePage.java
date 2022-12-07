@@ -118,7 +118,7 @@ public class HomePage extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 window.setSelectedIndex(1);
-                MessagePage mb = (MessagePage) window.getComponentAt(1);
+                MessagePage mb = (MessagePage) (window.getComponentAt(1));
                 mb.setCurrentMessageBoard("Math and Physics");
             }
         });

@@ -41,7 +41,7 @@ public class Window extends JPanel {
         setPreferredSize(preferredSize);
         tabSize = new Dimension((int) (preferredSize.getWidth() - 50),
                 (int) (preferredSize.getHeight() - 80));
-        //tabbedPane = new JTabbedPane();
+        tabbedPane = new JTabbedPane();
         this.tabMap = initTabs();
         initWindow();
         setBackground(Color.LIGHT_GRAY);
@@ -148,7 +148,8 @@ public class Window extends JPanel {
 
     public void initNavigationBar() throws IOException {
         this.tabMap = initTabs();
-        tabbedPane = new JTabbedPane();
+        if (tabbedPane == null)
+            tabbedPane = new JTabbedPane();
         tabbedPane.setPreferredSize(getPreferredSize());
 
         BufferedImage userIcon = ImageIO.read(getClass().getResource("/userIcon.png"));
