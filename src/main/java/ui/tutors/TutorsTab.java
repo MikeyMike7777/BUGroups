@@ -1,12 +1,16 @@
 package ui.tutors;
 
 import database.utils.BUGUtils;
+import ui.classmates.ClassmatesList;
+import ui.general.Window;
 import ui.profile.ProfileClassList;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Vector;
 
 public class TutorsTab extends JPanel{
 
@@ -22,7 +26,9 @@ public class TutorsTab extends JPanel{
         super();
         classNames[0] = "Select A Class";
         for (int i = 1; i < classNames.length; ++i) {
-            classNames[i] = list.getNames().elementAt(i - 1);
+            String course = list.getNames().elementAt(i - 1);
+            course = course.substring(0, 8);
+            classNames[i] = course;
             boardKeys.put(classNames[i], i);
         }
         createAndDisplay();
@@ -78,9 +84,14 @@ public class TutorsTab extends JPanel{
                 remove(getComponentCount() - 1);
 
             // call controller
-            TutorsList tutors = new TutorsList(BUGUtils.controller.getTutorOffers(s));
-            System.out.println(s);
-            add(tutors);
+            Vector<ArrayList<String>> info = BUGUtils.controller.getTutorOffers(s.replaceAll(" ", ""));
+            if (info.isEmpty()) {
+                add(new JLabel(" "));
+                add(new JLabel("No tutor offers for the selected course"));
+            } else {
+                TutorsList tutors = new TutorsList(info);
+                add(tutors);
+            }
         }
     }
 

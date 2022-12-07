@@ -22,9 +22,9 @@ public class MongoDBUtils {
         MongoDatabase database = mongoClient.getDatabase("test");
         MongoCollection<Document> collection = database.getCollection("BUGStudents");
 
-//        Bson filter = exists("_id");
-//        Bson update = set("courses", new ArrayList<>());
-//        collection.deleteMany(filter);
+        Bson filter = eq("_id", "michael_mathews1");
+        Bson update = set("courses", new ArrayList<>());
+        collection.updateOne(filter, update);
 
 //        MongoCursor<Document> cursor = collection.find(filter).iterator();
 

@@ -94,15 +94,10 @@ public class TutorOfferDAO {
             TutorOffer t = toTutorOffer(cursor.next());
             ArrayList<String> tutorOfferInfo = new ArrayList<>();
 
-            System.out.println(t.getUsername());
             tutorOfferInfo.add(t.getUsername());
-            System.out.println(t.getCourseCode());
             tutorOfferInfo.add(t.getCourseCode());
-            System.out.println(t.getProfessorTaken());
             tutorOfferInfo.add(t.getProfessorTaken());
-            System.out.println(t.getSemesterTaken());
             tutorOfferInfo.add(t.getSemesterTaken());
-            System.out.println(t.getHourlyRate().toString());
             tutorOfferInfo.add(t.getHourlyRate().toString());
 
             tutorOffers.add(tutorOfferInfo);

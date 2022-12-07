@@ -45,9 +45,7 @@ public class ClassmateInfoDialog extends JDialog{
         panel.add(new JLabel(cm.getPhone()));
         panel.add(new JLabel(" "));
 
-
-
-        panel.add(new JLabel("Availability"));
+        panel.add(new JLabel("Availability:"));
         String[] availabilities = cm.getAvailability().split(",");
         for (String s : availabilities){
             panel.add(new JLabel(s));

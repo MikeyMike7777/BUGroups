@@ -8,46 +8,6 @@ import java.util.Vector;
 public class TutorsList extends JPanel{
     Vector<ArrayList<String>> tutorOffersInfo;
 
-    /*private static final String[] tutorNames = {
-            "Carsyn Smeda",
-            "Bryce Robinson",
-            "Mikey Mathews",
-            "Gabriel Goulis",
-            "Carson Buntin"
-    };
-
-    private static final String[] tutorClasses = {
-            "REL 1310 - Christian Scriptures",
-            "CSI 1430 - Introduction to Computer Science I",
-            "STA 3381 - Probability and Statistics",
-            "CSI 2334 - Computer Systems",
-            "CSS 1302 - Speech for Business"
-    };
-
-    private static final String[] professors = {
-            "John Smith",
-            "Bill Booth",
-            "Michael Gallaugher",
-            "Cindy Fry",
-            "Stephen Edwards"
-    };
-
-    private static final String[] semesters = {
-            "Fall 2019",
-            "Spring 2020",
-            "Spring 2021",
-            "Fall 2019",
-            "Spring 2021"
-    };
-
-    private static final String[] rates = {
-            "$10.00/hr",
-            "$7.50/hr",
-            "$12.00/hr",
-            "$5.00/hr",
-            "$8.00/hr"
-    };*/
-
     TutorsList(Vector<ArrayList<String>> tutorOffersInfo){
         // reworked this. previously had hardcoded values. will also need to rework addClassmates function
         this.tutorOffersInfo = tutorOffersInfo;
@@ -80,6 +40,7 @@ public class TutorsList extends JPanel{
         component.setMinimumSize(new Dimension(600, 300));
         component.setMaximumSize(new Dimension(600, 8000));
         for (ArrayList<String> tutorOffer : tutorOffersInfo){
+            tutorOffer.remove(0);
             TutoringOffer t = new TutoringOffer(tutorOffer);
             component.add(t);
         }

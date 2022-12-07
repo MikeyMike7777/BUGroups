@@ -54,12 +54,24 @@ public class ProfileDAO {
      * @return the profile object with data for id
      */
     Profile fetchProfileInfo(String id){
+    Vector<Object> fetchProfileInfo(String id){
         MongoCollection<Document> collection = BUGUtils.database.getCollection("profileInfos");
         Bson filter = eq("_id", id);
         cursor = collection.find(filter).iterator();
         if (cursor.hasNext())
-            return toProfile(cursor.next());
-        else return null;
+             p = toProfile(cursor.next());
+
+        Vector<Object> v = new Vector<>();
+
+        if (p != null){
+            Vector<String> s = p.getAvailability().getTimes();
+            v.add(p.getName());
+            v.add(p.getEmail());
+            v.add(p.getPhoneNumber());
+            v.add(s);
+        }
+
+        return v;
     }
 
     /**

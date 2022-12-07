@@ -97,20 +97,7 @@ public class StudentService {
      * @return the profile object with data for id
      */
     public Vector<Object> fetchProfileInfo(String id){
-        Profile p = profileDAO.fetchProfileInfo(id);
-        Vector<Object> v = new Vector<>();
-
-        if(p == null){
-            return v;
-        } else {
-            Vector<String> s = p.getAvailability().getTimes();
-            v.add(p.getName());
-            v.add(p.getEmail());
-            v.add(p.getPhoneNumber());
-            v.add(s);
-        }
-
-        return v;
+        return profileDAO.fetchProfileInfo(id);
     }
 
     /**
@@ -786,11 +773,7 @@ public class StudentService {
         }
     }
 
-    /**
-     * Sends a new email for a registering an account
-     * @param email the email to send it too
-     * @return the boolean representing whether the email send was successful
-     */
+    //Sends a password request email to target email and returns boolean of valid send or not
     public boolean sendRegisterEmail(String email, String generatedPassword, String name){
         if(!email.endsWith("@baylor.edu")){
             return false;
@@ -1312,7 +1295,14 @@ public class StudentService {
                         "</html>\n");
 
 
+//        body.append("The first image is a chart:<br>");
+//        body.append("<img src=\"cid:image1\" width=\"30%\" height=\"30%\" /><br>");
+//        body.append("The second one is a cube:<br>");
+//        body.append("<img src=\"cid:image2\" width=\"15%\" height=\"15%\" /><br>");
+//        body.append("End of message.");
+//        body.append("</html>");
 
+        // inline images
         Map<String, String> inlineImages = new HashMap<>();
         inlineImages.put("image1", "src/main/resources/BUGroups.png");
         //inlineImages.put("image2", "C:\\Users\\ninja\\Downloads\\SequenceDiagram\\BUGroups\\src\\main\\resources\\BUGroups.png");
@@ -1330,11 +1320,6 @@ public class StudentService {
         }
     }
 
-    /**
-     * generates a new unique password of length
-     * @param length the length of the unique password
-     * @return the newly created password
-     */
     public static String generatePassword(int length) {
         String capitalCaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         String lowerCaseLetters = "abcdefghijklmnopqrstuvwxyz";
@@ -1355,52 +1340,24 @@ public class StudentService {
         return password;
     }
 
-    /**
-     * gets all the tutoring offers for a specific course code
-     * @param courseId the course code to get offers for
-     * @return all the students and their information that have tutoring offers
-     */
     public Vector<ArrayList<String>> getTutorOffers(String courseId){
         return TutorOfferDAO.getTutorOffers(courseId);
     }
 
-    /**
-     * updates profile availability that matches id with new availability
-     * @param id the id to match
-     * @param avail the new availability to update profile with
-     */
     public void changeAvail(String id, Vector<String> avail) {
         profileDAO.updateProfileAvail(id, avail);
     }
 
-    /**
-     * Creates a new tutor offer
-     * @param username the username of the user offering the tutoring
-     * @param courseCode the courseCode of the course the offer is for
-     * @param professorTaken the professor taken for the course
-     * @param semesterTaken the semester the course was taken during
-     * @param hourlyRate the hourly rate of the offer
-     */
     public void addTutorOffer(String username, String courseCode, String professorTaken, String semesterTaken, Double hourlyRate) {
         //Date d = new Date();
         tutorOfferDAO.createTutorOffer(username + courseCode, username, courseCode, professorTaken, semesterTaken, hourlyRate);
         studentDAO.addTutorOffer(username, username + courseCode);
     }
 
-    /**
-     * gets the courses that the username is apart of
-     * @param id the id to search courses for
-     * @return an arraylist of all the courses this username is in
-     */
     public ArrayList<String> getStudentCourses(String id){
         return studentDAO.getCourses(id);
     }
 
-    /**
-     * gets the students tutoring student with username
-     * @param username the username to search for
-     * @return the vector of all students tutoring username
-     */
     public Vector<String> getStudentTutors(String username) {
         Vector<String> tutorCourses = new Vector<>();
         // get course IDs that a student has (their id is student who made it and date they made it)
@@ -1415,11 +1372,6 @@ public class StudentService {
         return tutorCourses;
     }
 
-    /**
-     * removes student from course's list of students that are enrolled in it
-     * @param username the username of the user to remove
-     * @param courseId the id of the course to remove them from
-     */
     public void removeCourse(String username, String courseId){
         // removes student from course's list of students that are enrolled in it
         CourseDAO.removeCourse(username, courseId);
@@ -1427,11 +1379,6 @@ public class StudentService {
         StudentDAO.removeCourse(username, courseId);
     }
 
-    /**
-     * removes a tutoring offer based on a username and courseCode
-     * @param username the username to search for
-     * @param courseCode the course code to search for
-     */
     public void removeTutoringOffer(String username, String courseCode){
         // remove tutoring offer from tutorOffers
         tutorOfferDAO.removeOffer(username, courseCode);
