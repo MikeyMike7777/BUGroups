@@ -120,7 +120,6 @@ public class ProfileDAO {
             classmateInfo.add(profile.getEmail());
             classmateInfo.add(profile.getPhoneNumber());
             classmateInfo.add(profile.getAvailability().toString());
-            //System.out.println(profile.getAvailability().toString());
 
             classmates.add(classmateInfo);
         }
