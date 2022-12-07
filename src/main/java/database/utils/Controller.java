@@ -94,8 +94,8 @@ public class Controller {
         return mService.fetchBoard(messageBoard);
     }
 
-    public Vector<ArrayList<String>> getClassmates(String username, String courseId) {
-        return sService.getClassmates(username, courseId);
+    public Vector<ArrayList<String>> getClassmates(String courseId, String username) {
+        return sService.getClassmates(courseId, username);
     }
 
     public boolean verifyAccount(String email) {
