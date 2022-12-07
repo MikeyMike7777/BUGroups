@@ -2,6 +2,7 @@ package database.student;
 
 import database.message.Message;
 
+import java.util.Objects;
 import java.util.Vector;
 
 public class Student {
@@ -93,5 +94,18 @@ public class Student {
         studentInfo.add(this.getPassword());
         //courses?
         return studentInfo;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Student student = (Student) o;
+        return Objects.equals(username, student.username) && Objects.equals(password, student.password) && Objects.equals(courses, student.courses) && Objects.equals(tutorOffers, student.tutorOffers) && Objects.equals(sentMessages, student.sentMessages) && Objects.equals(profile, student.profile);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(username, password, courses, tutorOffers, sentMessages, profile);
     }
 }

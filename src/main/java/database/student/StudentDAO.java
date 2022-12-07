@@ -3,6 +3,7 @@ package database.student;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.model.Filters;
+import database.message.MessageService;
 import database.utils.BUGUtils;
 import database.utils.MongoInit;
 import org.bson.Document;
@@ -46,7 +47,7 @@ public class StudentDAO {
         return s;
     }
 
-    boolean registerStudent(String username, String password, String name, String email, String phone){
+    boolean registerStudent(String username, String password){
         Student s = new Student(username, password);
         MongoCollection<Document> collection1 = BUGUtils.database.getCollection("BUGStudents");
 
@@ -68,6 +69,26 @@ public class StudentDAO {
         cursor = collection.find(filter).iterator();
         if (cursor.hasNext())
             return toStudent(cursor.next());
+        else return null;
+    }
+
+    Profile fetchProfile(String id){
+        MongoCollection<Document> collection = BUGUtils.database.getCollection("profileInfos");
+        Bson filter = eq("_id", id);
+        cursor = collection.find(filter).iterator();
+        if (cursor.hasNext()){
+            Document document = cursor.next();
+            ArrayList<String> times = (ArrayList<String>) document.get("availability");
+            Vector<String> convertTimes = new Vector<>();
+            if(times != null) {
+                convertTimes.addAll(times);
+            }
+            Availability availability = new Availability(convertTimes);
+
+            return new Profile(document.getString("_id"), document.getString("name"),
+                    document.getString("email"), document.getString("phoneNumber"), availability);
+        }
+
         else return null;
     }
 
@@ -130,10 +151,40 @@ public class StudentDAO {
         return false;
     }
 
+    //Deletes everything in relation to a students account
+    //therefore all the logic will be in student
     boolean deleteAccount(String id) {
-        MongoCollection<Document> collection = BUGUtils.database.getCollection("BUGStudents");
-        Bson filter = Filters.eq("_id", id);
-        collection.findOneAndDelete(filter);
+        MongoCollection<Document> studentCollection = BUGUtils.database.getCollection("BUGStudents");
+        MongoCollection<Document> profileCollection = BUGUtils.database.getCollection("profileInfos");
+        MongoCollection<Document> messageCollection = BUGUtils.database.getCollection("BUGMessages");
+        MongoCollection<Document> tutorCollection = BUGUtils.database.getCollection("tutorOffers");
+
+        MessageService ms = new MessageService();
+
+        Bson filterStudentCollectionID = eq("_id", id);
+        cursor = studentCollection.find(filterStudentCollectionID).iterator();
+        if (cursor.hasNext()) {
+            Document studentDocument = cursor.next();
+
+            Bson filterAuthor = eq("author", studentDocument.get("username"));
+            messageCollection.find(filterAuthor);
+            cursor = messageCollection.find(filterAuthor).iterator();
+            while(cursor.hasNext()){
+                Document d = cursor.next();
+                ms.deleteMessage(d.getString("_id"));
+            }
+
+            Bson filterUsername = eq("username", studentDocument.get("username"));
+            tutorCollection.findOneAndDelete(filterUsername);
+
+            Bson filterProfileCollectionID = eq("_id", studentDocument.get("username"));
+            profileCollection.findOneAndDelete(filterProfileCollectionID);
+
+            Bson filter = Filters.eq("_id", id);
+            studentCollection.findOneAndDelete(filter);
+
+        }
+
         return true;
     }
 

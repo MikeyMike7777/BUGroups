@@ -73,13 +73,6 @@ public class ProfileDAO {
 
     }
 
-    boolean deleteAccount(String id) {
-        MongoCollection<Document> collection = BUGUtils.database.getCollection("profileInfos");
-        Bson filter = Filters.eq("_id", id);
-        collection.findOneAndDelete(filter);
-        return true;
-    }
-
     static Profile toProfile(Document document) {
         ArrayList<String> a = (ArrayList<String>) document.get("availability");
         Vector<String> convert = new Vector<>();

@@ -6,7 +6,7 @@ public class Availability {
 
     private Vector<String> times = new Vector<>();
 
-    Availability(Vector<String> time) {
+    public Availability(Vector<String> time) {
         times = time;
     }
 
@@ -26,5 +26,18 @@ public class Availability {
             availability += s + ",";
         }
         return availability;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Availability that = (Availability) o;
+        return Objects.equals(times, that.times);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(times);
     }
 }

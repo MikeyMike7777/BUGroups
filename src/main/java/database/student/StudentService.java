@@ -90,9 +90,10 @@ public class StudentService {
     }
 
 
-    public boolean registerStudent(String username, String password, String name, String email, String phone) {
-        return studentDAO.registerStudent(username, password, name, email, phone);
+    public boolean registerStudent(String username, String password) {
+        return studentDAO.registerStudent(username, password);
     }
+
 
     // return vector of relevant student info, put username first please :)
     public Vector<Object> fetchStudent(String id) {
@@ -112,13 +113,19 @@ public class StudentService {
         return v;
     }
 
+    // return student object because of JUNIT TESTING
+    public Student getStudent(String id) {
+        Student s = studentDAO.fetchStudent(id);
+        return s;
+    }
+
     public Vector<ArrayList<String>> getClassmates(String courseId, String username){
         ArrayList<String> students = courseDAO.getStudents(courseId, username); // get all the students in the given course
         return profileDAO.getClassmates(students); // get the students' info (availability, name, number, etc.)
     }
 
     public boolean deleteAccount(String id) {
-        return studentDAO.deleteAccount(id) && profileDAO.deleteAccount(id);
+        return studentDAO.deleteAccount(id);
     }
 
     //Verify if a user's account is in profileInfos table based on email
@@ -130,8 +137,15 @@ public class StudentService {
         return studentDAO.changePassword(ID, password);
     }
 
+    public Profile getProfile(String id) {
+        return studentDAO.fetchProfile(id);
+    }
+
     //Sends a password request email to target email and returns boolean of valid send or not
     public boolean sendPasswordReset(String email){
+        if(!email.endsWith("@baylor.edu") || !verifyAccount(email)){
+            return false;
+        }
 
         String host = "smtp.gmail.com";
         String port = "465";
@@ -618,7 +632,7 @@ public class StudentService {
                 "                                                </td>\n" +
                 "                                            </tr>\n" +
                 "                                        </table>\n" +
-                "                                        <p>If you have questions contact BUGroups Support at <a href=\"{{support_url}}\">830-730-7120</a>.</p>\n" +
+                "                                        <p>If you have questions contact BUGroups Support at <b>830-730-7120</b>.</p>\n" +
                 "                                        <p>Thanks,\n" +
                 "                                            <br>The BUGroups Team</p>\n" +
                 "                                    </div>\n" +
@@ -650,28 +664,19 @@ public class StudentService {
                 "</html>\n");
 
 
-//        body.append("The first image is a chart:<br>");
-//        body.append("<img src=\"cid:image1\" width=\"30%\" height=\"30%\" /><br>");
-//        body.append("The second one is a cube:<br>");
-//        body.append("<img src=\"cid:image2\" width=\"15%\" height=\"15%\" /><br>");
-//        body.append("End of message.");
-//        body.append("</html>");
 
         // inline images
         Map<String, String> inlineImages = new HashMap<String, String>();
         inlineImages.put("image1", "src/main/resources/BUGroups.png");
-        //inlineImages.put("image2", "C:\\Users\\ninja\\Downloads\\SequenceDiagram\\BUGroups\\src\\main\\resources\\BUGroups.png");
 
         BUGUtils.controller.changePassword((email.substring(0, email.length() - 11)), newPassword);
 
         try {
-            EmbeddedEmailUtil.send(host, port, mailFrom, password, mailTo,
-//                    subject, body.toString(), inlineImages);
-                    subject, body.toString(), null);
+            EmbeddedEmailUtil.send(host, port, mailFrom, password, mailTo, subject, body.toString(), null);
             System.out.println("Email sent.");
             return true;
         } catch (Exception ex) {
-            System.out.println("Could not send email.");
+            System.out.println("There was an error sending the email.");
             ex.printStackTrace();
             return false;
         }
@@ -1167,7 +1172,7 @@ public class StudentService {
                 "                                                </td>\n" +
                 "                                            </tr>\n" +
                 "                                        </table>\n" +
-                "                                        <p>If you have questions regarding your account contact BUGroups Support at <a href=\"{{support_url}}\">830-730-7120</a>.</p>\n" +
+                "                                        <p>If you have questions regarding your account contact BUGroups Support at <b>830-730-7120.</b>\n" +
                 "                                        <p>Thanks,\n" +
                 "                                            <br>The BUGroups Team</p>\n" +
                 "                                    </div>\n" +

@@ -10,7 +10,7 @@ public class Course {
     private Vector<String> students; // stores the students' IDs from the Student collection
     //private String id = courseCode + section;
 
-    Course(String courseCode, String section, String professor, Vector<String> students) {
+    public Course(String courseCode, String section, String professor, Vector<String> students) {
         this.professor = professor;
         this.section = section;
         this.courseCode = courseCode;

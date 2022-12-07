@@ -22,7 +22,7 @@ public class Controller {
     public void init() {}
 
     public void registerStudent(String username, String password, String name, String email, String phone){
-        sService.registerStudent(username, password, name, email, phone);
+        sService.registerStudent(username, password);
     }
 
     public Vector<Object> fetchStudent(String id){
