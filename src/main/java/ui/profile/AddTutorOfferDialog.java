@@ -1,8 +1,5 @@
 package ui.profile;
 
-import database.utils.BUGUtils;
-import ui.general.Window;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -10,11 +7,14 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.Objects;
 
-public class AddTutorDialog extends JDialog{
+import database.utils.BUGUtils;
+import ui.general.Window;
+
+public class AddTutorOfferDialog extends JDialog{
 
     JLabel codeLabel;
 
-    JLabel sectionLabel;
+    JLabel semesterLabel;
 
     JLabel professorLabel;
     JLabel hourlyRateLabel;
@@ -27,28 +27,24 @@ public class AddTutorDialog extends JDialog{
 
     JTextField classCode = new JTextField(20);
 
-    JTextField section = new JTextField(20);
-
     JTextField professor = new JTextField(20);
 
     JTextField hourlyRate = new JTextField(20);
-
-    String type;
+    JTextField semester = new JTextField(20);
 
     JPanel parent;
 
 
-    AddTutorDialog(DefaultListModel<String> model, String s, JPanel parent) {
+    AddTutorOfferDialog(DefaultListModel<String> model, JPanel parent) {
         super();
         this.parent = parent;
         List = model;
-        type = s;
-        setSize(300,410);
+        setSize(300, 550);
         createAndDisplay();
     }
 
     void createAndDisplay() {
-        setLayout(new GridLayout(2,2));
+        setLayout(new GridLayout(2, 2));
 
         buildTextPanel();
         add(textPanel);
@@ -59,12 +55,12 @@ public class AddTutorDialog extends JDialog{
         setVisible(true);
     }
 
-    void buildSaveCancel(){
+    void buildSaveCancel() {
         JButton save = new JButton("Save");
         JButton cancel = new JButton("Cancel");
 
-        cancel.addActionListener(new AddTutorDialog.CancelActionListener());
-        save.addActionListener(new AddTutorDialog.SaveActionListener());
+        cancel.addActionListener(new CancelActionListener());
+        save.addActionListener(new SaveActionListener());
 
         buttonPanel.add(save);
         buttonPanel.add(cancel);
@@ -75,15 +71,13 @@ public class AddTutorDialog extends JDialog{
     void buildTextPanel() {
         String s;
         codeLabel = new JLabel("Enter Course Code:");
-        professorLabel = new JLabel("Enter Professor You took:");
-        sectionLabel = new JLabel("Enter Semester Taken:");
-        hourlyRateLabel = new JLabel("Enter hourly rate:");
-
-
+        semesterLabel = new JLabel("Enter Semester Taken:");
+        professorLabel = new JLabel("Enter Professor Taken: ");
+        hourlyRateLabel = new JLabel("Enter Hourly Rate: ");
         textPanel.add(codeLabel);
         textPanel.add(classCode);
-        textPanel.add(sectionLabel);
-        textPanel.add(section);
+        textPanel.add(semesterLabel);
+        textPanel.add(semester);
         textPanel.add(professorLabel);
         textPanel.add(professor);
         textPanel.add(hourlyRateLabel);
@@ -94,18 +88,18 @@ public class AddTutorDialog extends JDialog{
     class SaveActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            if ( List.size() != 0 && Objects.equals(List.get(0), "No Current Classes!")){
+            if (List.size() != 0 && Objects.equals(List.get(0), "No Current Classes!")) {
                 List.remove(0);
             }
-
-            String normalizedCourseCode = classCode.getText().substring(0,3).toUpperCase(); // course
-            String normalizedCourseNumber = classCode.getText().substring(classCode.getText().length() - 4);
-
-            BUGUtils.controller.addTutorOffer(Window.username, normalizedCourseCode + normalizedCourseNumber, professor.getText(),
-                    section.getText(), Double.parseDouble(hourlyRate.getText()));
+            String normalizedCourseCode = classCode.getText().substring(0, 3).toUpperCase(); // course e.g. CSI
+            String normalizedCourseNumber = classCode.getText().substring(classCode.getText().length() - 4); // number e.g 2334
+            BUGUtils.controller.addTutorOffer(Window.username,
+                    normalizedCourseCode + normalizedCourseNumber,
+                    professor.getText(),
+                    semester.getText(),
+                    Double.parseDouble(hourlyRate.getText()));
             List.addElement(normalizedCourseCode + " " + normalizedCourseNumber);
-
-            ui.general.Window temp = (Window)(parent.getParent()
+            Window temp = (Window) (parent.getParent()
                     .getParent().getParent());
             temp.setVisible(false);
             temp.remove(1);
@@ -114,7 +108,7 @@ public class AddTutorDialog extends JDialog{
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
-            ((JTabbedPane)temp.getComponent(1)).setSelectedIndex(4);
+            ((JTabbedPane) temp.getComponent(1)).setSelectedIndex(4);
             temp.setVisible(true);
             dispose();
         }
@@ -128,4 +122,3 @@ public class AddTutorDialog extends JDialog{
     }
 
 }
-
