@@ -12,13 +12,16 @@ public class ReplyDialog extends PostDialog {
     MessageBox repliesTo;
     MessageBox dialog;
     MessageDialog window;
+    JDialog messageDialog;
 
-    ReplyDialog(MessageBox owner, MessageBox dialog, Component board,
-                String title, MessageDialog window) {
+    ReplyDialog(MessageBox owner, MessageBox dialog, MessageUtil board,
+                String title, MessageDialog window, JDialog parent) {
         super(owner, board, title);
         repliesTo = owner;
         this.dialog = dialog;
         this.window = window;
+        this.messageDialog = parent;
+        this.course.setEditable(false);
         course.setText(dialog.courseNum);
     }
 
@@ -44,15 +47,27 @@ public class ReplyDialog extends PostDialog {
     class PostActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            dialog = new MessageBox(BUGUtils.controller.createMessage(
-                    message.getText(), Window.username, course.getText(),
-                    parent.getX(), repliesTo.id
-            ));
-            repliesTo.replies.add(dialog);
-            parent.repaint(4);
-            window.refresh(repliesTo);
-
-            dispose();
+            if (course.getText().matches("[a-zA-Z]{3,4} ?[1-4][1-5][0-9]{2}")) {
+                if (message.getText().length() < 1024) {
+                    dialog = new MessageBox(BUGUtils.controller.createMessage(
+                            message.getText(), Window.username, course.getText(),
+                            parent.getIndex(), repliesTo.id
+                    ));
+                    repliesTo.replies.add(dialog);
+                    parent.refresh();
+                    window.refresh(repliesTo);
+                    messageDialog.dispose();
+                    dispose();
+                } else {
+                    JOptionPane.showMessageDialog(getRootPane().getParent(),
+                            "Message too long.",
+                            null, JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(getRootPane().getParent(),
+                        "Please enter a valid course code.",
+                        null, JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 }

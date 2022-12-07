@@ -95,7 +95,7 @@ public class MessageTab extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (board != null) {
-                    board.repaint(4);
+                    board.refresh();
                 } else {
                     JOptionPane.showMessageDialog(post.getRootPane().getParent(),
                             "No board selected!", "Error",

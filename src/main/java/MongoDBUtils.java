@@ -20,9 +20,15 @@ public class MongoDBUtils {
                 .build();
         MongoClient mongoClient = MongoClients.create(settings);
         MongoDatabase database = mongoClient.getDatabase("test");
-        MongoCollection<Document> collection = database.getCollection("courses");
+        MongoCollection<Document> collection = database.getCollection("BUGMessages");
         Bson filter = exists("_id");
         MongoCursor<Document> cursor = collection.find(filter).iterator();
+//        Document d = new Document("_id", "john_appleseed1")
+//                .append("name", "")
+//                .append("email", "john_appleseed1@baylor.edu")
+//                .append("phoneNumber", "")
+//                .append("availability", new ArrayList<>());
+//        collection.insertOne(d);
         while (cursor.hasNext())
             System.out.println(cursor.next());
 

@@ -86,8 +86,8 @@ public class MessageDialog extends JDialog {
         @Override
         public void actionPerformed(ActionEvent e) {
             PostDialog reply = new ReplyDialog(parent, messageBox,
-                    parent.getParent().getParent().getParent().getParent(),
-                    "New Reply", (MessageDialog)panel.getTopLevelAncestor());
+                    (MessageUtil)parent.getParent().getParent().getParent().getParent(),
+                    "New Reply", (MessageDialog)panel.getTopLevelAncestor(), MessageDialog.this);
         }
     }
 
