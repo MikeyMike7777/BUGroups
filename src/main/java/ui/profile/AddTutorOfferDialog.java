@@ -88,29 +88,53 @@ public class AddTutorOfferDialog extends JDialog{
     class SaveActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            if (List.size() != 0 && Objects.equals(List.get(0), "No Current Offers!")) {
-                List.remove(0);
+            if (classCode.getText().matches("[a-zA-Z]{3} ?[1-4][1-5][0-9]{2}")) {
+                if (!semester.getText().isEmpty()) {
+                    if (!professor.getText().isEmpty()) {
+                        if (hourlyRate.getText().matches("[0-9]{1,9}\\.?[0-9]{0,2}")) {
+                            if (List.size() != 0 && Objects.equals(List.get(0), "No Current Offers!")) {
+                                List.remove(0);
+                            }
+                            String normalizedCourseCode = classCode.getText().substring(0, 3).toUpperCase(); // course e.g. CSI
+                            String normalizedCourseNumber = classCode.getText().substring(classCode.getText().length() - 4); // number e.g 2334
+                            BUGUtils.controller.addTutorOffer(Window.username,
+                                    normalizedCourseCode + normalizedCourseNumber,
+                                    professor.getText(),
+                                    semester.getText(),
+                                    Double.parseDouble(hourlyRate.getText()));
+                            List.addElement(normalizedCourseCode + " " + normalizedCourseNumber);
+                            Window temp = (Window) (parent.getParent()
+                                    .getParent().getParent());
+                            temp.setVisible(false);
+                            temp.remove(1);
+                            try {
+                                temp.initNavigationBar();
+                            } catch (IOException ex) {
+                                ex.printStackTrace();
+                            }
+                            ((JTabbedPane) temp.getComponent(1)).setSelectedIndex(4);
+                            temp.setVisible(true);
+                            dispose();
+                        } else {
+                            JOptionPane.showMessageDialog(getRootPane().getParent(),
+                                    "Please enter a valid decimal value.",
+                                    null, JOptionPane.ERROR_MESSAGE);
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(getRootPane().getParent(),
+                                "Please enter a professor name.",
+                                null, JOptionPane.ERROR_MESSAGE);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(getRootPane().getParent(),
+                            "Please enter a semester.",
+                            null, JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(getRootPane().getParent(),
+                        "Please enter a valid course code.",
+                        null, JOptionPane.ERROR_MESSAGE);
             }
-            String normalizedCourseCode = classCode.getText().substring(0, 3).toUpperCase(); // course e.g. CSI
-            String normalizedCourseNumber = classCode.getText().substring(classCode.getText().length() - 4); // number e.g 2334
-            BUGUtils.controller.addTutorOffer(Window.username,
-                    normalizedCourseCode + normalizedCourseNumber,
-                    professor.getText(),
-                    semester.getText(),
-                    Double.parseDouble(hourlyRate.getText()));
-            List.addElement(normalizedCourseCode + " " + normalizedCourseNumber);
-            Window temp = (Window) (parent.getParent()
-                    .getParent().getParent());
-            temp.setVisible(false);
-            temp.remove(1);
-            try {
-                temp.initNavigationBar();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-            ((JTabbedPane) temp.getComponent(1)).setSelectedIndex(4);
-            temp.setVisible(true);
-            dispose();
         }
     }
 

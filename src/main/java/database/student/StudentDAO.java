@@ -75,7 +75,8 @@ public class StudentDAO {
                 .append("username", s.getUsername())
                 .append("password", s.getPassword())
                 .append("courses", new ArrayList<String>())
-                .append("tutors", new ArrayList<String>());
+                .append("tutors", new ArrayList<String>())
+                .append("active", true);
 
 
         collection1.insertOne(d1);

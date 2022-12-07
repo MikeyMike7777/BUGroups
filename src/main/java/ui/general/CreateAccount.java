@@ -107,7 +107,7 @@ public class CreateAccount extends JPanel {
                             //verify account
                             if(!(BUGUtils.controller.verifyAccount(emailField.getText()))){
                                 JOptionPane.showMessageDialog(CreateAccount.this.getRootPane()
-                                                .getParent(), "Temporary password sent to email address!",
+                                                .getParent(), "Temporary password sent to email address! (Email may take up to five minutes to arrive)",
                                         "Confirmation", JOptionPane.QUESTION_MESSAGE);
                                 String name = firstName.getText() + " " + lastName.getText();
                                 String password = BUGUtils.controller.generatePassword(8);

@@ -47,7 +47,7 @@ public class ForgotPassword extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 if(emailField.getText().endsWith("@baylor.edu")) {
                     JOptionPane.showMessageDialog(ForgotPassword.this.getRootPane()
-                                    .getParent(), "Email sent!", "Confirmation",
+                                    .getParent(), "Email sent! (Email may take up to five minutes to arrive)", "Confirmation",
                             JOptionPane.QUESTION_MESSAGE);
                     JPanel temp = (JPanel) getParent();
                     setVisible(false);
