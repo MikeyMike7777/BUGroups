@@ -71,7 +71,6 @@ public class ProfileTutorList extends JPanel {
     void buildClassList(){
 
         Vector<String> s = BUGUtils.controller.getStudentTutors(Window.username);
-        Vector<String> t = new Vector<>();
 
         if(s.size() > 0) {
             for (String value : s) {
