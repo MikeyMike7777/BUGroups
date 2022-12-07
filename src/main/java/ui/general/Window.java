@@ -147,11 +147,10 @@ public class Window extends JPanel {
     }
 
     public void initNavigationBar() throws IOException {
+        //tabbedPane = new JTabbedPane();
+        tabbedPane.removeAll();
+        //remove(tabbedPane);
         this.tabMap = initTabs();
-        tabbedPane = new JTabbedPane();
-        if (tabbedPane == null)
-            tabbedPane = new JTabbedPane();
-        else tabbedPane.removeAll();
         tabbedPane.setPreferredSize(getPreferredSize());
 
         BufferedImage userIcon = ImageIO.read(getClass().getResource("/userIcon.png"));
