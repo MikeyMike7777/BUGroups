@@ -13,8 +13,8 @@ import static com.mongodb.client.model.Filters.eq;
 public class TutorOfferDAO {
     private static MongoCursor<Document> cursor;
 
-    void createTutorOffer(String id, String courseCode, String professorTaken, String semesterTaken, Double hourlyRate){
-        TutorOffer t = new TutorOffer(id, Window.username, courseCode, professorTaken, semesterTaken, hourlyRate);
+    void createTutorOffer(String id, String username, String courseCode, String professorTaken, String semesterTaken, Double hourlyRate){
+        TutorOffer t = new TutorOffer(id, username, courseCode, professorTaken, semesterTaken, hourlyRate);
         MongoCollection<Document> collection = BUGUtils.database.getCollection("tutorOffers");
         Bson filter = eq("_id", id);
 

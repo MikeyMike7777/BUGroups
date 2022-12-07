@@ -51,7 +51,6 @@ public class TutorsList extends JPanel{
     TutorsList(Vector<ArrayList<String>> tutorOffersInfo){
         // reworked this. previously had hardcoded values. will also need to rework addClassmates function
         this.tutorOffersInfo = tutorOffersInfo;
-        System.out.println("size of tutorOffersInfo: " + tutorOffersInfo.size());
         createAndDisplay();
     }
 

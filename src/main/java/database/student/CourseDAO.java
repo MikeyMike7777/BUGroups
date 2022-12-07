@@ -1,7 +1,5 @@
 package database.student;
 
-import ui.general.Window;
-
 import com.mongodb.client.*;
 import database.utils.BUGUtils;
 import org.bson.Document;
@@ -12,6 +10,7 @@ import java.util.Vector;
 
 import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Updates.addToSet;
+import static com.mongodb.client.model.Updates.pull;
 
 public class CourseDAO {
 
@@ -52,25 +51,30 @@ public class CourseDAO {
 
 
 
-    ArrayList<String> getStudents(String courseId){
+    ArrayList<String> getStudents(String courseId, String username){
         // query for all students' profiles that have the given course code in their course list
         // get all students in a course
+
+        ArrayList<String> students = new ArrayList<>();
 
         // querying courses collection
         MongoCollection<Document> courseCollection = BUGUtils.database.getCollection("courses");
         // looking for course that matches courseId (course code + section)
         Document course = courseCollection.find(eq("_id", courseId)).first();
         // from the course Document object, return the list of Student IDs
-        try {
-            return (ArrayList<String>) (course.get("students"));
-        } catch (NullPointerException e){
-            return new ArrayList<String>();
-        }
+        students = (ArrayList<String>)(course.get("students"));
+        students.remove(username);
+
+        return students;
     }
 
-    static void removeCourse(String courseId){
+    // removes student from course's list of students that are enrolled in it
+    static void removeCourse(String username, String courseId){
         MongoCollection<Document> courseCollection = BUGUtils.database.getCollection("courses");
-        courseCollection.deleteOne(eq("_id", courseId));
+        // fixme: should just delete student from list of students enrolled in that course, not the whole course
+        Bson filter = eq("_id", courseId);
+        Bson update = pull("students", username);
+        courseCollection.updateOne(filter, update);
     }
 
     // generates dummy data in course collection for testing classmates FIXME: remove when done testing

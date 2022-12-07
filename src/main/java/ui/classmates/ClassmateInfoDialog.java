@@ -5,13 +5,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Vector;
 
 public class ClassmateInfoDialog extends JDialog{
-    Classmate cm;
-    Classmate parent;
+    ClassmateBox cm;
+    ClassmateBox parent;
     JPanel panel;
-    ClassmateInfoDialog(Classmate owner){
+    ClassmateInfoDialog(ClassmateBox owner){
         super(SwingUtilities.windowForComponent(owner));
         parent = owner;
         ArrayList<String> parentInfo = new ArrayList<>();
@@ -19,7 +18,7 @@ public class ClassmateInfoDialog extends JDialog{
         parentInfo.add(parent.getEmail());
         parentInfo.add(parent.getPhone());
         parentInfo.add(parent.getAvailability());
-        cm = new Classmate(parentInfo);
+        cm = new ClassmateBox(parentInfo);
         cm.setFocusable(false);
         createAndDisplay();
     }

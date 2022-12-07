@@ -6,11 +6,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.Objects;
+import java.util.Vector;
 
+import database.student.Student;
 import database.utils.BUGUtils;
 import  ui.general.Window;
 
-public class AddClassDialog extends JDialog {
+public class AddClassTutorDialog extends JDialog {
 
     JLabel codeLabel;
 
@@ -35,7 +37,7 @@ public class AddClassDialog extends JDialog {
     JPanel parent;
 
 
-    AddClassDialog(DefaultListModel<String> model, String s, JPanel parent) {
+    AddClassTutorDialog(DefaultListModel<String> model, String s, JPanel parent) {
         super();
         this.parent = parent;
         List = model;
@@ -93,14 +95,17 @@ public class AddClassDialog extends JDialog {
             if (section.getText().length() < 2){
                 sec = "0" + section.getText();
             }
-            System.out.println(sec);
-            String normalizedCourseCode = classCode.getText().substring(0,3).toUpperCase(); // course
-            String normalizedCourseNumber = classCode.getText().substring(classCode.getText().length() - 4);
-
-            BUGUtils.controller.addCourse(normalizedCourseCode + normalizedCourseNumber + sec, normalizedCourseCode + " " + normalizedCourseNumber,
+            String normalizedCourseCode = classCode.getText().substring(0,3).toUpperCase(); // course e.g. CSI
+            String normalizedCourseNumber = classCode.getText().substring(classCode.getText().length() - 4); // number e.g 2334
+            if(Objects.equals(type, "course")) {
+                BUGUtils.controller.addCourse(normalizedCourseCode + normalizedCourseNumber + sec, Window.username,normalizedCourseCode + " " + normalizedCourseNumber,
                         sec, professor.getText());
-            List.addElement(normalizedCourseCode + " " + normalizedCourseNumber + " " + sec);
+                List.addElement(normalizedCourseCode + " " + normalizedCourseNumber + " " + sec);
+            } else if (Objects.equals(type, "tutor")) {
+                BUGUtils.controller.addTutorOffer(Window.username, normalizedCourseCode , professor.getText(),"Fall 2022", 2.50);
 
+                List.addElement(normalizedCourseCode + " " + normalizedCourseNumber + " " + sec);
+            }
             Window temp = (Window)(parent.getParent()
                     .getParent().getParent());
             temp.setVisible(false);

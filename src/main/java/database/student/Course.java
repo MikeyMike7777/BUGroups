@@ -41,14 +41,6 @@ public class Course {
         this.courseCode = courseCode;
     }
 
-//    public String getId() {
-//        return id;
-//    }
-//
-//    public void setId(String id) {
-//        this.id = id;
-//    }
-
     public Vector<String> getStudents() {
         return students;
     }

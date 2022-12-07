@@ -2,6 +2,7 @@ package ui.classmates;
 
 import database.utils.BUGUtils;
 import ui.profile.ProfileClassList;
+import ui.general.Window;
 
 import javax.swing.*;
 import java.awt.*;
@@ -80,12 +81,12 @@ public class ClassmatesTab extends JPanel{
                 remove(getComponentCount() - 1);
 
             // call controller
-            Vector<ArrayList<String>> info = BUGUtils.controller.getClassmates(s.replaceAll(" ", ""));
+            Vector<ArrayList<String>> info = BUGUtils.controller.getClassmates(s.replaceAll(" ", ""), Window.username);
             if (info.isEmpty()) {
                 add(new JLabel(" "));
                 add(new JLabel("No other classmates!"));
             } else {
-                ClassmatesList currClassmates = new ClassmatesList(info); // pass course code to controller
+                ClassmatesList currClassmates = new ClassmatesList(info);
                 currClassmates.iD = boardKeys.get(s);
                 currClassmates.name = s;
                 add(currClassmates);
