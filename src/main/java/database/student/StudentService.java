@@ -1269,6 +1269,7 @@ public class StudentService {
         return studentDAO.getCourses(id);
     }
 
+    // gets tutoring offers from student's list
     public Vector<String> getStudentTutors(String username) {
         Vector<String> tutorCourses = new Vector<>();
         // get course IDs that a student has (their id is student who made it and date they made it)
