@@ -20,7 +20,7 @@ public class MongoDBUtils {
                 .build();
         MongoClient mongoClient = MongoClients.create(settings);
         MongoDatabase database = mongoClient.getDatabase("test");
-        MongoCollection<Document> collection = database.getCollection("BUGStudents");
+        MongoCollection<Document> collection = database.getCollection("tutorOffers");
 
 //        Bson filter = exists("_id");
 //        Bson update = set("courses", new ArrayList<>());

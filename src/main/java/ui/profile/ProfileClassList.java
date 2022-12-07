@@ -1,6 +1,8 @@
 package ui.profile;
 
 import database.utils.BUGUtils;
+
+import javax.print.attribute.standard.JobStateReason;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -29,6 +31,7 @@ public class ProfileClassList extends JPanel {
 
     void createAndDisplay() {
         setMinimumSize(new Dimension(100,100));
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         addComponents();
         setVisible(true);
     }
@@ -36,20 +39,25 @@ public class ProfileClassList extends JPanel {
     void addComponents() {
         // header label
         header = new JLabel("Current enrolled courses:");
+        header.setAlignmentX(CENTER_ALIGNMENT);
 
         add(header);
 
-        buildClassList();
-        add(classList);
-
         buildAddRemoveButtons();
+        buttons.setAlignmentX(CENTER_ALIGNMENT);
         add(buttons);
+
+        buildClassList();
+        classList.setAlignmentX(CENTER_ALIGNMENT);
+        add(classList);
 
     }
 
     void buildAddRemoveButtons(){
         JButton add = new JButton("Add Class");
         JButton remove = new JButton("Remove Class");
+
+        buttons.setLayout(new BoxLayout(buttons, BoxLayout.X_AXIS));
 
         add.addActionListener(new AddActionListener());
         remove.addActionListener(new RemoveActionListener());
@@ -75,7 +83,6 @@ public class ProfileClassList extends JPanel {
 
         classList = new JList<>(model);
         classList.setSize(50,50);
-        add(new JScrollPane(classList));
     }
 
     class AddActionListener implements ActionListener {

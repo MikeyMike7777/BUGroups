@@ -32,6 +32,7 @@ public class ProfileTutorList extends JPanel {
 
     void createAndDisplay() {
         setMinimumSize(new Dimension(100,150));
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         addComponents();
         setVisible(true);
     }
@@ -39,20 +40,23 @@ public class ProfileTutorList extends JPanel {
     void addComponents() {
         // header label
         header = new JLabel("Classes you are Tutoring:");
-
+        header.setAlignmentX(CENTER_ALIGNMENT);
         add(header);
 
-        buildClassList();
-        add(tutorList);
-
         buildAddRemoveButtons();
+        buttons.setAlignmentX(CENTER_ALIGNMENT);
         add(buttons);
 
+        buildClassList();
+        tutorList.setAlignmentX(CENTER_ALIGNMENT);
+        add(tutorList);
     }
 
     void buildAddRemoveButtons(){
         JButton add = new JButton("Add Tutoring Offer");
         JButton remove = new JButton("Remove Tutoring");
+
+        buttons.setLayout(new BoxLayout(buttons, BoxLayout.X_AXIS));
 
         add.addActionListener(new AddActionListener());
         remove.addActionListener(new RemoveActionListener());
@@ -81,7 +85,6 @@ public class ProfileTutorList extends JPanel {
 
         tutorList = new JList<>(model);
         tutorList.setSize(50,50);
-        add(new JScrollPane(tutorList));
     }
 
     class AddActionListener implements ActionListener {

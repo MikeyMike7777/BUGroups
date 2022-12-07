@@ -148,7 +148,13 @@ public class Window extends JPanel {
 
     public void initNavigationBar() throws IOException {
         this.tabMap = initTabs();
+<<<<<<< Updated upstream
         tabbedPane = new JTabbedPane();
+=======
+        if (tabbedPane == null)
+            tabbedPane = new JTabbedPane();
+        else tabbedPane.removeAll();
+>>>>>>> Stashed changes
         tabbedPane.setPreferredSize(getPreferredSize());
 
         BufferedImage userIcon = ImageIO.read(getClass().getResource("/userIcon.png"));
