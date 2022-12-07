@@ -47,7 +47,6 @@ public class StudentService {
         return s;
     }
 
-
     public void createProfileInfo(String id, String name, String email, String phone, Vector<String> availability){
         profileDAO.createProfileInfo(id, name, email, phone, availability);
     }
@@ -1276,5 +1275,9 @@ public class StudentService {
         CourseDAO.removeCourse(username, courseId);
         // removes course from students' list of courses they're enrolled in
         StudentDAO.removeCourse(username, courseId);
+    }
+
+    public void removeTutoringOffer(String username, String courseCode){
+        // remove tutoring offer from tutorOffers
     }
 }

@@ -94,8 +94,8 @@ public class Controller {
         return mService.fetchBoard(messageBoard);
     }
 
-    public Vector<ArrayList<String>> getClassmates(String username, String courseId) {
-        return sService.getClassmates(username, courseId);
+    public Vector<ArrayList<String>> getClassmates(String courseId, String username) {
+        return sService.getClassmates(courseId, username);
     }
 
     public boolean verifyAccount(String email) {
@@ -131,4 +131,9 @@ public class Controller {
     public void removeCourse(String username, String courseId){
         sService.removeCourse(username, courseId);
     }
+
+    public void removeTutoringOffer(String username, String courseCode){
+        sService.removeTutoringOffer(username, courseCode);
+    }
+
 }

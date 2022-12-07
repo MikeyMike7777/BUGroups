@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.Objects;
 
 import database.utils.BUGUtils;
-import  ui.general.Window;
+import ui.general.Window;
 
 public class AddCourseDialog extends JDialog {
 
@@ -30,22 +30,18 @@ public class AddCourseDialog extends JDialog {
 
     JTextField professor = new JTextField(20);
 
-    String type;
-
     JPanel parent;
 
-
-    AddCourseDialog(DefaultListModel<String> model, String s, JPanel parent) {
+    AddCourseDialog(DefaultListModel<String> model, JPanel parent) {
         super();
         this.parent = parent;
         List = model;
-        type = s;
-        setSize(300,350);
+        setSize(300, 350);
         createAndDisplay();
     }
 
     void createAndDisplay() {
-        setLayout(new GridLayout(2,2));
+        setLayout(new GridLayout(2, 2));
 
         buildTextPanel();
         add(textPanel);
@@ -56,7 +52,7 @@ public class AddCourseDialog extends JDialog {
         setVisible(true);
     }
 
-    void buildSaveCancel(){
+    void buildSaveCancel() {
         JButton save = new JButton("Save");
         JButton cancel = new JButton("Cancel");
 
@@ -86,25 +82,19 @@ public class AddCourseDialog extends JDialog {
     class SaveActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            if ( List.size() != 0 && Objects.equals(List.get(0), "No Current Classes!")){
+            if (List.size() != 0 && Objects.equals(List.get(0), "No Current Classes!")) {
                 List.remove(0);
             }
             String sec = "";
-            if (section.getText().length() < 2){
+            if (section.getText().length() < 2) {
                 sec = "0" + section.getText();
             }
-            String normalizedCourseCode = classCode.getText().substring(0,3).toUpperCase(); // course e.g. CSI
+            String normalizedCourseCode = classCode.getText().substring(0, 3).toUpperCase(); // course e.g. CSI
             String normalizedCourseNumber = classCode.getText().substring(classCode.getText().length() - 4); // number e.g 2334
-            if(Objects.equals(type, "course")) {
-                BUGUtils.controller.addCourse(normalizedCourseCode + normalizedCourseNumber + sec, Window.username,normalizedCourseCode + " " + normalizedCourseNumber,
-                        sec, professor.getText());
-                List.addElement(normalizedCourseCode + " " + normalizedCourseNumber + " " + sec);
-            } else if (Objects.equals(type, "tutor")) {
-                BUGUtils.controller.addTutorOffer(Window.username, normalizedCourseCode , professor.getText(),"Fall 2022", 2.50);
-
-                List.addElement(normalizedCourseCode + " " + normalizedCourseNumber + " " + sec);
-            }
-            Window temp = (Window)(parent.getParent()
+            BUGUtils.controller.addCourse(Window.username,normalizedCourseCode + normalizedCourseNumber + sec, normalizedCourseCode + " " + normalizedCourseNumber,
+                    sec, professor.getText());
+            List.addElement(normalizedCourseCode + " " + normalizedCourseNumber + " " + sec);
+            Window temp = (Window) (parent.getParent()
                     .getParent().getParent());
             temp.setVisible(false);
             temp.remove(1);
@@ -113,7 +103,7 @@ public class AddCourseDialog extends JDialog {
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
-            ((JTabbedPane)temp.getComponent(1)).setSelectedIndex(4);
+            ((JTabbedPane) temp.getComponent(1)).setSelectedIndex(4);
             temp.setVisible(true);
             dispose();
         }

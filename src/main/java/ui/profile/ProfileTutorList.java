@@ -7,6 +7,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Vector;
 
 public class ProfileTutorList extends JPanel {
@@ -70,30 +72,45 @@ public class ProfileTutorList extends JPanel {
 
     void buildClassList(){
 
-        Vector<String> s = BUGUtils.controller.getStudentTutors(Window.username);
-        Vector<String> t = new Vector<>();
+//        Vector<String> s = BUGUtils.controller.getStudentTutors(Window.username);
+//        Vector<String> t = new Vector<>();
+//
+//        if(s.size() > 0) {
+//            for (String value : s) {
+//              String tutor = String.valueOf(BUGUtils.controller.fetchTutorOfferCourse(value));
+//              String formatted = tutor.substring(0, 3) + " " + tutor.substring (3,7);
+//              tutors.add(formatted);
+//            }
+//        }
+//
+//        if(!tutors.isEmpty()) {
+//            model.addAll(tutors);
+//        } else {
+//            model.addElement("No Current Classes!");
+//        }
+//        tutorList = new JList<>(model);
+//        add(new JScrollPane(tutorList));
 
-        if(s.size() > 0) {
-            for (String value : s) {
-              String tutor = String.valueOf(BUGUtils.controller.fetchTutorOfferCourse(value));
-              String formatted = tutor.substring(0, 3) + " " + tutor.substring (3,7);
-              tutors.add(formatted);
+        ArrayList<String> courses = BUGUtils.controller.getStudentCourses(Window.username);
+        if (!courses.isEmpty()){
+            for (String s : courses){
+                String formatted = s.substring(0, 3) + " " + s.substring (3);
+                tutors.add(formatted);
             }
-        }
-
-        if(!tutors.isEmpty()) {
             model.addAll(tutors);
         } else {
             model.addElement("No Current Classes!");
         }
+
         tutorList = new JList<>(model);
+        tutorList.setSize(50,50);
         add(new JScrollPane(tutorList));
     }
 
     class AddActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            new AddTutorDialog(model, "tutor", ProfileTutorList.this);
+            new AddTutorOfferDialog(model, ProfileTutorList.this);
         }
     }
 
@@ -107,7 +124,21 @@ public class ProfileTutorList extends JPanel {
                                 "Do you want to remove " + tutorList.getSelectedValue() + "?",
                                 "Warning", JOptionPane.YES_NO_OPTION);
                 if (answer == 0) {
+                    //model.remove(tutorList.getSelectedIndex());
+                    String dbReadable = tutorList.getSelectedValue().replaceAll(" ", "");
                     model.remove(tutorList.getSelectedIndex());
+                    BUGUtils.controller.removeTutoringOffer(Window.username, dbReadable);
+                    Window temp = (Window)(getParent()
+                            .getParent().getParent());
+                    temp.setVisible(false);
+                    temp.remove(1);
+                    try {
+                        temp.initNavigationBar();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                    ((JTabbedPane)temp.getComponent(1)).setSelectedIndex(4);
+                    temp.setVisible(true);
                 }
             }
         }
