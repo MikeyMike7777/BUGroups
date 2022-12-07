@@ -62,20 +62,7 @@ public class StudentService {
         profileDAO.updateProfilePhoneNumber(id, number);
     }
     public Vector<Object> fetchProfileInfo(String id){
-        Profile p = profileDAO.fetchProfileInfo(id);
-        Vector<Object> v = new Vector<>();
-
-        if(p == null){
-            return v;
-        } else {
-            Vector<String> s = p.getAvailability().getTimes();
-            v.add(p.getName());
-            v.add(p.getEmail());
-            v.add(p.getPhoneNumber());
-            v.add(s);
-        }
-
-        return v;
+        return profileDAO.fetchProfileInfo(id);
     }
 
     public void reportBug(String report){
@@ -1252,7 +1239,13 @@ public class StudentService {
     }
 
     public Vector<ArrayList<String>> getTutorOffers(String courseId){
-        return TutorOfferDAO.getTutorOffers(courseId);
+        Vector<ArrayList<String>> v = TutorOfferDAO.getTutorOffers(courseId);
+        v.forEach(q -> {
+                    q.add((String)profileDAO.fetchProfileInfo(q.get(0)).get(0));
+                    String availability = profileDAO.fetchProfileInfo(q.get(0)).get(3).toString();
+                    q.add(availability.substring(1, availability.length() -1));
+                });
+        return v;
     }
 
     public void changeAvail(String id, Vector<String> avail) {

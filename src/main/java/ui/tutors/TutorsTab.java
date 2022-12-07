@@ -92,11 +92,6 @@ public class TutorsTab extends JPanel{
                 TutorsList tutors = new TutorsList(info);
                 add(tutors);
             }
-
-//            // call controller
-//            TutorsList tutors = new TutorsList(BUGUtils.controller.getTutorOffers(s));
-//            System.out.println(s);
-//            add(tutors);
         }
     }
 

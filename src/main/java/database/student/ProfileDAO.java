@@ -35,13 +35,25 @@ public class ProfileDAO {
         collection.findOneAndDelete(filter);
     }
 
-    Profile fetchProfileInfo(String id){
+    Vector<Object> fetchProfileInfo(String id){
         MongoCollection<Document> collection = BUGUtils.database.getCollection("profileInfos");
         Bson filter = eq("_id", id);
         cursor = collection.find(filter).iterator();
+        Profile p = null;
         if (cursor.hasNext())
-            return toProfile(cursor.next());
-        else return null;
+             p = toProfile(cursor.next());
+
+        Vector<Object> v = new Vector<>();
+
+        if (p != null){
+            Vector<String> s = p.getAvailability().getTimes();
+            v.add(p.getName());
+            v.add(p.getEmail());
+            v.add(p.getPhoneNumber());
+            v.add(s);
+        }
+
+        return v;
     }
     public void updateProfileName(String id, String name){
         MongoCollection<Document> collection = BUGUtils.database.getCollection("profileInfos");

@@ -34,14 +34,14 @@ public class ClassmateInfoDialog extends JDialog{
         cm.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         panel.add(new JLabel(" "));
-        panel.add(new JLabel(cm.getName()));
+        panel.add(new JLabel("Name: " + cm.getName()));
         panel.add(new JLabel(" "));
-        panel.add(new JLabel(cm.getEmail()));
+        panel.add(new JLabel("Email: " + cm.getEmail()));
         panel.add(new JLabel(" "));
-        panel.add(new JLabel(cm.getPhone()));
+        panel.add(new JLabel("Phone number: " + cm.getPhone()));
         panel.add(new JLabel(" "));
 
-        panel.add(new JLabel("Availability"));
+        panel.add(new JLabel("Availability:"));
         String[] availabilities = cm.getAvailability().split(",");
         for (String s : availabilities){
             panel.add(new JLabel(s));
