@@ -53,11 +53,11 @@ public class ProfileDAO {
      * @param id the id to query for
      * @return the profile object with data for id
      */
-    Profile fetchProfileInfo(String id){
     Vector<Object> fetchProfileInfo(String id){
         MongoCollection<Document> collection = BUGUtils.database.getCollection("profileInfos");
         Bson filter = eq("_id", id);
         cursor = collection.find(filter).iterator();
+        Profile p = null;
         if (cursor.hasNext())
              p = toProfile(cursor.next());
 
