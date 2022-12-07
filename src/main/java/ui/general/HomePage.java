@@ -146,7 +146,7 @@ public class HomePage extends JPanel {
         JLabel titleLabel = new JLabel("Classmates");
         titleLabel.setPreferredSize(new Dimension(viewClassmatesPreview.getPreferredSize().width, COMPONENT_HEIGHT/8));
 
-        JLabel subtitleLabel = new JLabel("Classmates is where you can see who's in your class and their profiles! \n" +
+        JLabel subtitleLabel = new JLabel("Classmates is where you can see who's in your classes and their profiles! \n" +
                 "Your classes are below!");
         subtitleLabel.setPreferredSize(new Dimension(viewClassmatesPreview.getPreferredSize().width, COMPONENT_HEIGHT/8));
         subtitleLabel.setHorizontalAlignment(SwingConstants.LEFT);
@@ -162,6 +162,7 @@ public class HomePage extends JPanel {
             classButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                    System.out.println(window.getComponents());
                     window.setSelectedIndex(2);
                     ClassmatesPage cm = (ClassmatesPage) window.getComponentAt(2);
                     cm.selectClass(className);
@@ -198,13 +199,13 @@ public class HomePage extends JPanel {
         Vector<String> classNames = list.getNames();
 
         for(String className : classNames){
-            JButton classButton = new JButton(className);
+            JButton classButton = new JButton(className.substring(0, className.lastIndexOf(" ")));
             classButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     window.setSelectedIndex(3);
                     TutorsPage t = (TutorsPage) window.getComponentAt(3);
-                    t.selectClass(className);
+                    t.selectClass(className.substring(0, className.lastIndexOf(" ")));
                 }
             });
             viewTutorsPreview.add(classButton);
