@@ -82,30 +82,40 @@ public class AddCourseDialog extends JDialog {
     class SaveActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            if (List.size() != 0 && Objects.equals(List.get(0), "No Current Courses!")) {
-                List.remove(0);
+            if (classCode.getText().matches("[a-zA-Z]{3} ?[1-4][1-5][0-9]{2}")) {
+                if (section.getText().matches("[0-9]{2}")) {
+                    if (List.size() != 0 && Objects.equals(List.get(0), "No Current Classes!"))
+                        List.remove(0);
+                    String sec = "";
+                    if (section.getText().length() < 2)
+                        sec = "0" + section.getText();
+                    String normalizedCourseCode = classCode.getText().substring(0, 3).toUpperCase(); // course e.g. CSI
+                    String normalizedCourseNumber = classCode.getText().substring(classCode.getText().length() - 4); // number e.g 2334
+                    BUGUtils.controller.addCourse(Window.username, normalizedCourseCode + normalizedCourseNumber + sec, normalizedCourseCode + " " + normalizedCourseNumber,
+                            sec, professor.getText());
+                    List.addElement(normalizedCourseCode + " " + normalizedCourseNumber + " " + sec);
+                    Window temp = (Window) (parent.getParent()
+                            .getParent().getParent());
+                    temp.setVisible(false);
+                    temp.remove(1);
+                    try {
+                        temp.initNavigationBar();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                    ((JTabbedPane) temp.getComponent(1)).setSelectedIndex(4);
+                    temp.setVisible(true);
+                    dispose();
+                } else {
+                    JOptionPane.showMessageDialog(getRootPane().getParent(),
+                            "Please enter a valid section.",
+                            null, JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(getRootPane().getParent(),
+                        "Please enter a valid course code.",
+                        null, JOptionPane.ERROR_MESSAGE);
             }
-            String sec = "";
-            if (section.getText().length() < 2) {
-                sec = "0" + section.getText();
-            }
-            String normalizedCourseCode = classCode.getText().substring(0, 3).toUpperCase(); // course e.g. CSI
-            String normalizedCourseNumber = classCode.getText().substring(classCode.getText().length() - 4); // number e.g 2334
-            BUGUtils.controller.addCourse(normalizedCourseCode + normalizedCourseNumber + sec, Window.username, normalizedCourseCode + " " + normalizedCourseNumber,
-                    sec, professor.getText());
-            List.addElement(normalizedCourseCode + " " + normalizedCourseNumber + " " + sec);
-            Window temp = (Window) (parent.getParent()
-                    .getParent().getParent());
-            temp.setVisible(false);
-            temp.remove(1);
-            try {
-                temp.initNavigationBar();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-            ((JTabbedPane) temp.getComponent(1)).setSelectedIndex(4);
-            temp.setVisible(true);
-            dispose();
         }
     }
 
