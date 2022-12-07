@@ -19,13 +19,15 @@ public class TutorDialog extends JDialog{
         parentInfo.add(parent.getProfessor());
         parentInfo.add(parent.getSemester());
         parentInfo.add(parent.getHourlyRate());
+        parentInfo.add(parent.getName());
+        parentInfo.add(parent.getAvailability());
         t = new TutoringOffer(parentInfo);
         t.setFocusable(false);
         createAndDisplay();
     }
 
     void createAndDisplay() {
-        setPreferredSize(new Dimension(600, 450));
+        setPreferredSize(new Dimension(600, 550));
         setTitle("View Tutoring Offer");
         panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -43,18 +45,16 @@ public class TutorDialog extends JDialog{
         panel.add(new JLabel(" "));
         panel.add(new JLabel("Semester taken: " + t.getSemester()));
         panel.add(new JLabel(" "));
-        panel.add(new JLabel("Hourly rate: " + t.getHourlyRate()));
+        panel.add(new JLabel("Hourly rate: $" + t.getHourlyRate()));
         panel.add(new JLabel(" "));
 
         // availability-- same for everyone for demo purposes
         panel.add(new JLabel("Availability:"));
-        panel.add(new JLabel("Monday: 8:00 AM - 12:00 PM"));
-        panel.add(new JLabel("Tuesday: 2:30 PM - 4:30 PM"));
-        panel.add(new JLabel("Wednesday: 3:00 PM - 3:30 PM, " +
-                "5:00 PM - 6:15 PM"));
-        panel.add(new JLabel("Thursday: 2:30 PM - 4:30 PM"));
-        panel.add(new JLabel("Friday: none"));
-        panel.add(new JLabel(" "));
+        String[] availabilities = t.getAvailability().split(",");
+        for (String s : availabilities){
+            panel.add(new JLabel(s));
+            panel.add(new JLabel(" "));
+        }
 
         add(panel);
         addButton();
