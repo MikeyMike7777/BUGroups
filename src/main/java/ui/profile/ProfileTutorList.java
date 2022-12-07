@@ -101,7 +101,6 @@ public class ProfileTutorList extends JPanel {
                                 "Do you want to remove " + tutorList.getSelectedValue() + "?",
                                 "Warning", JOptionPane.YES_NO_OPTION);
                 if (answer == 0) {
-                    //model.remove(tutorList.getSelectedIndex());
                     String dbReadable = tutorList.getSelectedValue().replaceAll(" ", "");
                     model.remove(tutorList.getSelectedIndex());
                     BUGUtils.controller.removeTutoringOffer(Window.username, dbReadable);

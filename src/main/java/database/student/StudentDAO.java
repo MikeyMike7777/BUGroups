@@ -7,12 +7,14 @@ import database.message.MessageService;
 import database.utils.BUGUtils;
 import database.utils.MongoInit;
 import org.bson.Document;
+import org.bson.codecs.pojo.annotations.BsonProperty;
 import org.bson.conversions.Bson;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Vector;
 
+import static com.mongodb.client.model.Filters.and;
 import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Updates.addToSet;
 import static com.mongodb.client.model.Updates.set;
@@ -39,7 +41,6 @@ public class StudentDAO {
 
     // get all courses that a student has (their id is student who made it and date they made it)
     Vector<String> getTutors(String username){
-        ArrayList<String> tutorOffers = new ArrayList<>();
         MongoCollection<Document> collection1 = BUGUtils.database.getCollection("BUGStudents");
         Document student = collection1.find(eq("_id", username)).first();
         Vector<String> s = new Vector<>();
@@ -212,6 +213,13 @@ public class StudentDAO {
         MongoCollection<Document> studentCollection = BUGUtils.database.getCollection("BUGStudents");
         Bson filter = eq("_id", username);
         Bson update = pull("courses", courseId);
+        studentCollection.updateOne(filter, update);
+    }
+
+    static void removeOffer(String username, String courseCode){
+        MongoCollection<Document> studentCollection = BUGUtils.database.getCollection("BUGStudents");
+        Bson filter = eq("_id", username);
+        Bson update = pull("tutors", courseCode);
         studentCollection.updateOne(filter, update);
     }
 }
