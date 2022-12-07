@@ -1,5 +1,6 @@
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
+import database.message.Message;
 import database.message.MessageService;
 import database.student.*;
 import database.utils.BUGUtils;
@@ -11,6 +12,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Date;
 import java.util.Vector;
 
 import static com.mongodb.client.model.Filters.eq;
@@ -199,29 +201,79 @@ public class UnitTests {
 
     }
 
-//    @Test
-//    void postMessage(){
-//
-//    }
-//
-//    @Test
-//    void deleteMessage(){
-//
-//    }
-//
-//    @Test
-//    void addReply(){
-//
-//    }
-//
+    @Test
+    void postMessage(){
+        messageService.createMessage("Test", "TestUser", "CSI3437", 0, "Test");
+
+        MongoCursor<Document> cursor;
+        MongoCollection<Document> collection = BUGUtils.database.getCollection("BUGMessages");
+        Bson filter = eq("author", "TestUser");
+        cursor = collection.find(filter).iterator();
+        assertTrue(cursor.hasNext());
+        collection.findOneAndDelete(filter);
+
+    }
+
+    @Test
+    void deleteMessage(){
+        Document message = new Document();
+        Date d = new Date();
+        String _id = "TestUser" + d;
+        message.append("_id", _id);
+        message.append("text", "Test");
+        message.append("author", "TestUser");
+        message.append("time", d);
+        message.append("courseNumber", "CSI3437");
+        message.append("messageBoard", 0);
+        message.append("repliesTo", new Vector<Message>());
+        message.append("replies", new Vector<Message>());
+
+        MongoCursor<Document> cursor;
+        MongoCollection<Document> collection = BUGUtils.database.getCollection("BUGMessages");
+        collection.insertOne(message);
+
+        messageService.deleteMessage(_id);
+
+        Bson filter = eq("_id", _id);
+        cursor = collection.find(filter).iterator();
+        assertFalse(cursor.hasNext());
+    }
+
 //    @Test
 //    void addCourse(){
+//        MongoCursor<Document> cursor;
+//        MongoCollection<Document> collection = BUGUtils.database.getCollection("courses");
+//        Bson filter = eq("_id", "TestCourse");
+//        cursor = collection.find(filter).iterator();
 //
+//        studentService.addCourse("TestCourse", "TestUser", "TestCode", "CSI1111", "TestProfessor");
+//
+//        assertTrue(cursor.hasNext());
+//        collection.findOneAndDelete(filter);
 //    }
-//
+
+    @Test
+    public void reportBug(){
+        MongoCursor<Document> cursor;
+        MongoCollection<Document> collection = BUGUtils.database.getCollection("courses");
+        Bson filter = eq("report", "TestBug");
+        cursor = collection.find(filter).iterator();
+
+        studentService.reportBug("TestBug");
+
+        collection.deleteOne(filter);
+
+    }
+
 //    @Test
 //    void deleteCourse(){
 //
+//    }
+//
+//    @Test
+//    void addTutor(){
+//        studentService.addTutorOffer("TestUser", "TestCode",
+//                "TestProfessor", "TestSemester", 20.00);
 //    }
 
 }
