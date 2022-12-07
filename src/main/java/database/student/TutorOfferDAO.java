@@ -82,4 +82,11 @@ public class TutorOfferDAO {
 
         return tutorOffers;
     }
+
+//    static String getTutorCourse(String tutorId){
+//        MongoCollection<Document> collection = BUGUtils.database.getCollection("tutorOffers");
+//        Bson filter = eq("_id", tutorId);
+//        Document d = collection.find(filter).first();
+//
+//    }
 }

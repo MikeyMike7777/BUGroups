@@ -49,8 +49,6 @@ public class CourseDAO {
                 .append("students", course.getStudents());
     }
 
-
-
     ArrayList<String> getStudents(String courseId, String username){
         // query for all students' profiles that have the given course code in their course list
         // get all students in a course
@@ -71,31 +69,8 @@ public class CourseDAO {
     // removes student from course's list of students that are enrolled in it
     static void removeCourse(String username, String courseId){
         MongoCollection<Document> courseCollection = BUGUtils.database.getCollection("courses");
-        // fixme: should just delete student from list of students enrolled in that course, not the whole course
         Bson filter = eq("_id", courseId);
         Bson update = pull("students", username);
         courseCollection.updateOne(filter, update);
     }
-
-    // generates dummy data in course collection for testing classmates FIXME: remove when done testing
-//    void generate(){
-//        MongoCollection<Document> courseCollection = BUGUtils.database.getCollection("courses");
-//        if (courseCollection.countDocuments() > 0){
-//            // if there is stuff in the collection, delete everything
-//            courseCollection.deleteMany(new Document());
-//        }
-//        // course 1
-//        Vector<String> students1 = new Vector<>();
-//        students1.add("tomas_cerny1");
-//        students1.add("greg_hamerly1");
-//        students1.add("bill_booth1");
-//        createCourse("CSI prof", "01", "CSI 3471");
-//
-//        // course 2
-//        Vector<String> students2 = new Vector<>();
-//        students2.add("bill_booth1");
-//        students2.add("cindy_fry1");
-//        students2.add("greg_speegle1");
-//        createCourse("WGS prof", "02", "WGS 2300");
-//    }
 }

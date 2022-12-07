@@ -53,8 +53,8 @@ public class Controller {
         return sService.getStudentCourses(id);
     }
 
-    public Vector<String> getStudentTutors(String id){
-        return sService.getStudentTutors(id);
+    public Vector<String> getStudentTutors(String username){
+        return sService.getStudentTutors(username);
     }
 
     public Vector<Object> fetchProfileInfo(String id) {

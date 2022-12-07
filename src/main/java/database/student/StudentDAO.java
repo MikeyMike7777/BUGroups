@@ -37,13 +37,14 @@ public class StudentDAO {
         return (ArrayList<String>)(course.get("courses"));
     }
 
-    Vector<String> getTutors(String id){
+    // get courses that a student has (their id is student who made it and date they made it)
+    Vector<String> getTutors(String username){
         MongoCollection<Document> collection1 = BUGUtils.database.getCollection("BUGStudents");
-        Document courses = collection1.find(eq("_id", id)).first();
+        Document student = collection1.find(eq("_id", username)).first();
         Vector<String> s = new Vector<>();
-        if(courses.size() == 6) {
-            s.addAll((Collection<? extends String>) courses.get("TutorOffers"));
-        }
+        //if(courses.size() == 6) {
+            s.addAll((Collection<? extends String>) student.get("TutorOffers"));
+        //}
         return s;
     }
 
@@ -210,8 +211,3 @@ public class StudentDAO {
         studentCollection.updateOne(filter, update);
     }
 }
-
-/*
-TODO: classes showing up on tutor offers, add and remove doesn't really persist
- test another person in a course
- */

@@ -1266,8 +1266,15 @@ public class StudentService {
         return studentDAO.getCourses(id);
     }
 
-    public Vector<String> getStudentTutors(String id) {
-        return studentDAO.getTutors(id);
+    public Vector<String> getStudentTutors(String username) {
+        Vector<String> tutorCourses = new Vector<>();
+        // get course IDs that a student has (their id is student who made it and date they made it)
+        Vector<String> tutorIds = studentDAO.getTutors(username);
+        // look in tutor DAO for that tutor offer's course
+        for (String s : tutorIds){
+            //tutorCourses.add(tutorOfferDAO.getClass(s));
+        }
+        return tutorCourses;
     }
 
     public void removeCourse(String username, String courseId){
