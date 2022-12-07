@@ -84,17 +84,17 @@ public class Login extends JPanel {
                 Vector<Object> s = BUGUtils.controller.fetchStudent(usernameText.getText().toLowerCase());
 
                 if(s == null || s.size() == 0){
-                    int action = JOptionPane.showConfirmDialog(getRootPane().getParent(),
+                    JOptionPane.showMessageDialog(getRootPane().getParent(),
                             "Username Not Found!",
-                            null, JOptionPane.CANCEL_OPTION);
+                            null, JOptionPane.ERROR_MESSAGE);
                 } else {
                     String user = ((String)s.elementAt(0)).toLowerCase();
                     String userPassword = (String) s.elementAt(1);
 
                     if(!Objects.equals(pass, userPassword)){
-                        int action = JOptionPane.showConfirmDialog(getRootPane().getParent(),
+                        JOptionPane.showMessageDialog(getRootPane().getParent(),
                                 "Incorrect Password!",
-                                null, JOptionPane.CANCEL_OPTION);
+                                null, JOptionPane.ERROR_MESSAGE);
                     } else {
                         JPanel temp = (JPanel) getParent();
                         setVisible(false);

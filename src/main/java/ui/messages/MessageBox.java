@@ -32,7 +32,7 @@ public class MessageBox extends JPanel {
         this.boardId = template.boardId;
 
         setLayout(layout);
-        setPreferredSize(new Dimension(630, 300));
+        setPreferredSize(new Dimension(630, 250));
         setBackground(Color.white);
         setOpaque(true);
         setFocusable(true);
@@ -55,7 +55,7 @@ public class MessageBox extends JPanel {
         this.boardId = (Integer)v.elementAt(7);
 
         setLayout(layout);
-        setPreferredSize(new Dimension(630, 300));
+        setPreferredSize(new Dimension(630, 250));
         setBackground(Color.white);
         setOpaque(true);
         setFocusable(true);

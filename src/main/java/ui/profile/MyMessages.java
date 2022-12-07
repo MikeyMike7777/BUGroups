@@ -2,6 +2,7 @@ package ui.profile;
 
 import database.utils.BUGUtils;
 import ui.messages.MessageBox;
+import ui.messages.MessageUtil;
 import ui.messages.PostDialog;
 import ui.messages.RepostDialog;
 import ui.general.Window;
@@ -13,10 +14,10 @@ import java.util.Vector;
 import java.util.stream.Collectors;
 
 
-public class MyMessages extends JDialog {
+public class MyMessages extends JDialog implements MessageUtil {
     JPanel panel;
     public MessageBox focused;
-    public int id = 0;
+    int id = 0;
 
     MyMessages() {
         super();
@@ -59,11 +60,13 @@ public class MyMessages extends JDialog {
             messages.add(m);
             messages.add(new JLabel(" "));
         }
+        messages.getComponent(0).requestFocus();
+        focused = (MessageBox)messages.getComponent(0);
         return messages;
     }
 
     @Override
-    public int getX() {
+    public int getIndex() {
         return id;
     }
 
@@ -101,11 +104,11 @@ public class MyMessages extends JDialog {
                 id = temp.getBoardId();
                 edit = new RepostDialog(temp.getText(), temp.getCourse(),
                         "Edit and Repost Message", id,
-                        (MyMessages)(getRootPane().getParent()), temp.getId());
+                        (MessageUtil)(getRootPane().getParent()), temp.getId());
             } else JOptionPane.showMessageDialog(getRootPane().getParent(),
                     "No message selected!",
                     "Error", JOptionPane.WARNING_MESSAGE);
-            repaint(4);
+            refresh();
         }
     }
 
@@ -123,12 +126,12 @@ public class MyMessages extends JDialog {
                     "No message selected!",
                     "Error", JOptionPane.WARNING_MESSAGE);
 
-            repaint(4);
+            refresh();
         }
     }
 
     @Override
-    public void repaint(long l) {
+    public void refresh() {
         panel.setVisible(false);
 
         panel.removeAll();

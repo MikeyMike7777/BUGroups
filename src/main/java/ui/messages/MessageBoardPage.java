@@ -6,9 +6,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Vector;
 
-public class MessageBoardPage extends JPanel {
-    public int id = 0;
+public class MessageBoardPage extends JPanel implements MessageUtil {
     String name;
+    int id = 0;
 
     MessageBoardPage(String name, Integer id) {
         super();
@@ -18,10 +18,13 @@ public class MessageBoardPage extends JPanel {
     }
 
     void createAndDisplay() {
-        setPreferredSize(new Dimension(750, 470));
+        setMinimumSize(new Dimension(750, 250));
+        setMaximumSize(new Dimension(750, 600));
         setAlignmentX(CENTER_ALIGNMENT);
         addComponents();
         setVisible(true);
+        if (getRootPane() != null)
+            getRootPane().validate();
     }
 
     void addComponents() {
@@ -35,7 +38,7 @@ public class MessageBoardPage extends JPanel {
     Component addMessages() {
         JPanel component = new JPanel();
         component.setLayout(new BoxLayout(component, BoxLayout.Y_AXIS));
-        component.setSize(new Dimension(720, 400));
+        component.setMinimumSize(new Dimension(720, 250));
         component.setMaximumSize(new Dimension(720, 9000));
 
         Vector<Object> messages = BUGUtils.controller.fetchBoard(id);
@@ -52,17 +55,17 @@ public class MessageBoardPage extends JPanel {
     }
 
     @Override
-    public int getX() {
-        return id;
-    }
-
-    @Override
-    public void repaint(long l) {
+    public void refresh() {
         setVisible(false);
         removeAll();
         addComponents();
         setVisible(true);
-        if (this.getRootPane() != null)
+        if (getRootPane() != null)
             getRootPane().validate();
+    }
+
+    @Override
+    public int getIndex() {
+        return id;
     }
 }
