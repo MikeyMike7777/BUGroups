@@ -49,12 +49,26 @@ public class UnitTests {
 
     @Test
     void verifyValidAccount() {
-        assertTrue(studentService.verifyAccount("gabriel_goulis1@baylor.edu"));
+        MongoCursor<Document> cursor;
+        MongoCollection<Document> collection = BUGUtils.database.getCollection("profileInfos");
+        Document testProfile = new Document("_id", "TestUser");
+
+        testProfile.append("name", "Test User");
+        testProfile.append("email", "TestUser@baylor.edu");
+        testProfile.append("phoneNumber", "111-111-1111");
+        testProfile.append("availability", new Vector<>());
+
+        Bson filter = eq("_id", testProfile.get("_id"));
+        collection.deleteOne(filter);
+        collection.insertOne(testProfile);
+
+        assertTrue(studentService.verifyAccount(testProfile.getString("email")));
+        collection.deleteOne(filter);
     }
 
     @Test
     void verifyInvalidAccount() {
-        assertTrue(studentService.verifyAccount("greg_hamerly1@baylor.edu"));
+        assertFalse(studentService.verifyAccount("InvalidEmail@gmail.com"));
     }
 
 
@@ -66,7 +80,20 @@ public class UnitTests {
 
     @Test
     void testValidEmail(){
-        assertTrue(studentService.sendPasswordReset("gabriel_goulis1@baylor.edu"));
+        MongoCursor<Document> cursor;
+        MongoCollection<Document> collection = BUGUtils.database.getCollection("profileInfos");
+        Document testProfile = new Document("_id", "TestUser");
+
+        testProfile.append("name", "Test User");
+        testProfile.append("email", "TestUser@baylor.edu");
+        testProfile.append("phoneNumber", "111-111-1111");
+        testProfile.append("availability", new Vector<>());
+
+        Bson filter = eq("_id", testProfile.get("_id"));
+        collection.deleteOne(filter);
+        collection.insertOne(testProfile);
+        assertTrue(studentService.sendPasswordReset("TestUser@baylor.edu"));
+        collection.deleteOne(filter);
     }
 
 
@@ -172,17 +199,6 @@ public class UnitTests {
 
     }
 
-
-//    @Test
-//    void createAccount(){
-//
-//    }
-//
-//    @Test
-//    void deleteAccount(){
-//
-//    }
-//
 //    @Test
 //    void postMessage(){
 //
