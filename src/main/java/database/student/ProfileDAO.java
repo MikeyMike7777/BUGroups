@@ -22,7 +22,7 @@ public class ProfileDAO {
         Availability a = new Availability(availability);
         Profile p = new Profile(id, name, email, phone, a);
         MongoCollection<Document> collection = BUGUtils.database.getCollection("profileInfos");
-        Bson filter = eq("_id", id);
+
 
         Document d = toDocument(p);
         collection.deleteOne(d);

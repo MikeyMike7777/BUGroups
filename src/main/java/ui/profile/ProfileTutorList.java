@@ -12,12 +12,6 @@ import java.util.ArrayList;
 import java.util.Vector;
 
 public class ProfileTutorList extends JPanel {
-    String[] classesDummyData = {
-            "CSI 3336",
-            "CSI 3471",
-            "WGS 2300",
-            "GEO 1306 "
-    };
 
     Vector<String> tutors = new Vector<>();
 
@@ -125,9 +119,5 @@ public class ProfileTutorList extends JPanel {
                 }
             }
         }
-    }
-
-    public String[] getNames(){
-        return classesDummyData;
     }
 }

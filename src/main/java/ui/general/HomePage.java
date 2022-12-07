@@ -3,6 +3,7 @@ package ui.general;
 import ui.classmates.ClassmatesPage;
 import ui.messages.MessagePage;
 import ui.profile.ProfileClassList;
+import ui.profile.ProfileTutorList;
 import ui.tutors.TutorsPage;
 
 import javax.swing.*;
@@ -12,13 +13,11 @@ import java.awt.event.ActionListener;
 import java.util.Vector;
 
 public class HomePage extends JPanel {
-    BoxLayout boxLayout;
     JLabel mainHeader;
     JPanel previewContainer;
     JPanel viewMessageBoardsPreview;
     JPanel viewClassmatesPreview;
     JPanel viewTutorsPreview;
-    JPanel viewProfilesPreview;
     JTabbedPane window;
 
     HomePage(JTabbedPane window, Dimension preferredSize){
@@ -39,30 +38,13 @@ public class HomePage extends JPanel {
 
         //Initialize the preview containers
         initPreviewContainers();
-
-        buildLayout();
     }
 
     private void initPreviewContainers(){
-        //messageBoardsPreview Initialization
 
-        //viewClassmatesPreview Initialization
-//        viewClassmatesPreview = new JPanel();
-//        viewClassmatesPreview.add(new JLabel("View Classmates"));
-//
-//        //viewTutorsPreview Initialization
-//        viewTutorsPreview = new JPanel();
-//        viewTutorsPreview.add(new JLabel("View Tutors"));
-//
-//        //viewProfilesPreview Initialization
-//        viewProfilesPreview = new JPanel();
-//        viewProfilesPreview.add(new JLabel("View Profiles"));
-
-        //previewContainer Initialization
         previewContainer = new JPanel();
         previewContainer.setSize(getPreferredSize());
         previewContainer.setLayout(new BoxLayout(previewContainer, BoxLayout.Y_AXIS));
-        //previewContainer.setLayout(new GridLayout());
 
 
         buildMessageBoardsPreview();
@@ -75,11 +57,6 @@ public class HomePage extends JPanel {
         previewContainer.add(viewTutorsPreview);
 
         add(previewContainer, BorderLayout.CENTER);
-    }
-
-    void buildLayout(){
-//        boxLayout = new BoxLayout(this, BoxLayout.Y_AXIS);
-//        setLayout(boxLayout);
     }
 
     void buildMessageBoardsPreview(){
@@ -177,8 +154,8 @@ public class HomePage extends JPanel {
         viewClassmatesPreview.add(titleLabel);
         viewClassmatesPreview.add(subtitleLabel);
 
-        ProfileClassList list = new ProfileClassList();
-        Vector<String> classNames = list.getNames();
+        ProfileClassList classList = new ProfileClassList();
+        Vector<String> classNames = classList.getNames();
 
         for(String className : classNames){
             JButton classButton = new JButton(className);
@@ -218,8 +195,6 @@ public class HomePage extends JPanel {
         viewTutorsPreview.add(subtitleLabel);
 
         ProfileClassList list = new ProfileClassList();
-
-
         Vector<String> classNames = list.getNames();
 
         for(String className : classNames){
