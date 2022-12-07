@@ -24,6 +24,11 @@ public class StudentDAO {
 
     private static MongoCursor<Document> cursor;
 
+    /**
+     * gets the courses that the username is apart of
+     * @param username the username to search courses for
+     * @return an arraylist of all the courses this username is in
+     */
     ArrayList<String> getCourses(String username){ // given username
 //        MongoCollection<Document> collection1 = BUGUtils.database.getCollection("BUGStudents");
 //        Document courses = collection1.find(eq("_id", id)).first();
@@ -39,7 +44,11 @@ public class StudentDAO {
         return (ArrayList<String>)(course.get("courses"));
     }
 
-    // get all courses that a student has (their id is student who made it and date they made it)
+    /**
+     * returns all the tutors that this username is being tutored by
+     * @param username the username to search the database for
+     * @return a vector of all the tutors this username has
+     */
     Vector<String> getTutors(String username){
         MongoCollection<Document> collection1 = BUGUtils.database.getCollection("BUGStudents");
         Document student = collection1.find(eq("_id", username)).first();
@@ -53,6 +62,12 @@ public class StudentDAO {
         return s;
     }
 
+    /**
+     * registers a new student account
+     * @param username the username of the account
+     * @param password the password of the account
+     * @return boolean representing whether creating the student was successful or not
+     */
     boolean registerStudent(String username, String password){
         Student s = new Student(username, password);
         MongoCollection<Document> collection1 = BUGUtils.database.getCollection("BUGStudents");
@@ -69,6 +84,11 @@ public class StudentDAO {
         return true;
     }
 
+    /**
+     * Fetches a students account information that matches id and returns as a student object
+     * @param id the id to search for
+     * @return the student object representing the information of id
+     */
     Student fetchStudent(String id){
         MongoCollection<Document> collection = BUGUtils.database.getCollection("BUGStudents");
         Bson filter = eq("_id", id);
@@ -78,6 +98,11 @@ public class StudentDAO {
         else return null;
     }
 
+    /**
+     * Fetches a students profile information that matches id and returns as a student object
+     * @param id the id to search for
+     * @return the profile object representing the information of id
+     */
     Profile fetchProfile(String id){
         MongoCollection<Document> collection = BUGUtils.database.getCollection("profileInfos");
         Bson filter = eq("_id", id);
@@ -98,6 +123,11 @@ public class StudentDAO {
         else return null;
     }
 
+    /**
+     * converts a document object to a student and returns it
+     * @param document The document to convert
+     * @return the Student object representing the document
+     */
     public static Student toStudent(Document document) {
         ArrayList<String> c = (ArrayList<String>) document.get("courses");
         Vector<String> convertc = new Vector<>();
@@ -124,6 +154,12 @@ public class StudentDAO {
 
         return new Student(document.getString("username"), document.getString("password"), courses, tutors);
     }
+
+    /**
+     * converts a Student object to a document and returns it
+     * @param student The student to convert
+     * @return the document object representing the student
+     */
     public static Document toDocument(Student student) {
         Vector<String> courseList = new Vector<>();
         for(int i = 0; i < student.getCourses().size(); i++){
@@ -142,6 +178,12 @@ public class StudentDAO {
                 .append("tutors", tutorList);
     }
 
+    /**
+     * changes the password of the account represented by ID to new password
+     * @param ID the id to search for
+     * @param password the password to change it to
+     * @return the boolean representing whether it changed the password or not
+     */
     boolean changePassword(String ID, String password){
         MongoCollection<Document> collection = BUGUtils.database.getCollection("BUGStudents");
         Bson filter = Filters.eq("_id", ID);
@@ -157,8 +199,11 @@ public class StudentDAO {
         return false;
     }
 
-    //Deletes everything in relation to a students account
-    //therefore all the logic will be in student
+    /**
+     * Deletes an account that matches id
+     * @param id the id to delete from database
+     * @return the boolean representing whether the delete was successful or not
+     */
     boolean deleteAccount(String id) {
         MongoCollection<Document> studentCollection = BUGUtils.database.getCollection("BUGStudents");
         MongoCollection<Document> profileCollection = BUGUtils.database.getCollection("profileInfos");
@@ -194,6 +239,52 @@ public class StudentDAO {
         return true;
     }
 
+    /**
+     * Delete the account represented by email
+     * @param email the email of the account to delete
+     * @return the boolean representing whether the delete was successful or not
+     */
+    boolean deleteAccountByEmail(String email){
+        MongoCollection<Document> studentCollection = BUGUtils.database.getCollection("BUGStudents");
+        MongoCollection<Document> profileCollection = BUGUtils.database.getCollection("profileInfos");
+        MongoCollection<Document> messageCollection = BUGUtils.database.getCollection("BUGMessages");
+        MongoCollection<Document> tutorCollection = BUGUtils.database.getCollection("tutors");
+
+        MessageService ms = new MessageService();
+        String id = email.substring(0, email.length() - 11);
+
+        Bson filterStudentCollectionID = eq("_id", id);
+        cursor = studentCollection.find(filterStudentCollectionID).iterator();
+        if (cursor.hasNext()) {
+            Document studentDocument = cursor.next();
+
+            Bson filterAuthor = eq("author", studentDocument.get("username"));
+            messageCollection.find(filterAuthor);
+            cursor = messageCollection.find(filterAuthor).iterator();
+            while(cursor.hasNext()){
+                Document d = cursor.next();
+                ms.deleteMessage(d.getString("_id"));
+            }
+
+            Bson filterUsername = eq("username", studentDocument.get("username"));
+            tutorCollection.findOneAndDelete(filterUsername);
+
+            Bson filterProfileCollectionID = eq("_id", studentDocument.get("username"));
+            profileCollection.findOneAndDelete(filterProfileCollectionID);
+
+            Bson filter = Filters.eq("_id", id);
+            studentCollection.findOneAndDelete(filter);
+
+        }
+
+        return true;
+    }
+
+    /**
+     * adds a new class of courseID for user with username
+     * @param username the username of the person to add to
+     * @param courseId the courseId of the course to add
+     */
     void addClass(String username, String courseId) {
         MongoCollection<Document> collection = BUGUtils.database.getCollection("BUGStudents");
         Bson filter = Filters.eq("_id", username);
@@ -201,6 +292,11 @@ public class StudentDAO {
         collection.findOneAndUpdate(filter, update);
     }
 
+    /**
+     * add a new tutor offer to user id of offer
+     * @param id the id of the user to add to
+     * @param offer the offer of the tutor offer
+     */
     void addTutorOffer(String id, String offer) {
         MongoCollection<Document> collection = BUGUtils.database.getCollection("BUGStudents");
         Bson filter = Filters.eq("_id", id);
@@ -208,7 +304,11 @@ public class StudentDAO {
         collection.findOneAndUpdate(filter, update);
     }
 
-    // removes course from students' list of courses they're enrolled in
+    /**
+     * removes a course from a user of type courseId
+     * @param username the username of the person to remove course from
+     * @param courseId the courseId to remove
+     */
     static void removeCourse(String username, String courseId){
         MongoCollection<Document> studentCollection = BUGUtils.database.getCollection("BUGStudents");
         Bson filter = eq("_id", username);
@@ -216,6 +316,11 @@ public class StudentDAO {
         studentCollection.updateOne(filter, update);
     }
 
+    /**
+     * removes a tutoring offer for user
+     * @param username the username to remove from
+     * @param courseCode the courseCode of the course to remove from
+     */
     static void removeOffer(String username, String courseCode){
         MongoCollection<Document> studentCollection = BUGUtils.database.getCollection("BUGStudents");
         Bson filter = eq("_id", username);

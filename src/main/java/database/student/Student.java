@@ -88,6 +88,11 @@ public class Student {
     public void setTutorOffers(Vector<TutorOffer> tutorOffers) {
         this.tutorOffers = tutorOffers;
     }
+
+    /**
+     * Converts student object to a vector of objects and returns it
+     * @return the Vector of objects this is represented by
+     */
     public Vector<Object> toVector(){
         Vector<Object> studentInfo = new Vector<>();
         studentInfo.add(this.getUsername());

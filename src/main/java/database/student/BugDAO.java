@@ -8,6 +8,10 @@ import java.util.Vector;
 
 public class BugDAO {
 
+    /**
+     * Creates a bug report in entry in the database
+     * @param report the message of the bug report
+     */
     public void reportBug(String report){
         MongoCollection<Document> collection = BUGUtils.database.getCollection("BUGS");
 
@@ -16,6 +20,11 @@ public class BugDAO {
         collection.insertOne(d);
     }
 
+    /**
+     * Converts a string report to a document object and returns the object
+     * @param report
+     * @return the document object representing the report
+     */
     public static Document toDocument(String report) {
         return new Document("Report", report);
     }

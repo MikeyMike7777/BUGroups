@@ -6,6 +6,7 @@ public class Availability {
 
     private Vector<String> times = new Vector<>();
 
+
     public Availability(Vector<String> time) {
         times = time;
     }

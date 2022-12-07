@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"database.message"},{"l":"database.student"},{"l":"database.utils"},{"l":"ui.classmates"},{"l":"ui.general"},{"l":"ui.messages"},{"l":"ui.profile"},{"l":"ui.tutors"}];updateSearchResults();

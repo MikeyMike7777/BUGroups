@@ -16,6 +16,13 @@ public class CourseDAO {
 
     private static MongoCursor<Document> cursor;
 
+    /**
+     * Creates a course entry in the database
+     * @param id the id of the course
+     * @param courseCode the course code
+     * @param section the section of the course
+     * @param professor the professor name
+     */
     void createCourse(String id, String courseCode, String section, String professor){
 
         Course c = new Course(courseCode, section, professor, new Vector<>());
@@ -26,12 +33,22 @@ public class CourseDAO {
         collection.insertOne(d);
     }
 
+    /**
+     * Checks if a course exists in the database or not
+     * @param courseId the id of the course to search for
+     * @return a boolean representing whether the course exists
+     */
     boolean fetchCourse(String courseId) {
         MongoCollection<Document> collection = BUGUtils.database.getCollection("courses");
         Bson filter = eq("_id", courseId);
         return collection.find(filter).iterator().hasNext();
     }
 
+    /**
+     * Enrolls a user in a course
+     * @param username the username of the user to enter
+     * @param courseId the id of the course to enter them in
+     */
     void enroll(String username, String courseId) {
         MongoCollection<Document> collection = BUGUtils.database.getCollection("courses");
         Bson filter = eq("_id", courseId);
@@ -40,7 +57,11 @@ public class CourseDAO {
         collection.findOneAndUpdate(filter, update);
     }
 
-    // Document is an object in the collection in the database
+    /**
+     * Converts a course object into a document object and returns it
+     * @param course the course object to convert
+     * @return the document representing the course to return
+     */
     public static Document toDocument(Course course) {
         return new Document("_id", course.getCourseCode().toUpperCase().replace(" ", "") + course.getSection())
                 .append("courseCode", course.getCourseCode())
@@ -49,6 +70,12 @@ public class CourseDAO {
                 .append("students", course.getStudents());
     }
 
+    /**
+     * Gets a list of students in a course other than the student with username
+     * @param courseId the id of the course to query for
+     * @param username the username of the user querying
+     * @return a list representing all other students in specified course
+     */
     ArrayList<String> getStudents(String courseId, String username){
         // query for all students' profiles that have the given course code in their course list
         // get all students in a course
@@ -67,6 +94,12 @@ public class CourseDAO {
     }
 
     // removes student from course's list of students that are enrolled in it
+
+    /**
+     * removes student from course's list of students that are enrolled in it
+     * @param username the username of the user to remove
+     * @param courseId the id of the course to remove them from
+     */
     static void removeCourse(String username, String courseId){
         MongoCollection<Document> courseCollection = BUGUtils.database.getCollection("courses");
         Bson filter = eq("_id", courseId);

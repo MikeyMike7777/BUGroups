@@ -138,7 +138,7 @@ public class Settings extends JPanel {
                                 "Are you sure you want to delete your account?",
                                 "Warning", JOptionPane.YES_NO_OPTION);
                 if (answer == 0) {
-                    BUGUtils.controller.deleteAccount(Window.username);
+                    BUGUtils.controller.deleteAccountByID(Window.username);
                     Container temp = (Container)getRootPane().getContentPane();
                     JPanel root = new JPanel();
                     temp.removeAll();

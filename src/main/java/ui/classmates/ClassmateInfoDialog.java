@@ -1,5 +1,9 @@
 package ui.classmates;
 
+import database.utils.BUGUtils;
+import database.utils.Controller;
+import ui.general.Window;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -41,6 +45,8 @@ public class ClassmateInfoDialog extends JDialog{
         panel.add(new JLabel(cm.getPhone()));
         panel.add(new JLabel(" "));
 
+
+
         panel.add(new JLabel("Availability"));
         String[] availabilities = cm.getAvailability().split(",");
         for (String s : availabilities){
@@ -50,6 +56,9 @@ public class ClassmateInfoDialog extends JDialog{
 
         add(panel);
         addButton();
+        if(Window.username.equalsIgnoreCase("admin")){
+            addBanButton();
+        }
 
         pack();
         setLocationRelativeTo(getParent());
@@ -62,6 +71,20 @@ public class ClassmateInfoDialog extends JDialog{
         close.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });
+
+        panel.add(close);
+    }
+
+    void addBanButton() {
+        JButton close = new JButton("Ban User");
+        close.setAlignmentX(Component.CENTER_ALIGNMENT);
+        close.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                BUGUtils.controller.deleteAccountByEmail(cm.getEmail());
                 dispose();
             }
         });

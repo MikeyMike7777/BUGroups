@@ -13,6 +13,12 @@ class MessageBoard {
         this.messages = new ArrayList<>();
     }
 
+    /**
+     * Edit's a message and reposts
+     * @param message the message that will be edited
+     * @param text the updated text that will be inserted into message
+     * @param repliesTo the message that this message replies to
+     */
     public void editRepostMessage(Message message, String text, Message repliesTo) {
         this.messages.remove(message);
         if (repliesTo != null)
@@ -23,6 +29,14 @@ class MessageBoard {
         this.messages.add(message);
     }
 
+    /**
+     * Creates a new message thread on message board
+     * @param text the text that this message will have
+     * @param author the author of this message
+     * @param courseNumber the courseNumber this message falls under
+     * @param message the message object that this message is represented by
+     * @return the message that was posted on message board
+     */
     public Message createMessage(String text, String author,
                               String courseNumber, Message message) {
         Message m = new Message(text, author, courseNumber, this.index,
