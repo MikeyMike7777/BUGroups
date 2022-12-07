@@ -90,7 +90,7 @@ public class TutorOfferDAO {
         MongoCollection<Document> tutorOffersCollection = BUGUtils.database.getCollection("tutorOffers");
         Bson filter = eq("courseCode", courseCode);
         cursor = tutorOffersCollection.find(filter).iterator();
-        if (cursor.hasNext()){
+        while (cursor.hasNext()){
             TutorOffer t = toTutorOffer(cursor.next());
             ArrayList<String> tutorOfferInfo = new ArrayList<>();
 

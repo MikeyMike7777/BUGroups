@@ -9,7 +9,8 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 public class TutoringOffer extends JPanel {
-    String name; // of tutor-- eventually will be its own class but this is for UI purposes
+    String name;
+    String email; // of tutor-- eventually will be its own class but this is for UI purposes
     String courseCode;
     String professor;
     String semester;
@@ -17,7 +18,7 @@ public class TutoringOffer extends JPanel {
     String availability;
 
     TutoringOffer(ArrayList<String> info){
-        System.out.println("Other constructor: " + info);
+        email = info.get(0);
         courseCode = info.get(1);
         professor = info.get(2);
         semester = info.get(3);
@@ -40,7 +41,7 @@ public class TutoringOffer extends JPanel {
     public String getName() {
         return name;
     }
-
+    public String getEmail() {return email;}
     public String getCourseCode() {
         return courseCode;
     }

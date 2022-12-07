@@ -86,7 +86,6 @@ public class TutorsTab extends JPanel{
             // call controller
             Vector<ArrayList<String>> info = BUGUtils.controller.getTutorOffers(s.replaceAll(" ", ""));
             if (info.isEmpty()) {
-                add(new JLabel(" "));
                 add(new JLabel("No tutor offers for the selected course"));
             } else {
                 TutorsList tutors = new TutorsList(info);
