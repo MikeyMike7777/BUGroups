@@ -98,8 +98,8 @@ public class PostDialog extends JDialog {
                 if (message.getText().length() < 1024) {
                     String temp = course.getText().toUpperCase();
                     String course;
-                    if (temp.charAt(4) != ' ' && temp.charAt(5) != ' ')
-                        course = temp.replaceAll(" ", "");
+                    if (temp.charAt(3) != ' ' && temp.charAt(4) != ' ')
+                        course = temp.split("[1-4][1-5][0-9]{2}")[0] + ' ' + temp.split("[a-zA-Z]{3,4}")[1];
                     else course = PostDialog.this.course.getText();
                     BUGUtils.controller.createMessage(
                             message.getText(), Window.username, course,
