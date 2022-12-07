@@ -82,7 +82,7 @@ public class AddCourseDialog extends JDialog {
     class SaveActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            if (List.size() != 0 && Objects.equals(List.get(0), "No Current Classes!")) {
+            if (List.size() != 0 && Objects.equals(List.get(0), "No Current Courses!")) {
                 List.remove(0);
             }
             String sec = "";

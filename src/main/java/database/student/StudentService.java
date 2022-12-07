@@ -1272,7 +1272,7 @@ public class StudentService {
         Vector<String> tutorIds = studentDAO.getTutors(username);
         // look in tutor DAO for that tutor offer's course
         for (String s : tutorIds){
-            //tutorCourses.add(tutorOfferDAO.getClass(s));
+            tutorCourses.add(tutorOfferDAO.getTutorCourse(s));
         }
         return tutorCourses;
     }

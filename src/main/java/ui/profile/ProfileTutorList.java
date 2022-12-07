@@ -82,7 +82,7 @@ public class ProfileTutorList extends JPanel {
             }
             model.addAll(tutors);
         } else {
-            model.addElement("No Current Classes!");
+            model.addElement("No Current Courses!");
         }
 
         tutorList = new JList<>(model);
