@@ -1924,6 +1924,7 @@ public class StudentService {
                             s.split("_")[1].toUpperCase().charAt(0) +
                             s.split("_")[1].substring(1)
                     );
+        studentDAO.setActivitiesFalse();
     }
 
     public boolean confirmed() {

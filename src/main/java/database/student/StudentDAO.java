@@ -356,4 +356,11 @@ public class StudentDAO {
         Bson update = set("active", b);
         studentCollection.updateOne(filter, update);
     }
+
+    void setActivitiesFalse() {
+        MongoCollection<Document> collection = BUGUtils.database.getCollection("BUGStudents");
+        Bson filter = exists("_id");
+        Bson update = set("active", false);
+        collection.updateMany(filter, update);
+    }
 }
