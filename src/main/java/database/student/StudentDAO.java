@@ -14,8 +14,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Vector;
 
-import static com.mongodb.client.model.Filters.and;
-import static com.mongodb.client.model.Filters.eq;
+import static com.mongodb.client.model.Filters.*;
 import static com.mongodb.client.model.Updates.addToSet;
 import static com.mongodb.client.model.Updates.set;
 import static com.mongodb.client.model.Updates.pull;
@@ -220,6 +219,36 @@ public class StudentDAO {
         MongoCollection<Document> studentCollection = BUGUtils.database.getCollection("BUGStudents");
         Bson filter = eq("_id", username);
         Bson update = pull("tutors", username + courseCode);
+        studentCollection.updateOne(filter, update);
+    }
+
+    boolean confirmed() {
+        MongoCollection<Document> studentCollection = BUGUtils.database.getCollection("BUGStudents");
+        Bson filter = eq("_id", "confirmationBoolean");
+        return (boolean)studentCollection.find(filter).first().get("confirmed");
+    }
+
+    Collection<String> getAllStudents() {
+        MongoCollection<Document> studentCollection = BUGUtils.database.getCollection("BUGStudents");
+        Bson filter = and(not(eq("_id", "confirmationBoolean")), exists("_id"));
+        MongoCursor<Document> doc = studentCollection.find(filter).iterator();
+        Collection<String> c = new Vector<>();
+        while (doc.hasNext()) {
+            c.add((String)doc.next().get("username"));
+        }
+        return c;
+    }
+
+    boolean isActive(String user) {
+        MongoCollection<Document> studentCollection = BUGUtils.database.getCollection("BUGStudents");
+        Bson filter = eq("_id", user);
+        return (boolean)studentCollection.find(filter).first().get("active");
+    }
+
+    void setActive(String user, boolean b) {
+        MongoCollection<Document> studentCollection = BUGUtils.database.getCollection("BUGStudents");
+        Bson filter = eq("_id", user);
+        Bson update = set("active", b);
         studentCollection.updateOne(filter, update);
     }
 }

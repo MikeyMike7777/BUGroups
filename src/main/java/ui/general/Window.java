@@ -1,5 +1,6 @@
 package ui.general;
 
+import database.utils.BUGUtils;
 import ui.classmates.ClassmatesPage;
 import ui.messages.MessagePage;
 import ui.profile.ProfilePage;
@@ -16,6 +17,8 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -106,6 +109,7 @@ public class Window extends JPanel {
         }
         buildLayout();
         setLayout(layout);
+        setVisible(true);
     }
 
     public void initLogo() throws IOException {

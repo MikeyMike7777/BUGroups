@@ -136,4 +136,20 @@ public class Controller {
         sService.removeTutoringOffer(username, courseCode);
     }
 
+    public void confirmActivities() {
+        sService.confirmActivities();
+    }
+
+    public boolean confirmed() {
+        return sService.confirmed();
+    }
+
+
+    public boolean isActive(String user) {
+        return sService.isActive(user);
+    }
+
+    public void setActivity(String user, int active) {
+        sService.setActive(user, active == 0);
+    }
 }
