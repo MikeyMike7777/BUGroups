@@ -219,7 +219,7 @@ public class StudentDAO {
     static void removeOffer(String username, String courseCode){
         MongoCollection<Document> studentCollection = BUGUtils.database.getCollection("BUGStudents");
         Bson filter = eq("_id", username);
-        Bson update = pull("tutors", courseCode);
+        Bson update = pull("tutors", username + courseCode);
         studentCollection.updateOne(filter, update);
     }
 }

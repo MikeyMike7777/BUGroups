@@ -1260,9 +1260,9 @@ public class StudentService {
     }
 
     public void addTutorOffer(String username, String courseCode, String professorTaken, String semesterTaken, Double hourlyRate) {
-        Date d = new Date();
-        tutorOfferDAO.createTutorOffer(username + d, username, courseCode, professorTaken, semesterTaken, hourlyRate);
-        studentDAO.addTutorOffer(username, username + d);
+        //Date d = new Date();
+        tutorOfferDAO.createTutorOffer(username + courseCode, username, courseCode, professorTaken, semesterTaken, hourlyRate);
+        studentDAO.addTutorOffer(username, username + courseCode);
     }
 
     public ArrayList<String> getStudentCourses(String id){
