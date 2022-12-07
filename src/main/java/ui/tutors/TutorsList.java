@@ -40,7 +40,7 @@ public class TutorsList extends JPanel{
         component.setMinimumSize(new Dimension(600, 300));
         component.setMaximumSize(new Dimension(600, 8000));
         for (ArrayList<String> tutorOffer : tutorOffersInfo){
-            tutorOffer.remove(0);
+            //tutorOffer.remove(0);
             TutoringOffer t = new TutoringOffer(tutorOffer);
             component.add(t);
         }

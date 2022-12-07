@@ -15,6 +15,7 @@ public class TutorDialog extends JDialog{
         super(SwingUtilities.windowForComponent(owner));
         parent = owner;
         ArrayList<String> parentInfo = new ArrayList<>();
+        parentInfo.add("dummy string");
         parentInfo.add(parent.getCourseCode());
         parentInfo.add(parent.getProfessor());
         parentInfo.add(parent.getSemester());
@@ -48,7 +49,6 @@ public class TutorDialog extends JDialog{
         panel.add(new JLabel("Hourly rate: $" + t.getHourlyRate()));
         panel.add(new JLabel(" "));
 
-        // availability-- same for everyone for demo purposes
         panel.add(new JLabel("Availability:"));
         String[] availabilities = t.getAvailability().split(",");
         for (String s : availabilities){

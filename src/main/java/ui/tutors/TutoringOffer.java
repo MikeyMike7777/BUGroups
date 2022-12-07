@@ -17,12 +17,14 @@ public class TutoringOffer extends JPanel {
     String availability;
 
     TutoringOffer(ArrayList<String> info){
-        courseCode = info.get(0);
-        professor = info.get(1);
-        semester = info.get(2);
-        hourlyRate = info.get(3);
-        name = info.get(4);
-        availability = info.get(5);
+        System.out.println("Other constructor: " + info);
+        courseCode = info.get(1);
+        professor = info.get(2);
+        semester = info.get(3);
+        hourlyRate = info.get(4);
+        name = info.get(5);
+        if (info.size() > 6)
+            availability = info.get(6);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setMinimumSize(new Dimension(500, 100));
         setMaximumSize(new Dimension(500, 300));

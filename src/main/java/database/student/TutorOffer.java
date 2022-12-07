@@ -8,7 +8,6 @@ public class TutorOffer {
     private String semesterTaken;
     private Double hourlyRate;
 
-
     TutorOffer(String id, String username, String courseCode, String professorTaken,
                                  String semesterTaken, Double hourlyRate) {
         this.id = id;

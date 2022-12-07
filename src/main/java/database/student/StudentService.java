@@ -1341,7 +1341,13 @@ public class StudentService {
     }
 
     public Vector<ArrayList<String>> getTutorOffers(String courseId){
-        return TutorOfferDAO.getTutorOffers(courseId);
+        Vector<ArrayList<String>> v = TutorOfferDAO.getTutorOffers(courseId);
+        v.forEach(q -> {
+            q.add((String)profileDAO.fetchProfileInfo(q.get(0)).get(0));
+            String availability = profileDAO.fetchProfileInfo(q.get(0)).get(3).toString();
+            q.add(availability.substring(1, availability.length() -1));
+        });
+        return v;
     }
 
     public void changeAvail(String id, Vector<String> avail) {
